@@ -1,0 +1,59 @@
+{
+  "record_id": "bioev:record-dog10k-boxer",
+  "statement": {
+    "id": "bioev:statement-dog10k-boxer",
+    "statement_type": "source_label_assignment",
+    "subject_label": {
+      "value": "Boxer",
+      "source_name": "Dog10K",
+      "source_record_ids": ["Dog10K:example-1"],
+      "candidate_concept_ids": ["VBO:0000185", "VBO:regional-boxer-example"],
+      "source_scope": ["Dog10K"],
+      "scope_hint": "regional_population",
+      "genotype_membership_verified": false
+    },
+    "predicate": "maps_to_breed",
+    "object_breed": {
+      "concept_id": "VBO:0000185",
+      "preferred_name": "Boxer",
+      "ontology": "VBO",
+      "ontology_version": "2026-09-snapshot",
+      "concept_status": "current",
+      "breed_scope": "breed",
+      "scope_flags": []
+    },
+    "evidence_lines": [
+      {
+        "id": "bioev:line-boxer-string",
+        "direction": "supports",
+        "evidence_item_ids": ["bioev:evidence-boxer-string"],
+        "rationale": "The normalized labels match, but scope has not been adjudicated."
+      }
+    ],
+    "statement_status": "proposed"
+  },
+  "source_artifacts": [
+    {
+      "id": "bioev:source-vbo-2026-09",
+      "title": "VBO canine term snapshot",
+      "source_type": "ontology_snapshot",
+      "uri": "https://purl.obolibrary.org/obo/vbo.owl",
+      "version": "2026-09-snapshot",
+      "retrieved_at": "2026-09-17T00:00:00Z",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "observed_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "evidence_items": [
+    {
+      "id": "bioev:evidence-boxer-string",
+      "source_artifact_id": "bioev:source-vbo-2026-09",
+      "locator": "normalized-label-index:boxer",
+      "extracted_text": "Boxer",
+      "evidence_type": "normalized_name_candidate",
+      "extraction_method": "normalized_string_match"
+    }
+  ],
+  "adjudications": [],
+  "requested_uses": ["source_sample_mapping", "training_label"]
+}

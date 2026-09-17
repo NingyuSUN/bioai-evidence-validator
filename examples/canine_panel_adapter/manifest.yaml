@@ -1,0 +1,14 @@
+database_title: Synthetic canine breed inventory
+database_version: synthetic-v1
+retrieved_at: "2026-09-17T00:00:00Z"
+ontology: VBO
+ontology_version: synthetic-vbo-snapshot
+concept_status_default: current
+breed_scope_default: breed
+source_scope_hint_default: breed
+requested_uses_default:
+  - source_sample_mapping
+requested_uses_by_source:
+  CurrentDisplay:
+    - reference_catalog
+    - display_name

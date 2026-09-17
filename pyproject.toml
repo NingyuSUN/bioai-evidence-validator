@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bioai-evidence-validator"
+version = "0.2.0"
+description = "Standards-aligned evidence policy validation for AI-assisted biological curation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ningyu Sun" }]
+dependencies = [
+  "jsonschema>=4.23,<5",
+  "linkml>=1.8,<2",
+  "pyyaml>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+bioevidence = "bioevidence_validator.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bioevidence_validator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

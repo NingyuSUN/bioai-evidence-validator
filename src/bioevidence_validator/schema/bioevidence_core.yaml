@@ -1,0 +1,239 @@
+id: https://w3id.org/bioevidence/core
+name: bioevidence_core
+title: BioEvidence operational core
+description: >-
+  A compact operational model for evidence-bearing statements, source snapshots,
+  validation findings, human adjudication, and use-specific admission decisions.
+license: Apache-2.0
+version: 0.1.0
+
+prefixes:
+  bioev: https://w3id.org/bioevidence/
+  linkml: https://w3id.org/linkml/
+  prov: http://www.w3.org/ns/prov#
+  sepio: http://purl.obolibrary.org/obo/SEPIO_
+
+default_prefix: bioev
+default_range: string
+imports:
+  - linkml:types
+
+enums:
+  AgentType:
+    permissible_values:
+      human:
+      software:
+      organization:
+  SourceType:
+    permissible_values:
+      ontology_snapshot:
+      registry_snapshot:
+      dataset_snapshot:
+      publication:
+      web_page:
+      local_file:
+  EvidenceDirection:
+    permissible_values:
+      supports:
+      contradicts:
+      neutral:
+  ExtractionMethod:
+    permissible_values:
+      deterministic_parser:
+      manual_curation:
+      normalized_string_match:
+      llm_extraction:
+  StatementStatus:
+    permissible_values:
+      proposed:
+      accepted:
+      rejected:
+      superseded:
+  AdjudicationDecision:
+    permissible_values:
+      accept:
+      reject:
+      defer:
+  FindingSeverity:
+    permissible_values:
+      error:
+      review:
+      warning:
+  AdmissionStatus:
+    permissible_values:
+      admitted:
+      review_required:
+      rejected:
+      not_evaluated:
+
+slots:
+  id:
+    identifier: true
+    range: uriorcurie
+    required: true
+  name:
+    range: string
+  agent_type:
+    range: AgentType
+    required: true
+  title:
+    range: string
+    required: true
+  source_type:
+    range: SourceType
+    required: true
+  uri:
+    range: uri
+  version:
+    range: string
+    required: true
+  retrieved_at:
+    range: datetime
+    required: true
+  sha256:
+    range: string
+    pattern: "^[0-9a-f]{64}$"
+    required: true
+  observed_sha256:
+    range: string
+    pattern: "^[0-9a-f]{64}$"
+  source_artifact_id:
+    range: uriorcurie
+    required: true
+  locator:
+    range: string
+    required: true
+  extracted_text:
+    range: string
+  evidence_type:
+    range: string
+    required: true
+  extraction_method:
+    range: ExtractionMethod
+    required: true
+  created_by:
+    range: Agent
+    inlined: true
+  evidence_item_ids:
+    range: uriorcurie
+    multivalued: true
+    minimum_cardinality: 1
+  direction:
+    range: EvidenceDirection
+    required: true
+  rationale:
+    range: string
+  evidence_lines:
+    range: EvidenceLine
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    minimum_cardinality: 1
+  statement_status:
+    range: StatementStatus
+    required: true
+  decision:
+    range: AdjudicationDecision
+    required: true
+  reviewer:
+    range: Agent
+    inlined: true
+    required: true
+  decided_at:
+    range: datetime
+    required: true
+  rule_id:
+    range: string
+    required: true
+  severity:
+    range: FindingSeverity
+    required: true
+  message:
+    range: string
+    required: true
+  field_path:
+    range: string
+  blocking_uses:
+    range: string
+    multivalued: true
+  use:
+    range: string
+    required: true
+  admission_status:
+    range: AdmissionStatus
+    required: true
+  reason_codes:
+    range: string
+    multivalued: true
+
+classes:
+  Agent:
+    class_uri: prov:Agent
+    slots:
+      - id
+      - name
+      - agent_type
+
+  SourceArtifact:
+    description: Immutable description of the exact source bytes used by a decision.
+    class_uri: prov:Entity
+    slots:
+      - id
+      - title
+      - source_type
+      - uri
+      - version
+      - retrieved_at
+      - sha256
+      - observed_sha256
+
+  EvidenceItem:
+    description: A located, typed unit of evidence extracted from one source artifact.
+    slots:
+      - id
+      - source_artifact_id
+      - locator
+      - extracted_text
+      - evidence_type
+      - extraction_method
+      - created_by
+
+  EvidenceLine:
+    description: An explicit supporting, contradicting, or neutral evidence relationship.
+    slots:
+      - id
+      - direction
+      - evidence_item_ids
+      - rationale
+
+  Statement:
+    abstract: true
+    class_uri: sepio:0000000
+    slots:
+      - id
+      - evidence_lines
+      - statement_status
+      - created_by
+
+  Adjudication:
+    description: A human decision that never overwrites the underlying evidence or findings.
+    slots:
+      - id
+      - decision
+      - reviewer
+      - rationale
+      - decided_at
+
+  Finding:
+    slots:
+      - rule_id
+      - severity
+      - message
+      - field_path
+      - blocking_uses
+
+  UseDecision:
+    slots:
+      - use
+      - admission_status
+      - reason_codes
