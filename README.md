@@ -1,4 +1,7 @@
-# BioAI Evidence Validator
+# BioAI Evidence Validator — Canine Breed
+
+This `canine-breed` branch preserves the canine-specific profile and SQLite adapter.
+For the domain-neutral BioAI framework, see [main](https://github.com/NingyuSUN/bioai-evidence-validator/tree/main).
 
 **Schema-valid biological records can still lack evidence for their intended use.**
 This Python toolkit separates structural validation, evidence-policy checks,
