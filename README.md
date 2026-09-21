@@ -1,65 +1,58 @@
 # BioAI Evidence Validator
 
-**Schema-valid biological records can still lack evidence for their intended use.**
-This Python toolkit separates structural validation, evidence-policy checks,
-and use-specific admission for AI-assisted curation.
+**Is a biological assertion supported well enough for its intended use?**
+This Python toolkit checks evidence structure, provenance consistency, scope,
+and review requirements, then reports a decision for each requested use.
+It can sit between AI-assisted extraction and a curated knowledge base or dataset.
 
-Version 0.3 supports canine breed evidence and a read-only SQLite adapter.
-It checks supplied records, not biological truth or breed-classification accuracy.
+`main` is the domain-neutral framework (0.4). Domain rules are YAML profiles;
+new entity types, relations, evidence types, and uses do not require engine edits.
+The complete canine implementation and SQLite adapter live on the
+[`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed).
 
-## Validation workflow
+## How it works
 
 ```mermaid
-flowchart TD
-    A["JSON evidence record"] --> C["LinkML schema checks"]
-    B["Read-only SQLite export"] --> A
-    C --> D["Policy checks when schema-valid"]
-    E["Versioned policy + supplied adjudications"] --> D
-    C --> F["Findings"]
-    D --> F
-    F --> G["Decision for each requested use"]
-    G --> H["JSON report + input/schema/policy hashes"]
+flowchart LR
+    A["Structured evidence JSON"] --> B["LinkML structure checks"]
+    B --> C["Reference and scope checks"]
+    P["Selected YAML profile"] --> C
+    C --> D["Evidence and human review requirements"]
+    D --> E["Decision for each requested use"]
+    E --> F["Audit report: findings, versions and hashes"]
 ```
 
-| Layer | Checks |
-|---|---|
-| Schema | Required fields, types, and relationships |
-| Policy | Source identity, mapping scope, and review requirements |
-| Admission | Admitted, rejected, or review required for each use |
+| Example profile | Assertion | Use contract |
+|---|---|---|
+| `general` | Any typed entity–relation–entity statement | Provenance, scoped support, optional human review by use |
+| `literature-claim` | Gene/variant associated with phenotype/disease | Publication evidence; human acceptance for knowledge-base admission |
+| `dataset-label` | Sample assigned a label | Curated label plus sample link; human acceptance for training |
+| Custom YAML | Compound measured response in an assay | Assay evidence; defined without changing Python code |
 
-A name suitable for catalog display may still lack verified sample membership
-or human acceptance for training.
-
-## Run the synthetic examples
+## Try it
 
 Python 3.11+ and uv, from the repository root:
 
 ```bash
 uv sync --frozen --extra dev
-uv run bioevidence validate examples/canine_breed/valid_labrador.json --output validation_report.json
-uv run bioevidence validate examples/canine_breed/ambiguous_boxer.json
+uv run bioevidence profiles
+uv run bioevidence validate examples/general/curated_assertion.json
+uv run bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim
+uv run bioevidence validate examples/custom_profile/assay_record.json --profile examples/custom_profile/assay.yaml
 uv run pytest
 ```
 
-Labrador is admitted for catalog/display use. Boxer is rejected for its requested
-sample/training uses and intentionally exits with code 1.
+The LLM-only example intentionally requires review (exit **2**).
+Other validation codes: **0** admitted, **1** rejected, **3** input/configuration error.
+Use `--output report.json` to save findings, per-use decisions, and input/schema/profile hashes.
 
-`validate` exit codes: **0** admitted · **1** rejected · **2** review required.
-Operational errors exit **3**. Invalid or unknown requested uses are rejected.
-Reports include findings, use decisions, input/schema/policy hashes, and versions.
-Missing policy rules, incompatible claims and unsupported evidence cannot silently
-produce admission; [policy 0.3](docs/ENGINEERING.md#policy-03) documents the contracts.
+## Scope
 
-## SQLite integration
+All examples are synthetic. Admission means **the supplied record meets the selected
+profile**, not that a biological claim is true. The toolkit does not retrieve papers,
+verify reviewer identities, train models, or measure prediction accuracy. Source hashes
+are compared as supplied; external bytes and cohort independence require upstream verification.
 
-The [adapter](docs/CANINE_PANEL_ADAPTER.md) requires a standalone SQLite snapshot,
-checks its hash before and after read-only export, rejects duplicate IDs, logs
-unresolved rows, and requires a fresh output directory.
-Export completion does not imply record admission; inspect the reports.
-
-Keep company records, source snapshots, sample identifiers, and private reviews
-in the private project. Public examples are synthetic.
-
-[Design rationale](docs/ADR-001-canine-breed-first.md) ·
-[Versioned policy](src/bioevidence_validator/policies/canine_breed_catalog_v0.3.yaml) ·
-[Case study](docs/CASE_STUDY.md) · [Tests](tests/) · [Engineering contract](docs/ENGINEERING.md) · [Apache-2.0](LICENSE)
+[Create a profile](docs/PROFILES.md) · [Engineering contract](docs/ENGINEERING.md) ·
+[Design case study](docs/CASE_STUDY.md) · [0.3 migration](docs/MIGRATION-0.4.md) ·
+[Architecture decision](docs/ADR-002-domain-neutral-main.md) · [Apache-2.0](LICENSE)

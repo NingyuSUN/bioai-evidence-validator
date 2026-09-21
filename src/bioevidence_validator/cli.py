@@ -3,33 +3,27 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import sqlite3
 import sys
 import tempfile
 from pathlib import Path
 
 import yaml
 
-from .canine_panel_adapter import export_canine_panel
-from .engine import default_policy_path, default_schema_path, generate_json_schema, validate_record
+from .engine import default_schema_path, generate_json_schema, validate_record, profile_path, list_profiles
 
 
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(prog="bioevidence")
     commands = result.add_subparsers(dest="command", required=True)
-    validate = commands.add_parser("validate", help="Validate one canine breed evidence record")
+    validate = commands.add_parser("validate", help="Validate one biological evidence record")
     validate.add_argument("input", type=Path)
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
-    validate.add_argument("--policy", type=Path, default=default_policy_path())
+    validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
     generate = commands.add_parser("generate-schema", help="Generate JSON Schema from LinkML")
     generate.add_argument("--output", type=Path, required=True)
     generate.add_argument("--schema", type=Path, default=default_schema_path())
-    export = commands.add_parser("export-canine-panel", help="Export and validate an existing canine-panel SQLite database")
-    export.add_argument("database", type=Path)
-    export.add_argument("--manifest", type=Path, required=True)
-    export.add_argument("--output", type=Path, required=True)
-    export.add_argument("--limit", type=int)
+    commands.add_parser("profiles", help="List built-in profiles and their use contracts")
     return result
 
 
@@ -64,21 +58,22 @@ def _write_json(path: Path, value: dict) -> None:
 
 def _run(args) -> int:
     if args.command == "generate-schema":
-        if args.output.resolve() == args.schema.resolve():
+        if args.output.resolve() in {args.schema.resolve(), default_schema_path().resolve()}:
             raise ValueError("Output must not overwrite the schema")
         _write_json(args.output, generate_json_schema(args.schema))
         return 0
 
-    if args.command == "export-canine-panel":
-        summary = export_canine_panel(args.database, args.manifest, args.output, limit=args.limit)
-        print(json.dumps(summary, indent=2, sort_keys=True))
+    if args.command == "profiles":
+        print(json.dumps(list_profiles(), indent=2))
         return 0
 
-    if args.output and args.output.resolve() in {p.resolve() for p in [args.input, args.schema, args.policy]}:
-        raise ValueError("Output must not overwrite an input, schema, or policy")
+    selected_profile = profile_path(args.profile)
+    protected = [args.input, args.schema, selected_profile, default_schema_path()]
+    if args.output and args.output.resolve() in {p.resolve() for p in protected}:
+        raise ValueError("Output must not overwrite an input, schema, or profile")
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
-    report = validate_record(record, schema_path=args.schema, policy_path=args.policy)
+    report = validate_record(record, schema_path=args.schema, profile=args.profile)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)
@@ -95,7 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
         return _run(args)
-    except (OSError, UnicodeError, ValueError, RecursionError, yaml.YAMLError, sqlite3.Error) as exc:
+    except (OSError, UnicodeError, ValueError, RecursionError, yaml.YAMLError) as exc:
         print(json.dumps({"error": "input_or_execution_error", "message": str(exc)}), file=sys.stderr)
         return 3
 

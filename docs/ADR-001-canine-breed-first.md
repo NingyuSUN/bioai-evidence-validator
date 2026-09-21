@@ -2,7 +2,8 @@
 
 ## Status
 
-Accepted for MVP 0.1.
+Historical decision for MVP 0.1. Superseded on main by [ADR-002](ADR-002-domain-neutral-main.md).
+The implementation described below is preserved on the [canine-breed branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed).
 
 ## Context
 
@@ -29,7 +30,7 @@ adapter may later export evidence bundles without moving company data into this
 repository.
 
 The read-only adapter described above was implemented in package 0.2; see
-[adapter documentation](CANINE_PANEL_ADAPTER.md).
+[adapter documentation](https://github.com/NingyuSUN/bioai-evidence-validator/blob/canine-breed/docs/CANINE_PANEL_ADAPTER.md).
 
 ## Consequences
 

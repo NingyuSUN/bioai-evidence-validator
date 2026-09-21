@@ -1,0 +1,28 @@
+id: general
+version: 0.4.0
+description: General provenance, evidence scope and use admission; no biological domain
+  assumptions.
+predicates: []
+subject_types: []
+object_types: []
+uses:
+  knowledge_base:
+    required_evidence_types: []
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  research_summary:
+    required_evidence_types: []
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  training_data:
+    required_evidence_types: []
+    require_human_acceptance: true
+    allow_llm_only: false
+    allow_string_match_only: false
+  external_validation:
+    required_evidence_types: []
+    require_human_acceptance: true
+    allow_llm_only: false
+    allow_string_match_only: false

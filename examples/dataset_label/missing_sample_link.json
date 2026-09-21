@@ -1,0 +1,76 @@
+{
+  "record_id": "bioev:synthetic-dataset-label",
+  "profile_id": "dataset-label",
+  "statement": {
+    "id": "bioev:synthetic-statement",
+    "subject": {
+      "id": "SYN:SAMPLE_1",
+      "label": "Synthetic sample 1",
+      "entity_type": "sample"
+    },
+    "predicate": "has_label",
+    "object": {
+      "id": "SYN:TYPE_1",
+      "label": "Synthetic cell type 1",
+      "entity_type": "cell_type"
+    },
+    "scope": [
+      "taxon:synthetic"
+    ],
+    "evidence_lines": [
+      {
+        "id": "bioev:line-1",
+        "direction": "supports",
+        "evidence_item_ids": [
+          "bioev:item-1"
+        ],
+        "rationale": "Synthetic curated example only."
+      }
+    ],
+    "statement_status": "proposed"
+  },
+  "source_artifacts": [
+    {
+      "id": "bioev:source-1",
+      "title": "Synthetic source; not real biological evidence",
+      "source_type": "dataset_snapshot",
+      "uri": "https://example.org/synthetic-evidence",
+      "version": "synthetic-v1",
+      "retrieved_at": "2026-09-21T00:00:00Z",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "observed_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "evidence_items": [
+    {
+      "id": "bioev:item-1",
+      "source_artifact_id": "bioev:source-1",
+      "locator": "synthetic-row-1",
+      "extracted_text": "Synthetic assertion for software testing only.",
+      "evidence_type": "curated_label",
+      "extraction_method": "manual_curation",
+      "scope": [
+        "taxon:synthetic"
+      ]
+    }
+  ],
+  "adjudications": [
+    {
+      "id": "bioev:human-review-1",
+      "statement_id": "bioev:synthetic-statement",
+      "applies_to_uses": [
+        "training_data"
+      ],
+      "decision": "accept",
+      "reviewer": {
+        "id": "bioev:synthetic-reviewer",
+        "agent_type": "human"
+      },
+      "rationale": "Synthetic acceptance for this statement and training use only.",
+      "decided_at": "2026-09-21T00:00:00Z"
+    }
+  ],
+  "requested_uses": [
+    "training_data"
+  ]
+}

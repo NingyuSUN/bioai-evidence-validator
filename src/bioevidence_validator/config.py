@@ -1,4 +1,4 @@
-"""Strict configuration parsing shared by policy and adapter boundaries."""
+"""Strict configuration parsing shared by profile boundaries."""
 from __future__ import annotations
 
 import yaml

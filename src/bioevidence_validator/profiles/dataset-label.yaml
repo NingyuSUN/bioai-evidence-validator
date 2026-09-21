@@ -1,0 +1,35 @@
+id: dataset-label
+version: 0.4.0
+description: Dataset label evidence and sample-link review; supplied metadata does
+  not prove biological membership.
+predicates:
+- has_label
+subject_types:
+- sample
+object_types:
+- cell_type
+- phenotype
+- class_label
+uses:
+  reference_annotation:
+    required_evidence_types:
+    - curated_label
+    - sample_link
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  training_data:
+    required_evidence_types:
+    - curated_label
+    - sample_link
+    require_human_acceptance: true
+    allow_llm_only: false
+    allow_string_match_only: false
+  external_validation:
+    required_evidence_types:
+    - curated_label
+    - sample_link
+    - independent_cohort_review
+    require_human_acceptance: true
+    allow_llm_only: false
+    allow_string_match_only: false

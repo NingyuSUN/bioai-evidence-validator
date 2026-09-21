@@ -1,0 +1,61 @@
+{
+  "record_id": "bioev:synthetic-record",
+  "profile_id": "assay-review",
+  "statement": {
+    "id": "bioev:synthetic-statement",
+    "subject": {
+      "id": "SYN:COMPOUND_1",
+      "label": "Synthetic compound",
+      "entity_type": "compound"
+    },
+    "predicate": "measured_response",
+    "object": {
+      "id": "SYN:READOUT_1",
+      "label": "Synthetic readout",
+      "entity_type": "assay_readout"
+    },
+    "scope": [
+      "taxon:synthetic"
+    ],
+    "evidence_lines": [
+      {
+        "id": "bioev:line-1",
+        "direction": "supports",
+        "evidence_item_ids": [
+          "bioev:item-1"
+        ],
+        "rationale": "Synthetic curated example only."
+      }
+    ],
+    "statement_status": "proposed"
+  },
+  "source_artifacts": [
+    {
+      "id": "bioev:source-1",
+      "title": "Synthetic source; not real biological evidence",
+      "source_type": "dataset_snapshot",
+      "uri": "https://example.org/synthetic-evidence",
+      "version": "synthetic-v1",
+      "retrieved_at": "2026-09-21T00:00:00Z",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "observed_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "evidence_items": [
+    {
+      "id": "bioev:item-1",
+      "source_artifact_id": "bioev:source-1",
+      "locator": "synthetic-row-1",
+      "extracted_text": "Synthetic assertion for software testing only.",
+      "evidence_type": "assay_measurement",
+      "extraction_method": "manual_curation",
+      "scope": [
+        "taxon:synthetic"
+      ]
+    }
+  ],
+  "adjudications": [],
+  "requested_uses": [
+    "assay_curation"
+  ]
+}

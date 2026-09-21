@@ -1,0 +1,61 @@
+{
+  "record_id": "bioev:synthetic-literature",
+  "profile_id": "literature-claim",
+  "statement": {
+    "id": "bioev:synthetic-statement",
+    "subject": {
+      "id": "SYN:GENE_A",
+      "label": "Synthetic gene A",
+      "entity_type": "gene"
+    },
+    "predicate": "associated_with",
+    "object": {
+      "id": "SYN:PHENOTYPE_A",
+      "label": "Synthetic phenotype A",
+      "entity_type": "phenotype"
+    },
+    "scope": [
+      "taxon:synthetic"
+    ],
+    "evidence_lines": [
+      {
+        "id": "bioev:line-1",
+        "direction": "supports",
+        "evidence_item_ids": [
+          "bioev:item-1"
+        ],
+        "rationale": "Synthetic curated example only."
+      }
+    ],
+    "statement_status": "proposed"
+  },
+  "source_artifacts": [
+    {
+      "id": "bioev:source-1",
+      "title": "Synthetic source; not real biological evidence",
+      "source_type": "publication",
+      "uri": "https://example.org/synthetic-evidence",
+      "version": "synthetic-v1",
+      "retrieved_at": "2026-09-21T00:00:00Z",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "observed_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "evidence_items": [
+    {
+      "id": "bioev:item-1",
+      "source_artifact_id": "bioev:source-1",
+      "locator": "synthetic-row-1",
+      "extracted_text": "Synthetic assertion for software testing only.",
+      "evidence_type": "publication_result",
+      "extraction_method": "manual_curation",
+      "scope": [
+        "taxon:synthetic"
+      ]
+    }
+  ],
+  "adjudications": [],
+  "requested_uses": [
+    "research_summary"
+  ]
+}

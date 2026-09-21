@@ -1,0 +1,16 @@
+id: assay-review
+version: 1.0.0
+description: Example extension supplied as a YAML file without core-code edits.
+predicates:
+- measured_response
+subject_types:
+- compound
+object_types:
+- assay_readout
+uses:
+  assay_curation:
+    required_evidence_types:
+    - assay_measurement
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false

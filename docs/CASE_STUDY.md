@@ -1,54 +1,40 @@
-# Case study: evidence admission beyond schema validity
+# Case study: evidence admission across BioAI workflows
 
 ## Problem
 
-A source label can be structurally valid yet insufficient for training labels or
-sample membership. The same mapping may be usable for catalog display while
-requiring verified genotype membership and human review for more demanding uses.
+AI-assisted pipelines can emit structurally valid records that lack sufficient evidence
+for the destination. A literature statement may be suitable for a research summary but
+require human review before knowledge-base admission. A sample label may be usable as an
+annotation while lacking approval for training or evidence of cohort independence.
 
-The project implements a deterministic evidence-validation layer with a narrow
-canine-breed profile. Public inputs are synthetic. It is not a breed classifier,
-a truth-verification service or an LLM judge.
+## Implementation
 
-## System design
+The core schema separates assertion, source, evidence, adjudication, and intended use.
+The engine checks references and provenance consistency before evaluating a selected
+YAML profile. Each use receives its own decision and reason codes. Human adjudications
+are attached to a statement and explicit uses; acceptance cannot erase contrary evidence.
+The report hashes the input and configuration to make decisions traceable.
 
-- **LinkML schema:** typed statements, source snapshots, evidence references,
-  adjudications and intended uses; required evidence collections are explicit.
-- **Versioned policy:** source scope, ambiguous names, source hashes, membership
-  requirements and review status. Policy 0.1 is retained alongside default 0.2.
-- **Admission engine:** per-use decisions plus a record-wide structural/integrity
-  gate, so malformed requests cannot bypass the policy layer.
-- **Read-only adapter:** export an existing SQLite snapshot, preserve unresolved
-  rows in a separate ledger and verify the database hash before/after export.
-- **Audit report:** findings, reason codes, versions and input/schema/policy hashes.
+The public examples demonstrate:
 
-## A concrete engineering failure and its regression
+| Input | Expected result | Reason |
+|---|---|---|
+| General curated assertion | Admitted | Scoped supporting evidence satisfies the general contract |
+| Literature LLM-only association | Review required | Extraction alone needs review under this profile |
+| Dataset label with sample link and scoped acceptance | Admitted for training | Both evidence types and human acceptance are supplied |
+| Dataset label missing sample link | Rejected | The required link evidence is absent |
+| Custom assay record | Admitted for assay curation | A new YAML profile supplies the domain contract |
 
-Originally, an empty `requested_uses` list produced zero decisions, so the final
-status fell through to `admitted`. An unknown use could also escape findings that
-blocked only the six recognized uses. The fix validates the request contract and
-makes structural errors reject the entire record. Regression tests also cover
-mixed known/unknown uses, non-object JSON, missing evidence and duplicate IDs.
+All records, identifiers, reviewers, and source hashes in these fixtures are synthetic.
+The independent test suite additionally demonstrates a novel organoid/imaging profile,
+negative evidence/reference cases, and isolation between training and external-validation
+approval. These are software contract tests, not measurements of biological truth.
 
-Human acceptance is not allowed to erase a coexisting rejection or deferral.
-This preserves conflicting evidence instead of resolving it by list order.
+## Scope of the project
 
-## Validation evidence
-
-The current suite contains 58 tests, run locally on Windows with Python 3.11 and
-3.13. Coverage includes schema and policy decisions, CLI exit codes, input/output
-preservation, Unicode, simulated write failure and SQLite snapshot integrity.
-An isolated wheel installation runs both documented CLI examples and the invalid
-use guard, verifying that YAML resources ship with the package. Linux/Windows CI
-is defined; remote CI execution is only established by a subsequent Actions run.
-
-## Tradeoffs to explain in an interview
-
-The profile is intentionally narrow because evidence rules depend on the intended
-use. LinkML captures structure; the policy engine captures evidence sufficiency.
-A successful export and an admitted record are separate outcomes. Audit hashes
-support replay and change detection but do not authenticate the human reviewer
-or independently verify biological claims. Immutable database snapshots are a
-precondition; concurrent database export is outside the adapter contract.
-
-See [engineering contract](ENGINEERING.md) for reproducible commands and error semantics.
+This is a reusable evidence-validation component for curation pipelines, not a predictive
+model. It consumes already structured records; it does not extract literature, run
+training, authenticate reviewers, or evaluate a model. Domain-specific pipelines can
+supply those results as located evidence, while retaining responsibility for scientific
+quality and source verification. The canine project remains a separate working example
+on the [`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed).

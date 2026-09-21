@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 — Domain-neutral main
+
+- Preserve canine 0.3 functionality on the `canine-breed` branch.
+- Replace canine defaults with a generic entity/relation/evidence schema and strict YAML profiles.
+- Add general, literature-claim, dataset-label, and custom assay examples.
+- Bind human adjudications to statements and uses; enforce evidence scope and reference integrity.
+- Replace `--policy` with `--profile`; add profile discovery and generic audit fields.
+- Remove the canine SQLite command from main. See `docs/MIGRATION-0.4.md` for breaking changes.
+
+
 ## 0.3.0 — Evidence and snapshot contract hardening
 
 - Require resolved supporting evidence, selected-candidate consistency and

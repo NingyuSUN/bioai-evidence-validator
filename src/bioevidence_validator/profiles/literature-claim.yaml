@@ -1,0 +1,26 @@
+id: literature-claim
+version: 0.4.0
+description: Synthetic gene/phenotype literature-claim curation example, not a clinical
+  interpretation guideline.
+predicates:
+- associated_with
+- contributes_to
+subject_types:
+- gene
+- variant
+object_types:
+- phenotype
+- disease
+uses:
+  research_summary:
+    required_evidence_types:
+    - publication_result
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  knowledge_base:
+    required_evidence_types:
+    - publication_result
+    require_human_acceptance: true
+    allow_llm_only: false
+    allow_string_match_only: false
