@@ -5,7 +5,7 @@ description: >-
   Profile for validating canine breed catalog concepts, aliases, source-label
   assignments, and explicitly typed breed relationships.
 license: Apache-2.0
-version: 0.2.0
+version: 0.3.0
 
 prefixes:
   bioev: https://w3id.org/bioevidence/
@@ -61,6 +61,7 @@ enums:
 
 slots:
   record_id:
+    pattern: '\S'
     identifier: true
     range: uriorcurie
     required: true
@@ -107,20 +108,25 @@ slots:
     inlined: true
     required: true
   value:
+    pattern: '\S'
     range: string
     required: true
   source_name:
+    pattern: '\S'
     range: string
     required: true
   source_record_ids:
+    pattern: '\S'
     range: string
     multivalued: true
   candidate_concept_ids:
+    pattern: '\S'
     required: true
     range: uriorcurie
     multivalued: true
     minimum_cardinality: 1
   source_scope:
+    pattern: '\S'
     required: true
     range: string
     multivalued: true
@@ -130,16 +136,20 @@ slots:
   genotype_membership_verified:
     range: boolean
   concept_id:
+    pattern: '\S'
     identifier: true
     range: uriorcurie
     required: true
   preferred_name:
+    pattern: '\S'
     range: string
     required: true
   ontology:
+    pattern: '\S'
     range: string
     required: true
   ontology_version:
+    pattern: '\S'
     range: string
     required: true
   concept_status:
@@ -149,6 +159,7 @@ slots:
     range: BreedScope
     required: true
   scope_flags:
+    pattern: '\S'
     range: string
     multivalued: true
 

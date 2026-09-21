@@ -5,7 +5,7 @@ description: >-
   A compact operational model for evidence-bearing statements, source snapshots,
   validation findings, human adjudication, and use-specific admission decisions.
 license: Apache-2.0
-version: 0.2.0
+version: 0.3.0
 
 prefixes:
   bioev: https://w3id.org/bioevidence/
@@ -68,6 +68,7 @@ enums:
 
 slots:
   id:
+    pattern: '\S'
     identifier: true
     range: uriorcurie
     required: true
@@ -77,6 +78,7 @@ slots:
     range: AgentType
     required: true
   title:
+    pattern: '\S'
     range: string
     required: true
   source_type:
@@ -85,6 +87,7 @@ slots:
   uri:
     range: uri
   version:
+    pattern: '\S'
     range: string
     required: true
   retrieved_at:
@@ -98,14 +101,17 @@ slots:
     range: string
     pattern: "^[0-9a-f]{64}$"
   source_artifact_id:
+    pattern: '\S'
     range: uriorcurie
     required: true
   locator:
+    pattern: '\S'
     range: string
     required: true
   extracted_text:
     range: string
   evidence_type:
+    pattern: '\S'
     range: string
     required: true
   extraction_method:
@@ -115,6 +121,7 @@ slots:
     range: Agent
     inlined: true
   evidence_item_ids:
+    pattern: '\S'
     required: true
     range: uriorcurie
     multivalued: true
@@ -123,6 +130,7 @@ slots:
     range: EvidenceDirection
     required: true
   rationale:
+    pattern: '\S'
     range: string
   evidence_lines:
     required: true

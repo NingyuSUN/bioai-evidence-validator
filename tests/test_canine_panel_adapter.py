@@ -1,6 +1,7 @@
 import hashlib
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -10,7 +11,7 @@ from bioevidence_validator.canine_panel_adapter import export_canine_panel, sha2
 
 
 def make_database(path: Path) -> None:
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db, db:
         db.executescript("""
         CREATE TABLE source_records (
           record_key TEXT PRIMARY KEY,

@@ -113,6 +113,6 @@ def test_unresolved_concept_requires_review():
 
 def test_policy_and_schema_versions_are_auditable():
     report = validate_record(valid())
-    assert report['policy_version'] == '0.2.0'
-    assert report['schema_version'] == '0.2.0'
+    assert report['policy_version'] == '0.3.0'
+    assert report['schema_version'] == '0.3.0'
     assert len(report['schema_sha256']) == 64

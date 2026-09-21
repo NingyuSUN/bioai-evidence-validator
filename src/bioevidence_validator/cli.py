@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
         return _run(args)
-    except (OSError, UnicodeError, ValueError, yaml.YAMLError, sqlite3.Error) as exc:
+    except (OSError, UnicodeError, ValueError, RecursionError, yaml.YAMLError, sqlite3.Error) as exc:
         print(json.dumps({"error": "input_or_execution_error", "message": str(exc)}), file=sys.stderr)
         return 3
 

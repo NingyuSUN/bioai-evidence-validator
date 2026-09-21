@@ -4,7 +4,7 @@
 This Python toolkit separates structural validation, evidence-policy checks,
 and use-specific admission for AI-assisted curation.
 
-Version 0.2 supports canine breed evidence and a read-only SQLite adapter.
+Version 0.3 supports canine breed evidence and a read-only SQLite adapter.
 It checks supplied records, not biological truth or breed-classification accuracy.
 
 ## Validation workflow
@@ -47,16 +47,19 @@ sample/training uses and intentionally exits with code 1.
 `validate` exit codes: **0** admitted · **1** rejected · **2** review required.
 Operational errors exit **3**. Invalid or unknown requested uses are rejected.
 Reports include findings, use decisions, input/schema/policy hashes, and versions.
+Missing policy rules, incompatible claims and unsupported evidence cannot silently
+produce admission; [policy 0.3](docs/ENGINEERING.md#policy-03) documents the contracts.
 
 ## SQLite integration
 
-The [adapter](docs/CANINE_PANEL_ADAPTER.md) checks database hashes before and after
-read-only export, logs unresolved rows, and requires a fresh output directory.
+The [adapter](docs/CANINE_PANEL_ADAPTER.md) requires a standalone SQLite snapshot,
+checks its hash before and after read-only export, rejects duplicate IDs, logs
+unresolved rows, and requires a fresh output directory.
 Export completion does not imply record admission; inspect the reports.
 
 Keep company records, source snapshots, sample identifiers, and private reviews
 in the private project. Public examples are synthetic.
 
 [Design rationale](docs/ADR-001-canine-breed-first.md) ·
-[Versioned policy](src/bioevidence_validator/policies/canine_breed_catalog_v0.2.yaml) ·
+[Versioned policy](src/bioevidence_validator/policies/canine_breed_catalog_v0.3.yaml) ·
 [Case study](docs/CASE_STUDY.md) · [Tests](tests/) · [Engineering contract](docs/ENGINEERING.md) · [Apache-2.0](LICENSE)
