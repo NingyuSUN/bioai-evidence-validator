@@ -28,6 +28,9 @@ The public package contains only synthetic fixtures. A private canine-panel
 adapter may later export evidence bundles without moving company data into this
 repository.
 
+The read-only adapter described above was implemented in package 0.2; see
+[adapter documentation](CANINE_PANEL_ADAPTER.md).
+
 ## Consequences
 
 - Disease, trait, cancer, and vendor policies are deferred.

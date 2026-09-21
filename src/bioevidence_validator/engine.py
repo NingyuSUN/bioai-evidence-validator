@@ -50,7 +50,7 @@ def default_schema_path() -> Path:
 
 
 def default_policy_path() -> Path:
-    return _resource_path("policies", "canine_breed_catalog_v0.1.yaml")
+    return _resource_path("policies", "canine_breed_catalog_v0.2.yaml")
 
 
 def generate_json_schema(schema_path: Path | None = None) -> dict[str, Any]:
@@ -59,12 +59,44 @@ def generate_json_schema(schema_path: Path | None = None) -> dict[str, Any]:
     return json.loads(rendered)
 
 
-def _schema_findings(record: dict[str, Any], schema_path: Path | None) -> list[Finding]:
-    validator = Draft202012Validator(generate_json_schema(schema_path), format_checker=FormatChecker())
+def _schema_findings(record: Any, schema_path: Path | None, rendered_schema: dict | None = None) -> list[Finding]:
+    validator = Draft202012Validator(rendered_schema if rendered_schema is not None else generate_json_schema(schema_path), format_checker=FormatChecker())
     findings: list[Finding] = []
-    for error in sorted(validator.iter_errors(record), key=lambda e: list(e.absolute_path)):
+    for error in sorted(validator.iter_errors(record), key=lambda e: tuple(str(part) for part in e.absolute_path)):
         path = "$" + "".join(f"[{item}]" if isinstance(item, int) else f".{item}" for item in error.absolute_path)
         findings.append(Finding("SCHEMA", "error", error.message, path, list(ALL_USES)))
+    return findings
+
+
+def _record_findings(record: Any) -> list[Finding]:
+    """Admission needs an explicit nonempty set of supported uses."""
+    if not isinstance(record, dict):
+        return [Finding("SCHEMA", "error", "Record must be a JSON object.", "$", list(ALL_USES))]
+    uses = record.get("requested_uses")
+    if (not isinstance(uses, list) or not uses
+            or any(not isinstance(use, str) or use not in ALL_USES for use in uses)
+            or len(set(uses)) != len(uses)):
+        return [Finding("SCHEMA", "error", "requested_uses must be a nonempty list of distinct supported uses.",
+                        "$.requested_uses", list(ALL_USES))]
+    return []
+
+
+def _identity_findings(record: dict[str, Any]) -> list[Finding]:
+    """Reject ambiguous identities before building reference dictionaries."""
+    findings = []
+    collections = [("$.source_artifacts", record["source_artifacts"]),
+                   ("$.evidence_items", record["evidence_items"]),
+                   ("$.statement.evidence_lines", record["statement"]["evidence_lines"]),
+                   ("$.adjudications", record.get("adjudications") or [])]
+    for path, rows in collections:
+        seen = set()
+        for row in rows:
+            identity = row["id"]
+            if identity in seen:
+                findings.append(Finding("RECORD_INTEGRITY", "error",
+                    f"Duplicate identifier {identity!r} makes evidence references ambiguous.",
+                    path, list(ALL_USES)))
+            seen.add(identity)
     return findings
 
 
@@ -77,7 +109,7 @@ def _finding(rule_id: str, policy: dict[str, Any], message: str, field_path: str
 
 
 def _accepted_adjudication(record: dict[str, Any]) -> bool:
-    for item in record.get("adjudications", []):
+    for item in (record.get("adjudications") or []):
         reviewer = item.get("reviewer") or {}
         if (item.get("decision") == "accept" and item.get("rationale")
                 and item.get("decided_at") and reviewer.get("id") and reviewer.get("agent_type") == "human"):
@@ -98,6 +130,18 @@ def evaluate_policy(record: dict[str, Any], policy: dict[str, Any]) -> list[Find
         found = _finding(rule_id, policy, message, path, uses or requested)
         if found:
             findings.append(found)
+
+    if statement["statement_status"] in {"rejected", "superseded"}:
+        add("CBR015", "A rejected or superseded statement is not eligible for admission.",
+            "$.statement.statement_status")
+    if breed["concept_status"] == "unresolved":
+        add("CBR016", "The breed concept is unresolved.", "$.statement.object_breed.concept_status")
+    human_decisions = {item["decision"] for item in (record.get("adjudications") or [])
+                       if item["reviewer"]["agent_type"] == "human"}
+    if "reject" in human_decisions:
+        add("CBR017", "Human rejection remains present; an acceptance record cannot erase it.", "$.adjudications")
+    if "defer" in human_decisions:
+        add("CBR018", "A deferred human decision remains unresolved.", "$.adjudications")
 
     if not CURIE.match(breed["concept_id"]):
         add("CBR001", "The canonical breed identifier is not a CURIE-like identifier.",
@@ -153,7 +197,7 @@ def evaluate_policy(record: dict[str, Any], policy: dict[str, Any]) -> list[Find
             "$.statement")
 
     prohibited = set(policy["rules"].get("CBR007", {}).get("prohibited_scope_flags", []))
-    conflict_flags = prohibited.intersection(breed.get("scope_flags", []))
+    conflict_flags = prohibited.intersection((breed.get("scope_flags") or []))
     if conflict_flags:
         add("CBR007", "The concept has incompatible scope flags: " + ", ".join(sorted(conflict_flags)) + ".",
             "$.statement.object_breed.scope_flags")
@@ -186,7 +230,8 @@ def evaluate_policy(record: dict[str, Any], policy: dict[str, Any]) -> list[Find
 def decide_uses(requested_uses: list[str], findings: list[Finding]) -> list[dict[str, Any]]:
     decisions: list[dict[str, Any]] = []
     for use in requested_uses:
-        relevant = [f for f in findings if use in f.blocking_uses]
+        relevant = [f for f in findings
+                    if f.rule_id in {"SCHEMA", "RECORD_INTEGRITY"} or use in f.blocking_uses]
         if any(f.severity == "error" for f in relevant):
             status = "rejected"
         elif any(f.severity == "review" for f in relevant):
@@ -201,19 +246,34 @@ def decide_uses(requested_uses: list[str], findings: list[Finding]) -> list[dict
     return decisions
 
 
-def validate_record(record: dict[str, Any], *, schema_path: Path | None = None,
+def validate_record(record: Any, *, schema_path: Path | None = None,
                     policy_path: Path | None = None) -> dict[str, Any]:
     policy_path = policy_path or default_policy_path()
     policy_bytes = policy_path.read_bytes()
     policy = yaml.safe_load(policy_bytes)
-    canonical = json.dumps(record, sort_keys=True, separators=(",", ":")).encode()
-    findings = _schema_findings(record, schema_path)
+    if (not isinstance(policy, dict) or not isinstance(policy.get("rules"), dict)
+            or not isinstance(policy.get("id"), str) or not policy["id"]
+            or not isinstance(policy.get("version"), str) or not policy["version"]):
+        raise ValueError("Policy must declare id, version, and a rules mapping")
+    for rule_id, rule in policy["rules"].items():
+        if (not isinstance(rule, dict) or not isinstance(rule.get("enabled"), bool)
+                or rule.get("severity") not in {"error", "review", "warning"}):
+            raise ValueError(f"Policy rule {rule_id!r} requires a boolean enabled and supported severity")
+    canonical = json.dumps(record, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    rendered_schema = generate_json_schema(schema_path)
+    findings = _record_findings(record)
+    findings.extend(_schema_findings(record, schema_path, rendered_schema))
+    if not findings:
+        findings.extend(_identity_findings(record))
     if not findings:
         findings.extend(evaluate_policy(record, policy))
-    decisions = decide_uses(record.get("requested_uses", ALL_USES), findings)
+    requested = record.get("requested_uses") if isinstance(record, dict) else None
+    uses = list(dict.fromkeys(use for use in requested if isinstance(use, str))) if isinstance(requested, list) else []
+    decisions = decide_uses(uses, findings)
     schema_valid = not any(f.rule_id == "SCHEMA" for f in findings)
     overall = (
-        "rejected" if any(x["admission_status"] == "rejected" for x in decisions)
+        "rejected" if not decisions or any(f.rule_id in {"SCHEMA", "RECORD_INTEGRITY"} for f in findings)
+        or any(x["admission_status"] == "rejected" for x in decisions)
         else "review_required" if any(x["admission_status"] == "review_required" for x in decisions)
         else "admitted"
     )
@@ -221,7 +281,8 @@ def validate_record(record: dict[str, Any], *, schema_path: Path | None = None,
         "validator": "bioai-evidence-validator",
         "validator_version": __version__,
         "profile": "canine_breed",
-        "schema_version": "0.1.0",
+        "schema_version": str(yaml.safe_load((schema_path or default_schema_path()).read_bytes()).get("version", "unknown")),
+        "schema_sha256": sha256_bytes(json.dumps(rendered_schema, sort_keys=True, separators=(",", ":")).encode()),
         "policy_id": policy["id"],
         "policy_version": policy["version"],
         "policy_sha256": sha256_bytes(policy_bytes),

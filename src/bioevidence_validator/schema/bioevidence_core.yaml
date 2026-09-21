@@ -5,7 +5,7 @@ description: >-
   A compact operational model for evidence-bearing statements, source snapshots,
   validation findings, human adjudication, and use-specific admission decisions.
 license: Apache-2.0
-version: 0.1.0
+version: 0.2.0
 
 prefixes:
   bioev: https://w3id.org/bioevidence/
@@ -115,6 +115,7 @@ slots:
     range: Agent
     inlined: true
   evidence_item_ids:
+    required: true
     range: uriorcurie
     multivalued: true
     minimum_cardinality: 1
@@ -124,6 +125,7 @@ slots:
   rationale:
     range: string
   evidence_lines:
+    required: true
     range: EvidenceLine
     multivalued: true
     inlined: true

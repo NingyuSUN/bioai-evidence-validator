@@ -1,87 +1,62 @@
-# bioai-evidence-validator
+# BioAI Evidence Validator
 
-A standards-aligned validation and policy layer for AI-assisted biological
-curation. Version 0.2 focuses on canine breed catalog evidence and includes a
-read-only adapter for an existing canine-panel SQLite inventory.
+**Schema-valid biological records can still lack evidence for their intended use.**
+This Python toolkit separates structural validation, evidence-policy checks,
+and use-specific admission for AI-assisted curation.
 
-The project separates three questions that are often conflated:
+Version 0.2 supports canine breed evidence and a read-only SQLite adapter.
+It checks supplied records, not biological truth or breed-classification accuracy.
 
-1. **Schema validity** — is the record structurally well formed?
-2. **Evidence policy** — is the claim sufficiently supported for this domain?
-3. **Use admission** — may the record be used in a catalog, sample mapping,
-   training set, or external validation set?
+## Validation workflow
 
-## Current scope
-
-The canine breed profile supports:
-
-- breed catalog statements;
-- official aliases, renames, and translations;
-- source-specific label assignments;
-- regional population, variety, and related-but-not-equivalent relationships;
-- immutable source hashes;
-- deterministic findings;
-- human adjudication;
-- use-specific admission decisions.
-
-It does **not** establish breed-identification accuracy, marker suitability, or
-independent biological validation.
-
-## Architecture
-
-```text
-JSON record
-  -> LinkML-derived JSON Schema
-  -> versioned canine breed policy
-  -> findings
-  -> human adjudication
-  -> per-use admission decision
+```mermaid
+flowchart TD
+    A["JSON evidence record"] --> C["LinkML schema checks"]
+    B["Read-only SQLite export"] --> A
+    C --> D["Policy checks when schema-valid"]
+    E["Versioned policy + supplied adjudications"] --> D
+    C --> F["Findings"]
+    D --> F
+    F --> G["Decision for each requested use"]
+    G --> H["JSON report + input/schema/policy hashes"]
 ```
 
-`bioevidence_core.yaml` provides reusable operational objects.
-`canine_breed.yaml` is the first domain profile. The policy file is separate so
-that a rule change does not silently redefine the data model.
+| Layer | Checks |
+|---|---|
+| Schema | Required fields, types, and relationships |
+| Policy | Source identity, mapping scope, and review requirements |
+| Admission | Admitted, rejected, or review required for each use |
 
-## Quick start
+A name suitable for catalog display may still lack verified sample membership
+or human acceptance for training.
+
+## Run the synthetic examples
+
+Python 3.11+ and uv, from the repository root:
 
 ```bash
-uv sync --extra dev
-
-uv run bioevidence validate \
-  examples/canine_breed/valid_labrador.json \
-  --output validation_report.json
-
-uv run bioevidence generate-schema \
-  --output dist/canine_breed.schema.json
-
-uv run bioevidence export-canine-panel canine_breed.sqlite \
-  --manifest adapter_manifest.yaml \
-  --output validation_run_001
-
+uv sync --frozen --extra dev
+uv run bioevidence validate examples/canine_breed/valid_labrador.json --output validation_report.json
+uv run bioevidence validate examples/canine_breed/ambiguous_boxer.json
 uv run pytest
 ```
 
-Exit codes:
+Labrador is admitted for catalog/display use. Boxer is rejected for its requested
+sample/training uses and intentionally exits with code 1.
 
-- `0`: all requested uses admitted;
-- `1`: at least one requested use rejected;
-- `2`: no rejection, but at least one use requires review.
+`validate` exit codes: **0** admitted · **1** rejected · **2** review required.
+Operational errors exit **3**. Invalid or unknown requested uses are rejected.
+Reports include findings, use decisions, input/schema/policy hashes, and versions.
 
-## Privacy boundary
+## SQLite integration
 
-The repository is designed for public code and synthetic examples. Company
-records, sample identifiers, internal paths, frozen source files, and private
-adjudications should remain in the private canine project. A future adapter will
-export only the structured evidence bundle required by this validator.
+The [adapter](docs/CANINE_PANEL_ADAPTER.md) checks database hashes before and after
+read-only export, logs unresolved rows, and requires a fresh output directory.
+Export completion does not imply record admission; inspect the reports.
 
-The adapter opens SQLite in read-only/query-only mode, hashes the database
-before and after export, and refuses to overwrite an existing output directory.
-Unresolved records are written to a skipped ledger instead of being guessed or
-silently discarded. See `docs/CANINE_PANEL_ADAPTER.md` for the exact contract.
+Keep company records, source snapshots, sample identifiers, and private reviews
+in the private project. Public examples are synthetic.
 
-## Standards direction
-
-The core terminology is designed to remain compatible with SEPIO-style
-statements/evidence and W3C PROV-style entities and agents. LinkML is the
-canonical schema source; generated JSON Schema is a build artifact rather than
-a separately maintained model.
+[Design rationale](docs/ADR-001-canine-breed-first.md) ·
+[Versioned policy](src/bioevidence_validator/policies/canine_breed_catalog_v0.2.yaml) ·
+[Case study](docs/CASE_STUDY.md) · [Tests](tests/) · [Engineering contract](docs/ENGINEERING.md) · [Apache-2.0](LICENSE)

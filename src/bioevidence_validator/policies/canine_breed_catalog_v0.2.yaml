@@ -1,0 +1,79 @@
+id: canine-breed-catalog
+version: 0.2.0
+profile: canine_breed
+description: Deterministic admission policy for canine breed catalog evidence.
+
+rules:
+  CBR001:
+    enabled: true
+    severity: error
+    description: Canonical concept identifiers must be CURIE-like identifiers.
+  CBR002:
+    enabled: true
+    severity: error
+    description: Every source must be versioned and content-addressed.
+  CBR003:
+    enabled: true
+    severity: error
+    description: Obsolete breed concepts cannot be admitted.
+  CBR004:
+    enabled: true
+    severity: review
+    description: Multiple candidate concepts require human adjudication.
+  CBR005:
+    enabled: true
+    severity: review
+    description: Normalized string matching alone is insufficient evidence.
+  CBR006:
+    enabled: true
+    severity: review
+    description: Regional populations cannot silently collapse into generic breeds.
+  CBR007:
+    enabled: true
+    severity: error
+    description: Mixed, extinct, or out-of-scope concepts require an explicit compatible profile.
+    prohibited_scope_flags: [mixed, extinct, outside_breed_target_scope]
+  CBR008:
+    enabled: true
+    severity: error
+    description: Sample-dependent uses require verified genotype membership.
+  CBR009:
+    enabled: true
+    severity: error
+    description: Observed source bytes must match the frozen source hash.
+  CBR010:
+    enabled: true
+    severity: review
+    description: High-risk mappings require complete human adjudication.
+  CBR011:
+    enabled: true
+    severity: error
+    description: Source-scoped mappings cannot propagate outside their declared source.
+  CBR012:
+    enabled: true
+    severity: review
+    description: Contradictory evidence requires review.
+  CBR013:
+    enabled: true
+    severity: error
+    description: Every statement must resolve all evidence and source references.
+  CBR014:
+    enabled: true
+    severity: error
+    description: Training and external-validation labels require explicit human acceptance.
+  CBR015:
+    enabled: true
+    severity: error
+    description: Rejected or superseded statements cannot be admitted.
+  CBR016:
+    enabled: true
+    severity: review
+    description: Unresolved concept status requires review.
+  CBR017:
+    enabled: true
+    severity: error
+    description: A human rejection blocks admission even when acceptance records also exist.
+  CBR018:
+    enabled: true
+    severity: review
+    description: A deferred human decision must be resolved before automatic admission.

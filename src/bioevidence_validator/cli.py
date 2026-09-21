@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import sqlite3
+import sys
+import tempfile
 from pathlib import Path
+
+import yaml
 
 from .canine_panel_adapter import export_canine_panel
 from .engine import default_policy_path, default_schema_path, generate_json_schema, validate_record
@@ -27,11 +33,40 @@ def parser() -> argparse.ArgumentParser:
     return result
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parser().parse_args(argv)
+def _unique_object(pairs):
+    record = {}
+    for key, value in pairs:
+        if key in record:
+            raise ValueError(f"Duplicate JSON key: {key!r}")
+        record[key] = value
+    return record
+
+
+def _invalid_constant(value):
+    raise ValueError(f"Non-finite JSON constant is not supported: {value}")
+
+
+def _write_json(path: Path, value: dict) -> None:
+    """Replace the report only after the complete UTF-8 payload is written."""
+    payload = json.dumps(value, indent=2, allow_nan=False) + "\n"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="\n",
+                                         dir=path.parent, delete=False) as handle:
+            temp_path = Path(handle.name)
+            handle.write(payload)
+        os.replace(temp_path, path)
+    finally:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+
+
+def _run(args) -> int:
     if args.command == "generate-schema":
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(generate_json_schema(args.schema), indent=2) + "\n")
+        if args.output.resolve() == args.schema.resolve():
+            raise ValueError("Output must not overwrite the schema")
+        _write_json(args.output, generate_json_schema(args.schema))
         return 0
 
     if args.command == "export-canine-panel":
@@ -39,12 +74,14 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(summary, indent=2, sort_keys=True))
         return 0
 
-    record = json.loads(args.input.read_text())
+    if args.output and args.output.resolve() in {p.resolve() for p in [args.input, args.schema, args.policy]}:
+        raise ValueError("Output must not overwrite an input, schema, or policy")
+    record = json.loads(args.input.read_text(encoding="utf-8"),
+                        object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     report = validate_record(record, schema_path=args.schema, policy_path=args.policy)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(rendered)
+        _write_json(args.output, report)
     else:
         print(rendered, end="")
     if report["overall_status"] == "rejected":
@@ -52,6 +89,15 @@ def main(argv: list[str] | None = None) -> int:
     if report["overall_status"] == "review_required":
         return 2
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parser().parse_args(argv)
+    try:
+        return _run(args)
+    except (OSError, UnicodeError, ValueError, yaml.YAMLError, sqlite3.Error) as exc:
+        print(json.dumps({"error": "input_or_execution_error", "message": str(exc)}), file=sys.stderr)
+        return 3
 
 
 if __name__ == "__main__":
