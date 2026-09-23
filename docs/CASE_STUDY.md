@@ -25,7 +25,9 @@ The public examples demonstrate:
 | Dataset label missing sample link | Rejected | The required link evidence is absent |
 | Custom assay record | Admitted for assay curation | A new YAML profile supplies the domain contract |
 
-All records, identifiers, reviewers, and source hashes in these fixtures are synthetic.
+All records, identifiers, reviewers, and source hashes in the fixtures above are synthetic.
+A separate [real-source VBO case](../examples/vbo_canine/README.md) now provides a pinned
+public dataset, replayable name mapping, and an explicitly bounded evaluation.
 The independent test suite additionally demonstrates a novel organoid/imaging profile,
 negative evidence/reference cases, and isolation between training and external-validation
 approval. These are software contract tests, not measurements of biological truth.

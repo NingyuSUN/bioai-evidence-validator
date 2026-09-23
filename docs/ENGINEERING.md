@@ -1,4 +1,4 @@
-# Engineering contract — 0.4
+# Engineering contract — 0.4.1
 
 ## Validation stages
 
@@ -28,12 +28,12 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV005 | Supporting evidence and statement scopes differ | Reject |
 | BEV006 | No resolved scope-matched support | Review |
 | BEV007 | Required supporting evidence type absent | Reject affected use |
-| BEV008 | LLM-only support without profile permission | Review affected use |
-| BEV009 | String-match-only support without profile permission | Review affected use |
+| BEV008 | LLM-only support within a required evidence type without profile permission | Review affected use |
+| BEV009 | String-match-only support within a required evidence type without profile permission | Review affected use |
 | BEV010 | Required human acceptance absent for this use | Reject affected use |
 | BEV011 | Human rejection present for this use | Reject affected use |
 | BEV012 | Human deferral present for this use | Review affected use |
-| BEV013 | Only LLM and string-match support mixed, without both permissions | Review affected use |
+| BEV013 | Only LLM and string-match support mixed within a required type, without both permissions | Review affected use |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -69,7 +69,7 @@ validation still applies the baseline independently.
 uv sync --frozen --extra dev
 uv run --frozen pytest
 uv build
-uv run --isolated --no-project --with ./dist/bioai_evidence_validator-0.4.0-py3-none-any.whl python tools/check_distribution.py
+uv run --isolated --no-project --with ./dist/bioai_evidence_validator-0.4.1-py3-none-any.whl python tools/check_distribution.py
 ```
 
 CI runs on Linux/Python 3.11 and Windows/Python 3.13. Tests cover multi-domain acceptance,
@@ -78,3 +78,6 @@ baseline enforcement, context snapshots, audit digests, and CLI report behavior.
 smoke test imports outside editable source, checks packaged profiles/schema, and exercises
 accepted, rejected, review-required, and custom-domain records. It does not assess
 biological correctness, model calibration, or predictive performance.
+
+The [VBO case](../examples/vbo_canine/README.md) adds offline source verification and a
+separate real-source/controlled-fault evaluation. Its trust-boundary failures remain visible.

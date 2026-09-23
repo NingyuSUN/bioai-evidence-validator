@@ -1,0 +1,151 @@
+{
+  "benchmark": "vbo-canine-v1",
+  "cohorts": {
+    "controlled_fault": {
+      "aggregate_quality": {
+        "exact_status_matches": 96,
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admission_rate": 0.4,
+        "false_admissions": 64,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 160,
+        "review_rate": 0.1,
+        "status_counts": {
+          "admitted": 64,
+          "rejected": 80,
+          "review_required": 16
+        }
+      },
+      "full": {
+        "exact_status_matches": 160,
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admission_rate": 0.0,
+        "false_admissions": 0,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 160,
+        "review_rate": 0.5,
+        "status_counts": {
+          "rejected": 80,
+          "review_required": 80
+        }
+      },
+      "schema_only": {
+        "exact_status_matches": 0,
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admission_rate": 1.0,
+        "false_admissions": 160,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 160,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 160
+        }
+      }
+    },
+    "real_source": {
+      "aggregate_quality": {
+        "exact_status_matches": 72,
+        "expected_admitted": 48,
+        "expected_non_admitted": 24,
+        "false_admission_rate": 0.0,
+        "false_admissions": 0,
+        "false_block_rate": 0.0,
+        "false_blocks": 0,
+        "n": 72,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 48,
+          "rejected": 24
+        }
+      },
+      "full": {
+        "exact_status_matches": 72,
+        "expected_admitted": 48,
+        "expected_non_admitted": 24,
+        "false_admission_rate": 0.0,
+        "false_admissions": 0,
+        "false_block_rate": 0.0,
+        "false_blocks": 0,
+        "n": 72,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 48,
+          "rejected": 24
+        }
+      },
+      "schema_only": {
+        "exact_status_matches": 48,
+        "expected_admitted": 48,
+        "expected_non_admitted": 24,
+        "false_admission_rate": 1.0,
+        "false_admissions": 24,
+        "false_block_rate": 0.0,
+        "false_blocks": 0,
+        "n": 72,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 72
+        }
+      }
+    },
+    "trust_boundary": {
+      "aggregate_quality": {
+        "exact_status_matches": 0,
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admission_rate": 1.0,
+        "false_admissions": 16,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 16,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 16
+        }
+      },
+      "full": {
+        "exact_status_matches": 0,
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admission_rate": 1.0,
+        "false_admissions": 16,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 16,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 16
+        }
+      },
+      "schema_only": {
+        "exact_status_matches": 0,
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admission_rate": 1.0,
+        "false_admissions": 16,
+        "false_block_rate": null,
+        "false_blocks": 0,
+        "n": 16,
+        "review_rate": 0.0,
+        "status_counts": {
+          "admitted": 16
+        }
+      }
+    }
+  },
+  "label_origin": "Source-derived contract expectations and authored fault specifications; no independent human annotations.",
+  "limitation": "No biological accuracy estimate. Correlated names and injected faults are not independent observations. Falsified targets expose the generic engine's trust in supplied metadata.",
+  "profile_sha256": "bde6210b52bec94113623a6efd4a5f547d1a689ca4ee2c4bf2a609d10c4f86d9",
+  "reference_sha256": "a733b9d0c2a7a86364d8377fcdaf8be98812972a1b1cccf936b7d5e2ee0a45c2",
+  "schema_sha256": "10b1e498a72b14706e0aa4a74889d6778fdfd89f374c51f15738d7d31fc290c1",
+  "source_release": "v2026-04-15",
+  "source_sha256": "f453bb698ef818f6b5c408f3a1c0f9c63085ba43a08fd9d37fc5fec94f90652d",
+  "source_terms": 1537,
+  "validator_version": "0.4.1"
+}

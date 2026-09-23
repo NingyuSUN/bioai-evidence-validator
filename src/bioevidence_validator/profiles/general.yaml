@@ -1,5 +1,5 @@
 id: general
-version: 0.4.0
+version: 0.4.1
 description: General provenance, evidence scope and use admission; no biological domain
   assumptions.
 predicates: []

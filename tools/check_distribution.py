@@ -12,7 +12,7 @@ from bioevidence_validator.engine import default_schema_path, profile_path, vali
 root = Path(__file__).resolve().parents[1]
 package = Path(bioevidence_validator.__file__).resolve().parent
 assert root / "src" not in package.parents
-assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.4.0"
+assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.4.1"
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()
@@ -47,3 +47,14 @@ record = json.loads((root / "examples/general/curated_assertion.json").read_text
 record["requested_uses"] = []
 assert validate_record(record)["overall_status"] == "rejected"
 print("Installed wheel: generic schema, all profiles, custom domain, CLI outcomes and admission guard verified.")
+
+# The example imports the installed generic core; it is kept outside the wheel.
+with tempfile.TemporaryDirectory() as directory:
+    result = subprocess.run([sys.executable, str(root / "examples/vbo_canine/run.py"),
+                             "--output", str(Path(directory) / "vbo")],
+                            capture_output=True, text=True, encoding="utf-8", cwd=root.parent)
+    assert result.returncode == 0, result.stderr
+    summary = json.loads(result.stdout)
+    assert summary["cohorts"]["controlled_fault"]["full"]["false_admissions"] == 0
+    assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 16
+print("Installed wheel: real-source VBO case, required-type quality fix and explicit trust boundary verified.")

@@ -54,6 +54,11 @@ ontology inference, hierarchy expansion, or extrapolation across cohorts occurs.
 Duplicate scope tokens are rejected. Keep assertions at the scope of their evidence.
 
 Only resolved, supporting, scope-matched items satisfy required evidence types.
+Since 0.4.1, extraction-method quality checks run **separately for every required
+evidence type**. A manually curated auxiliary note cannot strengthen an LLM-only
+publication result or sample link. The existing per-use permissions apply to each
+group; if a use declares no required types, its gate applies to all supporting evidence.
+Method labels are supplied metadata, not authenticated evidence of human verification.
 Neutral or contradicting items cannot fill a missing evidence requirement. Required
 evidence types express presence, not minimum source counts, statistical quality,
 independence, or mechanistic plausibility. Profiles are trusted configuration and

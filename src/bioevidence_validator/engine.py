@@ -171,21 +171,28 @@ def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
     if not supporting:
         add("BEV006", "review", "No resolved, scope-matched supporting evidence.", "$.statement.evidence_lines")
     types = {item["evidence_type"] for item in supporting.values()}
-    methods = {item["extraction_method"] for item in supporting.values()}
     decisions = record.get("adjudications") or []
     for use in requested:
         contract = profile["uses"][use]
         missing = set(contract["required_evidence_types"]) - types
         if missing:
             add("BEV007", "error", "Missing supporting evidence types: " + ", ".join(sorted(missing)), "$.evidence_items", [use])
-        if methods == {"llm_extraction"} and not contract["allow_llm_only"]:
-            add("BEV008", "review", "Support comes only from LLM extraction.", "$.evidence_items", [use])
-        if methods == {"normalized_string_match"} and not contract["allow_string_match_only"]:
-            add("BEV009", "review", "Support comes only from normalized string matching.", "$.evidence_items", [use])
-        # Mixing two weak extraction methods does not create independent support.
-        if len(methods) > 1 and methods <= {"llm_extraction", "normalized_string_match"}:
-            if not (contract["allow_llm_only"] and contract["allow_string_match_only"]):
-                add("BEV013", "review", "Support mixes only LLM extraction and string matching.", "$.evidence_items", [use])
+        # Each required evidence type must independently satisfy the quality gate.
+        # An unrelated manually curated note cannot strengthen a required LLM result.
+        groups = [(kind, [item for item in supporting.values() if item["evidence_type"] == kind])
+                  for kind in contract["required_evidence_types"]]
+        if not groups:
+            groups = [(None, list(supporting.values()))]
+        for kind, evidence in groups:
+            methods = {item["extraction_method"] for item in evidence}
+            context = f"Required evidence type {kind!r}" if kind is not None else "Supporting evidence"
+            if methods == {"llm_extraction"} and not contract["allow_llm_only"]:
+                add("BEV008", "review", context + " comes only from LLM extraction.", "$.evidence_items", [use])
+            if methods == {"normalized_string_match"} and not contract["allow_string_match_only"]:
+                add("BEV009", "review", context + " comes only from normalized string matching.", "$.evidence_items", [use])
+            if len(methods) > 1 and methods <= {"llm_extraction", "normalized_string_match"}:
+                if not (contract["allow_llm_only"] and contract["allow_string_match_only"]):
+                    add("BEV013", "review", context + " mixes only LLM extraction and string matching.", "$.evidence_items", [use])
         human = {d["decision"] for d in decisions if d["reviewer"]["agent_type"] == "human" and use in d["applies_to_uses"]}
         if contract["require_human_acceptance"] and "accept" not in human:
             add("BEV010", "error", "This use requires explicit human acceptance.", "$.adjudications", [use])

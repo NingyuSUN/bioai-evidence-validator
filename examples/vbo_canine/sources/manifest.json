@@ -1,0 +1,17 @@
+{
+  "dataset": "Vertebrate Breed Ontology dog-name projection",
+  "release": "v2026-04-15",
+  "upstream_commit": "8364a3ec538d529bdd3efcf3af8401b98f48fb4f",
+  "upstream_url": "https://raw.githubusercontent.com/monarch-initiative/vertebrate-breed-ontology/8364a3ec538d529bdd3efcf3af8401b98f48fb4f/vbo.obo",
+  "upstream_sha256": "4ada4d18dcc2ea421f1ee630dfee29042ae2a45a34b0928419475377ee3304bd",
+  "upstream_bytes": 21360761,
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Vertebrate Breed Ontology contributors, monarch-initiative/vertebrate-breed-ontology",
+  "retrieved_at": "2026-09-23T12:51:13.154860+00:00",
+  "projection_file": "sources/vbo-dogs.json",
+  "projection_sha256": "f453bb698ef818f6b5c408f3a1c0f9c63085ba43a08fd9d37fc5fec94f90652d",
+  "projection_bytes": 408174,
+  "term_count": 1537,
+  "selection": "All non-obsolete VBO terms transitively under Dog breed (VBO:0400024), excluding the root, following explicit is_a edges. Only id, name, EXACT synonyms, is_a and upstream stanza line retained. Not an OWL reasoner."
+}

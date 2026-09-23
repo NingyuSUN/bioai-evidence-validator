@@ -99,6 +99,6 @@ def test_acceptance_never_erases_conflicting_human_decisions(decisions, expected
 
 def test_profile_and_schema_versions_are_auditable():
     report = validate_record(valid())
-    assert report['profile_version'] == '0.4.0'
+    assert report['profile_version'] == '0.4.1'
     assert report['schema_version'] == '0.4.0'
     assert len(report['schema_sha256']) == 64

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 — Required-evidence quality and real-source evaluation
+
+- Apply extraction-method quality gates to each required evidence type independently.
+- Prevent unrelated manual/parser evidence from admitting an LLM-only required result.
+- Add an attributed, frozen VBO canine name-mapping case and source rebuild script.
+- Evaluate 72 real-source names, 160 controlled faults, and 16 explicit trust-boundary cases separately.
+- Preserve generic main and the legacy canine-breed branch.
+
 ## 0.4.0 — Domain-neutral main
 
 - Preserve canine 0.3 functionality on the `canine-breed` branch.

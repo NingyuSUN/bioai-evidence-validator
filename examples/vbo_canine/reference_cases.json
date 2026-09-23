@@ -1,0 +1,750 @@
+[
+  {
+    "case_id": "vbo-f2c91e28885e",
+    "stratum": "unique_canonical",
+    "query": "Gordon Setter (Dog)",
+    "expected_candidates": [
+      "VBO:0200613"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-133722c64955",
+    "stratum": "unique_canonical",
+    "query": "Saint Miguel Cattle Dog (Dog)",
+    "expected_candidates": [
+      "VBO:0201167"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-a78fe08c0744",
+    "stratum": "unique_canonical",
+    "query": "Berger de Beauce (Dog)",
+    "expected_candidates": [
+      "VBO:0200155"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-75d8652f98cd",
+    "stratum": "unique_canonical",
+    "query": "Combai (Dog)",
+    "expected_candidates": [
+      "VBO:0200379"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-08c1667a55f3",
+    "stratum": "unique_canonical",
+    "query": "Shikoku (Dog)",
+    "expected_candidates": [
+      "VBO:0201225"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-6f8e6d2e888d",
+    "stratum": "unique_canonical",
+    "query": "French Sheepdog (Dog)",
+    "expected_candidates": [
+      "VBO:0200547"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-ea834f23728c",
+    "stratum": "unique_canonical",
+    "query": "Scottish Terrier (Dog)",
+    "expected_candidates": [
+      "VBO:0201198"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-1bfe81bbb8e7",
+    "stratum": "unique_canonical",
+    "query": "French Bulldog (Dog)",
+    "expected_candidates": [
+      "VBO:0201455"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-fdcee4e5dbf3",
+    "stratum": "unique_canonical",
+    "query": "Porcelaine Hound (Dog)",
+    "expected_candidates": [
+      "VBO:0201065"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-dc685b0b2359",
+    "stratum": "unique_canonical",
+    "query": "Norwegian Elkhound Black (Dog)",
+    "expected_candidates": [
+      "VBO:0200956"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-2aa8881ae857",
+    "stratum": "unique_canonical",
+    "query": "Austrian Brandlbracke (Dog)",
+    "expected_candidates": [
+      "VBO:0200101"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-9ec8cb298fe7",
+    "stratum": "unique_canonical",
+    "query": "Dogo Guatemalteco (Dog)",
+    "expected_candidates": [
+      "VBO:0200447"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-4e9daead4b76",
+    "stratum": "unique_canonical",
+    "query": "Brazilian Terrier (Dog)",
+    "expected_candidates": [
+      "VBO:0200231"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-ec455dfdcce2",
+    "stratum": "unique_canonical",
+    "query": "Ori Pei (Dog)",
+    "expected_candidates": [
+      "VBO:0200978"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-1d7e177b61fd",
+    "stratum": "unique_canonical",
+    "query": "Jackshit (Dog)",
+    "expected_candidates": [
+      "VBO:0200730"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-086f715f8835",
+    "stratum": "unique_canonical",
+    "query": "American Dingo (Dog)",
+    "expected_candidates": [
+      "VBO:0200044"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-dd27588b0425",
+    "stratum": "unique_canonical",
+    "query": "Afghan Hound (Dog)",
+    "expected_candidates": [
+      "VBO:0200004"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-43a9f58e8d7f",
+    "stratum": "unique_canonical",
+    "query": "Japanese Pointer (Dog)",
+    "expected_candidates": [
+      "VBO:0200736"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-496e2d3facc0",
+    "stratum": "unique_canonical",
+    "query": "Australian Greyhound (Dog)",
+    "expected_candidates": [
+      "VBO:0200089"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-c78ec6915a14",
+    "stratum": "unique_canonical",
+    "query": "East Russian Coursing Hounds (Dog)",
+    "expected_candidates": [
+      "VBO:0200471"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-24122855a392",
+    "stratum": "unique_canonical",
+    "query": "Neapolitan Mastiff (Dog)",
+    "expected_candidates": [
+      "VBO:0200930"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-e20dcdb0db6d",
+    "stratum": "unique_canonical",
+    "query": "Small Swiss Hound, Small Schwyz Hound (Dog)",
+    "expected_candidates": [
+      "VBO:0201255"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-798f9558b83c",
+    "stratum": "unique_canonical",
+    "query": "German Spitz, Miniature Spitz Orange, Grey Shaded, Other Colours (Dog)",
+    "expected_candidates": [
+      "VBO:0200596"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-38112acaf61e",
+    "stratum": "unique_canonical",
+    "query": "Grand Gascon-Saintongeois (Dog)",
+    "expected_candidates": [
+      "VBO:0200618"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-d7dbfb22decb",
+    "stratum": "unique_synonym",
+    "query": "Istarski Kratkodlaki Gonic",
+    "expected_candidates": [
+      "VBO:0200709"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-119827bf9aac",
+    "stratum": "unique_synonym",
+    "query": "Griffon - Belge",
+    "expected_candidates": [
+      "VBO:0200141"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-d932a3234519",
+    "stratum": "unique_synonym",
+    "query": "German Hunt Terrier",
+    "expected_candidates": [
+      "VBO:0200732"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-98da1f77360d",
+    "stratum": "unique_synonym",
+    "query": "Terrier - Teddy Roosevelt (Terrier - Type B) (Terrier - Short-Legged Rat)",
+    "expected_candidates": [
+      "VBO:0201340"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-2590fd077dbc",
+    "stratum": "unique_synonym",
+    "query": "Shollie ( German Shepherd Border Collie mix )",
+    "expected_candidates": [
+      "VBO:0201229"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-112767727318",
+    "stratum": "unique_synonym",
+    "query": "Standard Whippet",
+    "expected_candidates": [
+      "VBO:0201421"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-231878a65a16",
+    "stratum": "unique_synonym",
+    "query": "Cattle Dog - Entlebuch (Entlebucher Sennenhund)",
+    "expected_candidates": [
+      "VBO:0200502"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-dc178de6ecab",
+    "stratum": "unique_synonym",
+    "query": "Type B",
+    "expected_candidates": [
+      "VBO:0201340"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-e3433f7d2320",
+    "stratum": "unique_synonym",
+    "query": "King Shepherd",
+    "expected_candidates": [
+      "VBO:0200770"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-b9e24733d21f",
+    "stratum": "unique_synonym",
+    "query": "Chinese Chongqing Dog",
+    "expected_candidates": [
+      "VBO:0200344"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-2d46bb144ccd",
+    "stratum": "unique_synonym",
+    "query": "Terrier - Soft-Coated Wheaten (unspecified)",
+    "expected_candidates": [
+      "VBO:0201260"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-ba7c132ecd8e",
+    "stratum": "unique_synonym",
+    "query": "Xoloitzcuintle, Intermediate",
+    "expected_candidates": [
+      "VBO:0201437"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-13a975b9bcd3",
+    "stratum": "unique_synonym",
+    "query": "Terrier - Short-Legged Rat",
+    "expected_candidates": [
+      "VBO:0201340"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-0adf9c7ebb03",
+    "stratum": "unique_synonym",
+    "query": "Transmontano-Hirtenhund",
+    "expected_candidates": [
+      "VBO:0200286"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-59b4ad6540e6",
+    "stratum": "unique_synonym",
+    "query": "Spaniel - Cocker, working",
+    "expected_candidates": [
+      "VBO:0201433"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-2490e9084b09",
+    "stratum": "unique_synonym",
+    "query": "Chien courant d’Estonie",
+    "expected_candidates": [
+      "VBO:0200508"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-3b3956117350",
+    "stratum": "unique_synonym",
+    "query": "Chowpom",
+    "expected_candidates": [
+      "VBO:0201044"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-22a8effc8469",
+    "stratum": "unique_synonym",
+    "query": "Weimardoodle ( Weimarpoo )",
+    "expected_candidates": [
+      "VBO:0201404"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-480cf28cc548",
+    "stratum": "unique_synonym",
+    "query": "Shepherd Dog - American White",
+    "expected_candidates": [
+      "VBO:0200060"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-c692d2f3af6b",
+    "stratum": "unique_synonym",
+    "query": "Terrier - Glen of Imaal",
+    "expected_candidates": [
+      "VBO:0200609"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-0122e5e4f727",
+    "stratum": "unique_synonym",
+    "query": "Sakhalin Husky",
+    "expected_candidates": [
+      "VBO:0201169"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-6091f7656513",
+    "stratum": "unique_synonym",
+    "query": "Löwchen",
+    "expected_candidates": [
+      "VBO:0200836"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-01a4b64deedd",
+    "stratum": "unique_synonym",
+    "query": "Pointer - Munsterlander, Large",
+    "expected_candidates": [
+      "VBO:0200816"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-41765113bd91",
+    "stratum": "unique_synonym",
+    "query": "Petit Griffon Bleu de Gascogne",
+    "expected_candidates": [
+      "VBO:0201013"
+    ],
+    "expected_status": "admitted",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-fcb758b78074",
+    "stratum": "ambiguous_name",
+    "query": "Collie",
+    "expected_candidates": [
+      "VBO:0200375",
+      "VBO:0200376"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-487634d6840f",
+    "stratum": "ambiguous_name",
+    "query": "ISTRIAN WIRE-HAIRED HOUND",
+    "expected_candidates": [
+      "VBO:0008047",
+      "VBO:0200710"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-dd89d5c0f92b",
+    "stratum": "ambiguous_name",
+    "query": "Heeler",
+    "expected_candidates": [
+      "VBO:0200097",
+      "VBO:0200665"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-520b197b4490",
+    "stratum": "ambiguous_name",
+    "query": "Norwegian Hound",
+    "expected_candidates": [
+      "VBO:0200456",
+      "VBO:0200958"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-fd516806e7ea",
+    "stratum": "ambiguous_name",
+    "query": "Finnish Hound",
+    "expected_candidates": [
+      "VBO:0008040",
+      "VBO:0200522"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-a5083933a363",
+    "stratum": "ambiguous_name",
+    "query": "POSAVATZ HOUND",
+    "expected_candidates": [
+      "VBO:0008048",
+      "VBO:0201080"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-bd3a70004123",
+    "stratum": "ambiguous_name",
+    "query": "Bulgarian Shepherd dog",
+    "expected_candidates": [
+      "VBO:0008007",
+      "VBO:0200247"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-110a503e7237",
+    "stratum": "ambiguous_name",
+    "query": "Griffon Fauve De Bretagne",
+    "expected_candidates": [
+      "VBO:0200514",
+      "VBO:0200643"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-17d4eba53721",
+    "stratum": "ambiguous_name",
+    "query": "Mastín Español",
+    "expected_candidates": [
+      "VBO:0008021",
+      "VBO:0201278"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-31df5cfc03b6",
+    "stratum": "ambiguous_name",
+    "query": "Stabijhoun",
+    "expected_candidates": [
+      "VBO:0008072",
+      "VBO:0201293",
+      "VBO:0201294"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-19d0c95f77d4",
+    "stratum": "ambiguous_name",
+    "query": "Brittany Spaniel",
+    "expected_candidates": [
+      "VBO:0200238",
+      "VBO:0200239"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-205398e86fcc",
+    "stratum": "ambiguous_name",
+    "query": "Braque Français - Type Gascogne",
+    "expected_candidates": [
+      "VBO:0200545",
+      "VBO:0200559"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-10ca330d647f",
+    "stratum": "ambiguous_name",
+    "query": "German Hound",
+    "expected_candidates": [
+      "VBO:0200439",
+      "VBO:0200567"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-5d4058a57171",
+    "stratum": "ambiguous_name",
+    "query": "Old English Mastiff",
+    "expected_candidates": [
+      "VBO:0200867",
+      "VBO:0200968"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-4e027db1bed7",
+    "stratum": "ambiguous_name",
+    "query": "POSAVSKI GONIČ",
+    "expected_candidates": [
+      "VBO:0008048",
+      "VBO:0201081"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-903b267a0b6e",
+    "stratum": "ambiguous_name",
+    "query": "Welshie",
+    "expected_candidates": [
+      "VBO:0201411",
+      "VBO:0201412"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-0df0d1a127fa",
+    "stratum": "ambiguous_name",
+    "query": "Hungarian Sheepdog",
+    "expected_candidates": [
+      "VBO:0200680",
+      "VBO:0200779"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-3a21a51e1c4d",
+    "stratum": "ambiguous_name",
+    "query": "Scottish Collie",
+    "expected_candidates": [
+      "VBO:0200376",
+      "VBO:0201194"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-dee5d7170adc",
+    "stratum": "ambiguous_name",
+    "query": "Carpathian Sheepdog",
+    "expected_candidates": [
+      "VBO:0200295",
+      "VBO:0201140"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-3951ff146d85",
+    "stratum": "ambiguous_name",
+    "query": "Sloughi Moghrebi",
+    "expected_candidates": [
+      "VBO:0200069",
+      "VBO:0201242"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-fe9cc099f5c0",
+    "stratum": "ambiguous_name",
+    "query": "Boxer",
+    "expected_candidates": [
+      "VBO:0008090",
+      "VBO:0200210"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-f54705487d4e",
+    "stratum": "ambiguous_name",
+    "query": "Mallorquin Bulldog",
+    "expected_candidates": [
+      "VBO:0200845",
+      "VBO:0200854",
+      "VBO:0200855"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-50576b4f527c",
+    "stratum": "ambiguous_name",
+    "query": "Nederlandse Schapendoes",
+    "expected_candidates": [
+      "VBO:0008070",
+      "VBO:0200460",
+      "VBO:0200462",
+      "VBO:0201181"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  },
+  {
+    "case_id": "vbo-3e3c77050109",
+    "stratum": "ambiguous_name",
+    "query": "Mastin Espanol",
+    "expected_candidates": [
+      "VBO:0201272",
+      "VBO:0201278"
+    ],
+    "expected_status": "rejected",
+    "reference_basis": "Cardinality of casefolded whitespace-normalized canonical names and EXACT synonyms in the full frozen dog projection; automatic unambiguous name mapping contract."
+  }
+]
