@@ -31,7 +31,17 @@ flowchart TD
     D --> G["Separate controlled faults and trust-boundary cases"]
     G --> H["Schema baseline / aggregate ablation / full validator"]
     F --> H
+    B --> I["New cases + independent human review"]
+    I --> J["Adjudication + frozen gold-standard labels"]
+    J --> K["Held-out comparison with validator decisions"]
+    F --> K
 ```
+
+The diagram includes the [project-specific gold-standard workflow](../../docs/GOLD_STANDARD.md).
+For a new canine project, reviewers define labels from its source context and intended
+use, resolve disagreements, and freeze an independent reference before held-out evaluation.
+The bundled 72-case benchmark uses source-derived labels; it is not an independently
+human-reviewed gold standard. Blank templates are provided for creating that separate reference.
 
 ## Source and selection
 

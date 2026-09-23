@@ -32,6 +32,14 @@ The independent test suite additionally demonstrates a novel organoid/imaging pr
 negative evidence/reference cases, and isolation between training and external-validation
 approval. These are software contract tests, not measurements of biological truth.
 
+## Project-specific gold-standard evaluation
+
+The main workflow now includes a [gold-standard review protocol](GOLD_STANDARD.md)
+and blank annotation/adjudication templates. It separates mapping correctness from
+use-specific evidence admission, preserves uncertainty, and freezes test labels
+independently of validator outputs. Each project supplies its own reviewed reference and records its review status.
+The bundled VBO benchmark remains a source-derived contract evaluation.
+
 ## Scope of the project
 
 This is a reusable evidence-validation component for curation pipelines, not a predictive

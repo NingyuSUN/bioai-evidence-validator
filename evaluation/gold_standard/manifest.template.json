@@ -1,0 +1,17 @@
+{
+  "dataset_id": null,
+  "version": null,
+  "status": "draft",
+  "reference_type": null,
+  "protocol_path": "docs/GOLD_STANDARD.md",
+  "protocol_version": "draft-1",
+  "reviewed_case_use_count": 0,
+  "independent_human_reviewer_count": 0,
+  "source_snapshots": [],
+  "profiles": [],
+  "split_groups": [],
+  "exclusions": [],
+  "files": {},
+  "frozen_at": null,
+  "gold_standard_metrics_available": false
+}
