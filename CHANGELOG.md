@@ -17,7 +17,6 @@
 - Replace `--policy` with `--profile`; add profile discovery and generic audit fields.
 - Remove the canine SQLite command from main. See `docs/MIGRATION-0.4.md` for breaking changes.
 
-
 ## 0.3.0 — Evidence and snapshot contract hardening
 
 - Require resolved supporting evidence, selected-candidate consistency and
@@ -31,11 +30,10 @@
   limits/accounting and batch hashes; publish the completion summary last.
 - Preserve earlier policy files, synthetic examples and operational CLI exit codes.
 
-## Unreleased
+## 0.2.0 — Evidence admission contracts and reproducible CLI
 
 - Version schema/policy 0.2; preserve policy 0.1 and record generated-schema hashes.
 - Prevent withdrawn statements or conflicting human judgments from silently being admitted.
-
 - Reject missing, empty, malformed, duplicated or unknown requested uses.
 - Make structural and identity errors block the entire record, including unknown uses.
 - Require evidence collections and reject duplicate IDs before dictionary lookup.
