@@ -80,6 +80,14 @@ per-required-evidence-type validation. Source-derived labels are not expert anno
 uv run python examples/vbo_canine/run.py --output artifacts/vbo-canine
 ```
 
+### Benchmark results (v0.4.1)
+
+![VBO canine benchmark comparing false admissions across three validation methods](docs/assets/vbo_canine_benchmark.svg)
+
+On 72 real-source name mappings, the full validator admitted all 48 unambiguous cases and blocked automatic admission of all 24 ambiguous names (0/48 false blocks; 0/24 false admissions). Across 160 deliberately injected faults, false admissions were 160/160 for schema-only, 64/160 for the aggregate-quality ablation, and 0/160 for the full validator; the full validator sent 80 cases to review and rejected 80. All three methods admitted 16/16 falsified-target trust-boundary cases, showing the need for trustworthy source ingestion and supplied metadata.
+
+**Interpretation limits:** Reference labels are derived from the pinned VBO source and authored fault specifications, not independent expert annotations. The 160 mutations share 16 seed cases and are correlated. This benchmark tests the mapping contract and controlled fault detection; it does not estimate biological accuracy or production error rates. See the [protocol and full results](examples/vbo_canine/README.md) and [machine-readable summary](examples/vbo_canine/results/summary.json).
+
 ## Scope
 
 The VBO case uses attributed public data; other fixtures are synthetic.
