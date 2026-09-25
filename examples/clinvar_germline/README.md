@@ -91,6 +91,8 @@ population rates; population rates come from all 218,920 variants.
 
 ## Observed results (0.6.0)
 
+![ClinVar benchmark: share of 2023 pathogenic classifications reclassified or conflicting by 2026, with and without a dissenting submission, and false admissions under controlled faults and the trust boundary](../../docs/assets/clinvar_germline_benchmark.svg)
+
 **A. The profile reproduces NCBI's policy on 98–99% of decisions**, and every disagreement
 has a documented cause:
 
@@ -161,3 +163,16 @@ uv run python examples/clinvar_germline/prepare_source.py \
 
 The script verifies each file's size and SHA-256 before reading it, then reproduces the sample
 (identical decompressed content hash), the population table and the manifest.
+
+## Regenerate the figure
+
+The figure is drawn from `results/summary.json` only:
+
+```bash
+uv run --with matplotlib python examples/clinvar_germline/plot.py
+```
+
+It writes `docs/assets/clinvar_germline_benchmark.svg` with fixed SVG ids and no timestamp,
+so a given matplotlib version reproduces it byte-for-byte (committed with matplotlib 3.11.2).
+Colors were checked for color-vision-deficiency and normal-vision separation on the figure's
+background; every bar also carries its value as text.

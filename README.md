@@ -231,6 +231,8 @@ The [ClinVar case](https://github.com/NingyuSUN/bioai-evidence-validator/blob/ma
 turns every 2023-09 lab submission into evidence, validates 5,026 sampled variants with a
 ClinVar-style profile, and checks what happened to them by 2026-09.
 
+![ClinVar benchmark: share of 2023 pathogenic classifications reclassified or conflicting by 2026, with and without a dissenting submission, and false admissions under controlled faults and the trust boundary](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/clinvar_germline_benchmark.svg)
+
 - **Policy reproduction:** the profile matches NCBI's own 2023-09 review status on 98–99% of
   decisions; every disagreement is listed with its cause.
 - **Where the validator is stricter, classifications were less stable.** It sends any P/LP
