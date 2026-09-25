@@ -76,6 +76,18 @@ action's own revision and runs `build`/`validate` through the CLI for each match
 It fails on rejected or unreadable files, and on review-required files unless
 `fail-on: rejected` is set.
 
+`review` implements the [gold-standard protocol](GOLD_STANDARD.md) on its CSV formats and is
+separate from validation: reference labels evaluate decisions and never become admission
+rules. `check` rejects blank fields, unknown columns or labels, malformed hashes, times and
+JSON, duplicate annotation IDs, a reviewer labelling a case-use twice, and reviewers of one
+case-use bound to different records, profiles, groups or splits. `agreement` reports
+Krippendorff's nominal α (bootstrap 95% interval, fixed seed) and, for two reviewers, Cohen's κ.
+`adjudication-sheet` lists disagreements and refuses to overwrite an existing file. `score`
+requires every disagreement to be adjudicated, joins predictions on case, use and record and
+profile hashes, rejects mismatches or missing predictions, and scores one split (default
+`test`). `freeze` refuses unresolved labels and records counts, reference type and file hashes;
+hashes identify files but do not prove that review took place. All exit 3 on invalid input.
+
 ## Reproduction
 
 ```bash

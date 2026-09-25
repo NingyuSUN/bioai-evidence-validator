@@ -5,9 +5,13 @@
 The README shows the full workflow for a project-specific reference standard.
 The protocol and templates are reusable across domains; each project supplies its own
 human reviewers, reference labels, sources and review status. The bundled VBO reference
-set is source-derived and has no independent human gold-standard labels. This package
-currently provides validator outputs, but no dedicated gold-standard scoring command.
-Its expected statuses must not be copied into these human annotation templates.
+set is source-derived and has no independent human gold-standard labels. The
+`bioevidence review` commands check annotations, measure agreement, build adjudication
+sheets, score predictions and freeze a reference set (see the
+[template directory](../evaluation/gold_standard/README.md)); they never produce labels.
+A complete, blinded kit for the ClinVar case is in
+[`evaluation/clinvar_review/`](../evaluation/clinvar_review/README.md).
+The VBO case's expected statuses must not be copied into these human annotation templates.
 
 The gold standard is an offline evaluation reference. It does not become another
 runtime admission rule, automatically approve a record, or overwrite evidence findings.
@@ -97,7 +101,8 @@ stable reviewer IDs and documented roles can identify reviews in the public rele
 
 For project-specific scoring, join frozen labels and validator outputs on case ID,
 canonical input hash, profile hash, and requested use. Reject missing, duplicate,
-or mismatched rows. Report performance against human admission labels separately from
+or mismatched rows; `bioevidence review score` does this and refuses to score while any
+disagreement lacks an adjudication. Report performance against human admission labels separately from
 mapping correctness and from the existing source-derived/controlled-fault benchmark.
 Do not tune profiles on the frozen test set. Freeze the validator/profile being evaluated;
 subsequent development requires a separately reported evaluation version.
@@ -105,7 +110,7 @@ subsequent development requires a separately reported evaluation version.
 Report false admissions, false blocks, review-required rates and the full three-way
 admission confusion matrix, with counts and denominators. Show coverage and uncertainty
 rather than discarding difficult cases silently. Report reviewer agreement before
-adjudication. Any statistical intervals should respect concept-level dependence; do not
+adjudication (`bioevidence review agreement`). Any statistical intervals should respect concept-level dependence; do not
 treat multiple aliases or mutations of one concept as independent samples.
 
 An improvement against this reference can support a claim about the defined curation
