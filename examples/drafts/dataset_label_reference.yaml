@@ -1,0 +1,35 @@
+# Synthetic dataset-label draft admitted for reference annotation.
+# Build:    bioevidence build examples/drafts/dataset_label_reference.yaml --output record.json
+# Validate: bioevidence validate record.json --profile dataset-label   (exit 0: admitted)
+profile: dataset-label
+uses: [reference_annotation]
+
+statement:
+  subject: {id: "SYN:SAMPLE_A", label: Synthetic sample A, type: sample}
+  predicate: has_label
+  object: {id: "SYN:LABEL_A", label: Synthetic class A, type: class_label}
+  scope: ["cohort:synthetic"]
+
+sources:
+  - id: labels
+    title: Synthetic label table; not real biological evidence
+    type: dataset_snapshot
+    uri: https://example.org/synthetic-labels
+    version: synthetic-v1
+    retrieved_at: "2026-09-25T00:00:00Z"
+    sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+evidence:
+  - source: labels
+    locator: row-1-label
+    text: Synthetic sample A has synthetic class A.
+    type: curated_label
+    method: manual_curation
+    scope: ["cohort:synthetic"]
+
+  - source: labels
+    locator: row-1-link
+    text: Synthetic sample A is linked to row 1 of the label table.
+    type: sample_link
+    method: deterministic_parser
+    scope: ["cohort:synthetic"]

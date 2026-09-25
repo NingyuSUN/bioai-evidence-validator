@@ -39,6 +39,19 @@ def test_reviewed_draft_is_admitted_for_both_uses():
     assert overall == "admitted" and uses == {"research_summary": "admitted", "knowledge_base": "admitted"}
 
 
+def test_dataset_label_reference_draft_is_admitted():
+    overall, uses, _ = statuses(draft("dataset_label_reference.yaml"))
+    assert overall == "admitted"
+    assert uses == {"reference_annotation": "admitted"}
+
+
+def test_dataset_label_training_draft_requires_human_acceptance():
+    overall, uses, report = statuses(draft("dataset_label_training_unreviewed.yaml"))
+    assert overall == "rejected"
+    assert uses == {"training_data": "rejected"}
+    assert {f["rule_id"] for f in report["findings"]} == {"BEV010"}
+
+
 def test_build_expands_structure_and_hashes_local_file():
     record = build(draft())
     source, = record["source_artifacts"]
@@ -138,9 +151,17 @@ def test_draft_schema_is_valid_json_schema(profile):
     assert schema["properties"]["profile"] == {"const": profile}
 
 
-@pytest.mark.parametrize("name", ["llm_claim.yaml", "reviewed_claim.yaml"])
-def test_example_drafts_match_their_profile_schema(name):
-    Draft202012Validator(draft_json_schema("literature-claim")).validate(draft(name))
+@pytest.mark.parametrize(
+    "name,profile",
+    [
+        ("llm_claim.yaml", "literature-claim"),
+        ("reviewed_claim.yaml", "literature-claim"),
+        ("dataset_label_reference.yaml", "dataset-label"),
+        ("dataset_label_training_unreviewed.yaml", "dataset-label"),
+    ],
+)
+def test_example_drafts_match_their_profile_schema(name, profile):
+    Draft202012Validator(draft_json_schema(profile)).validate(draft(name))
 
 
 def test_draft_schema_turns_profile_allowlists_into_enums():

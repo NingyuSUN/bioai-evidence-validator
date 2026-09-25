@@ -44,10 +44,15 @@ with tempfile.TemporaryDirectory() as directory:
     run("generate-schema", "--output", output)
     assert "BioEvidenceRecord" in json.loads(output.read_text(encoding="utf-8"))["$defs"]
 with tempfile.TemporaryDirectory() as directory:
-    for draft, expected in [("llm_claim.yaml", 2), ("reviewed_claim.yaml", 0)]:
+    for draft, profile, expected in [
+        ("llm_claim.yaml", "literature-claim", 2),
+        ("reviewed_claim.yaml", "literature-claim", 0),
+        ("dataset_label_reference.yaml", "dataset-label", 0),
+        ("dataset_label_training_unreviewed.yaml", "dataset-label", 1),
+    ]:
         output = Path(directory) / (draft + ".json")
         run("build", root / "examples/drafts" / draft, "--output", output)
-        run("validate", output, "--profile", "literature-claim", expected=expected)
+        run("validate", output, "--profile", profile, expected=expected)
     schema = json.loads(run("draft-schema", "--profile", "literature-claim").stdout)
     assert schema["properties"]["profile"] == {"const": "literature-claim"}
 record = json.loads((root / "examples/general/curated_assertion.json").read_text(encoding="utf-8"))
