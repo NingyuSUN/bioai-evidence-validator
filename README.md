@@ -1,14 +1,107 @@
 # BioAI Evidence Validator
 
-**Is a biological assertion supported well enough for its intended use?**
-This Python toolkit checks evidence structure, provenance consistency, scope,
-and review requirements, then reports a decision for each requested use.
-It can sit between AI-assisted extraction and a curated knowledge base or dataset.
+[![CI](https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/bioai-evidence-validator)](https://pypi.org/project/bioai-evidence-validator/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/pyproject.toml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
 
-`main` is the domain-neutral framework (0.4.1). Domain rules are YAML profiles;
-new entity types, relations, evidence types, and uses do not require engine edits.
-The complete canine implementation and SQLite adapter live on the
-[`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed).
+**Stop AI-extracted biological claims from entering your knowledge base or
+training set before their evidence is good enough for that use.**
+
+An LLM can turn a paper into a tidy `gene → associated_with → phenotype` record
+that passes every schema check. This toolkit asks the next question: *is the
+evidence behind it sufficient for the specific use you have in mind?* It checks
+evidence structure, provenance consistency, scope and human-review requirements,
+then returns an auditable **admitted / review_required / rejected** decision for
+each requested use.
+
+```bash
+pip install bioai-evidence-validator
+```
+
+## 30-second example
+
+The two records below are identical except for one field: how the supporting
+evidence was extracted.
+
+```diff
+   "evidence_type": "publication_result",
+-  "extraction_method": "llm_extraction",
++  "extraction_method": "manual_curation",
+```
+
+```console
+$ bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim
+```
+
+```json
+{
+  "overall_status": "review_required",
+  "findings": [
+    {
+      "rule_id": "BEV008",
+      "severity": "review",
+      "message": "Required evidence type 'publication_result' comes only from LLM extraction.",
+      "blocking_uses": ["research_summary"]
+    }
+  ],
+  "use_decisions": [
+    { "use": "research_summary", "admission_status": "review_required", "reason_codes": ["BEV008"] }
+  ]
+}
+```
+
+The command exits with **2**, so a pipeline can route the record to a reviewer.
+The manually curated version (`examples/literature_claim/curated_association.json`)
+is `admitted` with exit code **0**. Every full report also records the input,
+schema and profile SHA-256 hashes and versions for audit.
+
+## Why not just JSON Schema or Pydantic?
+
+A schema tells you a record is well formed. It cannot tell you whether the
+record is trustworthy enough for a particular purpose.
+
+| | Schema validation | This validator |
+|---|:---:|:---:|
+| Record shape and types | ✅ | ✅ (LinkML) |
+| Different evidence rules per intended use (summary vs. KB vs. training) | — | ✅ |
+| Quality gate per required evidence type (LLM-only evidence cannot ride on unrelated manual evidence) | — | ✅ |
+| Provenance consistency (source hashes, resolved references, scope) | — | ✅ |
+| Human adjudications bound to a specific statement and use | — | ✅ |
+| Machine-readable audit report with hashes of input, schema and profile | — | ✅ |
+
+On the real-data benchmark below, schema-only checks admitted **160/160**
+injected faults; the full validator admitted **0/160**.
+
+## Use it
+
+### Command line
+
+```bash
+bioevidence profiles                                   # list built-in profiles and their use contracts
+bioevidence validate record.json --profile literature-claim
+bioevidence validate record.json --profile my_profile.yaml --output report.json
+bioevidence generate-schema --output record.schema.json  # JSON Schema for the input format
+```
+
+Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input or configuration error.
+
+### Python
+
+```python
+import json
+from pathlib import Path
+
+from bioevidence_validator.engine import validate_record
+
+record = json.loads(Path("record.json").read_text(encoding="utf-8"))
+report = validate_record(record, profile="literature-claim")
+
+for decision in report["use_decisions"]:
+    print(decision["use"], decision["admission_status"], decision["reason_codes"])
+```
+
+`profile` accepts a built-in name or a path to your own YAML profile.
 
 ## How it works
 
@@ -32,6 +125,9 @@ This diagram defines the complete project workflow. Each project supplies its ow
 reviewed reference labels; the validator's decisions are evaluated against them.
 Gold labels stay separate from runtime evidence and rule development.
 
+Domain rules are YAML profiles: new entity types, relations, evidence types and
+uses do not require engine edits.
+
 | Example profile | Assertion | Use contract |
 |---|---|---|
 | `general` | Any typed entity–relation–entity statement | Provenance, scoped support, optional human review by use |
@@ -39,9 +135,11 @@ Gold labels stay separate from runtime evidence and rule development.
 | `dataset-label` | Sample assigned a label | Curated label plus sample link; human acceptance for training |
 | Custom YAML | Compound measured response in an assay | Assay evidence; defined without changing Python code |
 
-## Try it
+See [Create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md).
 
-Python 3.11+ and uv, from the repository root:
+## Run the examples from source
+
+Python 3.11+ and [uv](https://docs.astral.sh/uv/), from the repository root:
 
 ```bash
 uv sync --frozen --extra dev
@@ -52,10 +150,6 @@ uv run bioevidence validate examples/custom_profile/assay_record.json --profile 
 uv run pytest
 ```
 
-The LLM-only example intentionally requires review (exit **2**).
-Other validation codes: **0** admitted, **1** rejected, **3** input/configuration error.
-Use `--output report.json` to save findings, per-use decisions, and input/schema/profile hashes.
-
 ## Build a gold standard for your project
 
 1. **Define the task:** specify the domain, intended uses, label definitions and evidence requirements in a written rubric.
@@ -64,14 +158,14 @@ Use `--output report.json` to save findings, per-use decisions, and input/schema
 4. **Resolve and version:** preserve original reviews, document disagreements and adjudication, then freeze the labels and provenance manifest.
 5. **Evaluate:** compare held-out decisions with that reference; report false admissions, false blocks and review rates with counts and denominators.
 
-Use the [annotation templates](evaluation/gold_standard/README.md) and
-[detailed protocol](docs/GOLD_STANDARD.md). Each gold standard is specific to a task,
+Use the [annotation templates](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/gold_standard/README.md) and
+[detailed protocol](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/GOLD_STANDARD.md). Each gold standard is specific to a task,
 source version and intended use. Document reviewer roles and whether labels are
 single-reviewed or independently reviewed by multiple people.
 
 ## Real-data case
 
-[VBO canine name mapping](examples/vbo_canine/README.md) uses a frozen public ontology:
+[VBO canine name mapping](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/README.md) uses a frozen public ontology:
 72 real-name cases, 160 controlled errors, and 16 separately reported trust-boundary
 cases. It compares schema-only checks, the previous aggregate quality gate, and
 per-required-evidence-type validation. Source-derived labels are not expert annotations.
@@ -82,11 +176,11 @@ uv run python examples/vbo_canine/run.py --output artifacts/vbo-canine
 
 ### Benchmark results (v0.4.1)
 
-![VBO canine benchmark comparing false admissions across three validation methods](docs/assets/vbo_canine_benchmark.svg)
+![VBO canine benchmark comparing false admissions across three validation methods](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/vbo_canine_benchmark.svg)
 
 On 72 real-source name mappings, the full validator admitted all 48 unambiguous cases and blocked automatic admission of all 24 ambiguous names (0/48 false blocks; 0/24 false admissions). Across 160 deliberately injected faults, false admissions were 160/160 for schema-only, 64/160 for the aggregate-quality ablation, and 0/160 for the full validator; the full validator sent 80 cases to review and rejected 80. All three methods admitted 16/16 falsified-target trust-boundary cases, showing the need for trustworthy source ingestion and supplied metadata.
 
-**Interpretation limits:** Reference labels are derived from the pinned VBO source and authored fault specifications, not independent expert annotations. The 160 mutations share 16 seed cases and are correlated. This benchmark tests the mapping contract and controlled fault detection; it does not estimate biological accuracy or production error rates. See the [protocol and full results](examples/vbo_canine/README.md) and [machine-readable summary](examples/vbo_canine/results/summary.json).
+**Interpretation limits:** Reference labels are derived from the pinned VBO source and authored fault specifications, not independent expert annotations. The 160 mutations share 16 seed cases and are correlated. This benchmark tests the mapping contract and controlled fault detection; it does not estimate biological accuracy or production error rates. See the [protocol and full results](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/README.md) and [machine-readable summary](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/results/summary.json).
 
 ## Scope
 
@@ -96,6 +190,22 @@ profile**, not that a biological claim is true. The toolkit does not retrieve pa
 verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; the VBO importer also hashes its local source
 projection. External source truth and cohort independence require upstream verification.
 
-[Create a profile](docs/PROFILES.md) · [Engineering contract](docs/ENGINEERING.md) ·
-[Design case study](docs/CASE_STUDY.md) · [0.3 migration](docs/MIGRATION-0.4.md) ·
-[Architecture decision](docs/ADR-002-domain-neutral-main.md) · [Apache-2.0](LICENSE)
+## Versions and branches
+
+`main` is the domain-neutral framework (0.4.1). The complete canine implementation
+and SQLite adapter from 0.3 live on the
+[`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed);
+see the [0.4 migration guide](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/MIGRATION-0.4.md) and
+[changelog](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/CHANGELOG.md).
+
+## Citing
+
+If you use this toolkit in research, please cite it using the metadata in
+[`CITATION.cff`](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/CITATION.cff)
+(GitHub's "Cite this repository" button generates APA and BibTeX).
+
+[Create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
+[Engineering contract](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
+[Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
+[Architecture decision](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ADR-002-domain-neutral-main.md) ·
+[Apache-2.0](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)

@@ -7,6 +7,7 @@
 - Add an attributed, frozen VBO canine name-mapping case and source rebuild script.
 - Evaluate 72 real-source names, 160 controlled faults, and 16 explicit trust-boundary cases separately.
 - Preserve generic main and the legacy canine-breed branch.
+- Publish to PyPI from version tags; add package metadata and citation file.
 
 ## 0.4.0 — Domain-neutral main
 

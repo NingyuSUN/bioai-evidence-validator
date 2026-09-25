@@ -30,4 +30,5 @@ jobs:
       - name: Build distributable
         run: uv build
       - name: Verify installed wheel and CLI outside editable source
-        run: uv run --isolated --no-project --python ${{ matrix.python }} --with ./dist/bioai_evidence_validator-0.4.1-py3-none-any.whl python tools/check_distribution.py
+        shell: bash
+        run: uv run --isolated --no-project --python ${{ matrix.python }} --with ./dist/*.whl python tools/check_distribution.py
