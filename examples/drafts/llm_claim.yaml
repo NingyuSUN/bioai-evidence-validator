@@ -1,0 +1,28 @@
+# A compact draft of an LLM-extracted literature claim. Synthetic data only.
+# Build:    bioevidence build examples/drafts/llm_claim.yaml --output record.json
+# Validate: bioevidence validate record.json --profile literature-claim   (exit 2: review required)
+profile: literature-claim
+uses: [research_summary]
+
+statement:
+  subject: {id: "SYN:GENE_A", label: Synthetic gene A, type: gene}
+  predicate: associated_with
+  object: {id: "SYN:PHENOTYPE_A", label: Synthetic phenotype A, type: phenotype}
+  scope: ["taxon:synthetic"]
+
+sources:
+  - id: paper
+    title: Synthetic source; not real biological evidence
+    type: publication
+    uri: https://example.org/synthetic-evidence
+    version: synthetic-v1
+    retrieved_at: "2026-09-21T00:00:00Z"
+    file: synthetic_paper.txt          # hashed at build time
+
+evidence:
+  - source: paper
+    locator: Table 2
+    text: Synthetic gene A is associated with synthetic phenotype A.
+    type: publication_result
+    method: llm_extraction             # set by your pipeline, not by the model
+    scope: ["taxon:synthetic"]

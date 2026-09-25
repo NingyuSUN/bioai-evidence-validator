@@ -36,3 +36,34 @@ jobs:
       - name: Verify installed wheel and CLI outside editable source
         shell: bash
         run: uv run --isolated --no-project --python ${{ matrix.python }} --with ./dist/*.whl python tools/check_distribution.py
+
+  action:
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Admitted and review-required drafts pass with fail-on rejected
+        id: drafts
+        uses: ./
+        with:
+          files: examples/drafts/*.yaml
+          profile: literature-claim
+          format: draft
+          fail-on: rejected
+      - name: A rejected record fails the action
+        id: rejected
+        continue-on-error: true
+        uses: ./
+        with:
+          files: examples/dataset_label/*.json
+          profile: dataset-label
+      - name: Check action outcomes and outputs
+        shell: bash
+        run: |
+          test "${{ steps.drafts.outputs.admitted }}" = 1
+          test "${{ steps.drafts.outputs.review_required }}" = 1
+          test "${{ steps.rejected.outcome }}" = failure
+          test "${{ steps.rejected.outputs.rejected }}" = 1

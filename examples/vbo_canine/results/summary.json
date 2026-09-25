@@ -147,5 +147,5 @@
   "source_release": "v2026-04-15",
   "source_sha256": "f453bb698ef818f6b5c408f3a1c0f9c63085ba43a08fd9d37fc5fec94f90652d",
   "source_terms": 1537,
-  "validator_version": "0.4.1"
+  "validator_version": "0.5.0"
 }

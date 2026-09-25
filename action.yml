@@ -1,0 +1,57 @@
+name: BioAI Evidence Validator
+description: Check that biological evidence records meet a profile's use contract before they are merged.
+author: Ningyu Sun
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  files:
+    description: Whitespace-separated glob patterns of record (JSON) or draft (YAML/JSON) files, e.g. "records/**/*.json".
+    required: true
+  profile:
+    description: Built-in profile name (general, literature-claim, dataset-label) or a path to a profile YAML.
+    default: general
+  format:
+    description: "record: full evidence records. draft: compact drafts, built into records before validation."
+    default: record
+  fail-on:
+    description: "review: fail unless every file is admitted. rejected: fail only on rejected files or errors."
+    default: review
+  python-version:
+    description: Python version used to run the validator.
+    default: '3.12'
+outputs:
+  admitted:
+    description: Number of admitted files.
+    value: ${{ steps.validate.outputs.admitted }}
+  review_required:
+    description: Number of files that need human review.
+    value: ${{ steps.validate.outputs.review_required }}
+  rejected:
+    description: Number of rejected files.
+    value: ${{ steps.validate.outputs.rejected }}
+  error:
+    description: Number of files that could not be read or built.
+    value: ${{ steps.validate.outputs.error }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install the validator from this action's revision
+      shell: bash
+      run: python -m pip install --quiet --disable-pip-version-check "$GITHUB_ACTION_PATH"
+    - id: validate
+      name: Validate evidence files
+      shell: bash
+      env:
+        PYTHONIOENCODING: utf-8
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_PROFILE: ${{ inputs.profile }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+      run: >-
+        python "$GITHUB_ACTION_PATH/tools/github_action.py"
+        --files "$INPUT_FILES" --profile "$INPUT_PROFILE"
+        --format "$INPUT_FORMAT" --fail-on "$INPUT_FAIL_ON"
