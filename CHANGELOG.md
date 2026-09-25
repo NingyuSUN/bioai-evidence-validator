@@ -1,6 +1,15 @@
 # Changelog
 
-## Unreleased — Quality checks, community and documentation site
+## Unreleased — Quality checks, community, documentation site and expert review
+
+- Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)
+  implementing the gold-standard protocol: strict annotation checks, Krippendorff's α with
+  bootstrap interval and Cohen's κ (both cross-checked against reference implementations),
+  adjudication of disagreements, scoring on the test split with hash-bound joins, and frozen
+  manifests. It never produces labels.
+- Add a blinded ClinVar expert-review kit (`evaluation/clinvar_review/`): all 95 variants where
+  the validator and NCBI disagree plus 95 stratum-matched controls, an Excel workbook with
+  dropdowns, a reviewer rubric, a private key, and an importer into the protocol format.
 
 - CI runs ruff and mypy, and enforces a 95% test-coverage minimum (currently 98%).
 - Add CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 2.1), SECURITY, issue forms and a

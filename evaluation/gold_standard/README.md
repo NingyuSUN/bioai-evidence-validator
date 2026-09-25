@@ -22,6 +22,16 @@ Record unresolved uncertainty explicitly. Both files currently contain headers o
 
 `manifest.template.json` contains unfilled source/profile/group/file metadata and
 zero reviewed cases. An editor changing its status does not complete human review.
-There is no automated annotation, freeze or gold-scoring command in this release.
-The existing VBO replay command still evaluates only the published source-derived
-reference set and controlled faults.
+
+`bioevidence review` works on these formats. It never produces labels; people do:
+
+| Command | Does |
+|---|---|
+| `bioevidence review check annotations.csv [--adjudications adjudications.csv]` | Strict format check: labels, hashes, timestamps, duplicates, and that all reviewers of a case saw the same record |
+| `bioevidence review agreement annotations.csv` | Krippendorff's α with a bootstrap 95% interval, Cohen's κ (two reviewers) and raw agreement, per use |
+| `bioevidence review adjudication-sheet annotations.csv --output adjudications.csv` | Blank rows for every disagreement; never overwrites an existing file |
+| `bioevidence review score --annotations … --adjudications … --predictions …` | Resolves final labels and scores predictions on the test split; rejects missing or hash-mismatched rows |
+| `bioevidence review freeze --manifest … --annotations … --adjudications …` | Refuses unresolved cases; records counts, reference type and file hashes |
+
+A worked, domain-specific kit is in [`../clinvar_review/`](../clinvar_review/README.md).
+The VBO replay command still evaluates only its source-derived reference set and controlled faults.

@@ -280,7 +280,7 @@ Admission means **the supplied record meets the selected
 profile**, not that a biological claim is true. The toolkit does not retrieve papers,
 verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; the VBO and ClinVar importers also hash their local source
 projections. External source truth and cohort independence require upstream verification.
-Neither benchmark has independent expert annotation yet.
+Neither benchmark has independent expert annotation yet; a blinded [expert-review kit](https://github.com/NingyuSUN/bioai-evidence-validator/tree/main/evaluation/clinvar_review) for the ClinVar case is ready for reviewers.
 
 ## Versions and branches
 

@@ -46,6 +46,9 @@ nav:
       - ClinVar germline classifications: benchmarks/clinvar.md
       - VBO canine name mapping: benchmarks/vbo-canine.md
       - Building a gold standard: GOLD_STANDARD.md
+      - Review tooling and templates: review-tooling.md
+      - ClinVar expert-review kit: benchmarks/clinvar-review.md
+      - ClinVar reviewer rubric: benchmarks/clinvar-review-rubric.md
   - Reference:
       - Engineering contract: ENGINEERING.md
       - Standards alignment: STANDARDS.md
