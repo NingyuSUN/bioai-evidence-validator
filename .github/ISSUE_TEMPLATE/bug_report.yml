@@ -1,0 +1,53 @@
+name: Bug report
+description: The validator, CLI or GitHub Action does something it should not.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. For security problems (for example a record admitted that a
+        documented rule should reject), use [private reporting](https://github.com/NingyuSUN/bioai-evidence-validator/security/advisories/new) instead.
+        **Do not paste real patient data**; a synthetic record that shows the behavior is enough.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `pip show bioai-evidence-validator` or `bioevidence --help` header, or the commit.
+      placeholder: "0.6.0"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or code
+      description: The exact command or Python call, including `--profile`.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Smallest record, draft or profile that reproduces it
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: Which status, reason code or exit code did you expect, and which rule says so?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: The report's `overall_status`, `findings` and exit code, or the error message.
+      render: json
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Python 3.12, Ubuntu 24.04"

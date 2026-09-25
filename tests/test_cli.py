@@ -5,7 +5,6 @@ import pytest
 
 from bioevidence_validator.cli import main
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -115,7 +114,7 @@ def test_custom_profile_through_cli():
 
 @pytest.mark.parametrize('target', ['profile', 'schema'])
 def test_cli_protects_configuration_files(tmp_path, target):
-    from bioevidence_validator.engine import profile_path, default_schema_path
+    from bioevidence_validator.engine import default_schema_path, profile_path
     profile, schema = tmp_path / 'profile.yaml', tmp_path / 'schema.yaml'
     profile.write_bytes(profile_path().read_bytes()); schema.write_bytes(default_schema_path().read_bytes())
     output = profile if target == 'profile' else schema

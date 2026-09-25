@@ -1,0 +1,59 @@
+site_name: BioAI Evidence Validator
+site_description: Evidence validation and policy engine for AI-assisted biological curation
+site_url: https://ningyusun.github.io/bioai-evidence-validator/
+repo_url: https://github.com/NingyuSUN/bioai-evidence-validator
+repo_name: NingyuSUN/bioai-evidence-validator
+edit_uri: edit/main/docs/
+copyright: Apache-2.0 · ClinVar data from NCBI; VBO data CC BY 4.0
+
+docs_dir: docs
+hooks:
+  - tools/mkdocs_hooks.py
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/weather-night, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/weather-sunny, name: Light mode}
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Guide:
+      - Drafts: DRAFTS.md
+      - Profiles: PROFILES.md
+      - Community profiles: community-profiles.md
+  - Benchmarks:
+      - ClinVar germline classifications: benchmarks/clinvar.md
+      - VBO canine name mapping: benchmarks/vbo-canine.md
+      - Building a gold standard: GOLD_STANDARD.md
+  - Reference:
+      - Engineering contract: ENGINEERING.md
+      - Standards alignment: STANDARDS.md
+  - Design:
+      - Case study: CASE_STUDY.md
+      - "ADR-001: canine breed first": ADR-001-canine-breed-first.md
+      - "ADR-002: domain-neutral main": ADR-002-domain-neutral-main.md
+      - "Migrating to 0.4": MIGRATION-0.4.md
+  - Project:
+      - Contributing: contributing.md
+      - Changelog: changelog.md

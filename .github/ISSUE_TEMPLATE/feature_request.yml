@@ -1,0 +1,28 @@
+name: Feature request
+description: Propose a change to the engine, CLI, formats or integrations.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: The behavior you would like. For new rules, describe a record that should pass and one that should not.
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure mode
+      description: If this goes wrong, does it admit too much or block too much? How would a user notice?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: For example, doing it in a profile or an importer instead of the engine.

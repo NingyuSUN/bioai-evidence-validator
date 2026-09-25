@@ -5,6 +5,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/pyproject.toml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb)
+[![Docs](https://img.shields.io/badge/docs-site-blue)](https://ningyusun.github.io/bioai-evidence-validator/)
 
 **Stop AI-extracted biological claims from entering your knowledge base or
 training set before their evidence is good enough for that use.**
@@ -22,6 +23,7 @@ pip install bioai-evidence-validator
 
 Or try it in the browser, nothing to install:
 [quickstart notebook on Colab](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb).
+Full documentation: **[ningyusun.github.io/bioai-evidence-validator](https://ningyusun.github.io/bioai-evidence-validator/)**.
 
 ## 30-second example
 
@@ -281,10 +283,20 @@ Neither benchmark has independent expert annotation yet.
 ## Versions and branches
 
 `main` is the domain-neutral framework (0.6.0). The complete canine implementation
-and SQLite adapter from 0.3 live on the
-[`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed);
+and SQLite adapter from 0.3 are preserved at the
+[`canine-0.3` tag](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-0.3)
+(also the `canine-breed` branch);
 see the [0.4 migration guide](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/MIGRATION-0.4.md) and
 [changelog](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/CHANGELOG.md).
+
+## Contributing
+
+Bug reports, domain profiles and new benchmarks are welcome. See
+[CONTRIBUTING.md](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/CONTRIBUTING.md),
+the [community profiles](https://github.com/NingyuSUN/bioai-evidence-validator/tree/main/community/profiles)
+and issues labelled [`good first issue`](https://github.com/NingyuSUN/bioai-evidence-validator/labels/good%20first%20issue).
+Report security problems privately as described in
+[SECURITY.md](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/SECURITY.md).
 
 ## Citing
 

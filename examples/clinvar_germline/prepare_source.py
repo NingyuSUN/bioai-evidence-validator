@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import argparse
 import collections
-import csv
 import datetime as dt
 import gzip
 import hashlib
@@ -57,7 +56,7 @@ def rows(path: Path):
                 if line.startswith(("#VariationID\t", "#AlleleID\t")):
                     header = line[1:].rstrip("\n").split("\t")
                 continue
-            yield dict(zip(header, line.rstrip("\n").split("\t")))
+            yield dict(zip(header, line.rstrip("\n").split("\t"), strict=False))
 
 
 def variant_table(path: Path) -> dict[str, dict]:

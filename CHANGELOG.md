@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — Quality checks, community and documentation site
+
+- CI runs ruff and mypy, and enforces a 95% test-coverage minimum (currently 98%).
+- Add CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 2.1), SECURITY, issue forms and a
+  pull request template.
+- Add `community/profiles/`: contributed domain profiles whose example cases are built,
+  validated and checked against expected outcomes in CI; `_template/` to copy.
+- Add a documentation site (MkDocs, strict link checking) published to GitHub Pages.
+- The canine 0.3 implementation is also preserved at the `canine-0.3` tag.
+- No change to validation behavior or report contents.
+
 ## 0.6.0 — ClinVar case and standards alignment
 
 - Add a second real-data case: ClinVar germline classifications. 5,026 sampled variants

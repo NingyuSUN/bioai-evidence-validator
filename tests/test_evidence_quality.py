@@ -1,8 +1,10 @@
 import copy
+
 import pytest
 import yaml
-from bioevidence_validator.engine import RecordValidator, profile_path
 from test_engine import load
+
+from bioevidence_validator.engine import RecordValidator, profile_path
 
 
 @pytest.mark.parametrize('methods,code', [(['llm_extraction'], 'BEV008'), (['normalized_string_match'], 'BEV009'), (['llm_extraction', 'normalized_string_match'], 'BEV013')])

@@ -1,10 +1,10 @@
 import copy
-from pathlib import Path
 
 import pytest
 import yaml
+from test_engine import ROOT, load
+
 from bioevidence_validator.engine import load_profile, profile_path, validate_record
-from test_engine import load, ROOT
 
 
 @pytest.mark.parametrize("case", ["missing_field", "unknown_field", "empty_uses", "missing_flag", "string_bool", "string_types", "duplicate_type", "unknown_option", "blank_use", "duplicate_yaml", "numeric_key", "yaml_list", "bad_yaml"])

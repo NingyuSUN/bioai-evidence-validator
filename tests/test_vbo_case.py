@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from bioevidence_validator.engine import RecordValidator
+
 ROOT=Path(__file__).resolve().parents[1]
 EXAMPLE=ROOT/'examples/vbo_canine'
 spec=importlib.util.spec_from_file_location('vbo_pipeline',EXAMPLE/'pipeline.py')
@@ -59,6 +61,6 @@ def test_ambiguity_is_visible_and_does_not_become_implicit_acceptance():
     source=pipeline.DogNames();record=source.record('Border Collie','border-collie')
     resolution=record['evidence_items'][1]
     assert json.loads(resolution['extracted_text'])['candidate_ids']==['VBO:0007996','VBO:0200193']
-    report=pipeline.RecordValidator(profile=EXAMPLE/'profile.yaml').validate(record)
+    report=RecordValidator(profile=EXAMPLE/'profile.yaml').validate(record)
     assert report['overall_status']=='rejected'
     assert 'BEV007' in {f['rule_id'] for f in report['findings']}

@@ -1,0 +1,14 @@
+# Case file -> expected overall status and, per requested use, status and reason codes.
+cases/curated_assay.yaml:
+  overall: admitted
+  uses:
+    pathway_draft: {status: admitted, reasons: []}
+cases/llm_only.yaml:
+  overall: review_required
+  uses:
+    pathway_draft: {status: review_required, reasons: [BEV008]}
+cases/network_without_review.yaml:
+  overall: rejected
+  uses:
+    pathway_draft: {status: admitted, reasons: []}
+    curated_network: {status: rejected, reasons: [BEV010]}

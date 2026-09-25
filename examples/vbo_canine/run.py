@@ -4,7 +4,8 @@ import csv
 import json
 from pathlib import Path
 
-from pipeline import DogNames, ROOT, FAULTS, perturb, metrics, digest, aggregate_quality_ablation
+from pipeline import FAULTS, ROOT, DogNames, aggregate_quality_ablation, digest, metrics, perturb
+
 from bioevidence_validator.engine import RecordValidator
 
 

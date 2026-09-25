@@ -80,8 +80,6 @@ def _entity(value: Any, path: str) -> dict:
 
 def _source(value: Any, path: str, base_dir: Path) -> tuple[str, dict]:
     source = _fields(value, SOURCE_KEYS, path)
-    if "sha256" not in source and "file" not in source:
-        raise ValueError(f"{path} needs sha256, file, or both")
     artifact = {"title": _text(source["title"], path + ".title"),
                 "source_type": _text(source["type"], path + ".type", SOURCE_TYPES)}
     if "uri" in source:
@@ -96,8 +94,12 @@ def _source(value: Any, path: str, base_dir: Path) -> tuple[str, dict]:
         observed = hashlib.sha256(file.read_bytes()).hexdigest()
     # A stated hash is the frozen reference; a file hash is what was observed now.
     # With both, validation reports a mismatch (BEV002) instead of trusting either.
-    artifact["sha256"] = _text(source["sha256"], path + ".sha256").lower() if "sha256" in source else observed
-    if "sha256" in source and observed is not None:
+    stated = _text(source["sha256"], path + ".sha256").lower() if "sha256" in source else None
+    frozen = stated or observed
+    if frozen is None:
+        raise ValueError(f"{path} needs sha256, file, or both")
+    artifact["sha256"] = frozen
+    if stated is not None and observed is not None:
         artifact["observed_sha256"] = observed
     return _text(source["id"], path + ".id"), artifact
 
@@ -129,14 +131,15 @@ def build_record(draft: dict, *, base_dir: Path | str = ".") -> dict[str, Any]:
         local_ids[name] = f"{record_id}/source/{name}"
         sources.append({"id": local_ids[name], **artifact})
 
-    items, lines = [], {}
+    items: list[dict[str, Any]] = []
+    lines: dict[str, list[str]] = {}
     for index, row in enumerate(_rows(draft["evidence"], "draft.evidence")):
         path = f"draft.evidence[{index}]"
         evidence = _fields(row, EVIDENCE_KEYS, path)
         source = _text(evidence["source"], path + ".source")
         if source not in local_ids:
             raise ValueError(f"{path}.source {source!r} is not a declared source id")
-        item = {"id": f"{record_id}/evidence/{index + 1}", "source_artifact_id": local_ids[source],
+        item: dict[str, Any] = {"id": f"{record_id}/evidence/{index + 1}", "source_artifact_id": local_ids[source],
                 "locator": _text(evidence["locator"], path + ".locator")}
         if "text" in evidence:
             item["extracted_text"] = _text(evidence["text"], path + ".text")
