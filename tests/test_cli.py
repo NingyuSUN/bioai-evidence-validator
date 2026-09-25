@@ -136,7 +136,13 @@ def test_schema_generation_and_compilation_error(tmp_path, capsys):
     assert output.read_bytes() == before
 
 
-def test_deep_json_fails_with_structured_error(tmp_path, capsys):
-    source = tmp_path / 'deep.json'; source.write_text('[' * 5000 + ']' * 5000, encoding='utf-8')
+@pytest.mark.parametrize('depth', [101, 5000, 100_000])
+def test_deep_json_fails_with_structured_error(tmp_path, capsys, depth):
+    source = tmp_path / 'deep.json'; source.write_text('[' * depth + ']' * depth, encoding='utf-8')
     assert main(['validate', str(source)]) == 3
     assert json.loads(capsys.readouterr().err)['error'] == 'input_or_execution_error'
+
+
+def test_json_at_depth_limit_reaches_validation(tmp_path):
+    source = tmp_path / 'deep.json'; source.write_text('[' * 100 + ']' * 100, encoding='utf-8')
+    assert main(['validate', str(source)]) == 1

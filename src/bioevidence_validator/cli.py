@@ -40,6 +40,20 @@ def _invalid_constant(value):
     raise ValueError(f"Non-finite JSON constant is not supported: {value}")
 
 
+MAX_JSON_DEPTH = 100
+
+
+def _check_depth(value) -> None:
+    """Reject over-nested input explicitly; the parser's own recursion limit varies by platform."""
+    stack = [(value, 1)]
+    while stack:
+        node, depth = stack.pop()
+        if depth > MAX_JSON_DEPTH:
+            raise ValueError(f"JSON nesting exceeds {MAX_JSON_DEPTH} levels")
+        children = node.values() if isinstance(node, dict) else node if isinstance(node, list) else ()
+        stack.extend((child, depth + 1) for child in children if isinstance(child, (dict, list)))
+
+
 def _write_json(path: Path, value: dict) -> None:
     """Replace the report only after the complete UTF-8 payload is written."""
     payload = json.dumps(value, indent=2, allow_nan=False) + "\n"
@@ -73,6 +87,7 @@ def _run(args) -> int:
         raise ValueError("Output must not overwrite an input, schema, or profile")
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
+    _check_depth(record)
     report = validate_record(record, schema_path=args.schema, profile=args.profile)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
