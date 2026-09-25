@@ -36,7 +36,7 @@ uv run --frozen mypy
 uv run --frozen pytest --cov
 ```
 
-CI also runs the tests on Linux (Python 3.11–3.13) and Windows, builds the wheel and
+CI also runs the tests on Linux (Python 3.11–3.14) and Windows, builds the wheel and
 smoke-tests it outside the source tree, and runs the GitHub Action. Coverage must stay at
 or above the minimum in `pyproject.toml`.
 

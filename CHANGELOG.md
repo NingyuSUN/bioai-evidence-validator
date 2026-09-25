@@ -3,6 +3,7 @@
 ## Unreleased — Quality checks, community and documentation site
 
 - CI runs ruff and mypy, and enforces a 95% test-coverage minimum (currently 98%).
+- Add Python 3.14 to the supported package classifiers and Linux CI test matrix.
 - Add CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 2.1), SECURITY, issue forms and a
   pull request template.
 - Add `community/profiles/`: contributed domain profiles whose example cases are built,
