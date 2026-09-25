@@ -1,0 +1,35 @@
+# The same claim after manual curation and human review, requested for two uses.
+# Build:    bioevidence build examples/drafts/reviewed_claim.yaml --output record.json
+# Validate: bioevidence validate record.json --profile literature-claim   (exit 0: admitted)
+profile: literature-claim
+uses: [research_summary, knowledge_base]
+
+statement:
+  subject: {id: "SYN:GENE_A", label: Synthetic gene A, type: gene}
+  predicate: associated_with
+  object: {id: "SYN:PHENOTYPE_A", label: Synthetic phenotype A, type: phenotype}
+  scope: ["taxon:synthetic"]
+
+sources:
+  - id: paper
+    title: Synthetic source; not real biological evidence
+    type: publication
+    uri: https://example.org/synthetic-evidence
+    version: synthetic-v1
+    retrieved_at: "2026-09-21T00:00:00Z"
+    file: synthetic_paper.txt
+
+evidence:
+  - source: paper
+    locator: Table 2
+    text: Synthetic gene A is associated with synthetic phenotype A.
+    type: publication_result
+    method: manual_curation
+    scope: ["taxon:synthetic"]
+
+reviews:
+  - reviewer: {id: "orcid:0000-0000-0000-0000", name: Synthetic curator, type: human}
+    decision: accept
+    uses: [knowledge_base]
+    rationale: Synthetic example of a recorded human acceptance.
+    decided_at: "2026-09-22T00:00:00Z"

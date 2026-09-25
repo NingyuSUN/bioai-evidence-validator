@@ -9,6 +9,7 @@ from pathlib import Path
 
 import yaml
 
+from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, validate_record, profile_path, list_profiles
 
 
@@ -20,6 +21,12 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
+    build.add_argument("draft", type=Path)
+    build.add_argument("--output", type=Path)
+    draft_schema = commands.add_parser("draft-schema", help="JSON Schema for drafts under one profile")
+    draft_schema.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    draft_schema.add_argument("--output", type=Path)
     generate = commands.add_parser("generate-schema", help="Generate JSON Schema from LinkML")
     generate.add_argument("--output", type=Path, required=True)
     generate.add_argument("--schema", type=Path, default=default_schema_path())
@@ -79,6 +86,21 @@ def _run(args) -> int:
 
     if args.command == "profiles":
         print(json.dumps(list_profiles(), indent=2))
+        return 0
+
+    if args.command in {"build", "draft-schema"}:
+        if args.command == "build":
+            if args.output and args.output.resolve() == args.draft.resolve():
+                raise ValueError("Output must not overwrite the draft")
+            draft = load_draft(args.draft)
+            _check_depth(draft)
+            result = build_record(draft, base_dir=args.draft.parent)
+        else:
+            result = draft_json_schema(args.profile)
+        if args.output:
+            _write_json(args.output, result)
+        else:
+            print(json.dumps(result, indent=2))
         return 0
 
     selected_profile = profile_path(args.profile)

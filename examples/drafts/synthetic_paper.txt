@@ -1,0 +1,2 @@
+Synthetic source for software testing only. Not real biological evidence.
+Table 2: Synthetic gene A is associated with synthetic phenotype A.

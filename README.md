@@ -4,6 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/bioai-evidence-validator)](https://pypi.org/project/bioai-evidence-validator/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/pyproject.toml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb)
 
 **Stop AI-extracted biological claims from entering your knowledge base or
 training set before their evidence is good enough for that use.**
@@ -18,6 +19,9 @@ each requested use.
 ```bash
 pip install bioai-evidence-validator
 ```
+
+Or try it in the browser, nothing to install:
+[quickstart notebook on Colab](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb).
 
 ## 30-second example
 
@@ -75,13 +79,45 @@ injected faults; the full validator admitted **0/160**.
 
 ## Use it
 
+### Write a draft, not a full record
+
+A full record spells out identifiers, evidence lines and hashes. A draft states each fact
+once; `bioevidence build` derives the rest and hashes local source files:
+
+```yaml
+profile: literature-claim
+uses: [research_summary]
+statement:
+  subject: {id: "SYN:GENE_A", label: Synthetic gene A, type: gene}
+  predicate: associated_with
+  object: {id: "SYN:PHENOTYPE_A", label: Synthetic phenotype A, type: phenotype}
+  scope: ["taxon:synthetic"]
+sources:
+  - {id: paper, title: Synthetic paper, type: publication, version: v1,
+     retrieved_at: "2026-09-21T00:00:00Z", file: synthetic_paper.txt}
+evidence:
+  - {source: paper, locator: Table 2, type: publication_result,
+     method: llm_extraction, scope: ["taxon:synthetic"]}
+```
+
+```bash
+bioevidence build examples/drafts/llm_claim.yaml --output record.json
+bioevidence validate record.json --profile literature-claim    # exit 2: review required
+```
+
+Building never fills in scope, extraction method, retrieval time or review decisions for
+you. For LLM pipelines, `bioevidence draft-schema --profile literature-claim` prints a JSON
+Schema for structured output. See the [draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md).
+
 ### Command line
 
 ```bash
 bioevidence profiles                                   # list built-in profiles and their use contracts
+bioevidence build draft.yaml --output record.json       # expand a compact draft
 bioevidence validate record.json --profile literature-claim
 bioevidence validate record.json --profile my_profile.yaml --output report.json
-bioevidence generate-schema --output record.schema.json  # JSON Schema for the input format
+bioevidence draft-schema --profile literature-claim     # JSON Schema for drafts (e.g. LLM output)
+bioevidence generate-schema --output record.schema.json  # JSON Schema for full records
 ```
 
 Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input or configuration error.
@@ -89,12 +125,9 @@ Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input o
 ### Python
 
 ```python
-import json
-from pathlib import Path
+from bioevidence_validator import build_record, load_draft, validate_record
 
-from bioevidence_validator.engine import validate_record
-
-record = json.loads(Path("record.json").read_text(encoding="utf-8"))
+record = build_record(load_draft("draft.yaml"), base_dir=".")   # or load a full record JSON
 report = validate_record(record, profile="literature-claim")
 
 for decision in report["use_decisions"]:
@@ -102,6 +135,30 @@ for decision in report["use_decisions"]:
 ```
 
 `profile` accepts a built-in name or a path to your own YAML profile.
+
+### Check records in CI
+
+Validate every record or draft in a pull request, with a summary table and inline annotations:
+
+```yaml
+# .github/workflows/evidence.yml
+on: pull_request
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: NingyuSUN/bioai-evidence-validator@v0.5.0
+        with:
+          files: records/**/*.yaml        # whitespace-separated globs
+          format: draft                   # or: record (default)
+          profile: literature-claim       # built-in name or path to your profile YAML
+          fail-on: review                 # or: rejected
+```
+
+With `fail-on: review` (default) the job fails unless every file is admitted; with
+`fail-on: rejected` it fails only on rejected files or files that cannot be read. The
+action's outputs `admitted`, `review_required`, `rejected` and `error` hold the counts.
 
 ## How it works
 
@@ -192,7 +249,7 @@ projection. External source truth and cohort independence require upstream verif
 
 ## Versions and branches
 
-`main` is the domain-neutral framework (0.4.1). The complete canine implementation
+`main` is the domain-neutral framework (0.5.0). The complete canine implementation
 and SQLite adapter from 0.3 live on the
 [`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed);
 see the [0.4 migration guide](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/MIGRATION-0.4.md) and
@@ -205,6 +262,7 @@ If you use this toolkit in research, please cite it using the metadata in
 (GitHub's "Cite this repository" button generates APA and BibTeX).
 
 [Create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
+[Draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md) ·
 [Engineering contract](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
 [Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
 [Architecture decision](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ADR-002-domain-neutral-main.md) ·

@@ -12,7 +12,7 @@ from bioevidence_validator.engine import default_schema_path, profile_path, vali
 root = Path(__file__).resolve().parents[1]
 package = Path(bioevidence_validator.__file__).resolve().parent
 assert root / "src" not in package.parents
-assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.4.1"
+assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.5.0"
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()
@@ -43,10 +43,17 @@ with tempfile.TemporaryDirectory() as directory:
     output = Path(directory) / "schema.json"
     run("generate-schema", "--output", output)
     assert "BioEvidenceRecord" in json.loads(output.read_text(encoding="utf-8"))["$defs"]
+with tempfile.TemporaryDirectory() as directory:
+    for draft, expected in [("llm_claim.yaml", 2), ("reviewed_claim.yaml", 0)]:
+        output = Path(directory) / (draft + ".json")
+        run("build", root / "examples/drafts" / draft, "--output", output)
+        run("validate", output, "--profile", "literature-claim", expected=expected)
+    schema = json.loads(run("draft-schema", "--profile", "literature-claim").stdout)
+    assert schema["properties"]["profile"] == {"const": "literature-claim"}
 record = json.loads((root / "examples/general/curated_assertion.json").read_text(encoding="utf-8"))
 record["requested_uses"] = []
 assert validate_record(record)["overall_status"] == "rejected"
-print("Installed wheel: generic schema, all profiles, custom domain, CLI outcomes and admission guard verified.")
+print("Installed wheel: generic schema, all profiles, custom domain, drafts, CLI outcomes and admission guard verified.")
 
 # The example imports the installed generic core; it is kept outside the wheel.
 with tempfile.TemporaryDirectory() as directory:

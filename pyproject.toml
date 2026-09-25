@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bioai-evidence-validator"
-version = "0.4.1"
+version = "0.5.0"
 description = "Standards-aligned evidence policy validation for AI-assisted biological curation"
 readme = "README.md"
 requires-python = ">=3.11"

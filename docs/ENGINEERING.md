@@ -1,9 +1,9 @@
-# Engineering contract — 0.4.1
+# Engineering contract — 0.5.0
 
 ## Validation stages
 
 1. Parse one JSON record. The CLI rejects duplicate keys, nonfinite numbers, malformed
-   UTF-8/JSON, and excessive parser recursion as operational errors.
+   UTF-8/JSON, and nesting deeper than 100 levels as operational errors.
 2. Validate against the packaged LinkML core compiled to JSON Schema, plus any
    explicitly selected extension. Structural failures stop semantic evaluation.
 3. Check profile binding, supported/distinct uses, IDs and references, and review targets.
@@ -48,8 +48,9 @@ between runs. Hashes identify inputs/configuration; they do not sign records or 
 that a source, source hash, label, or reviewer identity is authentic.
 
 Source artifacts require a declared version, retrieval time, and frozen hash. The optional
-observed hash is compared to that hash; this package does not retrieve source bytes or
-calculate their hashes. A profile can require a declared `independent_cohort_review`
+observed hash is compared to that hash. Validation never retrieves source bytes or
+calculates their hashes. Only `build` hashes local files explicitly named in a draft; it
+does not fetch URIs. A profile can require a declared `independent_cohort_review`
 evidence item, but the engine cannot establish independence or evaluation validity.
 
 Report writes use a temporary file and atomic replacement. Input, selected profile,
@@ -63,20 +64,33 @@ Argparse usage errors also exit 2, with usage text rather than a validation repo
 exports the compiled core schema. Custom schema export exports that selected schema;
 validation still applies the baseline independently.
 
+`build draft.yaml [--output record.json]` expands a [draft](DRAFTS.md) into a full record:
+it derives identifiers, groups evidence lines by direction and hashes named local files,
+but never supplies scope, extraction method, retrieval time, versions or review decisions.
+Unknown, missing, blank, repeated or out-of-choice draft fields exit 3. The output cannot
+overwrite the draft. `draft-schema --profile NAME` prints a JSON Schema for drafts in which
+the profile's allowlists are enums; it guides authoring and never replaces validation.
+
+The repository's composite GitHub Action (`action.yml`) installs the package from the
+action's own revision and runs `build`/`validate` through the CLI for each matched file.
+It fails on rejected or unreadable files, and on review-required files unless
+`fail-on: rejected` is set.
+
 ## Reproduction
 
 ```bash
 uv sync --frozen --extra dev
 uv run --frozen pytest
 uv build
-uv run --isolated --no-project --with ./dist/bioai_evidence_validator-0.4.1-py3-none-any.whl python tools/check_distribution.py
+uv run --isolated --no-project --with ./dist/*.whl python tools/check_distribution.py
 ```
 
-CI runs on Linux/Python 3.11 and Windows/Python 3.13. Tests cover multi-domain acceptance,
-negative evidence cases, use-specific human review, strict configuration/JSON parsing,
-baseline enforcement, context snapshots, audit digests, and CLI report behavior. The wheel
-smoke test imports outside editable source, checks packaged profiles/schema, and exercises
-accepted, rejected, review-required, and custom-domain records. It does not assess
+CI runs on Linux/Python 3.11–3.13 and Windows/Python 3.13, and runs the GitHub Action on
+Linux and Windows. Tests cover multi-domain acceptance, negative evidence cases,
+use-specific human review, strict configuration/JSON/draft parsing, baseline enforcement,
+context snapshots, audit digests, and CLI report behavior. The wheel smoke test imports
+outside editable source, checks packaged profiles/schema, and exercises accepted, rejected,
+review-required, custom-domain and draft-built records. It does not assess
 biological correctness, model calibration, or predictive performance.
 
 The [VBO case](../examples/vbo_canine/README.md) adds offline source verification and a

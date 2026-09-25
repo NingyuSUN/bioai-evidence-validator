@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.0 — Drafts, LLM draft schema and GitHub Action
+
+- Add compact YAML/JSON drafts: `bioevidence build` and `build_record()` derive identifiers,
+  group evidence lines and hash named local files, without supplying scope, method, times
+  or review decisions. Strict parsing rejects unknown, missing and out-of-choice fields.
+- Add `bioevidence draft-schema` and `draft_json_schema()`: a per-profile JSON Schema for
+  drafts, e.g. for LLM structured output.
+- Add a composite GitHub Action that validates records or drafts in pull requests, with a
+  job summary, file annotations and count outputs.
+- Add a Colab quickstart notebook and draft examples.
+- Export `build_record`, `load_draft`, `draft_json_schema` and `validate_record` from the package root.
+
 ## 0.4.1 — Required-evidence quality and real-source evaluation
 
 - Apply extraction-method quality gates to each required evidence type independently.
