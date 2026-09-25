@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "BioAI Evidence Validator"
+abstract: >-
+  Evidence validation and policy engine for AI-assisted biological curation.
+  It checks evidence structure, provenance consistency, scope and review
+  requirements, then reports an admission decision for each requested use.
+authors:
+  - family-names: Sun
+    given-names: Ningyu
+version: 0.4.1
+license: Apache-2.0
+repository-code: "https://github.com/NingyuSUN/bioai-evidence-validator"
+keywords:
+  - bioinformatics
+  - biocuration
+  - evidence
+  - provenance
+  - LLM
+  - LinkML
