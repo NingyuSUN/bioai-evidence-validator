@@ -95,3 +95,9 @@ biological correctness, model calibration, or predictive performance.
 
 The [VBO case](../examples/vbo_canine/README.md) adds offline source verification and a
 separate real-source/controlled-fault evaluation. Its trust-boundary failures remain visible.
+The [ClinVar case](../examples/clinvar_germline/README.md) adds policy reproduction against
+an independent implementation (NCBI's review status) and a three-year outcome comparison;
+its fabricated-expert-review trust-boundary cohort is likewise admitted and reported.
+Both replay byte-identically from frozen, hash-checked sources, and CI compares each run
+with the committed results. [Standards alignment](STANDARDS.md) maps the record model to
+ECO, Biolink and GA4GH VA-Spec.

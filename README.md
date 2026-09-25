@@ -73,9 +73,12 @@ record is trustworthy enough for a particular purpose.
 | Provenance consistency (source hashes, resolved references, scope) | — | ✅ |
 | Human adjudications bound to a specific statement and use | — | ✅ |
 | Machine-readable audit report with hashes of input, schema and profile | — | ✅ |
+| Mapped to ECO, Biolink and GA4GH VA-Spec ([standards alignment](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/STANDARDS.md)) | — | ✅ |
 
-On the real-data benchmark below, schema-only checks admitted **160/160**
-injected faults; the full validator admitted **0/160**.
+On both real-data benchmarks below, schema-only checks admitted **160/160**
+injected faults; the full validator admitted **0/160**. On ClinVar, 1★ and 2★ variants
+the validator holds back were **about 4–5× more likely** to be reclassified or put in
+conflict three years later.
 
 ## Use it
 
@@ -220,7 +223,34 @@ Use the [annotation templates](https://github.com/NingyuSUN/bioai-evidence-valid
 source version and intended use. Document reviewer roles and whether labels are
 single-reviewed or independently reviewed by multiple people.
 
-## Real-data case
+## Real-data cases
+
+### ClinVar germline classifications, three years later
+
+The [ClinVar case](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/clinvar_germline/README.md)
+turns every 2023-09 lab submission into evidence, validates 5,026 sampled variants with a
+ClinVar-style profile, and checks what happened to them by 2026-09.
+
+- **Policy reproduction:** the profile matches NCBI's own 2023-09 review status on 98–99% of
+  decisions; every disagreement is listed with its cause.
+- **Where the validator is stricter, classifications were less stable.** It sends any P/LP
+  variant with a dissenting submission to review, even when ClinVar's aggregate does not.
+  Across all 218,920 germline P/LP variants, the share later reclassified or put in conflict:
+
+| 2023-09 ClinVar review status | No dissenting submission | With one (validator: review) |
+|---|---:|---:|
+| 1★ single submitter | 2.63% (2.54–2.71) | **13.77%** (11.46–16.47) |
+| 2★ multiple submitters | 2.19% (2.05–2.33) | **8.32%** (6.51–10.59) |
+| 3★ expert panel | 0.07% (0.03–0.16) | **1.30%** (0.63–2.66) |
+
+Wilson 95% intervals. Stability is not correctness, and this is observational; see the
+case's interpretation limits. Not for clinical use.
+
+```bash
+uv run python examples/clinvar_germline/run.py --output artifacts/clinvar
+```
+
+### VBO canine name mapping
 
 [VBO canine name mapping](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/README.md) uses a frozen public ontology:
 72 real-name cases, 160 controlled errors, and 16 separately reported trust-boundary
@@ -231,7 +261,7 @@ per-required-evidence-type validation. Source-derived labels are not expert anno
 uv run python examples/vbo_canine/run.py --output artifacts/vbo-canine
 ```
 
-### Benchmark results (v0.4.1)
+#### Benchmark results (v0.4.1)
 
 ![VBO canine benchmark comparing false admissions across three validation methods](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/vbo_canine_benchmark.svg)
 
@@ -241,15 +271,16 @@ On 72 real-source name mappings, the full validator admitted all 48 unambiguous 
 
 ## Scope
 
-The VBO case uses attributed public data; other fixtures are synthetic.
+The VBO and ClinVar cases use attributed public data; other fixtures are synthetic.
 Admission means **the supplied record meets the selected
 profile**, not that a biological claim is true. The toolkit does not retrieve papers,
-verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; the VBO importer also hashes its local source
-projection. External source truth and cohort independence require upstream verification.
+verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; the VBO and ClinVar importers also hash their local source
+projections. External source truth and cohort independence require upstream verification.
+Neither benchmark has independent expert annotation yet.
 
 ## Versions and branches
 
-`main` is the domain-neutral framework (0.5.0). The complete canine implementation
+`main` is the domain-neutral framework (0.6.0). The complete canine implementation
 and SQLite adapter from 0.3 live on the
 [`canine-breed` branch](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-breed);
 see the [0.4 migration guide](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/MIGRATION-0.4.md) and
@@ -263,6 +294,7 @@ If you use this toolkit in research, please cite it using the metadata in
 
 [Create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
 [Draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md) ·
+[Standards alignment](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/STANDARDS.md) ·
 [Engineering contract](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
 [Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
 [Architecture decision](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ADR-002-domain-neutral-main.md) ·

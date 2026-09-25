@@ -9,7 +9,7 @@ abstract: >-
 authors:
   - family-names: Sun
     given-names: Ningyu
-version: 0.5.0
+version: 0.6.0
 license: Apache-2.0
 repository-code: "https://github.com/NingyuSUN/bioai-evidence-validator"
 keywords:

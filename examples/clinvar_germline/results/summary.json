@@ -1,0 +1,556 @@
+{
+  "benchmark": "clinvar-germline-v1",
+  "faults": {
+    "controlled_fault": {
+      "aggregate_quality": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admissions": 64,
+        "false_blocks": 0,
+        "n": 160,
+        "review": 16,
+        "status_counts": {
+          "admitted": 64,
+          "rejected": 80,
+          "review_required": 16
+        }
+      },
+      "full": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admissions": 0,
+        "false_blocks": 0,
+        "n": 160,
+        "review": 80,
+        "status_counts": {
+          "rejected": 80,
+          "review_required": 80
+        }
+      },
+      "schema_only": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admissions": 160,
+        "false_blocks": 0,
+        "n": 160,
+        "review": 0,
+        "status_counts": {
+          "admitted": 160
+        }
+      }
+    },
+    "trust_boundary": {
+      "aggregate_quality": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admissions": 16,
+        "false_blocks": 0,
+        "n": 16,
+        "review": 0,
+        "status_counts": {
+          "admitted": 16
+        }
+      },
+      "full": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admissions": 16,
+        "false_blocks": 0,
+        "n": 16,
+        "review": 0,
+        "status_counts": {
+          "admitted": 16
+        }
+      },
+      "schema_only": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 16,
+        "false_admissions": 16,
+        "false_blocks": 0,
+        "n": 16,
+        "review": 0,
+        "status_counts": {
+          "admitted": 16
+        }
+      }
+    }
+  },
+  "label_origin": "Policy reproduction compares with NCBI's own 2023-09 aggregate review status; stability uses NCBI's 2026-09 aggregate classification; faults are authored specifications. No independent human annotation.",
+  "limitation": "Stability is not correctness, and ClinVar's own review tiers influence later submissions. Strata are equal-sized, so pooled sample rates are not population rates. Observational; not for clinical use.",
+  "policy_reproduction": {
+    "clinical_reference": {
+      "agreement": 4941,
+      "looser_by_stratum": {},
+      "n": 5026,
+      "ncbi_admitted": 2026,
+      "stricter_by_reason": {
+        "BEV004": 84,
+        "BEV007": 1
+      },
+      "stricter_by_stratum": {
+        "expert_panel": 65,
+        "multiple_submitters": 19,
+        "practice_guideline": 1
+      },
+      "validator_admitted": 1941,
+      "validator_looser": 0,
+      "validator_stricter": 85
+    },
+    "expert_reference": {
+      "agreement": 4960,
+      "looser_by_stratum": {},
+      "n": 5026,
+      "ncbi_admitted": 1026,
+      "stricter_by_reason": {
+        "BEV004": 66
+      },
+      "stricter_by_stratum": {
+        "expert_panel": 65,
+        "practice_guideline": 1
+      },
+      "validator_admitted": 960,
+      "validator_looser": 0,
+      "validator_stricter": 66
+    },
+    "research_summary": {
+      "agreement": 4932,
+      "looser_by_stratum": {
+        "conflicting": 1
+      },
+      "n": 5026,
+      "ncbi_admitted": 3026,
+      "stricter_by_reason": {
+        "BEV004": 93
+      },
+      "stricter_by_stratum": {
+        "expert_panel": 65,
+        "multiple_submitters": 18,
+        "practice_guideline": 1,
+        "single_submitter": 9
+      },
+      "validator_admitted": 2934,
+      "validator_looser": 1,
+      "validator_stricter": 93
+    }
+  },
+  "population_stability": {
+    "expert_panel": {
+      "all": {
+        "destabilized": 13,
+        "evaluable": 8950,
+        "n": 8950,
+        "outcomes": {
+          "downgraded": 13,
+          "stable_plp": 8937
+        },
+        "rate": 0.001453,
+        "wilson_95": [
+          0.000849,
+          0.002484
+        ]
+      },
+      "with_dissenting_submission": {
+        "destabilized": 7,
+        "evaluable": 539,
+        "n": 539,
+        "outcomes": {
+          "downgraded": 7,
+          "stable_plp": 532
+        },
+        "rate": 0.012987,
+        "wilson_95": [
+          0.006305,
+          0.026562
+        ]
+      },
+      "without_dissenting_submission": {
+        "destabilized": 6,
+        "evaluable": 8411,
+        "n": 8411,
+        "outcomes": {
+          "downgraded": 6,
+          "stable_plp": 8405
+        },
+        "rate": 0.000713,
+        "wilson_95": [
+          0.000327,
+          0.001556
+        ]
+      }
+    },
+    "multiple_submitters": {
+      "all": {
+        "destabilized": 981,
+        "evaluable": 42804,
+        "n": 42805,
+        "outcomes": {
+          "conflicting": 931,
+          "downgraded": 50,
+          "missing": 1,
+          "stable_plp": 41823
+        },
+        "rate": 0.022918,
+        "wilson_95": [
+          0.021543,
+          0.024379
+        ]
+      },
+      "with_dissenting_submission": {
+        "destabilized": 59,
+        "evaluable": 709,
+        "n": 709,
+        "outcomes": {
+          "conflicting": 57,
+          "downgraded": 2,
+          "stable_plp": 650
+        },
+        "rate": 0.083216,
+        "wilson_95": [
+          0.065062,
+          0.105862
+        ]
+      },
+      "without_dissenting_submission": {
+        "destabilized": 922,
+        "evaluable": 42095,
+        "n": 42096,
+        "outcomes": {
+          "conflicting": 874,
+          "downgraded": 48,
+          "missing": 1,
+          "stable_plp": 41173
+        },
+        "rate": 0.021903,
+        "wilson_95": [
+          0.020548,
+          0.023345
+        ]
+      }
+    },
+    "no_criteria": {
+      "all": {
+        "destabilized": 1248,
+        "evaluable": 29532,
+        "n": 29764,
+        "outcomes": {
+          "conflicting": 302,
+          "downgraded": 946,
+          "missing": 127,
+          "other": 105,
+          "stable_plp": 28284
+        },
+        "rate": 0.042259,
+        "wilson_95": [
+          0.040024,
+          0.044614
+        ]
+      },
+      "with_dissenting_submission": {
+        "destabilized": 0,
+        "evaluable": 0,
+        "n": 0,
+        "outcomes": {},
+        "rate": null,
+        "wilson_95": null
+      },
+      "without_dissenting_submission": {
+        "destabilized": 1248,
+        "evaluable": 29532,
+        "n": 29764,
+        "outcomes": {
+          "conflicting": 302,
+          "downgraded": 946,
+          "missing": 127,
+          "other": 105,
+          "stable_plp": 28284
+        },
+        "rate": 0.042259,
+        "wilson_95": [
+          0.040024,
+          0.044614
+        ]
+      }
+    },
+    "practice_guideline": {
+      "all": {
+        "destabilized": 0,
+        "evaluable": 26,
+        "n": 26,
+        "outcomes": {
+          "stable_plp": 26
+        },
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.128729
+        ]
+      },
+      "with_dissenting_submission": {
+        "destabilized": 0,
+        "evaluable": 1,
+        "n": 1,
+        "outcomes": {
+          "stable_plp": 1
+        },
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.793451
+        ]
+      },
+      "without_dissenting_submission": {
+        "destabilized": 0,
+        "evaluable": 25,
+        "n": 25,
+        "outcomes": {
+          "stable_plp": 25
+        },
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.133192
+        ]
+      }
+    },
+    "single_submitter": {
+      "all": {
+        "destabilized": 3687,
+        "evaluable": 137197,
+        "n": 137375,
+        "outcomes": {
+          "conflicting": 3319,
+          "downgraded": 368,
+          "missing": 163,
+          "other": 15,
+          "stable_plp": 133510
+        },
+        "rate": 0.026874,
+        "wilson_95": [
+          0.026031,
+          0.027743
+        ]
+      },
+      "with_dissenting_submission": {
+        "destabilized": 100,
+        "evaluable": 726,
+        "n": 726,
+        "outcomes": {
+          "conflicting": 94,
+          "downgraded": 6,
+          "stable_plp": 626
+        },
+        "rate": 0.137741,
+        "wilson_95": [
+          0.114573,
+          0.164723
+        ]
+      },
+      "without_dissenting_submission": {
+        "destabilized": 3587,
+        "evaluable": 136471,
+        "n": 136649,
+        "outcomes": {
+          "conflicting": 3225,
+          "downgraded": 362,
+          "missing": 163,
+          "other": 15,
+          "stable_plp": 132884
+        },
+        "rate": 0.026284,
+        "wilson_95": [
+          0.025448,
+          0.027146
+        ]
+      }
+    }
+  },
+  "profile_sha256": "ff2e0bb4b7df78ca4d1ea55a86e2bb9669e48b200003375243955e8b2464bb73",
+  "schema_sha256": "10b1e498a72b14706e0aa4a74889d6778fdfd89f374c51f15738d7d31fc290c1",
+  "source_release": "ClinVar 2023-09 (evidence) / 2026-09 (outcome)",
+  "source_sha256": "1f3219b57af82730fbf9e0aacfb43ad16136226014089d62d7ddf83d046b2841",
+  "stability_by_stratum": {
+    "expert_panel": {
+      "destabilized": 0,
+      "evaluable": 1000,
+      "n": 1000,
+      "outcomes": {
+        "stable_plp": 1000
+      },
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.003827
+      ]
+    },
+    "multiple_submitters": {
+      "destabilized": 17,
+      "evaluable": 1000,
+      "n": 1000,
+      "outcomes": {
+        "conflicting": 17,
+        "stable_plp": 983
+      },
+      "rate": 0.017,
+      "wilson_95": [
+        0.010641,
+        0.027056
+      ]
+    },
+    "no_criteria": {
+      "destabilized": 52,
+      "evaluable": 990,
+      "n": 1000,
+      "outcomes": {
+        "conflicting": 14,
+        "downgraded": 38,
+        "missing": 6,
+        "other": 4,
+        "stable_plp": 938
+      },
+      "rate": 0.052525,
+      "wilson_95": [
+        0.040278,
+        0.068232
+      ]
+    },
+    "practice_guideline": {
+      "destabilized": 0,
+      "evaluable": 26,
+      "n": 26,
+      "outcomes": {
+        "stable_plp": 26
+      },
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.128729
+      ]
+    },
+    "single_submitter": {
+      "destabilized": 27,
+      "evaluable": 1000,
+      "n": 1000,
+      "outcomes": {
+        "conflicting": 21,
+        "downgraded": 6,
+        "stable_plp": 973
+      },
+      "rate": 0.027,
+      "wilson_95": [
+        0.018621,
+        0.038999
+      ]
+    }
+  },
+  "stability_by_use": {
+    "clinical_reference": {
+      "admitted": {
+        "destabilized": 16,
+        "evaluable": 1941,
+        "n": 1941,
+        "outcomes": {
+          "conflicting": 16,
+          "stable_plp": 1925
+        },
+        "rate": 0.008243,
+        "wilson_95": [
+          0.00508,
+          0.013349
+        ]
+      },
+      "not_admitted": {
+        "destabilized": 80,
+        "evaluable": 2075,
+        "n": 2085,
+        "outcomes": {
+          "conflicting": 36,
+          "downgraded": 44,
+          "missing": 6,
+          "other": 4,
+          "stable_plp": 1995
+        },
+        "rate": 0.038554,
+        "wilson_95": [
+          0.031087,
+          0.047727
+        ]
+      }
+    },
+    "expert_reference": {
+      "admitted": {
+        "destabilized": 0,
+        "evaluable": 960,
+        "n": 960,
+        "outcomes": {
+          "stable_plp": 960
+        },
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.003986
+        ]
+      },
+      "not_admitted": {
+        "destabilized": 96,
+        "evaluable": 3056,
+        "n": 3066,
+        "outcomes": {
+          "conflicting": 52,
+          "downgraded": 44,
+          "missing": 6,
+          "other": 4,
+          "stable_plp": 2960
+        },
+        "rate": 0.031414,
+        "wilson_95": [
+          0.025793,
+          0.03821
+        ]
+      }
+    },
+    "research_summary": {
+      "admitted": {
+        "destabilized": 43,
+        "evaluable": 2933,
+        "n": 2933,
+        "outcomes": {
+          "conflicting": 37,
+          "downgraded": 6,
+          "stable_plp": 2890
+        },
+        "rate": 0.014661,
+        "wilson_95": [
+          0.010903,
+          0.019689
+        ]
+      },
+      "not_admitted": {
+        "destabilized": 53,
+        "evaluable": 1083,
+        "n": 1093,
+        "outcomes": {
+          "conflicting": 15,
+          "downgraded": 38,
+          "missing": 6,
+          "other": 4,
+          "stable_plp": 1030
+        },
+        "rate": 0.048938,
+        "wilson_95": [
+          0.037608,
+          0.063457
+        ]
+      }
+    }
+  },
+  "strata": {
+    "conflicting": 1000,
+    "expert_panel": 1000,
+    "multiple_submitters": 1000,
+    "no_criteria": 1000,
+    "practice_guideline": 26,
+    "single_submitter": 1000
+  },
+  "validator_version": "0.6.0",
+  "variants": 5026
+}
