@@ -12,7 +12,7 @@ from bioevidence_validator.engine import default_schema_path, profile_path, vali
 root = Path(__file__).resolve().parents[1]
 package = Path(bioevidence_validator.__file__).resolve().parent
 assert root / "src" not in package.parents
-assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.5.0"
+assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.6.0"
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()
@@ -65,3 +65,12 @@ with tempfile.TemporaryDirectory() as directory:
     assert summary["cohorts"]["controlled_fault"]["full"]["false_admissions"] == 0
     assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 16
 print("Installed wheel: real-source VBO case, required-type quality fix and explicit trust boundary verified.")
+
+with tempfile.TemporaryDirectory() as directory:
+    output = Path(directory) / "clinvar"
+    result = subprocess.run([sys.executable, str(root / "examples/clinvar_germline/run.py"), "--output", str(output)],
+                            capture_output=True, text=True, encoding="utf-8", cwd=root.parent)
+    assert result.returncode == 0, result.stderr
+    for expected in (root / "examples/clinvar_germline/results").iterdir():
+        assert expected.read_bytes() == (output / expected.name).read_bytes(), expected.name
+print("Installed wheel: ClinVar case replays its committed results byte-for-byte.")

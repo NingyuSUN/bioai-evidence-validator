@@ -133,7 +133,7 @@ wheels = [
 
 [[package]]
 name = "bioai-evidence-validator"
-version = "0.5.0"
+version = "0.6.0"
 source = { editable = "." }
 dependencies = [
     { name = "jsonschema" },

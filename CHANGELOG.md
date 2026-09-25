@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 — ClinVar case and standards alignment
+
+- Add a second real-data case: ClinVar germline classifications. 5,026 sampled variants
+  from the 2023-09 release are built from per-submission evidence and validated with a
+  ClinVar-style profile; decisions are compared with NCBI's own 2023-09 review status and
+  with each classification's 2026-09 outcome, plus controlled faults and a trust-boundary
+  cohort. Frozen, hash-pinned sample; rebuild script verifies the three upstream files.
+- Add `docs/STANDARDS.md`, mapping the record model to ECO, Biolink 4.4.4, GA4GH VA-Spec
+  1.0.1 and PROV-O, with mapping strength and caveats.
+- Annotate `ExtractionMethod` values with ECO meanings in the LinkML schema. The compiled
+  JSON Schema, and therefore every report's `schema_sha256`, is unchanged.
+- The VBO benchmark summary changes only `validator_version`.
+
 ## 0.5.0 — Drafts, LLM draft schema and GitHub Action
 
 - Add compact YAML/JSON drafts: `bioevidence build` and `build_record()` derive identifiers,

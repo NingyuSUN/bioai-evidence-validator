@@ -1,0 +1,121 @@
+{
+  "population_2023_09_germline_plp": {
+    "expert_panel": {
+      "n": 8950,
+      "outcomes_2026_09": {
+        "downgraded": 13,
+        "stable_plp": 8937
+      },
+      "with_dissenting_submission": {
+        "n": 539,
+        "outcomes_2026_09": {
+          "downgraded": 7,
+          "stable_plp": 532
+        }
+      },
+      "without_dissenting_submission": {
+        "n": 8411,
+        "outcomes_2026_09": {
+          "downgraded": 6,
+          "stable_plp": 8405
+        }
+      }
+    },
+    "multiple_submitters": {
+      "n": 42805,
+      "outcomes_2026_09": {
+        "conflicting": 931,
+        "downgraded": 50,
+        "missing": 1,
+        "stable_plp": 41823
+      },
+      "with_dissenting_submission": {
+        "n": 709,
+        "outcomes_2026_09": {
+          "conflicting": 57,
+          "downgraded": 2,
+          "stable_plp": 650
+        }
+      },
+      "without_dissenting_submission": {
+        "n": 42096,
+        "outcomes_2026_09": {
+          "conflicting": 874,
+          "downgraded": 48,
+          "missing": 1,
+          "stable_plp": 41173
+        }
+      }
+    },
+    "no_criteria": {
+      "n": 29764,
+      "outcomes_2026_09": {
+        "conflicting": 302,
+        "downgraded": 946,
+        "missing": 127,
+        "other": 105,
+        "stable_plp": 28284
+      },
+      "with_dissenting_submission": {
+        "n": 0,
+        "outcomes_2026_09": {}
+      },
+      "without_dissenting_submission": {
+        "n": 29764,
+        "outcomes_2026_09": {
+          "conflicting": 302,
+          "downgraded": 946,
+          "missing": 127,
+          "other": 105,
+          "stable_plp": 28284
+        }
+      }
+    },
+    "practice_guideline": {
+      "n": 26,
+      "outcomes_2026_09": {
+        "stable_plp": 26
+      },
+      "with_dissenting_submission": {
+        "n": 1,
+        "outcomes_2026_09": {
+          "stable_plp": 1
+        }
+      },
+      "without_dissenting_submission": {
+        "n": 25,
+        "outcomes_2026_09": {
+          "stable_plp": 25
+        }
+      }
+    },
+    "single_submitter": {
+      "n": 137375,
+      "outcomes_2026_09": {
+        "conflicting": 3319,
+        "downgraded": 368,
+        "missing": 163,
+        "other": 15,
+        "stable_plp": 133510
+      },
+      "with_dissenting_submission": {
+        "n": 726,
+        "outcomes_2026_09": {
+          "conflicting": 94,
+          "downgraded": 6,
+          "stable_plp": 626
+        }
+      },
+      "without_dissenting_submission": {
+        "n": 136649,
+        "outcomes_2026_09": {
+          "conflicting": 3225,
+          "downgraded": 362,
+          "missing": 163,
+          "other": 15,
+          "stable_plp": 132884
+        }
+      }
+    }
+  }
+}

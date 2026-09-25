@@ -1,0 +1,24 @@
+id: clinvar-germline
+version: "1.0.0"
+description: >-
+  ClinVar-style admission of a germline pathogenic/likely pathogenic classification from
+  per-submission evidence. A benchmark policy, not a clinical classification guideline.
+predicates: [has_germline_classification]
+subject_types: [sequence_variant]
+object_types: [germline_classification]
+uses:
+  research_summary:
+    required_evidence_types: [criteria_based_classification]
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  clinical_reference:
+    required_evidence_types: [criteria_based_classification, multi_submitter_or_expert_review]
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false
+  expert_reference:
+    required_evidence_types: [criteria_based_classification, expert_review]
+    require_human_acceptance: false
+    allow_llm_only: false
+    allow_string_match_only: false

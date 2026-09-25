@@ -10,6 +10,8 @@ prefixes:
   linkml: https://w3id.org/linkml/
   prov: http://www.w3.org/ns/prov#
   sepio: http://purl.obolibrary.org/obo/SEPIO_
+  ECO: http://purl.obolibrary.org/obo/ECO_
+  biolink: https://w3id.org/biolink/vocab/
 default_prefix: bioev
 default_range: string
 imports:
@@ -33,12 +35,24 @@ enums:
       supports: null
       contradicts: null
       neutral: null
+  # How an evidence item was produced. Meanings are the closest ECO terms (release
+  # 2026-07-10); see docs/STANDARDS.md for Biolink agent types and caveats. Kept as a
+  # comment so the compiled JSON Schema, and every report's schema_sha256, are unchanged.
   ExtractionMethod:
     permissible_values:
-      deterministic_parser: null
-      manual_curation: null
-      normalized_string_match: null
-      llm_extraction: null
+      deterministic_parser:
+        description: Rule-based import of an existing source record.
+        meaning: ECO:0000313
+      manual_curation:
+        description: A person read the source and recorded the evidence.
+        meaning: ECO:0000352
+      normalized_string_match:
+        description: Matching normalized strings, e.g. names to identifiers.
+        meaning: ECO:0008021
+      llm_extraction:
+        description: A language model extracted the evidence from text. ECO has no
+          LLM-specific term; the machine-learning term is the closest.
+        meaning: ECO:0008004
   StatementStatus:
     permissible_values:
       proposed: null

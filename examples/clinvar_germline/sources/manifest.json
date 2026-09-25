@@ -1,0 +1,39 @@
+{
+  "dataset": "ClinVar germline classification sample (2023-09) with 2026-09 aggregate outcome",
+  "upstream": {
+    "submission_summary_2023-09": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2023/submission_summary_2023-09.txt.gz",
+      "bytes": 201026694,
+      "sha256": "71c799c2d1bf5dbd4ffffdfc8e3d743093e5ee0c24ba9544ec0cb654ac8141ca"
+    },
+    "variant_summary_2023-09": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2023/variant_summary_2023-09.txt.gz",
+      "bytes": 210839206,
+      "sha256": "3c224263fbe8ade318c4bdbfda0e4cef4d449470ad6467bdc504171dc9a1a4e3"
+    },
+    "variant_summary_2026-09": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2026-09.txt.gz",
+      "bytes": 442495433,
+      "sha256": "186ad2838a138f0bc7a79b1b7b6dde5533b105175d293e1131652889529804c9"
+    }
+  },
+  "retrieved_at": "2026-09-25T06:42:53Z",
+  "attribution": "ClinVar, National Center for Biotechnology Information (NCBI), U.S. National Library of Medicine",
+  "terms": "ClinVar data are freely available (https://www.ncbi.nlm.nih.gov/clinvar/intro/); not for direct diagnostic use (https://www.ncbi.nlm.nih.gov/clinvar/docs/maintenance_use/).",
+  "projection_file": "sources/clinvar-sample.jsonl.gz",
+  "projection_sha256": "1f3219b57af82730fbf9e0aacfb43ad16136226014089d62d7ddf83d046b2841",
+  "projection_bytes": 5284533,
+  "projection_hash_scope": "SHA-256 and byte count of the decompressed JSON Lines content",
+  "population_file": "sources/population_outcomes.json",
+  "population_sha256": "60be7cb4a9e3d8f3351b01e1dcfdb14bfe7a5624a54b4f7bd6b753b5cffc75b6",
+  "variant_count": 5026,
+  "strata": {
+    "conflicting": 1000,
+    "expert_panel": 1000,
+    "multiple_submitters": 1000,
+    "no_criteria": 1000,
+    "practice_guideline": 26,
+    "single_submitter": 1000
+  },
+  "selection": "2023-09 germline (OriginSimple) variants whose aggregate classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic, stratified by aggregate review status, plus 'conflicting interpretations' variants with at least one criteria-based P/LP submission. Within each stratum, variants are ordered by SHA-256('bioai-clinvar-v1:' + VariationID) and the first 1000 with 2023-09 submissions are kept (all, if fewer). Retained per submission: SCV, Submitter, ReviewStatus, ClinicalSignificance, CollectionMethod, DateLastEvaluated. Free-text descriptions are not retained."
+}
