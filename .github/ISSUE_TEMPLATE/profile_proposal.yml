@@ -1,0 +1,42 @@
+name: Domain profile proposal
+description: Propose an admission profile for a biological domain.
+labels: [profile]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Profiles decide which evidence each intended use requires; they do not change the engine.
+        See [docs/PROFILES.md](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md)
+        and the [community profile template](https://github.com/NingyuSUN/bioai-evidence-validator/tree/main/community/profiles/_template).
+  - type: input
+    id: domain
+    attributes:
+      label: Domain and assertion
+      placeholder: "Protein–protein interactions: protein A interacts_with protein B"
+    validations:
+      required: true
+  - type: textarea
+    id: uses
+    attributes:
+      label: Intended uses and their evidence requirements
+      description: For each use (e.g. research summary, knowledge-base admission, training data), which evidence types are required, and is human acceptance required?
+    validations:
+      required: true
+  - type: textarea
+    id: basis
+    attributes:
+      label: Basis for the policy
+      description: Community guideline, database policy or published standard the requirements follow (with links), or state that it is your own proposal.
+    validations:
+      required: true
+  - type: textarea
+    id: cases
+    attributes:
+      label: Example cases
+      description: At least one claim that should be admitted and one that should not, with the reason.
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a pull request with the profile and example cases.

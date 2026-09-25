@@ -10,7 +10,7 @@ from pathlib import Path
 import yaml
 
 from .draft import build_record, draft_json_schema, load_draft
-from .engine import default_schema_path, generate_json_schema, validate_record, profile_path, list_profiles
+from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 
 
 def parser() -> argparse.ArgumentParser:

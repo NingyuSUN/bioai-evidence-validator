@@ -33,11 +33,18 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<9"]
+dev = [
+  "pytest>=8,<9",
+  "pytest-cov>=7,<8",
+  "ruff>=0.16,<0.17",
+  "mypy>=2.3,<3",
+  "types-PyYAML",
+  "types-jsonschema",
+]
 
 [project.urls]
 Homepage = "https://github.com/NingyuSUN/bioai-evidence-validator"
-Documentation = "https://github.com/NingyuSUN/bioai-evidence-validator/tree/main/docs"
+Documentation = "https://ningyusun.github.io/bioai-evidence-validator/"
 Changelog = "https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/CHANGELOG.md"
 Issues = "https://github.com/NingyuSUN/bioai-evidence-validator/issues"
 
@@ -50,3 +57,33 @@ packages = ["src/bioevidence_validator"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.coverage.run]
+source = ["bioevidence_validator"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 95
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["examples/quickstart.ipynb"]
+
+[tool.ruff.lint]
+# Correctness-focused rules. Style that the codebase uses deliberately (compact
+# one-line statements in tests and benchmark scripts) is not policed.
+select = ["E4", "E7", "E9", "F", "W", "I", "B", "UP"]
+ignore = ["E701", "E702", "E731"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+
+[[tool.mypy.overrides]]
+module = ["linkml.*"]
+ignore_missing_imports = true

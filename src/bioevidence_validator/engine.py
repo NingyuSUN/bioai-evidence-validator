@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -255,7 +255,7 @@ class RecordValidator:
             "profile_sha256": self.profile_sha256,
             "schema_version": self.schema_version, "schema_sha256": self.schema_sha256,
             "schema_sources": [dict(source) for source in self.schema_sources],
-            "input_sha256": sha256_bytes(canonical), "validated_at": datetime.now(timezone.utc).isoformat(),
+            "input_sha256": sha256_bytes(canonical), "validated_at": datetime.now(UTC).isoformat(),
             "schema_valid": not any(f.rule_id == "SCHEMA" for f in findings),
             "overall_status": overall, "findings": [asdict(f) for f in findings], "use_decisions": decisions,
         }

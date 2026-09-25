@@ -7,7 +7,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from bioevidence_validator.engine import RecordValidator, decide_uses, Finding
+from bioevidence_validator.engine import Finding, decide_uses
 
 ROOT = Path(__file__).resolve().parent
 QUALITY_CODES = {"BEV008", "BEV009", "BEV013"}

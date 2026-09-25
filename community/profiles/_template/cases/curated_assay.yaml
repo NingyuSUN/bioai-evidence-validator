@@ -1,0 +1,14 @@
+# A curator recorded the interaction from an assay table. Synthetic data only.
+profile: ppi-template
+uses: [pathway_draft]
+statement:
+  subject: {id: "SYN:PROTEIN_A", label: Synthetic protein A, type: protein}
+  predicate: physically_interacts_with
+  object: {id: "SYN:PROTEIN_B", label: Synthetic protein B, type: protein}
+  scope: ["taxon:synthetic"]
+sources:
+  - {id: study, title: Synthetic interaction study, type: publication, version: v1,
+     retrieved_at: "2026-09-25T00:00:00Z", file: synthetic_study.txt}
+evidence:
+  - {source: study, locator: Table 1, type: interaction_assay, method: manual_curation,
+     scope: ["taxon:synthetic"]}

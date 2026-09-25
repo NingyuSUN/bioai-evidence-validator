@@ -1,0 +1,2 @@
+Synthetic source for software testing only. Not real biological evidence.
+Table 1: Synthetic protein A co-purifies with synthetic protein B.

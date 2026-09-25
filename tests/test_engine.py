@@ -5,7 +5,8 @@ from pathlib import Path
 
 import pytest
 import yaml
-from bioevidence_validator.engine import RecordValidator, generate_json_schema, validate_record, profile_path
+
+from bioevidence_validator.engine import RecordValidator, generate_json_schema, profile_path, validate_record
 
 ROOT = Path(__file__).resolve().parents[1]
 
