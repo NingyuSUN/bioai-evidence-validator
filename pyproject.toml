@@ -85,5 +85,5 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 
 [[tool.mypy.overrides]]
-module = ["linkml.*"]
+module = ["linkml.*", "linkml_runtime.*"]
 ignore_missing_imports = true
