@@ -8,6 +8,8 @@
 - Add `community/profiles/`: contributed domain profiles whose example cases are built,
   validated and checked against expected outcomes in CI; `_template/` to copy.
 - Add a documentation site (MkDocs, strict link checking) published to GitHub Pages.
+- Add admitted and rejected `dataset-label` draft examples, covered by draft and
+  installed-wheel checks.
 - The canine 0.3 implementation is also preserved at the `canine-0.3` tag.
 - No change to validation behavior or report contents.
 

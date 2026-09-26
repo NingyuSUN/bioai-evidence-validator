@@ -70,7 +70,7 @@ jobs:
         id: drafts
         uses: ./
         with:
-          files: examples/drafts/*.yaml
+          files: examples/drafts/*claim.yaml
           profile: literature-claim
           format: draft
           fail-on: rejected
