@@ -47,6 +47,11 @@ version; UTC validation time; findings; and per-use reason codes. The timestamp 
 between runs. Hashes identify inputs/configuration; they do not sign records or prove
 that a source, source hash, label, or reviewer identity is authentic.
 
+ECO annotations are opt-in. `validate_record(..., annotate_eco=True)` and
+`bioevidence validate --annotate-eco` add `evidence_eco_annotations` to the report,
+derived from the packaged LinkML `ExtractionMethod` meanings. Without the option, the
+report shape is unchanged.
+
 Source artifacts require a declared version, retrieval time, and frozen hash. The optional
 observed hash is compared to that hash. Validation never retrieves source bytes or
 calculates their hashes. Only `build` hashes local files explicitly named in a draft; it

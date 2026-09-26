@@ -55,6 +55,12 @@ eco = {name: value.meaning for name, value in view.get_enum("ExtractionMethod").
 # {'deterministic_parser': 'ECO:0000313', 'manual_curation': 'ECO:0000352', ...}
 ```
 
+Validation reports expose this mapping only on request so the default report contract
+stays unchanged. `bioevidence validate ... --annotate-eco` (or
+`validate_record(record, annotate_eco=True)`) adds `evidence_eco_annotations`, with
+one entry per evidence item containing `evidence_item_id`, `extraction_method`, and
+`eco_curie`.
+
 ## The ClinVar case in VA-Spec terms
 
 In the [ClinVar case](../examples/clinvar_germline/README.md), each ClinVar submission (SCV)

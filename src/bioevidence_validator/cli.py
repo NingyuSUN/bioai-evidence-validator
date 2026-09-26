@@ -21,6 +21,11 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    validate.add_argument(
+        "--annotate-eco",
+        action="store_true",
+        help="Include extraction-method ECO CURIEs for evidence items in the report",
+    )
     build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
     build.add_argument("draft", type=Path)
     build.add_argument("--output", type=Path)
@@ -110,7 +115,12 @@ def _run(args) -> int:
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     _check_depth(record)
-    report = validate_record(record, schema_path=args.schema, profile=args.profile)
+    report = validate_record(
+        record,
+        schema_path=args.schema,
+        profile=args.profile,
+        annotate_eco=args.annotate_eco,
+    )
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)

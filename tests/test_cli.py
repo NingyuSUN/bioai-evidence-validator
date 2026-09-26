@@ -23,6 +23,36 @@ def test_cli_writes_audit_report(tmp_path):
     assert len(report["input_sha256"]) == 64
 
 
+def test_cli_eco_annotations_are_opt_in(tmp_path):
+    source = ROOT / "examples" / "general" / "curated_assertion.json"
+    plain_output = tmp_path / "plain.json"
+    annotated_output = tmp_path / "annotated.json"
+
+    assert main(["validate", str(source), "--output", str(plain_output)]) == 0
+    assert (
+        main(
+            [
+                "validate",
+                str(source),
+                "--annotate-eco",
+                "--output",
+                str(annotated_output),
+            ]
+        )
+        == 0
+    )
+
+    plain = json.loads(plain_output.read_text(encoding="utf-8"))
+    annotated = json.loads(annotated_output.read_text(encoding="utf-8"))
+    assert "evidence_eco_annotations" not in plain
+    assert annotated["evidence_eco_annotations"] == [
+        {
+            "evidence_item_id": "bioev:item-1",
+            "extraction_method": "manual_curation",
+            "eco_curie": "ECO:0000352",
+        }
+    ]
+
 def test_cli_exit_code_distinguishes_rejection(tmp_path):
     output = tmp_path / "report.json"
     code = main([
