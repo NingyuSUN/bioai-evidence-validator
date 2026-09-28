@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add `evaluation/clinvar_review/model_reviewers.py`: runs Claude Code, Codex and Antigravity (Gemini)
+  over the blinded review packet, one isolated session per case with tools disabled or detected,
+  and exports their labels as protocol annotations and predictions to compare with expert labels.
+
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
 - Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)

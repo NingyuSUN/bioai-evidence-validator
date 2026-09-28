@@ -113,6 +113,49 @@ Then commit `annotations.csv`, `adjudications.csv`, `agreement.json`, `score.jso
 `manifest.json` and the key into `evaluation/clinvar_review/results/`, and update the ClinVar
 case README, which currently states that no independent expert annotation exists.
 
+## Model reviewers (optional)
+
+The same packet can be given to LLMs, to measure which parts of expert review they could take
+over. `model_reviewers.py` drives three command-line agents: Claude Code (`claude`), Codex
+(`codex`) and Antigravity (`agy`, for Gemini). Each model gets exactly what a human reviewer
+gets: the rubric and one case under its code. It answers through a JSON schema.
+
+```bash
+# Where the CLIs are installed (e.g. WSL); reads only reviewer_packet/, never the key
+python3 evaluation/clinvar_review/model_reviewers.py run \
+  --packet artifacts/clinvar-review/reviewer_packet --output artifacts/clinvar-review/models \
+  --set calibration                     # start small; --limit N, --codes, --backends
+
+# Maintainer, with the key: protocol annotations + predictions for scoring
+uv run --frozen python evaluation/clinvar_review/model_reviewers.py export \
+  --output artifacts/clinvar-review/models --key artifacts/clinvar-review/maintainer/key.json
+uv run --frozen bioevidence review agreement artifacts/clinvar-review/models/model_annotations.csv
+```
+
+- **Isolation.** One case per call. Every call is a fresh, non-interactive session in an empty
+  temporary directory, so the model cannot read the key or other cases.
+- **No lookups.**
+  - Claude Code runs with every tool disabled.
+  - Codex runs without browser tools or your user config and MCP servers, in a read-only sandbox.
+  - Antigravity cannot switch off web search. Its tool calls are detected from the event stream.
+  - A case answered after a tool call is retried once. If a tool is used again, the case is kept
+    but marked `later_information_seen = yes`.
+- **Record.** `manifest.json` records model IDs, CLI versions and hashes of the rubric, prompt
+  and schema. `raw/` keeps every answer. `runs.csv` lists time, tokens and tool use per call.
+  Re-running resumes, so cases already answered are skipped.
+- **Cost, from a pilot run.** Per case: Claude Opus 5.5 took about 10 s and 7k input tokens;
+  GPT-6-Astra about 23 s and 24k; Gemini 3.1 Pro about 15 s and 7k. With the default two
+  concurrent calls per model, all 190 cases take roughly 40 minutes.
+- **Comparison.**
+  - `model_predictions.csv` can be passed to `bioevidence review score` in place of, or merged
+    with, `maintainer/predictions.csv`. Each model is then scored against the expert labels,
+    per subset.
+  - Agreement among the models alone shows how much they overlap. It is not a measure of
+    correctness.
+
+Model labels are **not independent human annotations**. Keep them in their own files, never in
+`annotations.csv`, and never use them to resolve an expert disagreement.
+
 ## Interpreting the result
 
 - With two independent reviewers and adjudication this is an **independently reviewed
