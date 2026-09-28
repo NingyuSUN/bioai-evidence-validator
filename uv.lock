@@ -209,6 +209,7 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "openpyxl" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "ruff" },
@@ -221,6 +222,7 @@ requires-dist = [
     { name = "jsonschema", specifier = ">=4.23,<5" },
     { name = "linkml", specifier = ">=1.8,<2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.3,<3" },
+    { name = "openpyxl", marker = "extra == 'dev'", specifier = ">=3.1,<4" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8,<9" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7,<8" },
     { name = "pyyaml", specifier = ">=6.0,<7" },
