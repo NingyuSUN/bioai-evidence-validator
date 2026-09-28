@@ -89,7 +89,7 @@ classifications (e.g. risk allele only) are reported but excluded from denominat
 Intervals are Wilson 95%. The sample strata are equal-sized, so pooled sample rates are not
 population rates; population rates come from all 218,920 variants.
 
-## Observed results (0.6.0)
+## Observed results (0.7.0)
 
 ![ClinVar benchmark: share of 2023 pathogenic classifications reclassified or conflicting by 2026, with and without a dissenting submission, and false admissions under controlled faults and the trust boundary](../../docs/assets/clinvar_germline_benchmark.svg)
 

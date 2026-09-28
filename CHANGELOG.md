@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — Quality checks, community, documentation site and expert review
+## 0.7.0 — Expert review, quality checks, community and documentation site
 
 - Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)
   implementing the gold-standard protocol: strict annotation checks, Krippendorff's α with
@@ -10,7 +10,6 @@
 - Add a blinded ClinVar expert-review kit (`evaluation/clinvar_review/`): all 95 variants where
   the validator and NCBI disagree plus 95 stratum-matched controls, an Excel workbook with
   dropdowns, a reviewer rubric, a private key, and an importer into the protocol format.
-
 - CI runs ruff and mypy, and enforces a 95% test-coverage minimum (currently 98%).
 - Add CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 2.1), SECURITY, issue forms and a
   pull request template.
@@ -18,7 +17,8 @@
   validated and checked against expected outcomes in CI; `_template/` to copy.
 - Add a documentation site (MkDocs, strict link checking) published to GitHub Pages.
 - The canine 0.3 implementation is also preserved at the `canine-0.3` tag.
-- No change to validation behavior or report contents.
+- No change to validation decisions or report format; both benchmarks reproduce 0.6.0 exactly
+  apart from `validator_version`.
 
 ## 0.6.0 — ClinVar case and standards alignment
 
