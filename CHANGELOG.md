@@ -8,6 +8,16 @@
   against the committed benchmark results.
 - The ClinVar case commits `results/faults.jsonl`, its per-case controlled-fault and
   trust-boundary outcomes.
+- Add source grounding (#19): optional grounders recompute from pinned source snapshots what a
+  record only asserts, with new rule codes BEV014–BEV018. `SnapshotStore` and the generic
+  `SourceBytesGrounder` live in `bioevidence_validator.grounding`; `bioevidence validate
+  --snapshot-dir` recomputes source hashes from local files. Reports without grounders are
+  unchanged.
+- The VBO and ClinVar cases add domain grounders and a fourth method, full validator plus
+  grounding. New trust-boundary controls: a real but wrong VBO target, an unpinned VBO source,
+  and ClinVar records that omit dissent. Trust-boundary false admissions fall from 48/48 to
+  0/48 (VBO) and 32/32 to 0/32 (ClinVar), with no change to any real-source decision.
+- Error taxonomy statuses are now judged with grounding: no failure mode is left exposed.
 
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 

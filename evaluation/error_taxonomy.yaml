@@ -19,10 +19,12 @@ layers:
   attestation: Signed statements from a trusted pipeline about how evidence was produced.
   process: Study design (blinding, pre-registration) rather than a runtime check.
 
+# Statuses are judged on the validator with grounding (checks recomputed from pinned source snapshots);
+# the rendered page also shows what the rules alone admit.
 statuses:
-  caught: Every controlled case of this failure is refused or sent to review by the full validator.
+  caught: Every controlled case of this failure is refused or sent to review by the validator with grounding.
   partial: Controlled or tested forms are caught; a described form is not yet covered.
-  exposed: Controlled cases show it is NOT caught today; a measured trust-boundary gap.
+  exposed: Controlled cases show it is NOT caught today, even with grounding; a measured trust-boundary gap.
   uncovered: No negative control yet; the planned work will add one.
 
 failure_modes:
@@ -32,10 +34,12 @@ failure_modes:
     definition: The record cites an identifier (ontology term, accession, PMID, DOI) that does not exist in the source.
     example: A dog-name mapping whose target VBO term does not exist in the pinned release.
     catch_layers: [grounding]
-    status: exposed
-    rule_codes: []
+    status: partial
+    rule_codes: [BEV016]
     negative_controls: [vbo:falsified_target]
-    planned: ["#19", "#20"]
+    note: Grounding checks identifiers against pinned snapshots (VBO terms; ClinVar variants and submissions, where an invented submission is also rejected).
+    uncovered_form: Literature identifiers (PMID, DOI) have no pinned snapshot or grounder yet.
+    planned: ["#20"]
 
   - id: SRC-2
     name: Misattributed source
@@ -65,11 +69,11 @@ failure_modes:
     definition: The bytes used differ from the frozen snapshot the record names.
     example: An observed source hash that differs from the record's frozen hash.
     catch_layers: [deterministic, grounding]
-    status: partial
-    rule_codes: [BEV002]
-    negative_controls: [vbo:source_hash_mismatch, clinvar:source_hash_mismatch]
-    uncovered_form: The engine compares supplied hashes; a record supplying a matching but false observed hash is not caught until hashes are recomputed from the snapshot.
-    planned: ["#19"]
+    status: caught
+    rule_codes: [BEV002, BEV014, BEV015]
+    negative_controls: [vbo:source_hash_mismatch, clinvar:source_hash_mismatch, vbo:unpinned_source]
+    note: The engine compares the hashes a record supplies (BEV002). Grounding recomputes them from the snapshot store, so consistent but false hashes are caught too; bytes that are missing go to review (BEV015) and bytes that differ are rejected (BEV014).
+    planned: []
 
   - id: EXT-1
     name: Fabricated or altered quote
@@ -123,9 +127,10 @@ failure_modes:
     example: An ambiguous dog name mapped to one of two VBO terms without uniqueness evidence.
     catch_layers: [deterministic, grounding]
     status: partial
-    rule_codes: [BEV007]
-    negative_controls: [vbo:missing_uniqueness]
-    uncovered_form: A wrong identifier that exists and looks unique is not caught without checking the source text for the entity (e.g. normalized mentions).
+    rule_codes: [BEV007, BEV017]
+    negative_controls: [vbo:missing_uniqueness, vbo:wrong_existing_target]
+    note: For exact-name mappings, grounding recomputes the candidates from the pinned ontology, so a real but wrong target is rejected.
+    uncovered_form: An entity resolved from free text needs the source passage to check the mention against.
     planned: ["#20", "#21"]
 
   - id: EXT-6
@@ -172,10 +177,12 @@ failure_modes:
     definition: The record claims an expert or human review that did not happen, or relabels weak evidence as reviewed.
     example: No-criteria ClinVar submissions relabelled as criteria-based, with an invented expert-panel review.
     catch_layers: [grounding, attestation]
-    status: exposed
-    rule_codes: []
+    status: partial
+    rule_codes: [BEV017]
     negative_controls: [clinvar:fabricated_expert_review]
-    planned: ["#19"]
+    note: Grounding rebuilds review tiers from the pinned ClinVar sample, so relabelled submissions and invented expert reviews are rejected.
+    uncovered_form: A review claimed outside any pinned source (e.g. a curator's own sign-off) can only be checked by a signed attestation.
+    planned: ["future: signed pipeline attestations"]
 
   - id: PRV-4
     name: Broken record integrity
@@ -206,11 +213,12 @@ failure_modes:
     definition: Contradicting evidence that exists in the source is left out of the record entirely.
     example: An importer or agent that drops the one submission disagreeing with the rest.
     catch_layers: [grounding]
-    status: uncovered
-    rule_codes: []
-    negative_controls: []
-    note: The engine can only act on dissent it is shown; completeness must be checked against the source.
-    planned: ["#19"]
+    status: partial
+    rule_codes: [BEV018]
+    negative_controls: [clinvar:omitted_dissent]
+    note: The engine can only act on dissent it is shown. Grounding lists every submission for the variant in the pinned sample and sends a record that leaves one out to review.
+    uncovered_form: Completeness is checked only where a grounder can enumerate the source (structured registries); dissent omitted from free text is not.
+    planned: ["#20"]
 
   - id: AGG-3
     name: Withdrawn statement reused

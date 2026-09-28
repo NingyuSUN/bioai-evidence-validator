@@ -27,6 +27,18 @@
           "review_required": 80
         }
       },
+      "grounded": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 160,
+        "false_admissions": 0,
+        "false_blocks": 0,
+        "n": 160,
+        "review": 64,
+        "status_counts": {
+          "rejected": 96,
+          "review_required": 64
+        }
+      },
       "schema_only": {
         "expected_admitted": 0,
         "expected_non_admitted": 160,
@@ -42,38 +54,58 @@
     "trust_boundary": {
       "aggregate_quality": {
         "expected_admitted": 0,
-        "expected_non_admitted": 16,
-        "false_admissions": 16,
+        "expected_non_admitted": 32,
+        "false_admissions": 32,
         "false_blocks": 0,
-        "n": 16,
+        "n": 32,
         "review": 0,
         "status_counts": {
-          "admitted": 16
+          "admitted": 32
         }
       },
       "full": {
         "expected_admitted": 0,
-        "expected_non_admitted": 16,
-        "false_admissions": 16,
+        "expected_non_admitted": 32,
+        "false_admissions": 32,
         "false_blocks": 0,
-        "n": 16,
+        "n": 32,
         "review": 0,
         "status_counts": {
-          "admitted": 16
+          "admitted": 32
+        }
+      },
+      "grounded": {
+        "expected_admitted": 0,
+        "expected_non_admitted": 32,
+        "false_admissions": 0,
+        "false_blocks": 0,
+        "n": 32,
+        "review": 16,
+        "status_counts": {
+          "rejected": 16,
+          "review_required": 16
         }
       },
       "schema_only": {
         "expected_admitted": 0,
-        "expected_non_admitted": 16,
-        "false_admissions": 16,
+        "expected_non_admitted": 32,
+        "false_admissions": 32,
         "false_blocks": 0,
-        "n": 16,
+        "n": 32,
         "review": 0,
         "status_counts": {
-          "admitted": 16
+          "admitted": 32
         }
       }
     }
+  },
+  "grounding": {
+    "grounders": [
+      "source-bytes",
+      "clinvar-snapshot"
+    ],
+    "real_source_decisions_changed": 0,
+    "real_source_variants": 5026
   },
   "label_origin": "Policy reproduction compares with NCBI's own 2023-09 aggregate review status; stability uses NCBI's 2026-09 aggregate classification; faults are authored specifications. No independent human annotation.",
   "limitation": "Stability is not correctness, and ClinVar's own review tiers influence later submissions. Strata are equal-sized, so pooled sample rates are not population rates. Observational; not for clinical use.",
@@ -550,6 +582,24 @@
     "no_criteria": 1000,
     "practice_guideline": 26,
     "single_submitter": 1000
+  },
+  "trust_boundary_admitted": {
+    "fabricated_expert_review": {
+      "aggregate_quality": 16,
+      "expected_status": "rejected",
+      "full": 16,
+      "grounded": 0,
+      "n": 16,
+      "schema_only": 16
+    },
+    "omitted_dissent": {
+      "aggregate_quality": 16,
+      "expected_status": "review_required",
+      "full": 16,
+      "grounded": 0,
+      "n": 16,
+      "schema_only": 16
+    }
   },
   "validator_version": "0.7.0",
   "variants": 5026

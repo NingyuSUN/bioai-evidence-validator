@@ -13,7 +13,9 @@ spec.loader.exec_module(render)
 TAX = render.load_taxonomy()
 MODES = TAX["failure_modes"]
 STATS = render.control_results()
-TRUST_BOUNDARY = {"vbo:falsified_target", "clinvar:fabricated_expert_review"}
+# Controls only grounding can catch; they are run outside FAULTS, as their own benchmark cohort.
+TRUST_BOUNDARY = {"vbo:falsified_target", "vbo:wrong_existing_target", "vbo:unpinned_source",
+                  "clinvar:fabricated_expert_review", "clinvar:omitted_dissent"}
 
 
 def pipeline_faults(case, folder, module):
@@ -49,7 +51,7 @@ def test_every_benchmark_fault_is_mapped_exactly_once():
 @pytest.mark.parametrize("mode", MODES, ids=lambda m: m["id"])
 def test_status_agrees_with_committed_results(mode):
     controls = mode["negative_controls"]
-    admitted = {c: STATS[c]["full"] for c in controls}
+    admitted = {c: STATS[c]["grounded"] for c in controls}
     if mode["status"] == "caught":
         assert controls and not any(admitted.values()), admitted
     elif mode["status"] == "partial":

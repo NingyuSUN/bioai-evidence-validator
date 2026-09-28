@@ -7,10 +7,11 @@ import hashlib
 import importlib.util
 import json
 import math
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from bioevidence_validator.engine import Finding, decide_uses
+from bioevidence_validator.grounding import finding
 
 ROOT = Path(__file__).resolve().parent
 # Load the sibling module by path: another example also has a prepare_source.py.
@@ -29,6 +30,8 @@ EVIDENCE_TYPE = {  # per-submission review status -> evidence type; unknown stat
     "no assertion provided": "record_without_classification",
 }
 EXPERT_STATUSES = {"reviewed by expert panel", "practice guideline"}
+SUBMISSION_TYPES = set(EVIDENCE_TYPE.values())
+DERIVED_TYPES = {"multi_submitter_or_expert_review", "expert_review"}
 # Minimum aggregate star level NCBI assigned in 2023-09 for each use to count as admitted.
 STARS = {"no_criteria": 0, "single_submitter": 1, "multiple_submitters": 2, "expert_panel": 3, "practice_guideline": 4}
 USE_MIN_STARS = {"research_summary": 1, "clinical_reference": 2, "expert_reference": 3}
@@ -170,6 +173,13 @@ def perturb(record: dict, kind: str) -> dict:
         record["statement"]["evidence_lines"].append({"id": "bioev:synthetic-dissent-line", "direction": "contradicts",
                                                       "evidence_item_ids": [dissent["id"]]})
     elif kind == "withdrawn_statement": record["statement"]["statement_status"] = "superseded"
+    elif kind == "omitted_dissent":
+        # Beyond the trust boundary: the record stays consistent, but the submissions that disagree are gone.
+        dropped = {i for line in record["statement"]["evidence_lines"] if line["direction"] == "contradicts"
+                   for i in line["evidence_item_ids"]}
+        record["evidence_items"] = [i for i in items if i["id"] not in dropped]
+        record["statement"]["evidence_lines"] = [line for line in record["statement"]["evidence_lines"]
+                                                 if line["direction"] != "contradicts"]
     elif kind == "fabricated_expert_review":
         # Deliberately beyond the generic validator's trust boundary: an importer that mislabels
         # uncurated submissions and invents an expert review is not detectable from the record alone.
@@ -180,6 +190,73 @@ def perturb(record: dict, kind: str) -> dict:
     else:
         raise ValueError(f"Unknown perturbation: {kind}")
     return record
+
+
+class ClinVarGrounder:
+    """Rebuild a variant's evidence from the pinned ClinVar sample and compare the record with it, item by item.
+
+    Extraction methods are not compared: they describe how the record was made, not what the source says.
+    """
+
+    name = "clinvar-snapshot"
+
+    def __init__(self, source: ClinVarSample):
+        self.source = source
+        self.cases = {case["variation_id"]: case for case in source.cases}
+
+    def check(self, record: dict) -> list:
+        ours = {a["id"] for a in record["source_artifacts"] if a["sha256"] == self.source.manifest["projection_sha256"]}
+        if not ours:
+            return []  # the record cites no ClinVar sample; other grounders may apply
+        subject = record["statement"]["subject"]["id"]
+        case = self.cases.get(subject.removeprefix("clinvar:")) if subject.startswith("clinvar:") else None
+        if case is None:
+            return [finding(record, "BEV016", "The variant is not in the pinned ClinVar sample.", "$.statement.subject.id")]
+        rebuilt = self.source.record(case)["evidence_items"]
+        submissions = {i["locator"]: i for i in rebuilt if i["evidence_type"] in SUBMISSION_TYPES}
+        derived = {i["evidence_type"]: i for i in rebuilt if i["evidence_type"] in DERIVED_TYPES}
+        directions = defaultdict(set)
+        for line in record["statement"]["evidence_lines"]:
+            for item_id in line["evidence_item_ids"]:
+                directions[item_id].add(line["direction"])
+        out, cited = [], set()
+        for index, item in enumerate(record["evidence_items"]):
+            if item["source_artifact_id"] not in ours:
+                continue
+            path, kind = f"$.evidence_items[{index}]", item["evidence_type"]
+            if kind in DERIVED_TYPES:
+                want = derived.get(kind)
+                if want is None:
+                    out.append(finding(record, "BEV017", f"The source submissions do not support {kind} for this variant.", path))
+                elif (item["locator"], item["extracted_text"]) != (want["locator"], want["extracted_text"]):
+                    out.append(finding(record, "BEV017", "The derived evidence differs from the aggregate recomputed from "
+                                                          "the source.", path))
+            elif kind in SUBMISSION_TYPES:
+                want = submissions.get(item["locator"])
+                if want is None:
+                    out.append(finding(record, "BEV016", "The cited submission does not exist for this variant in the source.",
+                                       path))
+                    continue
+                cited.add(item["locator"])
+                text = json.loads(want["extracted_text"])
+                if (kind != want["evidence_type"] or parsed(item.get("extracted_text")) != text
+                        or set(item["scope"]) != set(want["scope"])
+                        or directions[item["id"]] - {direction(text["classification"])}):
+                    out.append(finding(record, "BEV017", "The submission differs from the source (review status, content, "
+                                                          "scope or direction).", path))
+            else:
+                out.append(finding(record, "BEV015", "The ClinVar source cannot confirm this type of evidence item.", path))
+        for locator in sorted(set(submissions) - cited):
+            out.append(finding(record, "BEV018", f"The source holds a submission the record leaves out ({locator}).",
+                               "$.evidence_items"))
+        return out
+
+
+def parsed(text: str | None):
+    try:
+        return json.loads(text or "null")
+    except json.JSONDecodeError:
+        return None
 
 
 def aggregate_quality_ablation(record: dict, report: dict) -> str:

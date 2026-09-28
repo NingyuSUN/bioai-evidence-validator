@@ -30,9 +30,11 @@ What the benchmarks already show:
 
 - **Schema checks are not validation.** On both real-data cases, schema-only checking admitted
   160/160 injected faults; the full validator admitted 0/160.
-- **The trust boundary is real and measured.** The engine trusts supplied metadata. It admitted
-  16/16 records pointing to a non-existent ontology term, and 16/16 records with a fabricated
-  expert review.
+- **The trust boundary is real, measured, and now reduced.** The rules trust supplied metadata:
+  they admitted 16/16 records pointing to a non-existent ontology term, and 16/16 records with
+  a fabricated expert review. Source grounding (#19) recomputes such claims from the pinned
+  snapshots and admits none of the 80 trust-boundary forgeries in the two benchmarks, without
+  changing any real-source decision.
 
 ## The chain
 
@@ -45,10 +47,10 @@ source → structured extraction → provenance → deterministic validation
 |---|---|---|---|---|
 | Source | Which exact bytes is the evidence taken from? | Frozen, hash-pinned snapshots with rebuild scripts (VBO, ClinVar) | Literature sources | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
 | Structured extraction | Did the AI turn the source into the right claim? | Draft format and per-profile JSON Schema for LLM output | **Never run with real models on real text**; extraction methods in the benchmarks are simulated | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
-| Provenance | Can each item be traced to its source and method? | Source artifacts, locators, methods; PROV/ECO/VA-Spec mapping | Methods are self-declared | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19) |
+| Provenance | Can each item be traced to its source and method? | Source artifacts, locators, methods; PROV/ECO/VA-Spec mapping; locators and review tiers recomputed from pinned snapshots | Methods are self-declared | Signed attestations (future) |
 | Deterministic validation | Is the evidence sufficient for this use, by fixed rules? | Engine, profiles, per-type quality gates, audit reports | — | — |
 | Model/agent evaluation | What can model review replace, and where does it fail? | Blinded model-review runner (#17), pilot on 20 cases | No reference labels yet; error correlation unmeasured | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
-| Trust boundary | What does the system still take on faith? | Measured in both benchmarks (16/16 admitted) | **Not yet reduced** | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19), [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
+| Trust boundary | What does the system still take on faith? | Measured in both benchmarks; source grounding recomputes identifiers, review tiers and completeness from pinned snapshots (80/80 forgeries admitted by the rules alone, 0/80 with grounding) | Literature sources | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
 | Human review | What do experts conclude, and how reliably? | Protocol, `bioevidence review` tooling, blinded ClinVar kit | **No expert labels yet** | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) |
 
 ## How the work will be evaluated
@@ -74,7 +76,7 @@ source → structured extraction → provenance → deterministic validation
 | Order | Issue | Workstream | Depends on |
 |---|---|---|---|
 | Now | [#18](https://github.com/NingyuSUN/bioai-evidence-validator/issues/18) | Error taxonomy and coverage matrix | — |
-| Now | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19) | Source grounding, phase 1: recompute what the pinned snapshot can prove | — |
+| Done | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19) | Source grounding, phase 1: recompute what the pinned snapshot can prove | — |
 | Now | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) | Expert review of the ClinVar packet (runs in parallel; experts' time) | — |
 | Next | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) | Source grounding, phase 2: verify cited literature and quotes | #19 |
 | Next | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources | #18, #20 |

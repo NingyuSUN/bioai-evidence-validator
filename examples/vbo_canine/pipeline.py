@@ -8,6 +8,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from bioevidence_validator.engine import Finding, decide_uses
+from bioevidence_validator.grounding import finding
 
 ROOT = Path(__file__).resolve().parent
 QUALITY_CODES = {"BEV008", "BEV009", "BEV013"}
@@ -101,7 +102,7 @@ FAULTS = {
 }
 
 
-def perturb(record: dict, kind: str) -> dict:
+def perturb(record: dict, kind: str, source: DogNames | None = None) -> dict:
     record = copy.deepcopy(record)
     record["record_id"] += ":" + kind
     term, resolution = record["evidence_items"][:2]
@@ -124,8 +125,69 @@ def perturb(record: dict, kind: str) -> dict:
     elif kind == "falsified_target":
         # Deliberately beyond the generic validator's supplied-metadata trust boundary.
         record["statement"]["object"] = {"id":"VBO:NOT_A_REAL_TERM","label":"Synthetic nonexistent target","entity_type":"ontology_term"}
+    elif kind == "unpinned_source":
+        # Consistent hashes naming bytes other than the pinned snapshot, e.g. an edited or newer release.
+        forged = digest(b"edited:" + record["source_artifacts"][0]["sha256"].encode())
+        record["source_artifacts"][0].update(sha256=forged, observed_sha256=forged, uri="urn:sha256:" + forged)
+    elif kind == "wrong_existing_target":
+        # A real, unique-looking term that is not a match for the name; the record stays internally consistent.
+        query = record["statement"]["subject"]["label"]
+        wrong = next(t for i, t in sorted(source.terms.items()) if i not in source.candidates(query))
+        record["statement"]["object"] = {"id": wrong["id"], "label": wrong["name"], "entity_type": "ontology_term"}
+        term.update(locator=f"term:{wrong['id']};upstream-line:{wrong['upstream_line']}",
+                    extracted_text=json.dumps({"query": query, "id": wrong["id"], "name": wrong["name"]}, ensure_ascii=False))
     else: raise ValueError(f"Unknown perturbation: {kind}")
     return record
+
+
+class VboGrounder:
+    """Recompute from the pinned VBO projection what a dog-name mapping record asserts about it."""
+
+    name = "vbo-snapshot"
+
+    def __init__(self, source: DogNames):
+        self.source = source
+
+    def check(self, record: dict) -> list:
+        sha = self.source.manifest["projection_sha256"]
+        ours = {a["id"] for a in record["source_artifacts"] if a["sha256"] == sha}
+        if not ours:
+            return []  # the record cites no VBO projection; other grounders may apply
+        out = []
+        target, query = record["statement"]["object"], record["statement"]["subject"]["label"]
+        candidates, term = self.source.candidates(query), self.source.terms.get(target["id"])
+        if term is None:
+            out.append(finding(record, "BEV016", "The target term does not exist in the pinned VBO release.",
+                               "$.statement.object.id"))
+        elif target["id"] not in candidates:
+            out.append(finding(record, "BEV017", "The target term is not a name or exact-synonym match for the source name.",
+                               "$.statement.object.id"))
+        elif target["label"] != term["name"]:
+            out.append(finding(record, "BEV017", "The target label differs from the VBO term name.", "$.statement.object.label"))
+        for index, item in enumerate(record["evidence_items"]):
+            if item["source_artifact_id"] not in ours:
+                continue
+            path = f"$.evidence_items[{index}]"
+            try:
+                text = json.loads(item.get("extracted_text") or "null")
+            except json.JSONDecodeError:
+                text = None
+            text = text if isinstance(text, dict) else {}
+            if item["evidence_type"] == "ontology_name_assertion":
+                cited = self.source.terms.get(text.get("id"))
+                if cited is None:
+                    out.append(finding(record, "BEV016", "The asserted term does not exist in the pinned VBO release.", path))
+                elif (text.get("name") != cited["name"] or text.get("id") != target["id"] or text.get("query") != query
+                      or item["locator"] != f"term:{cited['id']};upstream-line:{cited['upstream_line']}"):
+                    out.append(finding(record, "BEV017", "The term assertion does not match the source term or the statement.", path))
+            elif item["evidence_type"] in ("unique_label_resolution", "ambiguous_label_resolution"):
+                expected = "unique_label_resolution" if len(candidates) == 1 else "ambiguous_label_resolution"
+                if text.get("candidate_ids") != candidates or item["evidence_type"] != expected:
+                    out.append(finding(record, "BEV017", "The candidate resolution differs from the name index recomputed "
+                                                          "from the source.", path))
+            else:
+                out.append(finding(record, "BEV015", "The VBO source cannot confirm this type of evidence item.", path))
+        return out
 
 
 def aggregate_quality_ablation(record: dict, report: dict) -> str:

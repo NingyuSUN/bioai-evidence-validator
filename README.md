@@ -240,7 +240,12 @@ ClinVar-style profile, and checks what happened to them by 2026-09.
   decisions; every disagreement is listed with its cause.
 - **Where the validator is stricter, classifications were less stable.** It sends any P/LP
   variant with a dissenting submission to review, even when ClinVar's aggregate does not.
-  Across all 218,920 germline P/LP variants, the share later reclassified or put in conflict:
+  Across all 218,920 germline P/LP variants, the share later reclassified or put in conflict
+  is in the table below.
+- **Source grounding closes the trust boundary.** The rules alone admit all 32 records that
+  carry a fabricated expert review or leave out a dissenting submission. Rebuilding each
+  record's evidence from the pinned sample admits none, and changes none of the 5,026
+  real-source decisions.
 
 | 2023-09 ClinVar review status | No dissenting submission | With one (validator: review) |
 |---|---:|---:|
@@ -258,19 +263,20 @@ uv run python examples/clinvar_germline/run.py --output artifacts/clinvar
 ### VBO canine name mapping
 
 [VBO canine name mapping](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/README.md) uses a frozen public ontology:
-72 real-name cases, 160 controlled errors, and 16 separately reported trust-boundary
-cases. It compares schema-only checks, the previous aggregate quality gate, and
-per-required-evidence-type validation. Source-derived labels are not expert annotations.
+72 real-name cases, 160 controlled errors, and 48 separately reported trust-boundary
+cases. It compares schema-only checks, the previous aggregate quality gate,
+per-required-evidence-type validation, and the same with source grounding. Source-derived
+labels are not expert annotations.
 
 ```bash
 uv run python examples/vbo_canine/run.py --output artifacts/vbo-canine
 ```
 
-#### Benchmark results (v0.4.1)
+#### Benchmark results
 
-![VBO canine benchmark comparing false admissions across three validation methods](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/vbo_canine_benchmark.svg)
+![VBO canine benchmark comparing false admissions across four validation methods](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/vbo_canine_benchmark.svg)
 
-On 72 real-source name mappings, the full validator admitted all 48 unambiguous cases and blocked automatic admission of all 24 ambiguous names (0/48 false blocks; 0/24 false admissions). Across 160 deliberately injected faults, false admissions were 160/160 for schema-only, 64/160 for the aggregate-quality ablation, and 0/160 for the full validator; the full validator sent 80 cases to review and rejected 80. All three methods admitted 16/16 falsified-target trust-boundary cases, showing the need for trustworthy source ingestion and supplied metadata.
+On 72 real-source name mappings, the full validator admitted all 48 unambiguous cases and blocked automatic admission of all 24 ambiguous names (0/48 false blocks; 0/24 false admissions). Across 160 deliberately injected faults, false admissions were 160/160 for schema-only, 64/160 for the aggregate-quality ablation, and 0/160 for the full validator; the full validator sent 80 cases to review and rejected 80. Without grounding, every method admitted all 48 trust-boundary forgeries (a non-existent target, a real but wrong target, a source that is not the pinned one). With [source grounding](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md#source-grounding), which recomputes these claims from the pinned ontology, none were admitted and no real-source decision changed.
 
 **Interpretation limits:** Reference labels are derived from the pinned VBO source and authored fault specifications, not independent expert annotations. The 160 mutations share 16 seed cases and are correlated. This benchmark tests the mapping contract and controlled fault detection; it does not estimate biological accuracy or production error rates. See the [protocol and full results](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/README.md) and [machine-readable summary](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/vbo_canine/results/summary.json).
 
@@ -279,8 +285,8 @@ On 72 real-source name mappings, the full validator admitted all 48 unambiguous 
 The VBO and ClinVar cases use attributed public data; other fixtures are synthetic.
 Admission means **the supplied record meets the selected
 profile**, not that a biological claim is true. The toolkit does not retrieve papers,
-verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; the VBO and ClinVar importers also hash their local source
-projections. External source truth and cohort independence require upstream verification.
+verify reviewer identities, train models, or measure prediction accuracy. The generic core compares supplied hashes; given local snapshots (`--snapshot-dir`) it recomputes them, and the VBO and
+ClinVar grounders also recompute each record's evidence from their pinned projections. External source truth and cohort independence require upstream verification.
 Neither benchmark has independent expert annotation yet; a blinded [expert-review kit](https://github.com/NingyuSUN/bioai-evidence-validator/tree/main/evaluation/clinvar_review) for the ClinVar case is ready for reviewers.
 
 ## Versions and branches
