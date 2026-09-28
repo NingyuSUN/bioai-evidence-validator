@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add the AI validation roadmap (`docs/AI_VALIDATION_ROADMAP.md`, tracked in #26).
+- Add an error taxonomy of 20 failure modes (`evaluation/error_taxonomy.yaml`, rendered to
+  `docs/ERROR_TAXONOMY.md`): each with its expected catching layer and a status checked
+  against the committed benchmark results.
+- The ClinVar case commits `results/faults.jsonl`, its per-case controlled-fault and
+  trust-boundary outcomes.
+
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
 - Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)

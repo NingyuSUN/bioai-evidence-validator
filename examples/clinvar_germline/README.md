@@ -18,8 +18,9 @@ uv run python examples/clinvar_germline/run.py --output artifacts/clinvar
 
 Runtime needs only the frozen 361 KB sample in `sources/`; its decompressed content hash is
 checked before ingestion. Two runs produce byte-identical outputs. Committed
-[results](results/summary.md) include `summary.json`, `summary.md` and `divergences.csv`
-(every case where the validator and NCBI disagree).
+[results](results/summary.md) include `summary.json`, `summary.md`, `divergences.csv`
+(every case where the validator and NCBI disagree) and `faults.jsonl` (every controlled-fault
+and trust-boundary case, used by the [error taxonomy](../../docs/ERROR_TAXONOMY.md)).
 
 ## Source and selection
 
