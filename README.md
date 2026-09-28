@@ -153,7 +153,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: NingyuSUN/bioai-evidence-validator@v0.5.0
+      - uses: NingyuSUN/bioai-evidence-validator@v0.7.0
         with:
           files: records/**/*.yaml        # whitespace-separated globs
           format: draft                   # or: record (default)
@@ -284,7 +284,7 @@ Neither benchmark has independent expert annotation yet; a blinded [expert-revie
 
 ## Versions and branches
 
-`main` is the domain-neutral framework (0.6.0). The complete canine implementation
+`main` is the domain-neutral framework (0.7.0). The complete canine implementation
 and SQLite adapter from 0.3 are preserved at the
 [`canine-0.3` tag](https://github.com/NingyuSUN/bioai-evidence-validator/tree/canine-0.3)
 (also the `canine-breed` branch);

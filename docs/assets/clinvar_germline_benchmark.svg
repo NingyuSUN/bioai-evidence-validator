@@ -3929,7 +3929,7 @@ z
    </g>
   </g>
   <g id="text_51">
-   <!-- Source: NingyuSUN/bioai-evidence-validator v0.6.0 · ClinVar 2023-09 and 2026-09 releases (NCBI) · examples/clinvar_germline/results/summary.json -->
+   <!-- Source: NingyuSUN/bioai-evidence-validator v0.7.0 · ClinVar 2023-09 and 2026-09 releases (NCBI) · examples/clinvar_germline/results/summary.json -->
    <g style="fill: #687b89" transform="translate(19.584 414.18) scale(0.075 -0.075)">
     <defs>
      <path id="DejaVuSans-42" d="M 3263 -1063 
@@ -3986,7 +3986,7 @@ z
     <use xlink:href="#DejaVuSans-59" transform="translate(2244.59375 0)"/>
     <use xlink:href="#DejaVuSans-13" transform="translate(2303.78125 0)"/>
     <use xlink:href="#DejaVuSans-11" transform="translate(2367.40625 0)"/>
-    <use xlink:href="#DejaVuSans-19" transform="translate(2399.1875 0)"/>
+    <use xlink:href="#DejaVuSans-1a" transform="translate(2399.1875 0)"/>
     <use xlink:href="#DejaVuSans-11" transform="translate(2462.8125 0)"/>
     <use xlink:href="#DejaVuSans-13" transform="translate(2494.59375 0)"/>
     <use xlink:href="#DejaVuSans-3" transform="translate(2558.21875 0)"/>
