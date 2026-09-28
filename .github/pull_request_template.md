@@ -14,5 +14,5 @@
 
 - [ ] `uv run --frozen ruff check .`, `uv run --frozen mypy` and `uv run --frozen pytest --cov` pass
 - [ ] Committed benchmark results regenerated if report contents changed
-- [ ] `CHANGELOG.md` updated if users will notice
+- [ ] A line under `## Unreleased` in `CHANGELOG.md` if users will notice
 - [ ] New third-party data has its license, attribution and exact version recorded

@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
 - Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)

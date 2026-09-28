@@ -65,12 +65,14 @@ checked by the test suite. Copy `community/profiles/_template/` to get started.
 ## Pull requests
 
 - Keep each pull request to one purpose; link the issue it resolves.
-- Update `CHANGELOG.md` under a new heading if users will notice the change.
+- If users will notice the change, add a line under `## Unreleased` at the top of
+  `CHANGELOG.md`. Never edit a released version's section.
 - New third-party data needs its license, attribution and exact source version recorded,
   as in `examples/*/sources/README.md`.
 
 ## Releases
 
 Maintainers release by bumping the version in `pyproject.toml` and
-`src/bioevidence_validator/__init__.py`, adding a `CHANGELOG.md` section, and pushing a
+`src/bioevidence_validator/__init__.py`, renaming `## Unreleased` in `CHANGELOG.md` to
+`## X.Y.Z — title` with a fresh, empty `## Unreleased` above it, and pushing a
 `vX.Y.Z` tag. The release workflow tests, publishes to PyPI and creates the GitHub release.
