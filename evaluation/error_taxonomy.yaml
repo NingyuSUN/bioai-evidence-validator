@@ -34,12 +34,11 @@ failure_modes:
     definition: The record cites an identifier (ontology term, accession, PMID, DOI) that does not exist in the source.
     example: A dog-name mapping whose target VBO term does not exist in the pinned release.
     catch_layers: [grounding]
-    status: partial
+    status: caught
     rule_codes: [BEV016]
-    negative_controls: [vbo:falsified_target]
-    note: Grounding checks identifiers against pinned snapshots (VBO terms; ClinVar variants and submissions, where an invented submission is also rejected).
-    uncovered_form: Literature identifiers (PMID, DOI) have no pinned snapshot or grounder yet.
-    planned: ["#20"]
+    negative_controls: [vbo:falsified_target, civic:fabricated_identifier]
+    note: Grounding checks identifiers against pinned snapshots (VBO terms; ClinVar variants and submissions; PMIDs, PMCIDs and DOIs resolved by `bioevidence ground`).
+    planned: []
 
   - id: SRC-2
     name: Misattributed source
@@ -47,10 +46,11 @@ failure_modes:
     definition: A real identifier is cited, but the claim or quote comes from a different source.
     example: A correct PMID for an unrelated paper attached to a gene–disease claim.
     catch_layers: [grounding]
-    status: uncovered
-    rule_codes: []
-    negative_controls: []
-    planned: ["#20"]
+    status: caught
+    rule_codes: [BEV017]
+    negative_controls: [civic:real_identifier_wrong_paper]
+    note: The literature grounder compares the record's title and quotes with the pinned paper the identifier resolves to. A paper without open full text cannot be checked and goes to review (BEV015).
+    planned: []
 
   - id: SRC-3
     name: Retracted or superseded source
@@ -58,10 +58,12 @@ failure_modes:
     definition: The cited source has been retracted, corrected or replaced by a newer version.
     example: A claim resting on a paper retracted after the extraction was made.
     catch_layers: [grounding]
-    status: uncovered
-    rule_codes: []
-    negative_controls: []
-    planned: ["#20"]
+    status: partial
+    rule_codes: [BEV019]
+    negative_controls: [civic:retracted_source]
+    note: Retraction as recorded by PubMed, Europe PMC or Crossref when the paper was grounded.
+    uncovered_form: A retraction published after grounding is seen only when the source is grounded again (`bioevidence ground --refresh`).
+    planned: ["#25"]
 
   - id: SRC-4
     name: Source bytes changed
@@ -81,10 +83,11 @@ failure_modes:
     definition: The extracted text does not appear in the source, or was reworded so its meaning changed.
     example: A quote that reads "strongly associated" where the source says "may be associated".
     catch_layers: [grounding]
-    status: uncovered
-    rule_codes: []
-    negative_controls: []
-    planned: ["#20"]
+    status: caught
+    rule_codes: [BEV017]
+    negative_controls: [civic:altered_quote]
+    note: Quotes must appear verbatim (after Unicode, quote-mark, dash and whitespace normalisation) in the pinned full text, at the named paragraph.
+    planned: []
 
   - id: EXT-2
     name: Polarity error
@@ -92,10 +95,11 @@ failure_modes:
     definition: A negative or contradicting finding is extracted as supporting.
     example: '"No association was observed between X and Y" extracted as X associated_with Y.'
     catch_layers: [grounding, model_review, human_review]
-    status: uncovered
-    rule_codes: []
-    negative_controls: []
-    planned: ["#20", "#21"]
+    status: partial
+    rule_codes: [BEV017]
+    negative_controls: [civic:negation_flip]
+    uncovered_form: A verbatim quote read with the wrong polarity passes grounding; only semantic review can catch it.
+    planned: ["#21", "#22"]
 
   - id: EXT-3
     name: Certainty inflation
@@ -116,7 +120,7 @@ failure_modes:
     catch_layers: [deterministic, grounding]
     status: partial
     rule_codes: [BEV005]
-    negative_controls: [vbo:scope_mismatch, clinvar:somatic_scope]
+    negative_controls: [vbo:scope_mismatch, clinvar:somatic_scope, civic:species_swap]
     uncovered_form: When the record's scope tokens are wrong but consistent with each other, only a check against the source text (e.g. the species it mentions) can catch it.
     planned: ["#20"]
 

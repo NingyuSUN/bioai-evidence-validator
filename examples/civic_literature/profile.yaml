@@ -1,0 +1,20 @@
+id: civic-literature
+version: 0.1.0
+description: Literature evidence for CIViC-style variant claims. A quote counts only when a grounder has verified
+  it against the pinned full text of the cited paper; model-extracted quotes are allowed on that condition.
+predicates:
+- supports_significance
+- does_not_support_significance
+subject_types:
+- molecular_profile
+object_types:
+- clinical_significance
+uses:
+  research_summary:
+    required_evidence_types:
+    - publication_quote
+    verified_evidence_types:
+    - publication_quote
+    require_human_acceptance: false
+    allow_llm_only: true
+    allow_string_match_only: false

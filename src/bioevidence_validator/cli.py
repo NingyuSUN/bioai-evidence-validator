@@ -34,6 +34,8 @@ def parser() -> argparse.ArgumentParser:
     ground.add_argument("--output", type=Path, required=True, help="The record with source hashes pinned")
     ground.add_argument("--email", help="Contact address for the resolvers' User-Agent (polite use)")
     ground.add_argument("--refresh", action="store_true", help="Resolve again even if already in the catalog")
+    ground.add_argument("--resolver", choices=["europepmc", "ncbi"], default="europepmc",
+                        help="Europe PMC (with Crossref for DOIs) or NCBI E-utilities")
     build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
     build.add_argument("draft", type=Path)
     build.add_argument("--output", type=Path)
@@ -155,7 +157,8 @@ def _run(args) -> int:
         record = json.loads(args.input.read_text(encoding="utf-8"),
                             object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
         _check_depth(record)
-        grounded, catalog = ground_record(record, args.snapshot_dir, http_fetch(args.email), refresh=args.refresh)
+        grounded, catalog = ground_record(record, args.snapshot_dir, http_fetch(args.email), refresh=args.refresh,
+                                          resolver=args.resolver)
         _write_json(args.output, grounded)
         print(f"{len(catalog['works'])} publication(s) in {args.snapshot_dir / CATALOG}")
         return 0

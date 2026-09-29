@@ -3,9 +3,9 @@
 Two steps, as for every source (docs/ENGINEERING.md#source-grounding):
 
 - `ground_record` (uses the network; `bioevidence ground`) resolves each cited PMID, PMCID or DOI with
-  Europe PMC, or Crossref for a DOI Europe PMC does not know. It stores the resolver's response and, for
-  open-access papers, the JATS full text in a snapshot directory under their SHA-256, maps each
-  identifier to those snapshots in `literature.json`, and pins the record's source hash to them.
+  Europe PMC (Crossref for a DOI Europe PMC does not know) or with NCBI E-utilities. It stores the
+  resolver's response and, for open-access papers, the JATS full text in a snapshot directory under their
+  SHA-256, maps each identifier to those snapshots in `literature.json`, and pins the record's source hash.
 - `LiteratureGrounder` (offline, during validation) recomputes everything from those snapshot bytes: whether
   the identifier resolved, the paper's title and retraction status, and whether each quote appears in the
   full text (at its paragraph, when the locator names one). The catalog only says which bytes to read.
@@ -17,6 +17,7 @@ BEV019 error (the paper is retracted). Only items whose quote was verified count
 from __future__ import annotations
 
 import datetime as dt
+import gzip
 import hashlib
 import json
 import re
@@ -36,6 +37,7 @@ from .grounding import SnapshotStore, finding
 CATALOG = "literature.json"
 EUROPE_PMC = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 CROSSREF = "https://api.crossref.org/works/"
+EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 MIN_QUOTE_WORDS = 5  # shorter quotes match almost anywhere and prove little
 TITLE_OVERLAP = 0.5  # word-set Jaccard below which a supplied title names a different paper
 _PUNCTUATION = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-",
@@ -75,9 +77,45 @@ def jats_paragraphs(data: bytes) -> list[tuple[str, str]]:
     return out
 
 
+def jats_license(data: bytes) -> str:
+    """'cc by', 'cc0' or 'other', from the article's own license statement."""
+    root = ET.fromstring(data)
+    texts = []
+    for element in root.iter():
+        tag = element.tag.rsplit("}", 1)[-1] if isinstance(element.tag, str) else ""
+        if tag in ("license", "license_ref", "ext-link"):
+            texts += [str(v) for v in element.attrib.values()] + ["".join(element.itertext())]
+    text = " ".join(texts).lower()
+    if "publicdomain/zero" in text or "cc0" in text:
+        return "cc0"
+    restricted = ("by-nc", "by-nd", "by-sa", "noncommercial", "non-commercial", "noderiv", "sharealike")
+    if ("creativecommons.org/licenses/by/" in text or "creative commons attribution" in text) \
+            and not any(word in text for word in restricted):
+        return "cc by"
+    return "other"
+
+
+def jats_open(data: bytes) -> bool:
+    """Whether a JATS document carries the article body (PMC marks restricted articles `restricted-by`)."""
+    root = ET.fromstring(data)
+    tags = {element.tag.rsplit("}", 1)[-1] for element in root.iter() if isinstance(element.tag, str)}
+    return "body" in tags and "restricted-by" not in tags
+
+
 def parse_metadata(resolver: str, data: bytes) -> dict[str, Any]:
     """What a resolver response says about the paper; recomputed offline from the pinned bytes."""
     body = json.loads(data)
+    if resolver == "ncbi":  # an E-utilities esummary (or an empty esearch for an unknown DOI)
+        result = body.get("result") or {}
+        uids = result.get("uids") or []
+        if not uids or "error" in result.get(uids[0], {"error": True}):
+            return {"found": False}
+        doc = result[uids[0]]
+        ids = {a["idtype"]: a["value"] for a in doc.get("articleids", [])}
+        pmcid = ids.get("pmc") or ids.get("pmcid")
+        return {"found": True, "title": doc.get("title", ""), "pmid": ids.get("pubmed") or ids.get("pmid") or uids[0],
+                "pmcid": pmcid.upper() if pmcid else None, "doi": ids.get("doi"),
+                "retracted": "Retracted Publication" in doc.get("pubtype", []), "open_access": None, "license": None}
     if resolver == "europepmc":
         results = body.get("resultList", {}).get("result", [])
         if not results:
@@ -211,40 +249,70 @@ def _search_url(key: str) -> str:
                                                              "pageSize": 1})
 
 
-def _save(directory: Path, data: bytes, suffix: str) -> str:
+def _eutils(tool: str, **params: str) -> str:
+    return f"{EUTILS}/{tool}.fcgi?" + urllib.parse.urlencode({**params, "tool": "bioai-evidence-validator"})
+
+
+def _save(directory: Path, data: bytes, suffix: str, compress: bool = False) -> str:
+    """Content-addressed by the uncompressed bytes; optionally stored gzip-compressed (`<sha>.xml.gz`)."""
     sha = hashlib.sha256(data).hexdigest()
-    path = directory / f"{sha}{suffix}"
+    path = directory / (f"{sha}{suffix}.gz" if compress else f"{sha}{suffix}")
     if not path.exists():
-        path.write_bytes(data)
+        path.write_bytes(gzip.compress(data, mtime=0) if compress else data)
     return sha
 
 
-def resolve(key: str, directory: Path, fetch: Callable[[str], bytes], now: str) -> dict[str, Any]:
-    """Resolve one identifier, pin the response and any open-access full text, and return its catalog entry."""
+def _metadata(key: str, resolver: str, fetch: Callable[[str], bytes]) -> tuple[str, bytes, list[str]]:
+    kind, _, value = key.partition(":")
+    if resolver == "ncbi":
+        if kind == "doi":
+            url = _eutils("esearch", db="pubmed", term=f"{value}[doi]", retmode="json")
+            hits = json.loads(fetch(url)).get("esearchresult", {}).get("idlist", [])
+            if not hits:
+                return "ncbi", b'{"result": {"uids": []}}', [url]
+            kind, value, urls = "pmid", hits[0], [url]
+        else:
+            urls = []
+        url = _eutils("esummary", db="pmc" if kind == "pmcid" else "pubmed",
+                      id=value[3:] if kind == "pmcid" else value, retmode="json")
+        return "ncbi", fetch(url), [*urls, url]
     url = _search_url(key)
-    data, resolver, urls = fetch(url), "europepmc", [url]
-    if not parse_metadata(resolver, data)["found"] and key.startswith("doi:"):
-        url = CROSSREF + urllib.parse.quote(key[4:])
-        try:
-            data, resolver = fetch(url), "crossref"
-        except OSError:  # includes HTTP 404 for an unknown DOI
-            data, resolver = b'{"message": null}', "crossref"
+    data, urls = fetch(url), [url]
+    if not parse_metadata("europepmc", data)["found"] and kind == "doi":
+        url = CROSSREF + urllib.parse.quote(value)
         urls.append(url)
-    entry = {"resolver": resolver, "metadata_sha256": _save(directory, data, ".json"), "fulltext_sha256": None,
-             "retrieved_at": now, "urls": urls}
-    meta = parse_metadata(resolver, data)
-    if meta.get("open_access") and meta.get("pmcid"):
-        url = f"{EUROPE_PMC}/{meta['pmcid']}/fullTextXML"
         try:
-            entry["fulltext_sha256"] = _save(directory, fetch(url), ".xml")
-            urls.append(url)
-        except OSError:
+            return "crossref", fetch(url), urls
+        except OSError:  # includes HTTP 404 for an unknown DOI
+            return "crossref", b'{"message": null}', urls
+    return "europepmc", data, urls
+
+
+def resolve(key: str, directory: Path, fetch: Callable[[str], bytes], now: str, resolver: str = "europepmc",
+            compress: bool = False) -> dict[str, Any]:
+    """Resolve one identifier, pin the response and any open-access full text, and return its catalog entry.
+
+    `resolver` is "europepmc" (Crossref for DOIs it does not know) or "ncbi" (E-utilities)."""
+    used, data, urls = _metadata(key, resolver, fetch)
+    entry = {"resolver": used, "metadata_sha256": _save(directory, data, ".json", compress), "fulltext_sha256": None,
+             "license": None, "retrieved_at": now, "urls": urls}
+    meta = parse_metadata(used, data)
+    if meta.get("pmcid") and (used == "ncbi" or meta.get("open_access")):
+        url = (_eutils("efetch", db="pmc", id=meta["pmcid"][3:], retmode="xml") if used == "ncbi"
+               else f"{EUROPE_PMC}/{meta['pmcid']}/fullTextXML")
+        try:
+            text = fetch(url)
+            if jats_open(text):  # PMC returns only the front matter of articles outside the open-access subset
+                entry.update(fulltext_sha256=_save(directory, text, ".xml", compress), license=jats_license(text))
+                urls.append(url)
+        except (OSError, ET.ParseError):
             pass  # stays unverifiable (BEV015), never silently admitted
     return entry
 
 
 def ground_record(record: dict[str, Any], directory: Path, fetch: Callable[[str], bytes],
-                  now: str | None = None, refresh: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:
+                  now: str | None = None, refresh: bool = False, resolver: str = "europepmc",
+                  compress: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:
     """Resolve every cited publication, update the directory's catalog, and pin the record's hashes."""
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / CATALOG
@@ -258,7 +326,7 @@ def ground_record(record: dict[str, Any], directory: Path, fetch: Callable[[str]
         if key is None:
             continue
         if refresh or key not in works:
-            works[key] = resolve(key, directory, fetch, now)
+            works[key] = resolve(key, directory, fetch, now, resolver, compress)
         entry = works[key]
         source["sha256"] = source["observed_sha256"] = entry["fulltext_sha256"] or entry["metadata_sha256"]
         source["retrieved_at"] = entry["retrieved_at"]

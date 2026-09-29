@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Add literature grounding (#20). `bioevidence ground` (network) resolves cited PMIDs, PMCIDs and
+  DOIs with Europe PMC, Crossref or NCBI E-utilities and pins the resolver response and any
+  open-access JATS full text; `LiteratureGrounder` (offline) checks identity, retraction, title
+  and every quote against those bytes. New codes BEV019 (retracted source) and BEV020 (evidence a
+  profile requires to be verified is not); profiles may list `verified_evidence_types`.
+  Snapshot stores read gzip-compressed snapshots.
+- Add the CIViC literature case (`examples/civic_literature`): open-access CIViC papers (CC BY or
+  CC0) and retracted papers pinned from PMC, with the issue's AI-specific negative controls
+  measured on real text.
 - Add the AI validation roadmap (`docs/AI_VALIDATION_ROADMAP.md`, tracked in #26).
 - Add an error taxonomy of 20 failure modes (`evaluation/error_taxonomy.yaml`, rendered to
   `docs/ERROR_TAXONOMY.md`): each with its expected catching layer and a status checked

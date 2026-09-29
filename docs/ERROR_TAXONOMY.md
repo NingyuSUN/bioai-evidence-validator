@@ -5,7 +5,7 @@ benchmarks show today. Generated from `evaluation/error_taxonomy.yaml` and the c
 `tools/render_taxonomy.py`; a test fails if this page, the benchmark faults and the rule codes drift apart.
 Part of the [AI validation roadmap](AI_VALIDATION_ROADMAP.md).
 
-**20 failure modes:** ✅ caught 5 · 🟡 partial 6 · ❌ exposed 0 · ⬜ uncovered 9
+**20 failure modes:** ✅ caught 8 · 🟡 partial 7 · ❌ exposed 0 · ⬜ uncovered 5
 
 ## Coverage matrix
 
@@ -14,14 +14,14 @@ the rules alone admit a different number, it follows in parentheses.
 
 | ID | Failure mode | Origin | Expected to catch it | Status | Negative controls: admitted / cases | Next |
 |---|---|---|---|---|---|---|
-| SRC-1 | Fabricated source identifier | source | Grounding | 🟡 partial | `vbo:falsified_target` 0/16 (rules alone: 16) | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
-| SRC-2 | Misattributed source | source | Grounding | ⬜ uncovered | — | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
-| SRC-3 | Retracted or superseded source | source | Grounding | ⬜ uncovered | — | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
+| SRC-1 | Fabricated source identifier | source | Grounding | ✅ caught | `vbo:falsified_target` 0/16 (rules alone: 16)<br>`civic:fabricated_identifier` 0/120 | — |
+| SRC-2 | Misattributed source | source | Grounding | ✅ caught | `civic:real_identifier_wrong_paper` 0/120 | — |
+| SRC-3 | Retracted or superseded source | source | Grounding | 🟡 partial | `civic:retracted_source` 0/20 | [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25) |
 | SRC-4 | Source bytes changed | source | Rules, Grounding | ✅ caught | `vbo:source_hash_mismatch` 0/16<br>`clinvar:source_hash_mismatch` 0/16<br>`vbo:unpinned_source` 0/16 (rules alone: 16) | — |
-| EXT-1 | Fabricated or altered quote | extraction | Grounding | ⬜ uncovered | — | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
-| EXT-2 | Polarity error | extraction | Grounding, Models, Experts | ⬜ uncovered | — | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
+| EXT-1 | Fabricated or altered quote | extraction | Grounding | ✅ caught | `civic:altered_quote` 0/120 | — |
+| EXT-2 | Polarity error | extraction | Grounding, Models, Experts | 🟡 partial | `civic:negation_flip` 0/82 | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
 | EXT-3 | Certainty inflation | extraction | Models, Experts | ⬜ uncovered | — | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
-| EXT-4 | Scope error | extraction | Rules, Grounding | 🟡 partial | `vbo:scope_mismatch` 0/16<br>`clinvar:somatic_scope` 0/16 | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
+| EXT-4 | Scope error | extraction | Rules, Grounding | 🟡 partial | `vbo:scope_mismatch` 0/16<br>`clinvar:somatic_scope` 0/16<br>`civic:species_swap` 0/27 | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
 | EXT-5 | Entity resolution error | extraction | Rules, Grounding | 🟡 partial | `vbo:missing_uniqueness` 0/16<br>`vbo:wrong_existing_target` 0/16 (rules alone: 16) | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
 | EXT-6 | Relation error | extraction | Rules, Models, Experts | ⬜ uncovered | — | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
 | PRV-1 | Extraction method misreported | provenance | Attestation | ⬜ uncovered | — | future: signed pipeline attestations |
@@ -65,7 +65,7 @@ the rules alone admit a different number, it follows in parentheses.
 
 ### SRC-1 · Fabricated source identifier
 
-**🟡 partial** · origin: source · expected layer: Grounding
+**✅ caught** · origin: source · expected layer: Grounding
 
 The record cites an identifier (ontology term, accession, PMID, DOI) that does not exist in the source.
 
@@ -73,35 +73,48 @@ The record cites an identifier (ontology term, accession, PMID, DOI) that does n
 
 Rule codes: `BEV016`
 
-*Not yet covered:* Literature identifiers (PMID, DOI) have no pinned snapshot or grounder yet.
-
-*Note:* Grounding checks identifiers against pinned snapshots (VBO terms; ClinVar variants and submissions, where an invented submission is also rejected).
+*Note:* Grounding checks identifiers against pinned snapshots (VBO terms; ClinVar variants and submissions; PMIDs, PMCIDs and DOIs resolved by `bioevidence ground`).
 
 | Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | Rules + grounding admitted |
 |---|---:|---:|---:|---:|---:|
 | [vbo](../examples/vbo_canine/README.md) `falsified_target` | 16 | 16 | 16 | 16 | 0 |
-
-Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)
+| [civic](../examples/civic_literature/README.md) `fabricated_identifier` | 120 | — | — | — | 0 |
 
 ### SRC-2 · Misattributed source
 
-**⬜ uncovered** · origin: source · expected layer: Grounding
+**✅ caught** · origin: source · expected layer: Grounding
 
 A real identifier is cited, but the claim or quote comes from a different source.
 
 *Example:* A correct PMID for an unrelated paper attached to a gene–disease claim.
 
-Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)
+Rule codes: `BEV017`
+
+*Note:* The literature grounder compares the record's title and quotes with the pinned paper the identifier resolves to. A paper without open full text cannot be checked and goes to review (BEV015).
+
+| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | Rules + grounding admitted |
+|---|---:|---:|---:|---:|---:|
+| [civic](../examples/civic_literature/README.md) `real_identifier_wrong_paper` | 120 | — | — | — | 0 |
 
 ### SRC-3 · Retracted or superseded source
 
-**⬜ uncovered** · origin: source · expected layer: Grounding
+**🟡 partial** · origin: source · expected layer: Grounding
 
 The cited source has been retracted, corrected or replaced by a newer version.
 
 *Example:* A claim resting on a paper retracted after the extraction was made.
 
-Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)
+Rule codes: `BEV019`
+
+*Not yet covered:* A retraction published after grounding is seen only when the source is grounded again (`bioevidence ground --refresh`).
+
+*Note:* Retraction as recorded by PubMed, Europe PMC or Crossref when the paper was grounded.
+
+| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | Rules + grounding admitted |
+|---|---:|---:|---:|---:|---:|
+| [civic](../examples/civic_literature/README.md) `retracted_source` | 20 | — | — | — | 0 |
+
+Planned: [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25)
 
 ### SRC-4 · Source bytes changed
 
@@ -123,23 +136,37 @@ Rule codes: `BEV002`, `BEV014`, `BEV015`
 
 ### EXT-1 · Fabricated or altered quote
 
-**⬜ uncovered** · origin: extraction · expected layer: Grounding
+**✅ caught** · origin: extraction · expected layer: Grounding
 
 The extracted text does not appear in the source, or was reworded so its meaning changed.
 
 *Example:* A quote that reads "strongly associated" where the source says "may be associated".
 
-Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)
+Rule codes: `BEV017`
+
+*Note:* Quotes must appear verbatim (after Unicode, quote-mark, dash and whitespace normalisation) in the pinned full text, at the named paragraph.
+
+| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | Rules + grounding admitted |
+|---|---:|---:|---:|---:|---:|
+| [civic](../examples/civic_literature/README.md) `altered_quote` | 120 | — | — | — | 0 |
 
 ### EXT-2 · Polarity error
 
-**⬜ uncovered** · origin: extraction · expected layer: Grounding, Models, Experts
+**🟡 partial** · origin: extraction · expected layer: Grounding, Models, Experts
 
 A negative or contradicting finding is extracted as supporting.
 
 *Example:* "No association was observed between X and Y" extracted as X associated_with Y.
 
-Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21)
+Rule codes: `BEV017`
+
+*Not yet covered:* A verbatim quote read with the wrong polarity passes grounding; only semantic review can catch it.
+
+| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | Rules + grounding admitted |
+|---|---:|---:|---:|---:|---:|
+| [civic](../examples/civic_literature/README.md) `negation_flip` | 82 | — | — | — | 0 |
+
+Planned: [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22)
 
 ### EXT-3 · Certainty inflation
 
@@ -167,6 +194,7 @@ Rule codes: `BEV005`
 |---|---:|---:|---:|---:|---:|
 | [vbo](../examples/vbo_canine/README.md) `scope_mismatch` | 16 | 16 | 0 | 0 | 0 |
 | [clinvar](../examples/clinvar_germline/README.md) `somatic_scope` | 16 | 16 | 0 | 0 | 0 |
+| [civic](../examples/civic_literature/README.md) `species_swap` | 27 | — | — | — | 0 |
 
 Planned: [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)
 

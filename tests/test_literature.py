@@ -244,3 +244,78 @@ def test_http_fetch_identifies_itself(monkeypatch):
     monkeypatch.setattr(literature.time, "sleep", lambda s: None)
     assert literature.http_fetch("me@example.org")("https://www.ebi.ac.uk/x") == b"{}"
     assert seen == {"agent": f"bioai-evidence-validator/{literature.__version__} (mailto:me@example.org)", "timeout": 60}
+
+
+def esummary(uid, title, pmcid=None, pub_types=("Journal Article",), db="pubmed"):
+    ids = [{"idtype": "pubmed" if db == "pubmed" else "pmid", "value": uid}]
+    ids += [{"idtype": "pmc" if db == "pubmed" else "pmcid", "value": pmcid}] if pmcid else []
+    return json.dumps({"result": {"uids": [uid], uid: {"uid": uid, "title": title, "pubtype": list(pub_types),
+                                                       "articleids": ids}}}).encode()
+
+
+LICENSED = PAPER_A.replace(b"<front><article-meta>", b'<front><article-meta><permissions><license xlink:href='
+                           b'"https://creativecommons.org/licenses/by/4.0/" xmlns:xlink="http://www.w3.org/1999/xlink">'
+                           b"<license-p>Open access.</license-p></license></permissions>")
+RESTRICTED = b"<pmc-articleset><article><front><restricted-by>pmc</restricted-by></front></article></pmc-articleset>"
+NCBI = {
+    literature._eutils("esummary", db="pubmed", id="2001", retmode="json"): esummary("2001", TITLE_A, "PMC2001"),
+    literature._eutils("efetch", db="pmc", id="2001", retmode="xml"): LICENSED,
+    literature._eutils("esummary", db="pubmed", id="2002", retmode="json"): esummary("2002", TITLE_A, "PMC2002"),
+    literature._eutils("efetch", db="pmc", id="2002", retmode="xml"): RESTRICTED,
+    literature._eutils("esummary", db="pubmed", id="2003", retmode="json"): esummary(
+        "2003", TITLE_A, "PMC2003", pub_types=("Journal Article", "Retracted Publication")),
+    literature._eutils("efetch", db="pmc", id="2003", retmode="xml"): LICENSED,
+    literature._eutils("esummary", db="pubmed", id="9900001", retmode="json"): json.dumps(
+        {"result": {"uids": ["9900001"], "9900001": {"uid": "9900001", "error": "cannot get document summary"}}}).encode(),
+    literature._eutils("esummary", db="pmc", id="2001", retmode="json"): esummary("2001", TITLE_A, "PMC2001", db="pmc"),
+    literature._eutils("esearch", db="pubmed", term="10.9999/syn.2001[doi]", retmode="json"): json.dumps(
+        {"esearchresult": {"idlist": ["2001"]}}).encode(),
+    literature._eutils("esearch", db="pubmed", term="10.9999/none[doi]", retmode="json"): json.dumps(
+        {"esearchresult": {"idlist": []}}).encode(),
+}
+
+
+@pytest.mark.parametrize("uri,codes,verified", [
+    ("pmid:2001", [], {"bioev:item-1"}),
+    ("pmcid:PMC2001", [], {"bioev:item-1"}),
+    ("doi:10.9999/syn.2001", [], {"bioev:item-1"}),
+    ("pmid:2002", ["BEV015"], set()),  # PMC holds only the front matter: not open access
+    ("pmid:2003", ["BEV019"], set()),
+    ("pmid:9900001", ["BEV016"], set()),
+    ("doi:10.9999/none", ["BEV016"], set()),
+])
+def test_ncbi_resolver(uri, codes, verified, tmp_path):
+    record, catalog = ground_record(claim(uri=uri), tmp_path / "snapshots", Fetcher(NCBI), now="2026-09-29T00:00:00+00:00",
+                                    resolver="ncbi", compress=True)
+    assert all(entry["resolver"] == "ncbi" for entry in catalog["works"].values())
+    assert check(record, tmp_path) == (codes, verified)
+    if uri == "pmid:2001":
+        entry = catalog["works"]["pmid:2001"]
+        assert entry["license"] == "cc by" and (tmp_path / "snapshots" / f"{entry['fulltext_sha256']}.xml.gz").exists()
+
+
+@pytest.mark.parametrize("license_xml,expected", [
+    (b'<license xlink:href="https://creativecommons.org/licenses/by/4.0/"/>', "cc by"),
+    (b'<license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/">'
+     b"https://creativecommons.org/publicdomain/zero/1.0/</ali:license_ref></license>", "cc0"),
+    (b"<license><license-p>This article is distributed under the Creative Commons Attribution License."
+     b"</license-p></license>", "cc by"),
+    (b'<license xlink:href="https://creativecommons.org/licenses/by-nc/4.0/"/>', "other"),
+    (b"<license><license-p>Creative Commons Attribution-NonCommercial License.</license-p></license>", "other"),
+    (b"<license><license-p>All rights reserved.</license-p></license>", "other"),
+])
+def test_jats_license(license_xml, expected):
+    document = (b'<article xmlns:xlink="http://www.w3.org/1999/xlink"><front><permissions>' + license_xml
+                + b"</permissions></front><body><p>x</p></body></article>")
+    assert literature.jats_license(document) == expected
+    assert literature.jats_open(document) and not literature.jats_open(RESTRICTED)
+
+
+def test_store_reads_gzip_snapshots_by_uncompressed_hash(tmp_path):
+    import gzip
+    import hashlib
+
+    sha = hashlib.sha256(PAPER_A).hexdigest()
+    (tmp_path / f"{sha}.xml.gz").write_bytes(gzip.compress(PAPER_A))
+    store = literature.SnapshotStore.from_directory(tmp_path)
+    assert store.get(sha) == PAPER_A and store.verified(sha)

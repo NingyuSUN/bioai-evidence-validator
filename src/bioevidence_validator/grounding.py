@@ -21,6 +21,7 @@ outside the engine; `SourceBytesGrounder` is generic.
 """
 from __future__ import annotations
 
+import gzip
 import hashlib
 from collections.abc import Callable
 from pathlib import Path
@@ -51,12 +52,16 @@ class SnapshotStore:
 
     @classmethod
     def from_directory(cls, directory: Path) -> SnapshotStore:
-        """Files named by their SHA-256, optionally with an extension (e.g. `ab12….json`)."""
-        loaders = {}
+        """Files named by their SHA-256, optionally with an extension (e.g. `ab12….json`). A `.gz` file is
+        decompressed first: its name is the hash of the uncompressed bytes."""
+        def unzip(path: Path) -> Callable[[], bytes]:
+            return lambda: gzip.decompress(path.read_bytes())
+
+        loaders: dict[str, Callable[[], bytes]] = {}
         for path in sorted(Path(directory).iterdir()):
             key = path.name.split(".", 1)[0].lower()
             if path.is_file() and len(key) == 64:
-                loaders[key] = path.read_bytes
+                loaders[key] = unzip(path) if path.suffix == ".gz" else path.read_bytes
         return cls(loaders)
 
     def _load(self, sha256: str) -> tuple[bytes | None, bool]:
