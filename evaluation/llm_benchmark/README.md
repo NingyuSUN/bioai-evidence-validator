@@ -111,9 +111,55 @@ What this shows:
   [ClinVar](../../examples/clinvar_germline) and [VBO](../../examples/vbo_canine) cases, with no false
   blocks on real sources. Every admission comes with a report of what was checked.
 
-Next: a semantic check for whether a verbatim quote supports the claim's direction
-([#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31)), which is where the remaining
-errors are.
+## Semantic checks (#31)
+
+Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were
+measured on the same pilot ([semantic_eval.py](semantic_eval.py), [results](results/semantic-pilot/summary.md)):
+
+- **Independent review.** A fast model from another vendor (Claude Haiku 4.5, GPT-5.6-Luna or
+  Gemini 3.8 Flash) sees the claim, the quotes and their paragraphs, never the extractor's decision.
+  Its reading becomes a non-human adjudication under `require_independent_review` (BEV021): accept if it
+  matches the extractor, defer otherwise. With two reviewers, both other vendors must accept.
+- **Semantic cues** (`CueChecker`, BEV022): negation against a positive claim, and animal or in-vitro
+  quotes for a human-scoped item.
+
+Controls (reviewers see only the claim and quotes):
+
+| Control | Claude Haiku 4.5 | GPT-5.6-Luna | Gemini 3.8 Flash | Cues |
+|---|---:|---:|---:|---:|
+| Correct answers read the right way (so a flipped direction is exposed) | 59/63 | 63/63 | 62/63 | flip flagged 28/63 |
+| Another task's claim recognised as not addressed | 7/12 | 11/12 | 12/12 | — |
+| Animal or cell-line sentence recognised as such | 7/8 | 7/8 | 7/8 | 8/8 |
+| Hedged sentence recognised as hedged | 8/12 | 9/12 | 8/12 | — |
+| Correct answers flagged (cost) | — | — | — | 22/63 |
+
+The 68 natural answers with the paper, 5 of them in the wrong direction:
+
+| Pipeline | Wrong direction admitted | Correct answers sent to a human |
+|---|---:|---:|
+| Grounding | 5/68 | 0/63 |
+| + cues | 4/68 | 23/63 |
+| + one independent reviewer | 4/68 | 2/63 |
+| + two independent reviewers | 4/68 | 4/63 |
+
+What this shows:
+
+- **Reviewers catch clear misreadings cheaply.** On controls, a reviewer from another vendor almost
+  always reads a correct answer's quotes the right way, so a flipped direction on clear text is
+  exposed, at a cost of 2–4 of 63 correct answers sent to a human.
+- **They do not catch the misreadings that actually happened.** The five natural errors sit on two
+  tasks where the evidence is mixed: a CD166 (ALCAM) paper reporting no significant association with
+  pathologic response although CIViC curates it as supporting resistance, and a meta-analysis whose
+  secondary endpoint is positive while its conclusion is negative. There the reviewers mostly agreed
+  with the extractors (1 of 5 caught): the errors are correlated across vendors, and agreement between
+  models is not evidence.
+- **Cues are too noisy to gate on.** They flagged 22 of 63 correct answers and caught 1 of 5 errors.
+
+Which semantic decisions can be automated: flagging a direction, claim or species that clearly does
+not match the quoted text (independent review, as a route to a human, never an admission on its own).
+Which need experts: evidence that is mixed, depends on the endpoint, or where the curated label and
+every model disagree; these are exactly the cases the expert review (#23) is for. Five errors on two
+tasks are too few for rates; the held-out test set would measure them with intervals.
 
 ## Run
 

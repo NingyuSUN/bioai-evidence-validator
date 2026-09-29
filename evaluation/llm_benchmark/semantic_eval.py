@@ -17,7 +17,7 @@ reads a correct answer's quotes the right way also exposes the same quotes offer
 Scoring runs the actual engine: each natural answer becomes the record score_literature.py builds, plus the
 reviewer's reading as a non-human adjudication (accept if it matches the extractor's decision, defer
 otherwise) under a profile with `require_independent_review`, and/or the deterministic `CueChecker`.
-The reviewer always comes from another vendor than the extractor.
+Reviewers always come from other vendors than the extractor: one (rotating) or both of the other two.
 """
 from __future__ import annotations
 
@@ -42,12 +42,17 @@ import score_literature  # noqa: E402
 
 UNITS = ROOT / "semantic"
 KEY = "bioai-semantic-v1"
-REVIEWERS = {"claude": "gemini-flash", "gpt": "gemini-flash", "gemini": "gpt-luna"}  # another vendor
+# Independent reviewers come from the other two vendors' fast models. With one reviewer, the vendors rotate.
+OTHER_VENDORS = {"claude": ["gpt-luna", "gemini-flash"], "gpt": ["claude-haiku", "gemini-flash"],
+                 "gemini": ["claude-haiku", "gpt-luna"]}
+ONE_REVIEWER = {"claude": "gemini-flash", "gpt": "claude-haiku", "gemini": "gpt-luna"}
 NEGATIVE = {"does_not_support_significance"}
-CONFIGS = [("grounded", False, False, "LLM + paper + bioevidence (grounding)"),
-           ("cues", False, True, "+ semantic cues"),
-           ("review", True, False, "+ independent review"),
-           ("review_cues", True, True, "+ independent review + cues")]
+CONFIGS = [("grounded", 0, False, "LLM + paper + bioevidence (grounding)"),
+           ("cues", 0, True, "+ semantic cues"),
+           ("review", 1, False, "+ one independent reviewer"),
+           ("review_cues", 1, True, "+ one independent reviewer + cues"),
+           ("two_reviews", 2, False, "+ two independent reviewers"),
+           ("two_reviews_cues", 2, True, "+ two independent reviewers + cues")]
 
 
 def keyed(text: str) -> str:
@@ -125,14 +130,23 @@ def build_units(split: str) -> tuple[list[dict], list[dict]]:
     return units, labels
 
 
-def write_units(split: str) -> None:
+def write_units(split: str, check: bool = False) -> int:
     UNITS.mkdir(exist_ok=True)
     units, labels = build_units(split)
+    stale = []
     for name, rows in ((f"{split}-units.jsonl", units), (f"{split}-labels.jsonl", labels)):
-        (UNITS / name).write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows),
-                                  encoding="utf-8", newline="\n")
+        text = "".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows)
+        if check:
+            if not (UNITS / name).exists() or (UNITS / name).read_text(encoding="utf-8") != text:
+                stale.append(name)
+        else:
+            (UNITS / name).write_text(text, encoding="utf-8", newline="\n")
+    if stale:
+        print(f"out of date: {', '.join(stale)}", file=sys.stderr)
+        return 1
     kinds = {k: sum(label["kind"] == k for label in labels) for k in ("natural", "unrelated_claim", "species", "hedged")}
     print(f"{len(units)} units: {kinds}")
+    return 0
 
 
 class Pipeline:
@@ -155,19 +169,19 @@ class Pipeline:
             (True, True): RecordValidator(profile=path, grounders=[*grounders, cues]),
         }
 
-    def decide(self, task: dict, answer: dict, reviewer: str | None, reading: dict | None, review: bool, cues: bool):
+    def decide(self, task: dict, answer: dict, readings: dict[str, dict | None], cues: bool):
+        """`readings`: reviewer -> its reading (None if it gave none); empty for no independent review."""
         record = self.base.build(task, answer)
         if record is None:
             return "stop", []
-        if review and reading:
-            accepted = reading["verdict"] == answer["decision"]
-            record["adjudications"] = [{"id": "bioev:independent-review", "statement_id": record["statement"]["id"],
-                                        "applies_to_uses": list(record["requested_uses"]),
-                                        "decision": "accept" if accepted else "defer",
-                                        "reviewer": {"id": f"model:{reviewer}", "agent_type": "software"},
-                                        "rationale": reading["rationale"] or "(none given)",
-                                        "decided_at": "2026-09-29T00:00:00Z"}]
-        report = self.validators[review, cues].validate(self.base.corpus.pin(record))
+        record["adjudications"] = [
+            {"id": f"bioev:review-{reviewer}", "statement_id": record["statement"]["id"],
+             "applies_to_uses": list(record["requested_uses"]),
+             "decision": "accept" if reading["verdict"] == answer["decision"] else "defer",
+             "reviewer": {"id": f"model:{reviewer}", "agent_type": "software"},
+             "rationale": reading["rationale"] or "(none given)", "decided_at": "2026-09-29T00:00:00Z"}
+            for reviewer, reading in readings.items() if reading]
+        report = self.validators[bool(readings), cues].validate(self.base.corpus.pin(record))
         codes = sorted({f["rule_id"] for f in report["findings"]})
         return (answer["decision"] if report["overall_status"] == "admitted" else "stop"), codes
 
@@ -235,10 +249,11 @@ def score(split: str, answers_dir: Path | None, output: Path) -> dict:
     for lab in natural:
         task = tasks[lab["task_id"]]
         answer = extractor[(lab["extractor"], lab["task_id"])]["answer"]
-        reviewer = REVIEWERS[lab["extractor"].split("-")[0]]
-        for config, review, cues, _ in CONFIGS:
-            final, codes = checker.decide(task, answer, reviewer, reading.get((reviewer, lab["unit_id"])), review, cues)
-            per_answer.append({"unit_id": lab["unit_id"], "extractor": lab["extractor"], "reviewer": reviewer,
+        vendor = lab["extractor"].split("-")[0]
+        for config, count_reviewers, cues, _ in CONFIGS:
+            chosen = [] if not count_reviewers else [ONE_REVIEWER[vendor]] if count_reviewers == 1 else OTHER_VENDORS[vendor]
+            final, codes = checker.decide(task, answer, {r: reading.get((r, lab["unit_id"])) for r in chosen}, cues)
+            per_answer.append({"unit_id": lab["unit_id"], "extractor": lab["extractor"], "reviewers": chosen,
                                "config": config, "expected": lab["expected"], "model_decision": lab["extractor_decision"],
                                "final": final, "reason_codes": codes})
     for config, *_ in CONFIGS:
@@ -284,9 +299,10 @@ def render(summary: dict) -> str:
         m = summary["pipeline"][config]
         lines.append(f"| {label} | {fraction(m['wrong_direction_admitted'])} | {fraction(m['correct_answers_stopped'])} | "
                      f"{fraction(m['wrong_answers_stopped'])} |")
-    lines += ["", "The independent reviewer is from another vendor than the extractor (Gemini 3.8 Flash for Claude and "
-              "GPT answers, GPT-5.6-Luna for Gemini answers) and never sees the extractor's decision. A reviewer or cue "
-              "can only send a record to a human. Wilson 95% intervals are in `summary.json`.", ""]
+    lines += ["", "Reviewers are the fast models of the other two vendors (Claude Haiku 4.5, GPT-5.6-Luna, Gemini 3.8 "
+              "Flash) and never see the extractor's decision. With one reviewer, Gemini reviews Claude, Claude reviews "
+              "GPT and GPT reviews Gemini; with two, both other vendors must accept. A reviewer or cue can only send a "
+              "record to a human. Wilson 95% intervals are in `summary.json`.", ""]
     return "\n".join(lines)
 
 
@@ -295,13 +311,14 @@ def main(argv: list[str] | None = None) -> int:
     steps = parser.add_subparsers(dest="step", required=True)
     units = steps.add_parser("units")
     units.add_argument("--split", choices=["pilot", "test"], required=True)
+    units.add_argument("--check", action="store_true", help="Fail if the committed units are out of date")
     scoring = steps.add_parser("score")
     scoring.add_argument("--split", choices=["pilot", "test"], required=True)
     scoring.add_argument("--answers", type=Path)
     scoring.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.step == "units":
-        write_units(args.split)
+        return write_units(args.split, args.check)
     else:
         score(args.split, args.answers, args.output)
     return 0

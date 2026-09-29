@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add semantic checks (#31). A use may require independent review: an accepting non-human
+  reviewer that created none of the evidence, whose absence, deferral or rejection sends the use
+  to review (BEV021). `semantic.CueChecker` flags negated, hedged or non-human quotes (BEV022).
+  In the benchmark pilot, a reviewer from another vendor exposed direction flips on clear text
+  (59–63 of 63) but caught 1 of 5 natural misreadings, which sat on mixed evidence; cues flagged
+  22 of 63 correct answers.
 - Add an LLM benchmark (`evaluation/llm_benchmark`): six models (frontier and fast tiers of Claude, GPT
   and Gemini) answer ClinVar and literature tasks with and without the source, and each answer is
   scored alone and after bioevidence validation and grounding. Pilot sets only: with the source,
