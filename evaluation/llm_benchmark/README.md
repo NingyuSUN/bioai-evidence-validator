@@ -146,6 +146,43 @@ whose citations all verified (all three decisions right), rejected 37 for a wron
 paper or a PMID that does not exist, and sent 1 to review. It cannot turn these answers
 into good ones; that takes the source (the pilots above) or a curator.
 
+## Scenario 2: an agent that searches, reads and revises
+
+Scenario 1 shows what bioevidence blocks; this one shows it feeding back. The agent gets the claim and
+three tools run by the harness, so every model has the same tools and every step is logged: PubMed
+search, read a paper (its open full text, else its abstract) and submit (a decision and up to three
+citations with PMID, title and exact quote). Each submission is built into a record and validated under
+the CIViC literature profile; if it is not admitted, the verifier's reasons ("citation 2: The quote does
+not appear in the cited paper.") go back to the agent, which may revise (at most three submissions,
+eight actions). One run gives three views: the agent alone (first submission as given), behind a
+bioevidence gate (first submission checked) and in the feedback loop (final submission checked)
+([results](results/agent-pilot/summary.md), [agent_loop.py](agent_loop.py)). Six models, 18 tasks:
+
+| Configuration | Answered | Correct decision | Wrong direction | Answers with an invalid citation | Routed to a human |
+|---|---:|---:|---:|---:|---:|
+| Agent alone | 77/108 | 62/108 | 15/108 | 8/77 | 0/108 |
+| Agent + bioevidence gate | 69/108 | 55/108 | 14/108 | 0/69 | 8/108 |
+| Agent + bioevidence feedback loop | 73/108 | 58/108 | 15/108 | 0/73 | 4/108 |
+
+The 108 episodes made 317 searches, 163 reads and 117 submissions (median 106.5 s per episode, 34 MB
+downloaded); 4 steps failed (a CLI error or timeout) and are kept.
+
+What this shows:
+
+- With tools to read the paper, five of six models cited only what they had read: no invalid citation in
+  their first submissions. In scenario 1b, the same models without tools gave 38 of 50 answers with an
+  invalid citation.
+- Claude Haiku 4.5 did not: 8 of its 16 first submissions quoted text that is not in the paper, mostly a
+  verbatim stretch joined to reworded text. The gate stopped all eight. With the reasons as feedback it
+  revised 6 of them and 4 were then admitted; the other 4 still misquoted when they ran out of actions
+  or submissions, and went to a human. In the loop Haiku answered 12 of 18 with no invalid citation, against 8 of 18 behind the gate.
+- So the loop recovers answers a gate alone would lose, without letting an unverified citation through.
+  What gets through is set by the verifier, not by which model runs the agent.
+- It does not fix the direction of the decision. 12 of the 15 wrong-direction answers are on the three
+  claims CIViC curates as "does not support" from one paper; the agents searched the wider literature
+  and cited that paper in only 23 of 108 first submissions. Some of these answers may be defensible from
+  other papers, which is why such tasks need expert labels (#23) rather than a single CIViC record.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were

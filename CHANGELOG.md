@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Benchmark scenario 2 (`agent_loop.py`): an agent searches PubMed, reads papers and submits a
+  decision with citations; bioevidence checks each submission and returns its reasons, and the agent
+  may revise. Five of six models cited only what they had read; Claude Haiku 4.5 misquoted in 8 of
+  16 first submissions, the gate stopped all eight, and after feedback 4 were admitted. No answer
+  with an invalid citation was admitted (0/73); 4 of 108 episodes went to a human.
+
 - Benchmark scenario 1: the literature tasks asked as a user would ask a chatbot, without rules, source
   or tools. With only PMID and title, 32 of 49 model answers held an invented quote; with the claim
   only, 38 of 50 cited at least one invalid paper or quote (28 of 66 citations were real PMIDs of

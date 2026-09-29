@@ -201,3 +201,40 @@ def test_claim_records_are_schema_valid():
               "citations": [{"pmid": "PMID 123", "title": "A title", "quote": "A quote of more than five words here."}]}
     report = RecordValidator(profile=claims.CASE / "profile.yaml").validate(verifier.record(task, answer))
     assert "SCHEMA" not in {f["rule_id"] for f in report["findings"]}
+
+
+def test_agent_scenario_replays_from_committed_episodes(tmp_path):
+    agent = load("agent_loop")
+    committed = BENCH / "results" / "agent-pilot"
+    (tmp_path / "episodes.jsonl").write_bytes((committed / "episodes.jsonl").read_bytes())
+    agent.score(tmp_path)
+    for name in ("summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_agent_views_gate_and_loop():
+    agent = load("agent_loop")
+    first = {"decision": "supports", "status": "rejected", "categories": ["quote_not_found"]}
+    last = {"decision": "supports", "status": "admitted", "categories": ["quote_found"]}
+    row = {"submissions": [first, last]}
+    assert agent.view(row, "agent") == {"final": "supports", "categories": ["quote_not_found"], "routed": False}
+    assert agent.view(row, "gate") == {"final": "stop", "categories": [], "routed": True}
+    assert agent.view(row, "loop") == {"final": "supports", "categories": ["quote_found"], "routed": False}
+    assert agent.view({"submissions": []}, "loop") == {"final": "stop", "categories": [], "routed": False}
+    stop = {"decision": "stop", "status": "rejected", "categories": []}
+    assert agent.view({"submissions": [stop]}, "gate")["routed"] is False
+
+
+def test_agent_steps_and_history():
+    agent = load("agent_loop")
+    assert agent.wsl_path(Path("C:/t/agent-work/x")) == "/mnt/c/t/agent-work/x"
+    step = dict.fromkeys(agent.FIELDS, "")
+    step.update(action="search", query="BRAF V600E vemurafenib", citations=[])
+    assert agent.check_step(step) is step
+    with pytest.raises(ValueError, match="decision"):
+        agent.check_step({**step, "action": "submit"})
+    with pytest.raises(ValueError, match="invalid step"):
+        agent.check_step({**step, "action": "browse"})
+    history = [f"[{n}] read pmid:{n}\n→ " + "x" * 1000 for n in range(1, 4)]
+    short = agent.compact(list(history))
+    assert short[0].endswith("read again if needed)") and short[1:] == history[1:]
