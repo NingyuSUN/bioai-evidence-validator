@@ -61,6 +61,9 @@ auxiliary verb to negate, no species word) are skipped and counted in [results/s
   negative finding reported as support, a mouse result used for a human claim) passes, and so
   does a real quote that does not support the claim. That needs semantic review, which the
   [LLM benchmark](../../evaluation/llm_benchmark) measures separately.
+- A quote is matched as a substring (after normalising Unicode, quote marks, dashes and spacing), so
+  a quote cut short inside a sentence still matches; one that only leaves out a trailing reference
+  such as `(Table 2)` matches too. Dropping a qualifier by truncation is not detected.
 - Papers without open full text cannot be checked: they go to review (BEV015), never admitted.
 - Retraction status is as PubMed recorded it on the retrieval date; later retractions are seen only
   after grounding again (`bioevidence ground --refresh`).

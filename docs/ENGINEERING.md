@@ -91,7 +91,8 @@ reports keep their exact previous shape.
   it recomputes whether the identifier exists (BEV016), whether the paper is retracted
   (BEV019), whether the record's title and hash belong to that paper (BEV017), and whether each
   quote (`extracted_text`) appears in the full text, at its paragraph when the locator ends in
-  `#<paragraph id>` (BEV017). A paper without open full text, or a quote under five words,
+  `#<paragraph id>` (BEV017). Matching is by substring after normalising Unicode, quote marks,
+  dashes and spacing; a quote may leave out a trailing parenthetical reference, nothing else. A paper without open full text, or a quote under five words,
   cannot be verified (BEV015): it is sent to review, never admitted silently.
 
 A profile use can list `verified_evidence_types` (a subset of its required types). Such a type

@@ -326,3 +326,15 @@ def test_jats_blocks_tell_titles_from_paragraphs():
     kinds = {text: kind for _, kind, text in blocks}
     assert kinds["Results"] == "title" and kinds[TITLE_A] == "title" and kinds[QUOTE] == "p"
     assert literature.jats_paragraphs(PAPER_A) == [(pid, text) for pid, _, text in blocks]
+
+
+@pytest.mark.parametrize("quote,found", [
+    ("stable across all tested strains (Figure 2).", True),        # spacing inside brackets
+    ("Expression was stable across all tested strains.", True),    # trailing reference left out
+    ("Expression was stable across all tested", True),             # substring semantics: a shortened quote matches
+    ("Expression was stable across all strains (Figure 2).", False),
+    ("Expression was stable (Figure 2).", False),                   # a middle part left out
+])
+def test_quote_matching_tolerates_only_formatting(quote, found):
+    text = normalize("Expression was stable across all tested strains ( Figure 2 ). Other text followed.")
+    assert literature.quote_in(normalize(quote), text) is found

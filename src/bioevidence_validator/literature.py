@@ -38,6 +38,9 @@ CATALOG = "literature.json"
 EUROPE_PMC = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 CROSSREF = "https://api.crossref.org/works/"
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+_BEFORE_CLOSE = re.compile(r"\s+([)\],.;:])")
+_AFTER_OPEN = re.compile(r"([(\[])\s+")
+_REFERENCE_TAIL = re.compile(r"\s*(\([^()]*\)\s*)+([.;:]|$)")
 MIN_QUOTE_WORDS = 5  # shorter quotes match almost anywhere and prove little
 TITLE_OVERLAP = 0.5  # word-set Jaccard below which a supplied title names a different paper
 _PUNCTUATION = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-",
@@ -45,8 +48,25 @@ _PUNCTUATION = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "�
 
 
 def normalize(text: str) -> str:
-    """Unicode NFKC, plain quotes and dashes, single spaces. Case is kept: gene symbols depend on it."""
-    return " ".join(unicodedata.normalize("NFKC", text).translate(_PUNCTUATION).split())
+    """Unicode NFKC, plain quotes and dashes, single spaces, and no space inside brackets or before
+    punctuation (JATS text often has `( Figure 2 )`). Case is kept: gene symbols depend on it."""
+    text = " ".join(unicodedata.normalize("NFKC", text).translate(_PUNCTUATION).split())
+    return _AFTER_OPEN.sub(r"\1", _BEFORE_CLOSE.sub(r"\1", text))
+
+
+def quote_in(quote: str, text: str) -> bool:
+    """Whether a normalised quote is a substring of normalised text (so a quote may start or stop
+    inside a sentence), or would be if its final punctuation stood after a trailing parenthetical
+    reference such as `(Table 2, Fig. 3)` that the quote leaves out."""
+    if quote in text:
+        return True
+    core = quote.rstrip(" .;:")
+    start = text.find(core)
+    while core and start >= 0:
+        if _REFERENCE_TAIL.match(text, start + len(core)):
+            return True
+        start = text.find(core, start + 1)
+    return False
 
 
 def identifier(uri: str) -> str | None:
@@ -220,10 +240,10 @@ class LiteratureGrounder:
                 anchor = (item.get("locator") or "").rpartition("#")[2]
                 located = [text for pid, text in paragraphs if pid == anchor]
                 where = located or [text for _, text in paragraphs]
-                if any(quote in text for text in where):
+                if any(quote_in(quote, text) for text in where):
                     if sound:
                         verified.add(item["id"])
-                elif located and any(quote in text for _, text in paragraphs):
+                elif located and any(quote_in(quote, text) for _, text in paragraphs):
                     findings.append(finding(record, "BEV017", f"The quote is in the paper but not at #{anchor}.", path))
                 else:
                     findings.append(finding(record, "BEV017", "The quote does not appear in the cited paper.", path))
