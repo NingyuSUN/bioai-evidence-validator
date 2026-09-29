@@ -48,7 +48,8 @@ def claude_reply(answer):
     return Done(json.dumps({"structured_output": answer, "usage": {"input_tokens": 5, "output_tokens": 2}}))
 
 
-def test_ask_retries_once_on_tool_use_and_records_it():
+def test_ask_retries_once_on_tool_use_and_records_it(monkeypatch):
+    monkeypatch.setattr(run_models, "find_executable", lambda name: f"/usr/bin/{name}")  # no CLI needed
     task = jsonl(BENCH / "tasks" / "pilot.jsonl")[0]
     answer = {"decision": "stop", "conflict": "unknown", "submissions": [], "rationale": "x"}
     calls = []

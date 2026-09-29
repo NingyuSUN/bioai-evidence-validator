@@ -121,7 +121,10 @@ def main() -> int:
         data = content if isinstance(content, bytes) else render(content).encode("utf-8")
         path = OUT / name
         if check:
-            if not path.exists() or path.read_bytes() != data:
+            # zlib builds differ between platforms, so compressed files are compared by their content.
+            same = path.exists() and (gzip.decompress(path.read_bytes()) == gzip.decompress(data) if name.endswith(".gz")
+                                      else path.read_bytes() == data)
+            if not same:
                 stale.append(name)
         else:
             path.write_bytes(data)
