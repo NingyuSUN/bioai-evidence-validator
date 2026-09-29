@@ -107,8 +107,9 @@ What this shows:
   [ClinVar](../../examples/clinvar_germline) and [VBO](../../examples/vbo_canine) cases, with no false
   blocks on real sources. Every admission comes with a report of what was checked.
 
-Next: a semantic check for whether a verbatim quote supports the claim's direction (independent
-model review measured against expert labels, #21 and #22), which is where the remaining errors are.
+Next: a semantic check for whether a verbatim quote supports the claim's direction
+([#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31)), which is where the remaining
+errors are.
 
 ## Run
 

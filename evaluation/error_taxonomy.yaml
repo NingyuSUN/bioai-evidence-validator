@@ -99,7 +99,7 @@ failure_modes:
     rule_codes: [BEV017]
     negative_controls: [civic:negation_flip]
     uncovered_form: A verbatim quote read with the wrong polarity passes grounding; only semantic review can catch it.
-    planned: ["#21", "#22"]
+    planned: ["#31", "#22"]
 
   - id: EXT-3
     name: Certainty inflation
@@ -110,7 +110,7 @@ failure_modes:
     status: uncovered
     rule_codes: []
     negative_controls: []
-    planned: ["#21"]
+    planned: ["#31", "#21"]
 
   - id: EXT-4
     name: Scope error
