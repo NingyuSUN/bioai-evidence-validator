@@ -12,6 +12,7 @@ Rule codes (all apply to every requested use):
   BEV017 error   the record disagrees with what the source says
   BEV018 review  the source holds evidence the record leaves out
   BEV019 error   the cited source is retracted
+  BEV022 review  a semantic cue suggests the quote is misread (see `semantic`)
 
 A grounder may also offer `verified_items(record)`: the evidence items it confirmed against their source.
 Only those count for evidence types a profile lists under `verified_evidence_types` (BEV020 otherwise).
@@ -30,7 +31,7 @@ from typing import Any, Protocol
 from .engine import Finding
 
 SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review",
-            "BEV019": "error"}
+            "BEV019": "error", "BEV022": "review"}
 
 
 class Grounder(Protocol):

@@ -42,6 +42,8 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV018 | Grounding: the source holds evidence the record leaves out | Review |
 | BEV019 | Grounding: the cited source is retracted | Reject |
 | BEV020 | A required type the profile lists under `verified_evidence_types` has no item a grounder verified | Review affected use |
+| BEV021 | The use requires independent review, and no independent non-human reviewer accepted it (or one deferred or rejected) | Review affected use |
+| BEV022 | Semantic cue: a quote supporting a positive claim is negated, hedged (optional), or only about animals or cells for a human-scoped item | Review |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -123,6 +125,22 @@ directory holds a `literature.json`. Grounding checks a record against the sourc
 it cannot tell whether that source is itself right, whether a verbatim quote really supports
 the claim (a correctly quoted sentence read with the wrong polarity passes), or anything about
 sources without a pinned snapshot and a grounder.
+
+## Semantic checks
+
+Grounding proves that a quote is real; it cannot tell whether the quote supports the claim.
+Two optional layers look at that, and both can only send a record to a human:
+
+- `CueChecker` (`bioevidence_validator.semantic`) is deterministic and cheap. It raises BEV022 when a
+  quote supporting a positive claim contains a negation, when a quote is hedged (if asked), or when
+  an item scoped to humans quotes only animal or in-vitro evidence. It does not understand text:
+  it misses misreadings without such words and flags some correct quotes.
+- An independent reviewer (another model, an agent, a second pipeline) reads the quotes without the
+  extractor's conclusion and records its reading as a non-human adjudication. Under
+  `require_independent_review` the use needs that reviewer's acceptance, and the reviewer must not
+  have created any of the evidence (BEV021).
+
+Their measured effect is in the [LLM benchmark](../evaluation/llm_benchmark/README.md).
 
 `validate`: 0 admitted, 1 rejected, 2 review_required, 3 input/configuration/execution error.
 Argparse usage errors also exit 2, with usage text rather than a validation report.
