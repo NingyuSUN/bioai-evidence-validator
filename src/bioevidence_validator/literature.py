@@ -66,15 +66,23 @@ def identifier(uri: str) -> str | None:
     return None
 
 
-def jats_paragraphs(data: bytes) -> list[tuple[str, str]]:
-    """(id, text) for every title and paragraph of a JATS article; ids fall back to document order."""
+def jats_blocks(data: bytes) -> list[tuple[str, str, str]]:
+    """(id, kind, text) for every title ("title") and paragraph ("p") of a JATS article, in document
+    order; ids fall back to the element's position. Showing only paragraph ids to a model keeps it from
+    citing a section heading instead of the paragraph under it."""
     root = ET.fromstring(data)  # ElementTree never resolves external entities
     out = []
     for n, element in enumerate(root.iter()):
         tag = element.tag.rsplit("}", 1)[-1] if isinstance(element.tag, str) else ""
         if tag in ("p", "title", "article-title"):
-            out.append((element.get("id") or f"n{n}", normalize("".join(element.itertext()))))
+            out.append((element.get("id") or f"n{n}", "p" if tag == "p" else "title",
+                        normalize("".join(element.itertext()))))
     return out
+
+
+def jats_paragraphs(data: bytes) -> list[tuple[str, str]]:
+    """(id, text) for every title and paragraph of a JATS article, as the grounder checks them."""
+    return [(pid, text) for pid, _, text in jats_blocks(data)]
 
 
 def jats_license(data: bytes) -> str:

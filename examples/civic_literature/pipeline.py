@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 
 from bioevidence_validator.grounding import SnapshotStore
-from bioevidence_validator.literature import CATALOG, LiteratureGrounder, identifier, jats_paragraphs
+from bioevidence_validator.literature import CATALOG, LiteratureGrounder, identifier, jats_blocks, jats_paragraphs
 
 ROOT = Path(__file__).resolve().parent
 SOURCES = ROOT / "sources"
@@ -44,6 +44,10 @@ class Corpus:
 
     def grounder(self) -> LiteratureGrounder:
         return LiteratureGrounder(self.store, self.catalog)
+
+    def blocks(self, pmid: str) -> list[tuple[str, str, str]]:
+        entry = self.catalog["works"][f"pmid:{pmid}"]
+        return jats_blocks(self.store.get(entry["fulltext_sha256"]) or b"")
 
     def paragraphs(self, pmid: str) -> list[tuple[str, str]]:
         entry = self.catalog["works"][f"pmid:{pmid}"]

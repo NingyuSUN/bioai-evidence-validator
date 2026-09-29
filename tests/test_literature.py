@@ -319,3 +319,10 @@ def test_store_reads_gzip_snapshots_by_uncompressed_hash(tmp_path):
     (tmp_path / f"{sha}.xml.gz").write_bytes(gzip.compress(PAPER_A))
     store = literature.SnapshotStore.from_directory(tmp_path)
     assert store.get(sha) == PAPER_A and store.verified(sha)
+
+
+def test_jats_blocks_tell_titles_from_paragraphs():
+    blocks = literature.jats_blocks(PAPER_A)
+    kinds = {text: kind for _, kind, text in blocks}
+    assert kinds["Results"] == "title" and kinds[TITLE_A] == "title" and kinds[QUOTE] == "p"
+    assert literature.jats_paragraphs(PAPER_A) == [(pid, text) for pid, _, text in blocks]
