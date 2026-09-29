@@ -126,23 +126,24 @@ no tools. Whatever changes comes from the workflow, not from model capability.
 
 1b. The claim only; the model picks the papers and gives PMID, title and quote
 ([results](results/literature-claims-pilot/summary.md), [score_claims.py](score_claims.py)). The 50 cited
-PMIDs were resolved with NCBI; full texts that are not openly licensed stay outside the repository, which
-keeps what was verified (`verification.jsonl`).
+PMIDs were resolved with NCBI. A quote is checked against the open full text, or else against the PubMed
+abstract; full texts that are not openly licensed stay outside the repository, which keeps what was
+verified (`verification.jsonl`).
 
 | Configuration | Answered | Correct decision | Answers with an invalid citation | Answers with only verified citations | Answers without a citation |
 |---|---:|---:|---:|---:|---:|
-| LLM alone | 50/108 | 46/108 | 34/50 | 1/50 | 9/50 |
-| LLM + bioevidence | 1/108 | 1/108 | 0/1 | 1/1 | 0/1 |
+| LLM alone | 50/108 | 46/108 | 38/50 | 3/50 | 9/50 |
+| LLM + bioevidence | 3/108 | 3/108 | 0/3 | 3/3 | 0/3 |
 
 Of the 66 citations the models gave: 28 had a real PMID that belongs to an unrelated paper (the title
 cited is often a real paper, with a mistyped or invented PMID: 28284562 for the NEMO trial, whose PMID is
-28284557), 16 quoted text absent from the open full text, 16 had no open full text, 2 PMIDs did not
-exist, 1 had no PMID, and 3 were verified.
+28284557), 29 quoted text absent from the paper (16 checked against the open full text, 13 against the
+abstract), 2 PMIDs did not exist, 1 had no PMID, and 6 were verified.
 
 What this shows: asked without the source and without the rules, every model, frontier or fast, cites
-papers and quotes that do not check out. Bioevidence admits none of them: it admitted the one answer
-whose citations all verified (and whose decision was right), rejected 33 for a wrong paper, a quote not in
-the paper or a PMID that does not exist, and sent 7 with no open full text to review. It cannot turn these answers
+papers and quotes that do not check out. Bioevidence admits none of them: it admitted the three answers
+whose citations all verified (all three decisions right), rejected 37 for a wrong paper, a quote not in the
+paper or a PMID that does not exist, and sent 1 to review. It cannot turn these answers
 into good ones; that takes the source (the pilots above) or a curator.
 
 ## Semantic checks (#31)

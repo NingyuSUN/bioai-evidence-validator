@@ -9,7 +9,14 @@ import re
 from pathlib import Path
 
 from bioevidence_validator.grounding import SnapshotStore
-from bioevidence_validator.literature import CATALOG, LiteratureGrounder, identifier, jats_blocks, jats_paragraphs
+from bioevidence_validator.literature import (
+    CATALOG,
+    LiteratureGrounder,
+    identifier,
+    jats_blocks,
+    jats_paragraphs,
+    pinned_sha256,
+)
 
 ROOT = Path(__file__).resolve().parent
 SOURCES = ROOT / "sources"
@@ -64,7 +71,7 @@ class Corpus:
         for source in record["source_artifacts"]:
             entry = self.catalog["works"].get(identifier(source["uri"]) or "")
             if entry:
-                source["sha256"] = source["observed_sha256"] = entry["fulltext_sha256"] or entry["metadata_sha256"]
+                source["sha256"] = source["observed_sha256"] = pinned_sha256(entry)
                 source["retrieved_at"] = entry["retrieved_at"]
         return record
 

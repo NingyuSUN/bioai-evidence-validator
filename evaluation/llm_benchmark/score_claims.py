@@ -17,7 +17,7 @@ repository keeps the answers and, per citation and per record, what was verified
 Each citation falls into one category, checked by this file's own code (the resolver's metadata and the
 article's paragraphs are read with the library's parsers): no_pmid, not_found (NCBI has no such PMID),
 retracted, wrong_paper (the title given does not match the PMID's), quote_found, quote_not_found (open full
-text, quote absent), unverifiable (no open full text). With bioevidence, the answer becomes a record citing
+text or abstract, quote absent), unverifiable (neither open full text nor an abstract). With bioevidence, the answer becomes a record citing
 each paper with its quote, grounded with `LiteratureGrounder` under the CIViC literature profile: only an
 admitted record keeps the model's decision.
 """
@@ -128,10 +128,15 @@ class Verifier:
             return {**facts, "category": "retracted"}
         if not facts["title_matches"]:
             return {**facts, "category": "wrong_paper"}
-        if not entry["fulltext_sha256"]:
+        if entry["fulltext_sha256"]:
+            blocks = [list(b) for b in literature.jats_blocks(self.store.get(entry["fulltext_sha256"]) or b"")]
+            facts["checked_against"] = "full text"
+        elif entry.get("abstract_sha256"):
+            blocks = [[i, "p", t] for i, t in literature.pubmed_abstract(self.store.get(entry["abstract_sha256"]) or b"")]
+            facts["checked_against"] = "abstract"
+        else:
             return {**facts, "category": "unverifiable"}
-        blocks = literature.jats_blocks(self.store.get(entry["fulltext_sha256"]) or b"")
-        found = score_literature.in_paper(cited["quote"], [list(b) for b in blocks])
+        found = score_literature.in_paper(cited["quote"], blocks)
         return {**facts, "category": "quote_found" if found else "quote_not_found"}
 
     def record(self, task: dict, answer: dict) -> dict | None:
@@ -143,7 +148,7 @@ class Verifier:
         for n, cited in enumerate(answer["citations"], start=1):
             key = pmid_of(cited["pmid"]) or f"unparsable:{n}"
             entry = self.catalog["works"].get(key, {})
-            sha = entry.get("fulltext_sha256") or entry.get("metadata_sha256") or "0" * 64
+            sha = literature.pinned_sha256(entry) if entry else "0" * 64
             sources.append({"id": f"bioev:paper-{n}", "title": cited["title"] or "(no title)", "source_type": "publication",
                             "uri": key if key.startswith("pmid:") else f"urn:unparsable:{n}", "version": "cited by the model",
                             "retrieved_at": entry.get("retrieved_at", "2026-01-01T00:00:00Z"), "sha256": sha,

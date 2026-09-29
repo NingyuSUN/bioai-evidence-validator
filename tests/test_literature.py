@@ -344,3 +344,22 @@ def test_quote_may_end_with_a_period_the_text_lacks():
     title = normalize("MYOD1 (L122R) mutations are associated with aggressive clinical outcomes")
     assert literature.quote_in(normalize("MYOD1 (L122R) mutations are associated with aggressive clinical outcomes."), title)
     assert not literature.quote_in(normalize("MYOD1 (L122R) mutations are associated with aggressive clinical."), title)
+
+
+PUBMED_2002 = (b"<PubmedArticleSet><PubmedArticle><MedlineCitation><PMID>2002</PMID><Article><ArticleTitle>"
+               + TITLE_A.encode() + b"</ArticleTitle><Abstract><AbstractText Label=\"RESULTS\">Tumours carrying the "
+               b"SYNG1 variant regressed in eight of ten treated patients.</AbstractText></Abstract></Article>"
+               b"</MedlineCitation></PubmedArticle></PubmedArticleSet>")
+
+
+def test_quotes_are_verified_against_the_abstract_without_open_full_text(tmp_path):
+    responses = {**NCBI, literature._eutils("efetch", db="pubmed", id="2002", retmode="xml"): PUBMED_2002}
+    quote = "Tumours carrying the SYNG1 variant regressed in eight of ten treated patients."
+    record, catalog = ground_record(claim(uri="pmid:2002", quote=quote, locator=""), tmp_path / "snapshots",
+                                    Fetcher(responses), resolver="ncbi")
+    entry = catalog["works"]["pmid:2002"]
+    assert entry["fulltext_sha256"] is None and record["source_artifacts"][0]["sha256"] == entry["abstract_sha256"]
+    assert check(record, tmp_path) == ([], {"bioev:item-1"})
+    altered = grounded(claim(uri="pmid:2002", quote=quote.replace("eight", "nine"), locator=""), tmp_path,
+                       Fetcher(responses))
+    assert check(altered, tmp_path) == (["BEV017"], set())
