@@ -168,3 +168,22 @@ def test_semantic_results_replay_byte_for_byte(tmp_path):
     semantic.score("pilot", None, tmp_path)
     for name in ("rows.jsonl", "summary.json", "summary.md"):
         assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_claims_scenario_replays_from_committed_verification(tmp_path):
+    claims = load("score_claims")
+    committed = BENCH / "results" / "literature-claims-pilot"
+    for name in ("answers.jsonl", "verification.jsonl"):
+        (tmp_path / name).write_bytes((committed / name).read_bytes())
+    claims.score(tmp_path)
+    for name in ("rows.jsonl", "summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_claims_pmids_and_titles():
+    claims = load("score_claims")
+    assert claims.pmid_of("PMID: 28284557") == "pmid:28284557" and claims.pmid_of("unknown") is None
+    assert claims.same_title("Binimetinib versus dacarbazine in NRAS-mutant melanoma (NEMO)",
+                             "Binimetinib versus dacarbazine in patients with advanced NRAS-mutant melanoma (NEMO)")
+    assert not claims.same_title("Loss of the VHL tumor-suppressor gene in renal carcinomas",
+                                 "Signal transduction in endocrine tissues.")
