@@ -72,6 +72,44 @@ The pilot sets exist to find problems in the protocol before the test run:
 Prompts, schemas, tasks and scoring are fixed by hash in each run's `manifest.json` before the test run;
 any change after that is reported as a separate run.
 
+## Pilot results
+
+These are the pilot sets only (six models; ClinVar 30 tasks, literature 18 tasks). The held-out test
+sets are built but have not been run: the pilots already answer the question below, and the test run
+would cost about 1,150 long model calls. Per-model tables with Wilson intervals:
+[ClinVar](results/pilot/summary.md), [literature](results/literature-pilot/summary.md).
+
+Literature, six models pooled (108 answers; 72 answerable):
+
+| Configuration | Correct decision | False STOP | Wrong direction | Quotes found in the paper | Answers with a quote not in the paper |
+|---|---:|---:|---:|---:|---:|
+| LLM only (no paper) | 36/108 (every task stopped) | 72/72 | 0/72 | — | — |
+| LLM only + bioevidence | 36/108 | 72/72 | 0/72 | — | — |
+| LLM + paper | 94/108 | 6/72 | 8/72 | 161/162 | 1/66 |
+| LLM + paper + bioevidence | 93/108 | 7/72 | 8/72 | 159/159 | 0/65 |
+
+ClinVar: with the submissions in the prompt, every model answered all 30 tasks correctly with exact
+citations, alone and in batches of 25; without them, every model stopped on every task. The
+validator changed no decision.
+
+What this shows:
+
+- **Current models rarely fabricate when they have the source, and abstain without it.** Of 162
+  quotes, one was not in the paper (two non-adjacent sentences stitched together, Claude Haiku 4.5);
+  the validator caught it, at the cost of sending that otherwise correct answer to a human.
+- **The errors they do make are semantic.** 8 of 72 answerable literature tasks were answered the
+  wrong way round, each with verbatim quotes: a "does not support" finding reported as support, or
+  the reverse. Text grounding cannot see these by design, and on natural model output it changed
+  almost nothing.
+- **The validator's value is a guarantee, not an average.** When a citation is invented, altered,
+  retracted or points at the wrong paper, it is stopped: 100% on the real-paper controls of the
+  [CIViC case](../../examples/civic_literature) and on the injected faults of the
+  [ClinVar](../../examples/clinvar_germline) and [VBO](../../examples/vbo_canine) cases, with no false
+  blocks on real sources. Every admission comes with a report of what was checked.
+
+Next: a semantic check for whether a verbatim quote supports the claim's direction (independent
+model review measured against expert labels, #21 and #22), which is where the remaining errors are.
+
 ## Run
 
 ```bash

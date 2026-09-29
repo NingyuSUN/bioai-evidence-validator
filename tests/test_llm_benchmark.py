@@ -137,3 +137,13 @@ def test_literature_checker_verifies_quotes(literature_checker):
     altered = {**real, "quotes": [{"paragraph": pid, "text": sentence.replace(" ", "  ", 1) + " strongly"}]}
     assert literature_checker.check(task, altered)["status"] == "rejected"
     assert literature_checker.check(task, {**real, "decision": "stop"})["status"] == "not_submitted"
+
+
+@pytest.mark.parametrize("module,folder", [("score", "pilot"), ("score_literature", "literature-pilot")])
+def test_committed_pilot_results_replay_byte_for_byte(module, folder, tmp_path):
+    committed = BENCH / "results" / folder
+    (tmp_path / "answers.jsonl").write_bytes((committed / "answers.jsonl").read_bytes())
+    scorer = score if module == "score" else score_lit
+    assert scorer.main(["--split", "pilot", "--output", str(tmp_path)]) == 0
+    for name in ("rows.jsonl", "summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name

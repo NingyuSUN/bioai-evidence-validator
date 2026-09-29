@@ -46,6 +46,7 @@ nav:
       - ClinVar germline classifications: benchmarks/clinvar.md
       - VBO canine name mapping: benchmarks/vbo-canine.md
       - CIViC literature grounding: benchmarks/civic-literature.md
+      - "LLM benchmark: models alone vs. with bioevidence": benchmarks/llm-benchmark.md
       - Building a gold standard: GOLD_STANDARD.md
       - Review tooling and templates: review-tooling.md
       - ClinVar expert-review kit: benchmarks/clinvar-review.md
