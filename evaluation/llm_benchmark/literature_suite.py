@@ -51,13 +51,16 @@ NO_TEXT = "The full text is not provided."
 
 
 def load_papers() -> dict[str, list[list[str]]]:
+    """pmid -> [[id, "title" or "p", text], ...]"""
     return json.loads(gzip.decompress((TASKS / "papers.json.gz").read_bytes()))
 
 
 def prompt(task: dict[str, Any], condition: str, papers: dict[str, list[list[str]]]) -> str:
     claim = task["claim"]
-    body = ("\n".join(f"[{pid}] {text}" for pid, text in papers[task["pmid"]]) if condition == "with_source"
-            else NO_TEXT)
+    # Paragraphs carry their ids; titles are shown as headings without one, since the pilot showed models
+    # citing a heading's id for the paragraph beneath it.
+    body = ("\n".join(f"[{pid}] {text}" if kind == "p" else f"## {text}" for pid, kind, text in papers[task["pmid"]])
+            if condition == "with_source" else NO_TEXT)
     return PROMPT.format(molecular_profile=claim["molecular_profile"], disease=claim["disease"],
                          evidence_type=claim["evidence_type"], significance=claim["significance"],
                          therapies=claim["therapies"] or "none", pmid=task["pmid"], title=task["title"], body=body)

@@ -66,7 +66,7 @@ def plain(text: str) -> str:
 
 def in_paper(quote: str, paragraphs: list[list[str]]) -> bool:
     needle = plain(quote)
-    return bool(needle) and any(needle in plain(text) for _, text in paragraphs)
+    return bool(needle) and any(needle in plain(block[-1]) for block in paragraphs)
 
 
 class Checker:

@@ -84,8 +84,11 @@ def test_codex_failure_is_reported(tmp_path):
 def test_literature_prompt_and_validation():
     task, papers = jsonl(BENCH / "literature_tasks" / "pilot.jsonl")[0], suite.load_papers()
     assert suite.NO_TEXT in suite.prompt(task, "no_source", papers)
-    pid, text = papers[task["pmid"]][0]
-    assert f"[{pid}] {text}" in suite.prompt(task, "with_source", papers)
+    prompt = suite.prompt(task, "with_source", papers)
+    pid, _, text = next(block for block in papers[task["pmid"]] if block[1] == "p")
+    assert f"[{pid}] {text}" in prompt
+    title = next(block for block in papers[task["pmid"]] if block[1] == "title")
+    assert f"## {title[2]}" in prompt and f"[{title[0]}]" not in prompt
     assert suite.validate({"decision": "stop", "quotes": [], "rationale": ""})
     with pytest.raises(ValueError):
         suite.validate({"decision": "stop", "quotes": [{"paragraph": "p1"}], "rationale": ""})
@@ -126,7 +129,7 @@ def literature_checker():
 
 def test_literature_checker_verifies_quotes(literature_checker):
     task, papers = jsonl(BENCH / "literature_tasks" / "pilot.jsonl")[0], suite.load_papers()
-    pid, text = max(papers[task["pmid"]], key=lambda p: len(p[1]))
+    pid, _, text = max(papers[task["pmid"]], key=lambda p: len(p[2]))
     sentence = " ".join(text.split()[:20])
     real = {"decision": "supports", "quotes": [{"paragraph": pid, "text": sentence}], "rationale": ""}
     assert literature_checker.check(task, real)["status"] == "admitted"

@@ -8,8 +8,8 @@ curation of that paper, not this repository's rules:
   supports          a CIViC item from this paper with direction "Supports"            -> supports
   does_not_support  a CIViC item from this paper with direction "Does Not Support"    -> does_not_support
   unrelated         a claim from another paper whose gene this paper never mentions  -> stop
-Pilot and test tasks use different papers. `papers.json.gz` holds each paper's paragraphs, with the ids the
-literature grounder uses, so the model runner needs no parser.
+Pilot and test tasks use different papers. `papers.json.gz` holds each paper's titles and paragraphs as
+[id, kind, text], with the ids the literature grounder uses, so the model runner needs no parser.
 """
 from __future__ import annotations
 
@@ -57,8 +57,8 @@ def build() -> dict[str, object]:
     rows: dict[str, list[dict]] = {}
     for row in source.evidence:
         rows.setdefault(row["citation_id"], []).append(row)
-    text = {pmid: source.paragraphs(pmid) for pmid in papers}
-    joined = {pmid: "\n".join(t for _, t in paragraphs) for pmid, paragraphs in text.items()}
+    text = {pmid: source.blocks(pmid) for pmid in papers}  # (id, "title" or "p", text)
+    joined = {pmid: "\n".join(t for _, _, t in blocks) for pmid, blocks in text.items()}
     seen: dict[tuple[str, str], bool] = {}
 
     def mentioned(pmid: str, gene: str) -> bool:
