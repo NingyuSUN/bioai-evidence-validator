@@ -64,6 +64,11 @@ The pilot sets exist to find problems in the protocol before the test run:
   out. Both the grounder and the scoring code (separately) now tolerate exactly these two differences.
   Of the quotes the first pilot flagged, most were these; one remained a real error (two
   non-adjacent sentences stitched into one quote).
+- Two kinds of literature task could not be answered from what the models see, and are now left out:
+  CIViC items whose clinical significance is "N/A" (the claim states no hypothesis: every model and
+  every reviewer "misread" one), and claims whose gene or specific protein change the paper's text
+  never names (the evidence is in a figure; every model rightly stopped). Seven pilot tasks were
+  replaced and rerun; the replaced answers are kept outside the repository, not scored.
 - ClinVar result: with the source in the prompt, all six models were perfect on every metric, in
   single and batch mode; without it, all six stopped on every task. On clean structured data the
   validator adds a guarantee and an audit trail, not a measurable accuracy gain. The literature suite

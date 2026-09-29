@@ -8,6 +8,9 @@ curation of that paper, not this repository's rules:
   supports          a CIViC item from this paper with direction "Supports"            -> supports
   does_not_support  a CIViC item from this paper with direction "Does Not Support"    -> does_not_support
   unrelated         a claim from another paper whose gene this paper never mentions  -> stop
+CIViC items whose clinical significance is "N/A" are left out: they state no hypothesis to judge. So are
+answerable claims whose gene (and specific protein change, if any) the paper's text never names: the models
+see the text only, not figures or tables.
 Pilot and test tasks use different papers. `papers.json.gz` holds each paper's titles and paragraphs as
 [id, kind, text], with the ids the literature grounder uses, so the model runner needs no parser.
 """
@@ -28,7 +31,7 @@ CASE = REPO / "examples" / "civic_literature"
 OUT = ROOT / "literature_tasks"
 KEY = "bioai-llm-literature-v1"
 SIZES = {"pilot": {"supports": 8, "does_not_support": 4, "unrelated": 6},
-         "test": {"supports": 50, "does_not_support": 16, "unrelated": 30}}  # 20 openly licensed papers have a DNS item
+         "test": {"supports": 50, "does_not_support": 12, "unrelated": 30}}  # 16 openly licensed papers have a usable DNS item
 
 
 def keyed(text: str) -> str:
@@ -56,6 +59,8 @@ def build() -> dict[str, object]:
     papers = sorted(source.manifest["corpus"], key=keyed)
     rows: dict[str, list[dict]] = {}
     for row in source.evidence:
+        if row["significance"] == "N/A":
+            continue  # no hypothesis to judge: in the pilot, all six models "misread" such a claim
         rows.setdefault(row["citation_id"], []).append(row)
     text = {pmid: source.blocks(pmid) for pmid in papers}  # (id, "title" or "p", text)
     joined = {pmid: "\n".join(t for _, _, t in blocks) for pmid, blocks in text.items()}
@@ -65,6 +70,13 @@ def build() -> dict[str, object]:
         if (pmid, gene) not in seen:
             seen[pmid, gene] = bool(re.search(rf"\b{re.escape(gene)}\b", joined[pmid]))
         return seen[pmid, gene]
+
+    def answerable(pmid: str, profile: str) -> bool:
+        """The text must name the gene and, for a specific protein change (A500T, V600E …), its position:
+        models see the text only, and the pilot showed evidence that lives only in a figure."""
+        words = profile.split()
+        position = re.match(r"^[A-Z]\d+", words[1]) if len(words) > 1 else None
+        return mentioned(pmid, words[0]) and (not position or bool(re.search(rf"\b{position.group(0)}", joined[pmid])))
 
     splits: dict[str, list[dict]] = {"pilot": [], "test": []}
     references, used = [], {"pilot": set(), "test": set()}
@@ -78,12 +90,13 @@ def build() -> dict[str, object]:
                 if pmid in other or pmid in used[split]:
                     continue
                 if category == "unrelated":
-                    donors = [r for p in papers if p != pmid for r in rows[p]
+                    donors = [r for p in papers if p != pmid for r in rows.get(p, [])
                               if not mentioned(pmid, r["molecular_profile"].split()[0])]
                     candidates = sorted(donors, key=lambda r: keyed(pmid + ":" + r["evidence_id"]))[:1]
                 else:
                     direction = "Supports" if category == "supports" else "Does Not Support"
-                    candidates = sorted((r for r in rows[pmid] if r["evidence_direction"] == direction),
+                    candidates = sorted((r for r in rows.get(pmid, []) if r["evidence_direction"] == direction
+                                         and answerable(pmid, r["molecular_profile"])),
                                         key=lambda r: keyed(r["evidence_id"]))[:1]
                 if not candidates:
                     continue
