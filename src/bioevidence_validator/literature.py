@@ -40,7 +40,7 @@ CROSSREF = "https://api.crossref.org/works/"
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 _BEFORE_CLOSE = re.compile(r"\s+([)\],.;:])")
 _AFTER_OPEN = re.compile(r"([(\[])\s+")
-_REFERENCE_TAIL = re.compile(r"\s*(\([^()]*\)\s*)+([.;:]|$)")
+_REFERENCE_TAIL = re.compile(r"\s*(\([^()]*\)\s*)*([.;:]|$)")
 MIN_QUOTE_WORDS = 5  # shorter quotes match almost anywhere and prove little
 TITLE_OVERLAP = 0.5  # word-set Jaccard below which a supplied title names a different paper
 _PUNCTUATION = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-",
@@ -56,8 +56,8 @@ def normalize(text: str) -> str:
 
 def quote_in(quote: str, text: str) -> bool:
     """Whether a normalised quote is a substring of normalised text (so a quote may start or stop
-    inside a sentence), or would be if its final punctuation stood after a trailing parenthetical
-    reference such as `(Table 2, Fig. 3)` that the quote leaves out."""
+    inside a sentence), or would be but for its final punctuation: where the text ends, or goes on with
+    trailing parenthetical references such as `(Table 2, Fig. 3)` that the quote leaves out."""
     if quote in text:
         return True
     core = quote.rstrip(" .;:")

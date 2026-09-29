@@ -338,3 +338,9 @@ def test_jats_blocks_tell_titles_from_paragraphs():
 def test_quote_matching_tolerates_only_formatting(quote, found):
     text = normalize("Expression was stable across all tested strains ( Figure 2 ). Other text followed.")
     assert literature.quote_in(normalize(quote), text) is found
+
+
+def test_quote_may_end_with_a_period_the_text_lacks():
+    title = normalize("MYOD1 (L122R) mutations are associated with aggressive clinical outcomes")
+    assert literature.quote_in(normalize("MYOD1 (L122R) mutations are associated with aggressive clinical outcomes."), title)
+    assert not literature.quote_in(normalize("MYOD1 (L122R) mutations are associated with aggressive clinical."), title)
