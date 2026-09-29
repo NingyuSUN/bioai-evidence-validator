@@ -56,17 +56,40 @@ def wilson(events: int, n: int, z: float = 1.959963984540054) -> list[float] | N
 
 
 def plain(text: str) -> str:
-    """Independent of the grounder: NFKC, straight quotes and dashes, single spaces, case kept."""
+    """Independent of the grounder: NFKC, straight quotes and dashes, single spaces, no space just inside
+    brackets or before punctuation (JATS writes `( Figure 2 )`), case kept."""
     text = unicodedata.normalize("NFKC", text)
-    for fancy, simple in (("‘", "'"), ("’", "'"), ("“", '"'), ("”", '"'), ("–", "-"),
-                          ("—", "-"), ("−", "-")):
+    for fancy, simple in (("\u2018", "'"), ("\u2019", "'"), ("\u201c", '"'), ("\u201d", '"'), ("\u2013", "-"),
+                          ("\u2014", "-"), ("\u2212", "-")):
         text = text.replace(fancy, simple)
-    return " ".join(text.split())
+    words = " ".join(text.split())
+    for gap, joined in ((" )", ")"), (" ]", "]"), ("( ", "("), ("[ ", "["), (" ,", ","), (" .", "."), (" ;", ";"),
+                        (" :", ":")):
+        while gap in words:
+            words = words.replace(gap, joined)
+    return words
 
 
 def in_paper(quote: str, paragraphs: list[list[str]]) -> bool:
+    """A quote counts as found if it occurs verbatim, or would if its final punctuation came after a
+    parenthetical reference the quote leaves out ('... group.' for '... group (Table 2).')."""
     needle = plain(quote)
-    return bool(needle) and any(needle in plain(block[-1]) for block in paragraphs)
+    if not needle:
+        return False
+    stem = needle.rstrip(" .;:")
+    for block in paragraphs:
+        text = plain(block[-1])
+        if needle in text:
+            return True
+        at = text.find(stem)
+        while stem and at >= 0:
+            rest = text[at + len(stem):].lstrip()
+            while rest.startswith("(") and ")" in rest:
+                rest = rest[rest.index(")") + 1:].lstrip()
+            if rest == "" or rest[0] in ".;:":
+                return True
+            at = text.find(stem, at + 1)
+    return False
 
 
 class Checker:

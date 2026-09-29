@@ -58,6 +58,12 @@ The pilot sets exist to find problems in the protocol before the test run:
   change of format, not of content, so dates are compared as dates, and the record builder normalises them.
 - With bioevidence, the model's own conflict flag still counts: the validator adds findings and hides nothing.
 - GPT-5.4-Mini is refused for ChatGPT accounts, so GPT-5.6-Luna is the fast GPT model.
+- Literature prompts first gave section headings paragraph ids, and models cited a heading's id for
+  the paragraph under it; headings are now shown without ids.
+- Genuine quotes failed on JATS spacing (`( Figure 2 )`) and on a trailing `(Table 2)` the quote left
+  out. Both the grounder and the scoring code (separately) now tolerate exactly these two differences.
+  Of the quotes the first pilot flagged, most were these; one remained a real error (two
+  non-adjacent sentences stitched into one quote).
 - ClinVar result: with the source in the prompt, all six models were perfect on every metric, in
   single and batch mode; without it, all six stopped on every task. On clean structured data the
   validator adds a guarantee and an audit trail, not a measurable accuracy gain. The literature suite
