@@ -11,7 +11,7 @@ make no extra model call; every difference between a pair of rows comes from the
 | Suite | Task | Reference answer | Sizes (pilot / test) |
 |---|---|---|---|
 | ClinVar (structured) | May this variant's P/LP classification enter a clinical reference set? List the ClinVar submissions behind the answer. | NCBI's own 2023-09 review status (not this repository's rules) | 30 / 150 |
-| Literature | Does this open-access paper support a CIViC-style claim, report evidence against it, or not address it? Quote the sentences that show it. | CIViC's curation of that paper; unrelated claims (gene never mentioned) should stop | 18 / 96 |
+| Literature | Does this open-access paper support a CIViC-style claim, report evidence against it, or not address it? Quote the sentences that show it. | CIViC's curation of that paper; unrelated claims (gene never mentioned) should stop | 18 / 92 |
 
 Tasks are built deterministically ([tasks.py](tasks.py), [tasks_literature.py](tasks_literature.py))
 from the pinned [ClinVar sample](../../examples/clinvar_germline) and the pinned
