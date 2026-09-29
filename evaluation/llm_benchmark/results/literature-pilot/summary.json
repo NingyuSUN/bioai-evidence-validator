@@ -368,18 +368,21 @@
       "llm_bioevidence": {
         "answered": 18,
         "citation_grounded": {
-          "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
         },
         "correct_decision": {
-          "events": 6,
+          "events": 7,
           "n": 18,
-          "rate": 0.3333,
+          "rate": 0.3889,
           "wilson_95": [
-            0.1628,
-            0.5625
+            0.2031,
+            0.6138
           ]
         },
         "correct_stop": {
@@ -392,19 +395,22 @@
           ]
         },
         "false_stop": {
-          "events": 12,
+          "events": 11,
           "n": 12,
-          "rate": 1.0,
+          "rate": 0.9167,
           "wilson_95": [
-            0.7575,
-            1.0
+            0.6461,
+            0.9851
           ]
         },
         "hallucination": {
           "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
         },
         "negative_detected": {
           "events": 0,
@@ -898,18 +904,21 @@
       "llm_bioevidence": {
         "answered": 18,
         "citation_grounded": {
-          "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
         },
         "correct_decision": {
-          "events": 6,
+          "events": 7,
           "n": 18,
-          "rate": 0.3333,
+          "rate": 0.3889,
           "wilson_95": [
-            0.1628,
-            0.5625
+            0.2031,
+            0.6138
           ]
         },
         "correct_stop": {
@@ -922,19 +931,22 @@
           ]
         },
         "false_stop": {
-          "events": 12,
+          "events": 11,
           "n": 12,
-          "rate": 1.0,
+          "rate": 0.9167,
           "wilson_95": [
-            0.7575,
-            1.0
+            0.6461,
+            0.9851
           ]
         },
         "hallucination": {
           "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
         },
         "negative_detected": {
           "events": 0,

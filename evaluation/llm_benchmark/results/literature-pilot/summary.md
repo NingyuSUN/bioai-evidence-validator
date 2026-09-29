@@ -5,7 +5,7 @@
 | Model | Configuration | Correct decision | Correct STOP | False STOP | Negative finding detected | Wrong direction | Citation grounded | Hallucination |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Opus 5.5 | LLM only | 44% | 100% | 83% | 0% | 0% | 50% | 50% |
-| Claude Opus 5.5 | LLM only + bioevidence | 33% | 100% | 100% | 0% | 0% | N/A | N/A |
+| Claude Opus 5.5 | LLM only + bioevidence | 39% | 100% | 92% | 0% | 0% | 100% | 0% |
 | Claude Opus 5.5 | LLM + paper | 89% | 100% | 17% | 75% | 0% | 100% | 0% |
 | Claude Opus 5.5 | LLM + paper + bioevidence | 89% | 100% | 17% | 75% | 0% | 100% | 0% |
 | GPT-6-Astra | LLM only | 33% | 100% | 100% | 0% | 0% | N/A | N/A |
@@ -13,7 +13,7 @@
 | GPT-6-Astra | LLM + paper | 89% | 100% | 0% | 75% | 17% | 100% | 0% |
 | GPT-6-Astra | LLM + paper + bioevidence | 89% | 100% | 0% | 75% | 17% | 100% | 0% |
 | Gemini 3.1 Pro | LLM only | 39% | 100% | 92% | 0% | 0% | 100% | 0% |
-| Gemini 3.1 Pro | LLM only + bioevidence | 33% | 100% | 100% | 0% | 0% | N/A | N/A |
+| Gemini 3.1 Pro | LLM only + bioevidence | 39% | 100% | 92% | 0% | 0% | 100% | 0% |
 | Gemini 3.1 Pro | LLM + paper | 94% | 100% | 8% | 75% | 0% | 100% | 0% |
 | Gemini 3.1 Pro | LLM + paper + bioevidence | 94% | 100% | 8% | 75% | 0% | 100% | 0% |
 | Claude Haiku 4.5 | LLM only | 33% | 100% | 100% | 0% | 0% | N/A | N/A |
