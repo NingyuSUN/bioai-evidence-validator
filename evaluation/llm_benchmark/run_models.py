@@ -298,7 +298,7 @@ def ask(key: str, unit: dict, condition: str, timeout: int, runner: Callable = e
         schema, check = review_suite.SCHEMA, review_suite.validate
     elif papers is not None:
         prompt = literature_suite.prompt(unit, condition, papers)
-        schema, check = literature_suite.SCHEMA, literature_suite.validate
+        schema, check = literature_suite.schema_for(condition), literature_suite.validator_for(condition)
     else:
         prompt = batch_prompt(unit["tasks"]) if batch else prompt_for(unit, condition)
         schema, check = (BATCH_SCHEMA, validate_batch) if batch else (SCHEMA, validate_answer)
@@ -362,6 +362,9 @@ def run(args: argparse.Namespace) -> int:
     elif literature:
         manifest.update({"suite": "literature", "split": args.split,
                          "prompt_template_sha256": sha256_text(literature_suite.PROMPT),
+                         "naive_prompt_templates_sha256": sha256_text(literature_suite.NAIVE_PAPER_PROMPT
+                                                                      + literature_suite.NAIVE_CLAIM_PROMPT),
+                         "claim_schema_sha256": sha256_text(json.dumps(literature_suite.CLAIM_SCHEMA, sort_keys=True)),
                          "schema_sha256": sha256_text(json.dumps(literature_suite.SCHEMA, sort_keys=True)),
                          "tasks_sha256": sha256_text(text),
                          "papers_sha256": hashlib.sha256((folder / "papers.json.gz").read_bytes()).hexdigest()})

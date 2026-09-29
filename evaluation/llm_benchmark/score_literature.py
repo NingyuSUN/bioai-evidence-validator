@@ -37,7 +37,9 @@ TASKS = ROOT / "literature_tasks"
 CASE = ROOT.parents[1] / "examples" / "civic_literature"
 CONFIGS = [("llm", "no_source", False, "LLM only"), ("llm_bioevidence", "no_source", True, "LLM only + bioevidence"),
            ("llm_paper", "with_source", False, "LLM + paper"),
-           ("llm_paper_bioevidence", "with_source", True, "LLM + paper + bioevidence")]
+           ("llm_paper_bioevidence", "with_source", True, "LLM + paper + bioevidence"),
+           ("llm_naive", "naive_paper", False, "LLM, plain question (PMID and title)"),
+           ("llm_naive_bioevidence", "naive_paper", True, "LLM, plain question + bioevidence")]
 MODEL_NAMES = {"claude-opus": "Claude Opus 5.5", "gpt-astra": "GPT-6-Astra", "gemini-pro": "Gemini 3.1 Pro",
                "claude-haiku": "Claude Haiku 4.5", "gpt-luna": "GPT-5.6-Luna", "gemini-flash": "Gemini 3.8 Flash"}
 
@@ -178,8 +180,8 @@ def metrics(rows: list[dict]) -> dict:
             "negative_detected": rate(sum(r["final"] == "does_not_support" for r in negative), len(negative)),
             "wrong_direction": rate(sum(r["final"] not in ("stop", r["expected"]) for r in answerable), len(answerable)),
             "citation_grounded": rate(sum(r["quotes_in_paper"] for r in delivered), sum(r["quotes"] for r in delivered)),
-            "hallucination": rate(sum(r["quotes_in_paper"] < r["quotes"] or not r["quotes"] for r in delivered),
-                                  len(delivered))}
+            "hallucination": rate(sum(r["quotes_in_paper"] < r["quotes"] for r in delivered), len(delivered)),
+            "no_quote": rate(sum(not r["quotes"] for r in delivered), len(delivered))}
 
 
 def pct(m: dict) -> str:
@@ -191,19 +193,21 @@ def render(summary: dict) -> str:
              f"{summary['tasks']} tasks on open-access CIViC papers; reference: CIViC's curation of each paper. Models: "
              + ", ".join(f"{MODEL_NAMES[b]} (`{m['model']}`)" for b, m in summary["models"].items()) + ".", "",
              "| Model | Configuration | Correct decision | Correct STOP | False STOP | Negative finding detected | "
-             "Wrong direction | Citation grounded | Hallucination |", "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
+             "Wrong direction | Citation grounded | Invented quote | No quote |",
+             "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for backend, configs in summary["results"].items():
         for config, _, _, label in CONFIGS:
             if config in configs:
                 m = configs[config]
                 lines.append(f"| {MODEL_NAMES[backend]} | {label} | {pct(m['correct_decision'])} | {pct(m['correct_stop'])} | "
                              f"{pct(m['false_stop'])} | {pct(m['negative_detected'])} | {pct(m['wrong_direction'])} | "
-                             f"{pct(m['citation_grounded'])} | {pct(m['hallucination'])} |")
+                             f"{pct(m['citation_grounded'])} | {pct(m['hallucination'])} | {pct(m['no_quote'])} |")
     lines += ["", "Correct STOP: share of unrelated claims (the paper never mentions the gene) not answered. False STOP: "
               "share of answerable tasks not answered. Negative finding detected: share of CIViC \"Does Not Support\" "
               "items answered as such. Wrong direction: share of answerable tasks answered the opposite way. Citation "
-              "grounded: share of quotes found verbatim in the paper, among delivered answers. Hallucination: share of "
-              "delivered answers with a quote not in the paper (or no quote). Delivered: every non-stop model answer; "
+              "grounded: share of quotes found verbatim in the paper, among delivered answers. Invented quote: share of "
+              "delivered answers with at least one quote not in the paper (the `hallucination` metric). No quote: share "
+              "of delivered answers that give a decision without any quote. Delivered: every non-stop model answer; "
               "with bioevidence, only admitted records.", "",
               "Wilson 95% intervals and per-task rows are in `summary.json` and `rows.jsonl`.", ""]
     return "\n".join(lines)
