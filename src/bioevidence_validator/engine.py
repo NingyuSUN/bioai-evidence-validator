@@ -75,10 +75,15 @@ def load_profile(data: bytes) -> dict[str, Any]:
         raise ValueError("Profile uses must be a nonempty mapping")
     flags = {"require_human_acceptance", "allow_llm_only", "allow_string_match_only"}
     for name, use in profile["uses"].items():
-        if not nonblank(name) or not isinstance(use, dict) or set(use) != flags | {"required_evidence_types"}:
+        if (not nonblank(name) or not isinstance(use, dict)
+                or set(use) - {"verified_evidence_types"} != flags | {"required_evidence_types"}):
             raise ValueError(f"Invalid or incomplete use configuration: {name!r}")
         if any(type(use[key]) is not bool for key in flags) or not _string_list(use["required_evidence_types"]):
             raise ValueError(f"Use {name!r} requires boolean flags and distinct evidence types")
+        verified = use.get("verified_evidence_types", [])
+        if not isinstance(verified, list) or (verified and not _string_list(verified)) \
+                or set(verified) - set(use["required_evidence_types"]):
+            raise ValueError(f"Use {name!r}: verified_evidence_types must be distinct required evidence types")
     return profile
 
 
@@ -138,8 +143,12 @@ def _integrity_findings(record: dict, profile: dict) -> list[Finding]:
     return findings
 
 
-def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
-    """Fixed evidence checks plus declarative use contracts; no domain dispatch."""
+def evaluate_profile(record: dict, profile: dict, verified: set[str] | None = None) -> list[Finding]:
+    """Fixed evidence checks plus declarative use contracts; no domain dispatch.
+
+    `verified` holds the evidence items a grounder confirmed against their source. A required type the
+    profile lists under `verified_evidence_types` counts only through such items (BEV020 otherwise).
+    """
     findings = []
     requested = record["requested_uses"]
     statement = record["statement"]
@@ -178,6 +187,11 @@ def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
         missing = set(contract["required_evidence_types"]) - types
         if missing:
             add("BEV007", "error", "Missing supporting evidence types: " + ", ".join(sorted(missing)), "$.evidence_items", [use])
+        for kind in contract.get("verified_evidence_types", []):
+            if kind in types and not any(item_id in (verified or set()) for item_id, item in supporting.items()
+                                         if item["evidence_type"] == kind):
+                add("BEV020", "review", f"Required evidence type {kind!r} is not verified against its source.",
+                    "$.evidence_items", [use])
         # Each required evidence type must independently satisfy the quality gate.
         # An unrelated manually curated note cannot strengthen a required LLM result.
         groups = [(kind, [item for item in supporting.values() if item["evidence_type"] == kind])
@@ -249,7 +263,11 @@ class RecordValidator:
         if not findings:
             findings.extend(_integrity_findings(record, self._profile))
         if not findings:
-            findings.extend(evaluate_profile(record, self._profile))
+            verified: set[str] = set()
+            for grounder in self.grounders:
+                if hasattr(grounder, "verified_items"):
+                    verified |= set(grounder.verified_items(record))
+            findings.extend(evaluate_profile(record, self._profile, verified))
             for grounder in self.grounders:  # only structurally sound records are compared with their source
                 findings.extend(grounder.check(record))
         decisions = decide_uses(uses, findings)

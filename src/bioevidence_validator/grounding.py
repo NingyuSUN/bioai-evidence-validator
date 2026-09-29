@@ -11,6 +11,10 @@ Rule codes (all apply to every requested use):
   BEV016 error   a cited identifier does not exist in the source
   BEV017 error   the record disagrees with what the source says
   BEV018 review  the source holds evidence the record leaves out
+  BEV019 error   the cited source is retracted
+
+A grounder may also offer `verified_items(record)`: the evidence items it confirmed against their source.
+Only those count for evidence types a profile lists under `verified_evidence_types` (BEV020 otherwise).
 
 Domain grounders (which fields to recompute for a given source format) live with their importers,
 outside the engine; `SourceBytesGrounder` is generic.
@@ -24,7 +28,8 @@ from typing import Any, Protocol
 
 from .engine import Finding
 
-SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review"}
+SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review",
+            "BEV019": "error"}
 
 
 class Grounder(Protocol):
