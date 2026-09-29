@@ -15,6 +15,8 @@ browser tools, user config and MCP servers, read-only sandbox). Antigravity cann
 search, so tool calls are detected from its event stream; an answer given with tool use is retried
 once and otherwise kept and flagged. The script reads only `tasks/<split>.jsonl`, never the
 reference answers, needs only the standard library, and resumes where it stopped.
+
+`--suite literature` asks the literature task instead (literature_suite.py): with or without the paper's text.
 """
 from __future__ import annotations
 
@@ -33,6 +35,8 @@ import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
+
+import literature_suite
 
 ROOT = Path(__file__).resolve().parent
 CONDITIONS = ["no_source", "with_source", "with_source_batch"]
@@ -280,12 +284,19 @@ def execute(argv: list[str], stdin: str | None, workdir: Path, timeout: int) -> 
                           errors="replace", timeout=timeout, env=env)
 
 
-def ask(key: str, unit: dict, condition: str, timeout: int, runner: Callable = execute) -> dict:
-    """One fresh CLI session for one task (or one batch); retried once on tool use or an invalid answer."""
+def ask(key: str, unit: dict, condition: str, timeout: int, runner: Callable = execute,
+        papers: dict | None = None) -> dict:
+    """One fresh CLI session for one task (or one batch); retried once on tool use or an invalid answer.
+
+    With `papers`, the task is a literature task."""
     spec, model = CLIS[MODELS[key]["cli"]], MODELS[key]["model"]
     batch = condition == "with_source_batch"
-    prompt = batch_prompt(unit["tasks"]) if batch else prompt_for(unit, condition)
-    schema, check = (BATCH_SCHEMA, validate_batch) if batch else (SCHEMA, validate_answer)
+    if papers is not None:
+        prompt = literature_suite.prompt(unit, condition, papers)
+        schema, check = literature_suite.SCHEMA, literature_suite.validate
+    else:
+        prompt = batch_prompt(unit["tasks"]) if batch else prompt_for(unit, condition)
+        schema, check = (BATCH_SCHEMA, validate_batch) if batch else (SCHEMA, validate_answer)
     attempts: list[dict[str, Any]] = []
     for attempt in (1, 2):
         started = time.monotonic()
@@ -324,22 +335,36 @@ def cli_version(name: str) -> str:
 
 
 def run(args: argparse.Namespace) -> int:
-    tasks = [json.loads(line) for line in (ROOT / "tasks" / f"{args.split}.jsonl").read_text(encoding="utf-8").splitlines()]
+    literature = args.suite == "literature"
+    folder = literature_suite.TASKS if literature else ROOT / "tasks"
+    text = (folder / f"{args.split}.jsonl").read_text(encoding="utf-8")
+    tasks = [json.loads(line) for line in text.splitlines()]
     if args.limit:
         tasks = tasks[:args.limit]
-    out = args.output / args.split
+    papers = literature_suite.load_papers() if literature else None
+    conditions = args.conditions or (literature_suite.CONDITIONS if literature else CONDITIONS)
+    if set(conditions) - set(literature_suite.CONDITIONS if literature else CONDITIONS):
+        raise SystemExit(f"conditions for the {args.suite} suite: {literature_suite.CONDITIONS if literature else CONDITIONS}")
+    out = args.output / (f"literature-{args.split}" if literature else args.split)
     out.mkdir(parents=True, exist_ok=True)
     manifest_path = out / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"backends": {}}
-    manifest.update({"split": args.split, "prompt_template_sha256": sha256_text(PROMPT),
-                     "batch_prompt_template_sha256": sha256_text(BATCH_PROMPT), "batch_size": BATCH_SIZE,
-                     "schema_sha256": sha256_text(json.dumps(SCHEMA, sort_keys=True)),
-                     "batch_schema_sha256": sha256_text(json.dumps(BATCH_SCHEMA, sort_keys=True)),
-                     "tasks_sha256": sha256_text((ROOT / "tasks" / f"{args.split}.jsonl").read_text(encoding="utf-8"))})
+    if literature:
+        manifest.update({"suite": "literature", "split": args.split,
+                         "prompt_template_sha256": sha256_text(literature_suite.PROMPT),
+                         "schema_sha256": sha256_text(json.dumps(literature_suite.SCHEMA, sort_keys=True)),
+                         "tasks_sha256": sha256_text(text),
+                         "papers_sha256": hashlib.sha256((folder / "papers.json.gz").read_bytes()).hexdigest()})
+    else:
+        manifest.update({"split": args.split, "prompt_template_sha256": sha256_text(PROMPT),
+                         "batch_prompt_template_sha256": sha256_text(BATCH_PROMPT), "batch_size": BATCH_SIZE,
+                         "schema_sha256": sha256_text(json.dumps(SCHEMA, sort_keys=True)),
+                         "batch_schema_sha256": sha256_text(json.dumps(BATCH_SCHEMA, sort_keys=True)),
+                         "tasks_sha256": sha256_text(text)})
     jobs = []
     for key in args.models:
         manifest["backends"][key] = {**MODELS[key], "cli_version": cli_version(MODELS[key]["cli"])}
-        for condition in args.conditions:
+        for condition in conditions:
             folder = out / key / condition
             folder.mkdir(parents=True, exist_ok=True)
             units = batches(tasks) if condition == "with_source_batch" else tasks
@@ -354,7 +379,7 @@ def run(args: argparse.Namespace) -> int:
     def work(job):
         key, unit, condition, raw = job
         timeout = args.timeout * 3 if condition == "with_source_batch" else args.timeout
-        result = ask(key, unit, condition, timeout)
+        result = ask(key, unit, condition, timeout, papers=papers)
         raw.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return result
 
@@ -371,10 +396,11 @@ def run(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--suite", choices=["clinvar", "literature"], default="clinvar")
     parser.add_argument("--split", choices=["pilot", "test"], required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS))
-    parser.add_argument("--conditions", nargs="+", choices=CONDITIONS, default=CONDITIONS)
+    parser.add_argument("--conditions", nargs="+", choices=sorted(set(CONDITIONS) | set(literature_suite.CONDITIONS)))
     parser.add_argument("--limit", type=int)
     parser.add_argument("--workers", type=int, default=2, help="Concurrent calls per backend")
     parser.add_argument("--timeout", type=int, default=600, help="Seconds per call (three times this for a batch)")
