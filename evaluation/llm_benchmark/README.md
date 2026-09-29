@@ -132,7 +132,7 @@ keeps what was verified (`verification.jsonl`).
 | Configuration | Answered | Correct decision | Answers with an invalid citation | Answers with only verified citations | Answers without a citation |
 |---|---:|---:|---:|---:|---:|
 | LLM alone | 50/108 | 46/108 | 34/50 | 1/50 | 9/50 |
-| LLM + bioevidence | 0/108 | 0/108 | — | — | — |
+| LLM + bioevidence | 1/108 | 1/108 | 0/1 | 1/1 | 0/1 |
 
 Of the 66 citations the models gave: 28 had a real PMID that belongs to an unrelated paper (the title
 cited is often a real paper, with a mistyped or invented PMID: 28284562 for the NEMO trial, whose PMID is
@@ -140,8 +140,9 @@ cited is often a real paper, with a mistyped or invented PMID: 28284562 for the 
 exist, 1 had no PMID, and 3 were verified.
 
 What this shows: asked without the source and without the rules, every model, frontier or fast, cites
-papers and quotes that do not check out. Bioevidence admits none of them: every such answer goes to a
-human with the reason (wrong paper, quote not in the paper, unverifiable). It cannot turn these answers
+papers and quotes that do not check out. Bioevidence admits none of them: it admitted the one answer
+whose citations all verified (and whose decision was right), rejected 33 for a wrong paper, a quote not in
+the paper or a PMID that does not exist, and sent 7 with no open full text to review. It cannot turn these answers
 into good ones; that takes the source (the pilots above) or a curator.
 
 ## Semantic checks (#31)

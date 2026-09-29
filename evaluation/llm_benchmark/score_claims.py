@@ -148,7 +148,7 @@ class Verifier:
                             "uri": key if key.startswith("pmid:") else f"urn:unparsable:{n}", "version": "cited by the model",
                             "retrieved_at": entry.get("retrieved_at", "2026-01-01T00:00:00Z"), "sha256": sha,
                             "observed_sha256": sha})
-            items.append({"id": f"bioev:quote-{n}", "source_artifact_id": f"bioev:paper-{n}", "locator": "",
+            items.append({"id": f"bioev:quote-{n}", "source_artifact_id": f"bioev:paper-{n}", "locator": "whole paper",
                           "extracted_text": cited["quote"], "evidence_type": "publication_quote",
                           "extraction_method": "llm_extraction", "scope": ["NCBITaxon:9606"]})
         return {

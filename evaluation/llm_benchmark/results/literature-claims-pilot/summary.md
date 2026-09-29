@@ -7,7 +7,7 @@ The model is asked, as a user would ask a chatbot, what the literature says abou
 | Claude Opus 5.5 | LLM alone | 13/18 | 11/18 | 2/18 | 8/13 | 0/13 | 3/13 |
 | Claude Opus 5.5 | + bioevidence | 0/18 | 0/18 | 0/18 | N/A | N/A | N/A |
 | GPT-6-Astra | LLM alone | 11/18 | 11/18 | 0/18 | 3/11 | 1/11 | 5/11 |
-| GPT-6-Astra | + bioevidence | 0/18 | 0/18 | 0/18 | N/A | N/A | N/A |
+| GPT-6-Astra | + bioevidence | 1/18 | 1/18 | 0/18 | 0/1 | 1/1 | 0/1 |
 | Gemini 3.1 Pro | LLM alone | 11/18 | 11/18 | 0/18 | 9/11 | 0/11 | 1/11 |
 | Gemini 3.1 Pro | + bioevidence | 0/18 | 0/18 | 0/18 | N/A | N/A | N/A |
 | Claude Haiku 4.5 | LLM alone | 2/18 | 1/18 | 1/18 | 2/2 | 0/2 | 0/2 |
@@ -17,7 +17,7 @@ The model is asked, as a user would ask a chatbot, what the literature says abou
 | Gemini 3.8 Flash | LLM alone | 11/18 | 10/18 | 1/18 | 10/11 | 0/11 | 0/11 |
 | Gemini 3.8 Flash | + bioevidence | 0/18 | 0/18 | 0/18 | N/A | N/A | N/A |
 | All six models | LLM alone | 50/108 | 46/108 | 4/108 | 34/50 | 1/50 | 9/50 |
-| All six models | + bioevidence | 0/108 | 0/108 | 0/108 | N/A | N/A | N/A |
+| All six models | + bioevidence | 1/108 | 1/108 | 0/108 | 0/1 | 1/1 | 0/1 |
 
 Citations given by the models alone: no_pmid 1, not_found 2, quote_found 3, quote_not_found 16, unverifiable 16, wrong_paper 28.
 

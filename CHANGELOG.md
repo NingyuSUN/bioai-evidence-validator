@@ -5,7 +5,7 @@
 - Benchmark scenario 1: the literature tasks asked as a user would ask a chatbot, without rules, source
   or tools. With only PMID and title, 32 of 49 model answers held an invented quote; with the claim
   only, 34 of 50 cited at least one invalid paper or quote (28 of 66 citations were real PMIDs of
-  unrelated papers). Bioevidence admitted none of them. The literature hallucination metric now counts
+  unrelated papers). Bioevidence admitted only the one answer whose citations all verified. The literature hallucination metric now counts
   invented quotes only; answers without a quote are reported separately.
 
 - Add semantic checks (#31). A use may require independent review: an accepting non-human

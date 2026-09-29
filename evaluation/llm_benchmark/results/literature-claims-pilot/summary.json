@@ -104,46 +104,58 @@
     },
     "llm_bioevidence": {
       "answered": {
-        "events": 0,
+        "events": 1,
         "n": 108,
-        "rate": 0.0,
+        "rate": 0.0093,
         "wilson_95": [
-          0.0,
-          0.0343
+          0.0016,
+          0.0506
         ]
       },
       "cites_curated_paper": {
         "events": 0,
-        "n": 0,
-        "rate": null,
-        "wilson_95": null
-      },
-      "correct_decision": {
-        "events": 0,
-        "n": 108,
+        "n": 1,
         "rate": 0.0,
         "wilson_95": [
           0.0,
-          0.0343
+          0.7935
+        ]
+      },
+      "correct_decision": {
+        "events": 1,
+        "n": 108,
+        "rate": 0.0093,
+        "wilson_95": [
+          0.0016,
+          0.0506
         ]
       },
       "invalid_citation": {
         "events": 0,
-        "n": 0,
-        "rate": null,
-        "wilson_95": null
+        "n": 1,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.7935
+        ]
       },
       "no_citation": {
         "events": 0,
-        "n": 0,
-        "rate": null,
-        "wilson_95": null
+        "n": 1,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.7935
+        ]
       },
       "only_verified_citations": {
-        "events": 0,
-        "n": 0,
-        "rate": null,
-        "wilson_95": null
+        "events": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_95": [
+          0.2065,
+          1.0
+        ]
       },
       "tasks": 108,
       "wrong_direction": {
@@ -715,46 +727,58 @@
       },
       "llm_bioevidence": {
         "answered": {
-          "events": 0,
+          "events": 1,
           "n": 18,
-          "rate": 0.0,
+          "rate": 0.0556,
           "wilson_95": [
-            0.0,
-            0.1759
+            0.0099,
+            0.2576
           ]
         },
         "cites_curated_paper": {
           "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
-        },
-        "correct_decision": {
-          "events": 0,
-          "n": 18,
+          "n": 1,
           "rate": 0.0,
           "wilson_95": [
             0.0,
-            0.1759
+            0.7935
+          ]
+        },
+        "correct_decision": {
+          "events": 1,
+          "n": 18,
+          "rate": 0.0556,
+          "wilson_95": [
+            0.0099,
+            0.2576
           ]
         },
         "invalid_citation": {
           "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
         },
         "no_citation": {
           "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
         },
         "only_verified_citations": {
-          "events": 0,
-          "n": 0,
-          "rate": null,
-          "wilson_95": null
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
         },
         "tasks": 18,
         "wrong_direction": {
@@ -892,5 +916,5 @@
     }
   },
   "split": "pilot",
-  "verification_sha256": "fba4f52e085463cdab7f89550e817ec4a75b209f325d34c7950fb1d0f96b30a3"
+  "verification_sha256": "3b71f83e7f15702c3e3e1bcd5e5053a4495c46dab8b731f988a58552fcd28111"
 }

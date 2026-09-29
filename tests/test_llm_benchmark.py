@@ -187,3 +187,17 @@ def test_claims_pmids_and_titles():
                              "Binimetinib versus dacarbazine in patients with advanced NRAS-mutant melanoma (NEMO)")
     assert not claims.same_title("Loss of the VHL tumor-suppressor gene in renal carcinomas",
                                  "Signal transduction in endocrine tissues.")
+
+
+def test_claim_records_are_schema_valid():
+    """Regression: an empty locator once made every scenario-1b record fail the schema before any grounding."""
+    from bioevidence_validator.engine import RecordValidator
+
+    claims = load("score_claims")
+    verifier = claims.Verifier.__new__(claims.Verifier)
+    verifier.catalog = {"works": {}}
+    task = jsonl(BENCH / "literature_tasks" / "pilot.jsonl")[0]
+    answer = {"decision": "supports", "rationale": "",
+              "citations": [{"pmid": "PMID 123", "title": "A title", "quote": "A quote of more than five words here."}]}
+    report = RecordValidator(profile=claims.CASE / "profile.yaml").validate(verifier.record(task, answer))
+    assert "SCHEMA" not in {f["rule_id"] for f in report["findings"]}
