@@ -374,6 +374,9 @@ def run(args: argparse.Namespace) -> int:
                     continue  # resume: already answered
                 jobs.append((key, unit, condition, raw))
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    # Interleave the models, so the pool keeps about `--workers` calls per model in flight.
+    queues = [[job for job in jobs if job[0] == key] for key in args.models]
+    jobs = [queue[n] for n in range(max(map(len, queues), default=0)) for queue in queues if n < len(queue)]
     print(f"{len(jobs)} call(s) to make", flush=True)
 
     def work(job):
