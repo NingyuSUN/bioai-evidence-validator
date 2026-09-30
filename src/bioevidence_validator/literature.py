@@ -100,6 +100,15 @@ def jats_blocks(data: bytes) -> list[tuple[str, str, str]]:
     return out
 
 
+def pubmed_abstract(data: bytes) -> list[tuple[str, str]]:
+    """(id, text) for the title and each abstract section of a PubMed efetch record: what is quotable when a
+    paper has no open full text."""
+    root = ET.fromstring(data)
+    out = [("title", normalize("".join(e.itertext()))) for e in root.iter("ArticleTitle")][:1]
+    out += [(f"abstract-{n}", normalize("".join(e.itertext()))) for n, e in enumerate(root.iter("AbstractText"), start=1)]
+    return out
+
+
 def jats_paragraphs(data: bytes) -> list[tuple[str, str]]:
     """(id, text) for every title and paragraph of a JATS article, as the grounder checks them."""
     return [(pid, text) for pid, _, text in jats_blocks(data)]
@@ -121,6 +130,11 @@ def jats_license(data: bytes) -> str:
             and not any(word in text for word in restricted):
         return "cc by"
     return "other"
+
+
+def pinned_sha256(entry: dict[str, Any]) -> str:
+    """The snapshot a record's source hash names: the full text, else the abstract, else the resolver's response."""
+    return entry.get("fulltext_sha256") or entry.get("abstract_sha256") or entry["metadata_sha256"]
 
 
 def jats_open(data: bytes) -> bool:
@@ -206,12 +220,14 @@ class LiteratureGrounder:
             problems.append(("BEV019", f"{key} is retracted."))
         if source.get("title") and not same_title(source["title"], meta["title"]):
             problems.append(("BEV017", f"{key} is a different paper: {meta['title']!r}."))
-        pinned = entry.get("fulltext_sha256") or entry["metadata_sha256"]
+        pinned = pinned_sha256(entry)
         if source["sha256"] != pinned:
             problems.append(("BEV017", "The record's source hash is not the pinned snapshot of this publication."))
         paragraphs: list[tuple[str, str]] = []
         if entry.get("fulltext_sha256") and self.store.verified(entry["fulltext_sha256"]):
             paragraphs = jats_paragraphs(self.store.get(entry["fulltext_sha256"]) or b"")
+        elif entry.get("abstract_sha256") and self.store.verified(entry["abstract_sha256"]):
+            paragraphs = pubmed_abstract(self.store.get(entry["abstract_sha256"]) or b"")
         return meta, paragraphs, problems
 
     def _evaluate(self, record: dict[str, Any]) -> tuple[list[Finding], set[str]]:
@@ -231,7 +247,7 @@ class LiteratureGrounder:
                 continue  # already reported on the source
             quote = normalize(item.get("extracted_text") or "")
             if not paragraphs:
-                findings.append(finding(record, "BEV015", "No open-access full text is pinned; the quote cannot be "
+                findings.append(finding(record, "BEV015", "Neither open full text nor an abstract is pinned; the quote cannot be "
                                                           "verified.", path))
             elif len(quote.split()) < MIN_QUOTE_WORDS:
                 findings.append(finding(record, "BEV015", f"A quote of fewer than {MIN_QUOTE_WORDS} words cannot be "
@@ -335,6 +351,15 @@ def resolve(key: str, directory: Path, fetch: Callable[[str], bytes], now: str, 
                 urls.append(url)
         except (OSError, ET.ParseError):
             pass  # stays unverifiable (BEV015), never silently admitted
+    if not entry["fulltext_sha256"] and meta.get("found") and meta.get("pmid"):
+        url = _eutils("efetch", db="pubmed", id=str(meta["pmid"]), retmode="xml")
+        try:
+            text = fetch(url)
+            if pubmed_abstract(text)[1:]:  # a title alone is not something to quote
+                entry["abstract_sha256"] = _save(directory, text, ".xml", compress)
+                urls.append(url)
+        except (OSError, ET.ParseError):
+            pass
     return entry
 
 
@@ -356,7 +381,7 @@ def ground_record(record: dict[str, Any], directory: Path, fetch: Callable[[str]
         if refresh or key not in works:
             works[key] = resolve(key, directory, fetch, now, resolver, compress)
         entry = works[key]
-        source["sha256"] = source["observed_sha256"] = entry["fulltext_sha256"] or entry["metadata_sha256"]
+        source["sha256"] = source["observed_sha256"] = pinned_sha256(entry)
         source["retrieved_at"] = entry["retrieved_at"]
     path.write_text(json.dumps(catalog, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return grounded, catalog

@@ -85,6 +85,12 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -146,6 +152,12 @@
             0.0,
             0.4899
           ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
         },
         "tasks": 18,
         "tool_use": 0,
@@ -215,6 +227,15 @@
             1.0
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -281,6 +302,15 @@
           "wilson_95": [
             0.5101,
             1.0
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
           ]
         },
         "tasks": 18,
@@ -353,6 +383,15 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 2,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.6576
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -421,6 +460,15 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -487,6 +535,15 @@
           "wilson_95": [
             0.3006,
             0.9544
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
           ]
         },
         "tasks": 18,
@@ -557,6 +614,15 @@
             0.9544
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -621,6 +687,12 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -682,6 +754,12 @@
             0.0,
             0.4899
           ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
         },
         "tasks": 18,
         "tool_use": 0,
@@ -749,6 +827,15 @@
           "wilson_95": [
             0.5101,
             1.0
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
           ]
         },
         "tasks": 18,
@@ -817,6 +904,15 @@
           "wilson_95": [
             0.5101,
             1.0
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
           ]
         },
         "tasks": 18,
@@ -889,6 +985,15 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -957,6 +1062,15 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1025,6 +1139,15 @@
             0.9544
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1091,6 +1214,15 @@
           "wilson_95": [
             0.3006,
             0.9544
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
           ]
         },
         "tasks": 18,
@@ -1157,6 +1289,12 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1218,6 +1356,12 @@
             0.0,
             0.4899
           ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
         },
         "tasks": 18,
         "tool_use": 0,
@@ -1287,6 +1431,15 @@
             0.9544
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1353,6 +1506,15 @@
           "wilson_95": [
             0.3006,
             0.9544
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
           ]
         },
         "tasks": 18,
@@ -1419,6 +1581,12 @@
             0.4899
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1480,6 +1648,12 @@
             0.0,
             0.4899
           ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
         },
         "tasks": 18,
         "tool_use": 0,
@@ -1549,6 +1723,15 @@
             0.9544
           ]
         },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
         "tasks": 18,
         "tool_use": 0,
         "wrong_direction": {
@@ -1615,6 +1798,15 @@
           "wilson_95": [
             0.3006,
             0.9544
+          ]
+        },
+        "no_quote": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
           ]
         },
         "tasks": 18,

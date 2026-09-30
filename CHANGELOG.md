@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Benchmark scenario 1: the literature tasks asked as a user would ask a chatbot, without rules, source
+  or tools. With only PMID and title, 32 of 49 model answers held an invented quote; with the claim
+  only, 38 of 50 cited at least one invalid paper or quote (28 of 66 citations were real PMIDs of
+  unrelated papers). Bioevidence admitted only the three answers whose citations all verified.
+- Literature grounding verifies a quote against the pinned PubMed abstract when a paper has no open
+  full text; `bioevidence ground` pins the abstract, and a record's source hash names it. The literature hallucination metric now counts
+  invented quotes only; answers without a quote are reported separately.
+
 - Add semantic checks (#31). A use may require independent review: an accepting non-human
   reviewer that created none of the evidence, whose absence, deferral or rejection sends the use
   to review (BEV021). `semantic.CueChecker` flags negated, hedged or non-human quotes (BEV022).

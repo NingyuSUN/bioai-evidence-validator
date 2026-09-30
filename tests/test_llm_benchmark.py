@@ -168,3 +168,36 @@ def test_semantic_results_replay_byte_for_byte(tmp_path):
     semantic.score("pilot", None, tmp_path)
     for name in ("rows.jsonl", "summary.json", "summary.md"):
         assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_claims_scenario_replays_from_committed_verification(tmp_path):
+    claims = load("score_claims")
+    committed = BENCH / "results" / "literature-claims-pilot"
+    for name in ("answers.jsonl", "verification.jsonl"):
+        (tmp_path / name).write_bytes((committed / name).read_bytes())
+    claims.score(tmp_path)
+    for name in ("rows.jsonl", "summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_claims_pmids_and_titles():
+    claims = load("score_claims")
+    assert claims.pmid_of("PMID: 28284557") == "pmid:28284557" and claims.pmid_of("unknown") is None
+    assert claims.same_title("Binimetinib versus dacarbazine in NRAS-mutant melanoma (NEMO)",
+                             "Binimetinib versus dacarbazine in patients with advanced NRAS-mutant melanoma (NEMO)")
+    assert not claims.same_title("Loss of the VHL tumor-suppressor gene in renal carcinomas",
+                                 "Signal transduction in endocrine tissues.")
+
+
+def test_claim_records_are_schema_valid():
+    """Regression: an empty locator once made every scenario-1b record fail the schema before any grounding."""
+    from bioevidence_validator.engine import RecordValidator
+
+    claims = load("score_claims")
+    verifier = claims.Verifier.__new__(claims.Verifier)
+    verifier.catalog = {"works": {}}
+    task = jsonl(BENCH / "literature_tasks" / "pilot.jsonl")[0]
+    answer = {"decision": "supports", "rationale": "",
+              "citations": [{"pmid": "PMID 123", "title": "A title", "quote": "A quote of more than five words here."}]}
+    report = RecordValidator(profile=claims.CASE / "profile.yaml").validate(verifier.record(task, answer))
+    assert "SCHEMA" not in {f["rule_id"] for f in report["findings"]}

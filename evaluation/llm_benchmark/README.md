@@ -111,6 +111,41 @@ What this shows:
   [ClinVar](../../examples/clinvar_germline) and [VBO](../../examples/vbo_canine) cases, with no false
   blocks on real sources. Every admission comes with a report of what was checked.
 
+## Scenario 1: the way people actually ask
+
+The pilots above give models the source and the curation rules ("never invent", "stop if you cannot
+verify"). Here the same 18 literature tasks are asked as a user would ask a chatbot: no rules, no source,
+no tools. Whatever changes comes from the workflow, not from model capability.
+
+1a. The claim, the paper's PMID and title ([results](results/literature-plain-pilot/summary.md)); six models pooled:
+
+| Configuration | Correct decision | Answers with an invented quote | Answers without a quote | Quotes found in the paper | Wrong direction |
+|---|---:|---:|---:|---:|---:|
+| LLM alone | 75/108 | 32/49 | 12/49 | 11/69 | 4/72 |
+| LLM + bioevidence | 41/108 | 0/5 | 0/5 | 5/5 | 0/72 |
+
+1b. The claim only; the model picks the papers and gives PMID, title and quote
+([results](results/literature-claims-pilot/summary.md), [score_claims.py](score_claims.py)). The 50 cited
+PMIDs were resolved with NCBI. A quote is checked against the open full text, or else against the PubMed
+abstract; full texts that are not openly licensed stay outside the repository, which keeps what was
+verified (`verification.jsonl`).
+
+| Configuration | Answered | Correct decision | Answers with an invalid citation | Answers with only verified citations | Answers without a citation |
+|---|---:|---:|---:|---:|---:|
+| LLM alone | 50/108 | 46/108 | 38/50 | 3/50 | 9/50 |
+| LLM + bioevidence | 3/108 | 3/108 | 0/3 | 3/3 | 0/3 |
+
+Of the 66 citations the models gave: 28 had a real PMID that belongs to an unrelated paper (the title
+cited is often a real paper, with a mistyped or invented PMID: 28284562 for the NEMO trial, whose PMID is
+28284557), 29 quoted text absent from the paper (16 checked against the open full text, 13 against the
+abstract), 2 PMIDs did not exist, 1 had no PMID, and 6 were verified.
+
+What this shows: asked without the source and without the rules, every model, frontier or fast, cites
+papers and quotes that do not check out. Bioevidence admits none of them: it admitted the three answers
+whose citations all verified (all three decisions right), rejected 37 for a wrong paper, a quote not in the
+paper or a PMID that does not exist, and sent 1 to review. It cannot turn these answers
+into good ones; that takes the source (the pilots above) or a curator.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were
