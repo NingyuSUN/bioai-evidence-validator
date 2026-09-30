@@ -24,6 +24,7 @@ pip install bioai-evidence-validator
 Or try it in the browser, nothing to install:
 [quickstart notebook on Colab](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb).
 Full documentation: **[ningyusun.github.io/bioai-evidence-validator](https://ningyusun.github.io/bioai-evidence-validator/)**.
+Where it is going: the [AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) (source → extraction → provenance → validation → model evaluation → trust boundary → human review).
 
 ## 30-second example
 
@@ -309,6 +310,8 @@ If you use this toolkit in research, please cite it using the metadata in
 [Create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
 [Draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md) ·
 [Standards alignment](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/STANDARDS.md) ·
+[AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) ·
+[Error taxonomy](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ERROR_TAXONOMY.md) ·
 [Engineering contract](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
 [Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
 [Architecture decision](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ADR-002-domain-neutral-main.md) ·

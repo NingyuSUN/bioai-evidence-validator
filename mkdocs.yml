@@ -52,6 +52,8 @@ nav:
   - Reference:
       - Engineering contract: ENGINEERING.md
       - Standards alignment: STANDARDS.md
+      - AI validation roadmap: AI_VALIDATION_ROADMAP.md
+      - Error taxonomy: ERROR_TAXONOMY.md
   - Design:
       - Case study: CASE_STUDY.md
       - "ADR-001: canine breed first": ADR-001-canine-breed-first.md
