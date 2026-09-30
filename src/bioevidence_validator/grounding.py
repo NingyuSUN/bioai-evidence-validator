@@ -13,12 +13,16 @@ Rule codes (all apply to every requested use):
   BEV018 review  the source holds evidence the record leaves out
   BEV019 error   the cited source is retracted
   BEV022 review  a semantic cue suggests the quote is misread (see `semantic`)
+  BEV023 error   a cited identifier is obsolete, withdrawn or not its current name (see `identifiers`)
+  BEV024 error   a cited identifier is malformed, or of the wrong kind for its place (see `identifiers`)
+  BEV025 review  a pinned reference resource contradicts the claim or its evidence (see `crosscheck`)
 
 A grounder may also offer `verified_items(record)`: the evidence items it confirmed against their source.
 Only those count for evidence types a profile lists under `verified_evidence_types` (BEV020 otherwise).
 
 Domain grounders (which fields to recompute for a given source format) live with their importers,
-outside the engine; `SourceBytesGrounder` is generic.
+outside the engine. Generic grounders: `SourceBytesGrounder` (here), `identifiers` (ontology terms, gene symbols,
+variant nomenclature), `tables` (rows of a pinned table), `crosscheck` (a pinned reference resource), `literature`.
 """
 from __future__ import annotations
 
@@ -31,7 +35,7 @@ from typing import Any, Protocol
 from .engine import Finding
 
 SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review",
-            "BEV019": "error", "BEV022": "review"}
+            "BEV019": "error", "BEV022": "review", "BEV023": "error", "BEV024": "error", "BEV025": "review"}
 
 
 class Grounder(Protocol):
