@@ -133,7 +133,8 @@ def test_ontology_grounder_explains_what_to_fix():
     assert codes(record, CELLS) == ["BEV016"] and "CL:0000084 (T cell)" in messages(record, CELLS)
     record = cell("CL:0000999", "B cell")
     assert codes(record, CELLS) == ["BEV023"] and "Use CL:0000236 (B cell)" in messages(record, CELLS)
-    assert "Closest names" in messages(cell("CL:9999999", "naive B-cells"), CELLS)
+    assert "is the name of CL:0000788" in messages(cell("CL:9999999", "naive B-cells"), CELLS)  # plural
+    assert "Closest names" in messages(cell("CL:9999999", "naive B-cell type"), CELLS)
     assert "Use CL:0000084 (T cell)" in messages(cell("CL:0000998", "T cell"), CELLS)
 
 
