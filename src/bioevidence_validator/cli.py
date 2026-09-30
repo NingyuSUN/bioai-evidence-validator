@@ -24,6 +24,11 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    validate.add_argument(
+        "--annotate-eco",
+        action="store_true",
+        help="Include extraction-method ECO CURIEs for evidence items in the report",
+    )
     validate.add_argument("--snapshot-dir", type=Path,
                           help="Directory of source snapshots named by SHA-256; recompute source hashes from them, "
                                "and check cited publications if it holds a literature.json from `ground`")
@@ -175,7 +180,13 @@ def _run(args) -> int:
         grounders.append(SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir)))
         if (args.snapshot_dir / CATALOG).exists():
             grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
-    report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
+    report = validate_record(
+        record,
+        schema_path=args.schema,
+        profile=args.profile,
+        grounders=grounders,
+        annotate_eco=args.annotate_eco,
+    )
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)

@@ -30,6 +30,7 @@ classifiers = [
 dependencies = [
   "jsonschema>=4.23,<5",
   "linkml>=1.8,<2",
+  "linkml-runtime>=1.1.24,<2",
   "pyyaml>=6.0,<7",
 ]
 
@@ -87,5 +88,5 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 
 [[tool.mypy.overrides]]
-module = ["linkml.*"]
+module = ["linkml.*", "linkml_runtime.*"]
 ignore_missing_imports = true
