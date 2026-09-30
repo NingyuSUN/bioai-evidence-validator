@@ -52,7 +52,9 @@ def _prefix(curie: str) -> str:
 
 
 def _label_key(text: str) -> str:
-    return " ".join(re.sub(r"[^0-9a-z]+", " ", text.casefold()).split())
+    """Case, punctuation and a plain plural ("hepatocytes") do not change a label."""
+    words = re.sub(r"[^0-9a-z]+", " ", text.casefold()).split()
+    return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w for w in words)
 
 
 def _entities(record: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:

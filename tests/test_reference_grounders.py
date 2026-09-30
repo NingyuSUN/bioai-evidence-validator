@@ -122,6 +122,7 @@ def test_ontology_grounder_accepts_a_current_matching_term():
     assert codes(cell("CL:0000625", "CD8-positive, alpha-beta T cell"), CELLS) == []
     assert codes(cell("CL:0000625", "cd8 positive alpha beta t cell"), CELLS) == []  # case and punctuation
     assert codes(cell("CL:0000084", "T-lymphocyte"), CELLS) == []  # exact synonym
+    assert codes(cell("CL:0000236", "B cells"), CELLS) == []  # a plain plural
 
 
 def test_ontology_grounder_explains_what_to_fix():

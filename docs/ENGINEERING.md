@@ -142,7 +142,7 @@ tokens, and evidence locators written as `key=value` pairs separated by `;` (`cl
   MONDO, UBERON …):
   - the term exists (BEV016);
   - it is not obsolete (BEV023, naming its replacement);
-  - its label is the term's name or an exact synonym, ignoring case and punctuation (BEV017, naming the
+  - its label is the term's name or an exact synonym, ignoring case, punctuation and a plain plural (BEV017, naming the
     term that label belongs to);
   - it is of the right kind: `roots` maps an entity type or locator key to the terms it must descend
     from, so a `cell_type` must be under CL:0000000 (BEV024).
