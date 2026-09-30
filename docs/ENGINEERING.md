@@ -168,8 +168,11 @@ tokens, and evidence locators written as `key=value` pairs separated by `;` (`cl
   support. It raises BEV025 in two cases:
   - the reference asserts the opposite predicate for the statement's subject and object;
   - supporting evidence names an entity (e.g. `gene=CD19`) that the reference relates (e.g. `marker_of`)
-    only to objects unrelated to the statement's object. With an ontology, an ancestor or descendant
-    counts as related.
+    only to objects that conflict with the statement's object. By default a different term conflicts unless
+    the ontology makes it an ancestor or descendant. With `conflict="disjoint"`, only terms the ontology
+    declares disjoint conflict (`disjoint_from` on them or their ancestors, e.g. T cell and B cell), so a
+    marker the reference lists for a sibling type is not reported. That needs an ontology release that keeps
+    its disjointness axioms: the Cell Ontology's full `cl.obo` does, `cl-basic.obo` does not.
 
 ```bash
 bioevidence validate record.json --ontology cl-basic.obo --term-root cell_type=CL:0000000     --genes hgnc_complete_set.txt --assembly-report GRCh38_assembly_report.txt

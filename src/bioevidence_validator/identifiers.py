@@ -74,10 +74,11 @@ class Term:
     obsolete: bool = False
     replaced_by: list[str] = field(default_factory=list)
     consider: list[str] = field(default_factory=list)
+    disjoint: list[str] = field(default_factory=list)
 
 
 class Ontology:
-    """The terms of one pinned OBO release: names, exact synonyms, `is_a` parents and obsoletion."""
+    """The terms of one pinned OBO release: names, exact synonyms, `is_a` parents, obsoletion, disjointness."""
 
     def __init__(self, terms: dict[str, Term], prefix: str, version: str):
         self.terms, self.prefix, self.version = terms, prefix, version
@@ -121,6 +122,8 @@ class Ontology:
                     term.replaced_by.append(value)
                 elif tag == "consider":
                     term.consider.append(value)
+                elif tag == "disjoint_from":
+                    term.disjoint.append(value)
         # `ontology: cl` or `ontology: cl/cl-basic`; a release file may also hold a few terms of other ontologies
         prefix = header.get("ontology", "").split("/")[0].upper()
         version = header.get("data-version", "") or header.get("date", "")
@@ -145,6 +148,11 @@ class Ontology:
     def related(self, a: str, b: str) -> bool:
         """The same term, or one is an ancestor of the other."""
         return a in self.ancestors(b) or b in self.ancestors(a)
+
+    def disjoint(self, a: str, b: str) -> bool:
+        """Declared disjoint: some ancestor of one is `disjoint_from` some ancestor of the other."""
+        mine, theirs = self.ancestors(a), self.ancestors(b)
+        return any(d in theirs for x in mine if x in self.terms for d in self.terms[x].disjoint) or             any(d in mine for x in theirs if x in self.terms for d in self.terms[x].disjoint)
 
     def by_label(self, label: str) -> list[str]:
         return self._labels.get(_label_key(label), [])

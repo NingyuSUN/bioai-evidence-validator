@@ -35,6 +35,7 @@ name: T cell
 synonym: "T-lymphocyte" EXACT []
 synonym: "T lymphocyte" RELATED []
 is_a: CL:0000000 ! cell
+disjoint_from: CL:0000236 ! B cell
 
 [Term]
 id: CL:0000625
@@ -277,6 +278,22 @@ def test_reference_grounder_evidence_conflicts():
     assert codes(marker_record("CD19", "CL:0000084", direction="contradicts"), grounder) == []
     plain = ReferenceGrounder(MARKERS, label="ASCT+B", evidence_key="gene", relation="marker_of")
     assert codes(marker_record("CD19", "CL:0000788"), plain) == ["BEV025"]  # without an ontology, only the same id
+
+
+def test_ontology_disjointness_is_inherited():
+    assert CL.disjoint("CL:0000625", "CL:0000788") and CL.disjoint("CL:0000236", "CL:0000084")
+    assert not CL.disjoint("CL:0000625", "CL:0000084") and not CL.disjoint("CL:0000625", "CL:0001000")
+
+
+def test_reference_grounder_disjoint_conflicts():
+    grounder = ReferenceGrounder(MARKERS, label="ASCT+B", evidence_key="gene", relation="marker_of", ontology=CL,
+                                 conflict="disjoint")
+    record = marker_record("CD19", "CL:0000625")  # a B cell marker for a CD8 T cell: disjoint lineages
+    assert codes(record, grounder) == ["BEV025"] and "cell types disjoint from CL:0000625" in messages(record, grounder)
+    assert codes(marker_record("CD8A", "CL:0000788"), grounder) == ["BEV025"]
+    assert codes(marker_record("CD8A", "CL:0001000"), grounder) == []  # nothing declared: nothing reported
+    with pytest.raises(ValueError):
+        ReferenceGrounder(MARKERS, label="x", conflict="disjoint")
 
 
 def test_reference_grounder_statement_conflict():
