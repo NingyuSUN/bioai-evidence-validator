@@ -148,3 +148,23 @@ def test_committed_pilot_results_replay_byte_for_byte(module, folder, tmp_path):
     assert scorer.main(["--split", "pilot", "--output", str(tmp_path)]) == 0
     for name in ("rows.jsonl", "summary.json", "summary.md"):
         assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_semantic_units_are_up_to_date():
+    done = subprocess.run([sys.executable, str(BENCH / "semantic_eval.py"), "units", "--split", "pilot", "--check"],
+                          capture_output=True, text=True)
+    assert done.returncode == 0, done.stderr
+
+
+def test_units_hide_the_extractor_decision():
+    units = jsonl(BENCH / "semantic" / "pilot-units.jsonl")
+    assert units and all(set(u) == {"task_id", "claim", "title", "quotes"} for u in units)
+
+
+def test_semantic_results_replay_byte_for_byte(tmp_path):
+    semantic = load("semantic_eval")
+    committed = BENCH / "results" / "semantic-pilot"
+    (tmp_path / "answers.jsonl").write_bytes((committed / "answers.jsonl").read_bytes())
+    semantic.score("pilot", None, tmp_path)
+    for name in ("rows.jsonl", "summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name

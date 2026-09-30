@@ -105,9 +105,10 @@ class Checker:
         self.validator = RecordValidator(profile=CASE / "profile.yaml", grounders=[
             SourceBytesGrounder(self.corpus.store), self.corpus.grounder()])
 
-    def check(self, task: dict, answer: dict | None) -> dict:
+    def build(self, task: dict, answer: dict | None) -> dict | None:
+        """The record for a model answer (quotes as LLM-extracted evidence items), or None for a stop."""
         if not answer or answer["decision"] == "stop" or not answer["quotes"]:
-            return {"status": "not_submitted", "codes": []}
+            return None
         claim = task["claim"]
         item = {"evidence_id": task["task_id"], "molecular_profile_id": "0", "molecular_profile": claim["molecular_profile"],
                 "evidence_direction": "Supports" if answer["decision"] == "supports" else "Does Not Support",
@@ -123,6 +124,12 @@ class Checker:
                             extracted_text=quote["text"])
             record["evidence_items"].append(evidence)
         record["statement"]["evidence_lines"][0]["evidence_item_ids"] = [e["id"] for e in record["evidence_items"]]
+        return record
+
+    def check(self, task: dict, answer: dict | None) -> dict:
+        record = self.build(task, answer)
+        if record is None:
+            return {"status": "not_submitted", "codes": []}
         report = self.validator.validate(self.corpus.pin(record))
         return {"status": report["overall_status"], "codes": sorted({f["rule_id"] for f in report["findings"]})}
 

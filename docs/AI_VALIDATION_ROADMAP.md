@@ -79,7 +79,7 @@ source → structured extraction → provenance → deterministic validation
 | Done | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19) | Source grounding, phase 1: recompute what the pinned snapshot can prove | — |
 | Now | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) | Expert review of the ClinVar packet (runs in parallel; experts' time) | — |
 | Done | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) | Source grounding, phase 2: verify cited literature and quotes | #19 |
-| Next | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) | Semantic support check: does a verbatim quote support the claim's direction? | #20 |
+| Now | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) | Semantic support check: does a verbatim quote support the claim's direction? | #20 |
 | Next | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources | #18, #20 |
 | Next | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) | Model and agent evaluation against expert labels | #17, #23 |
 | Then | [#24](https://github.com/NingyuSUN/bioai-evidence-validator/issues/24) | Calibrated triage and audit of auto-admitted records | #23 |

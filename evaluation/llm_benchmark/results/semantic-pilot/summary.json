@@ -1,0 +1,346 @@
+{
+  "answers_sha256": "5d56ef6317eed71e961b386d0b938abed66e94c6fbed7ccc392f2aff4bb09563",
+  "benchmark": "llm-semantic-checks-v1",
+  "controls": {
+    "claude-haiku": {
+      "base_read_correctly (direction flip exposed)": {
+        "events": 59,
+        "n": 63,
+        "rate": 0.9365,
+        "wilson_95": [
+          0.8478,
+          0.975
+        ]
+      },
+      "hedged_seen_as_hedged": {
+        "events": 8,
+        "n": 12,
+        "rate": 0.6667,
+        "wilson_95": [
+          0.3906,
+          0.8619
+        ]
+      },
+      "species_seen_as_non_human": {
+        "events": 7,
+        "n": 8,
+        "rate": 0.875,
+        "wilson_95": [
+          0.5291,
+          0.9776
+        ]
+      },
+      "unrelated_claim_not_addressed": {
+        "events": 7,
+        "n": 12,
+        "rate": 0.5833,
+        "wilson_95": [
+          0.3195,
+          0.8067
+        ]
+      }
+    },
+    "gemini-flash": {
+      "base_read_correctly (direction flip exposed)": {
+        "events": 62,
+        "n": 63,
+        "rate": 0.9841,
+        "wilson_95": [
+          0.9154,
+          0.9972
+        ]
+      },
+      "hedged_seen_as_hedged": {
+        "events": 8,
+        "n": 12,
+        "rate": 0.6667,
+        "wilson_95": [
+          0.3906,
+          0.8619
+        ]
+      },
+      "species_seen_as_non_human": {
+        "events": 7,
+        "n": 8,
+        "rate": 0.875,
+        "wilson_95": [
+          0.5291,
+          0.9776
+        ]
+      },
+      "unrelated_claim_not_addressed": {
+        "events": 12,
+        "n": 12,
+        "rate": 1.0,
+        "wilson_95": [
+          0.7575,
+          1.0
+        ]
+      }
+    },
+    "gpt-luna": {
+      "base_read_correctly (direction flip exposed)": {
+        "events": 63,
+        "n": 63,
+        "rate": 1.0,
+        "wilson_95": [
+          0.9425,
+          1.0
+        ]
+      },
+      "hedged_seen_as_hedged": {
+        "events": 9,
+        "n": 12,
+        "rate": 0.75,
+        "wilson_95": [
+          0.4677,
+          0.9111
+        ]
+      },
+      "species_seen_as_non_human": {
+        "events": 7,
+        "n": 8,
+        "rate": 0.875,
+        "wilson_95": [
+          0.5291,
+          0.9776
+        ]
+      },
+      "unrelated_claim_not_addressed": {
+        "events": 11,
+        "n": 12,
+        "rate": 0.9167,
+        "wilson_95": [
+          0.6461,
+          0.9851
+        ]
+      }
+    },
+    "semantic cues": {
+      "base_flagged (false review)": {
+        "events": 22,
+        "n": 63,
+        "rate": 0.3492,
+        "wilson_95": [
+          0.2433,
+          0.4725
+        ]
+      },
+      "direction_flip_flagged": {
+        "events": 28,
+        "n": 63,
+        "rate": 0.4444,
+        "wilson_95": [
+          0.3285,
+          0.5668
+        ]
+      },
+      "species_flagged": {
+        "events": 8,
+        "n": 8,
+        "rate": 1.0,
+        "wilson_95": [
+          0.6756,
+          1.0
+        ]
+      }
+    }
+  },
+  "pipeline": {
+    "cues": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 23,
+        "n": 63,
+        "rate": 0.3651,
+        "wilson_95": [
+          0.2572,
+          0.4885
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 1,
+        "n": 5,
+        "rate": 0.2,
+        "wilson_95": [
+          0.0362,
+          0.6245
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 4,
+        "n": 68,
+        "rate": 0.0588,
+        "wilson_95": [
+          0.0231,
+          0.1417
+        ]
+      }
+    },
+    "grounded": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 0,
+        "n": 63,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0575
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 0,
+        "n": 5,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 5,
+        "n": 68,
+        "rate": 0.0735,
+        "wilson_95": [
+          0.0318,
+          0.1609
+        ]
+      }
+    },
+    "review": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 2,
+        "n": 63,
+        "rate": 0.0317,
+        "wilson_95": [
+          0.0087,
+          0.1086
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 1,
+        "n": 5,
+        "rate": 0.2,
+        "wilson_95": [
+          0.0362,
+          0.6245
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 4,
+        "n": 68,
+        "rate": 0.0588,
+        "wilson_95": [
+          0.0231,
+          0.1417
+        ]
+      }
+    },
+    "review_cues": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 25,
+        "n": 63,
+        "rate": 0.3968,
+        "wilson_95": [
+          0.2853,
+          0.5202
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 1,
+        "n": 5,
+        "rate": 0.2,
+        "wilson_95": [
+          0.0362,
+          0.6245
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 4,
+        "n": 68,
+        "rate": 0.0588,
+        "wilson_95": [
+          0.0231,
+          0.1417
+        ]
+      }
+    },
+    "two_reviews": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 4,
+        "n": 63,
+        "rate": 0.0635,
+        "wilson_95": [
+          0.025,
+          0.1522
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 1,
+        "n": 5,
+        "rate": 0.2,
+        "wilson_95": [
+          0.0362,
+          0.6245
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 4,
+        "n": 68,
+        "rate": 0.0588,
+        "wilson_95": [
+          0.0231,
+          0.1417
+        ]
+      }
+    },
+    "two_reviews_cues": {
+      "answers": 68,
+      "correct_answers_stopped": {
+        "events": 26,
+        "n": 63,
+        "rate": 0.4127,
+        "wilson_95": [
+          0.2996,
+          0.5358
+        ]
+      },
+      "wrong_answers_stopped": {
+        "events": 1,
+        "n": 5,
+        "rate": 0.2,
+        "wilson_95": [
+          0.0362,
+          0.6245
+        ]
+      },
+      "wrong_direction_admitted": {
+        "events": 4,
+        "n": 68,
+        "rate": 0.0588,
+        "wilson_95": [
+          0.0231,
+          0.1417
+        ]
+      }
+    }
+  },
+  "reviewers": {
+    "claude-haiku": {
+      "cli_version": "2.1.283 (Claude Code)",
+      "model": "claude-haiku-4-5-20251001"
+    },
+    "gemini-flash": {
+      "cli_version": "1.2.13",
+      "model": "gemini-3.8-flash-medium"
+    },
+    "gpt-luna": {
+      "cli_version": "codex-cli 0.153.4",
+      "model": "gpt-5.6-luna"
+    }
+  },
+  "split": "pilot"
+}

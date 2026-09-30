@@ -30,6 +30,13 @@ uv run bioevidence validate examples/custom_profile/assay_record.json --profile 
 ```
 
 All seven top-level fields and all four fields in each use contract are required.
+Two use fields are optional:
+
+- `verified_evidence_types`: required types that count only through evidence a grounder verified
+  against its source (BEV020 otherwise; see [source grounding](ENGINEERING.md#source-grounding)).
+- `require_independent_review: true`: the use needs an accepting review by a non-human reviewer
+  (for example another model) that created none of the evidence. Its absence, deferral or rejection
+  sends the use to review (BEV021); such a reviewer never admits or rejects on its own.
 Unknown fields, duplicate YAML keys, non-string keys, string-valued booleans,
 empty use mappings, blank values, and duplicate list entries are configuration errors.
 Quote versions so YAML loads them as strings. Empty predicate/type lists mean

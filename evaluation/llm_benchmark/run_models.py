@@ -17,6 +17,7 @@ once and otherwise kept and flagged. The script reads only `tasks/<split>.jsonl`
 reference answers, needs only the standard library, and resumes where it stopped.
 
 `--suite literature` asks the literature task instead (literature_suite.py): with or without the paper's text.
+`--suite review` asks independent reviewers about extracted quotes (review_suite.py, issue #31).
 """
 from __future__ import annotations
 
@@ -37,6 +38,7 @@ from pathlib import Path
 from typing import Any
 
 import literature_suite
+import review_suite
 
 ROOT = Path(__file__).resolve().parent
 CONDITIONS = ["no_source", "with_source", "with_source_batch"]
@@ -291,7 +293,10 @@ def ask(key: str, unit: dict, condition: str, timeout: int, runner: Callable = e
     With `papers`, the task is a literature task."""
     spec, model = CLIS[MODELS[key]["cli"]], MODELS[key]["model"]
     batch = condition == "with_source_batch"
-    if papers is not None:
+    if condition == "review":
+        prompt = review_suite.prompt(unit)
+        schema, check = review_suite.SCHEMA, review_suite.validate
+    elif papers is not None:
         prompt = literature_suite.prompt(unit, condition, papers)
         schema, check = literature_suite.SCHEMA, literature_suite.validate
     else:
@@ -335,21 +340,26 @@ def cli_version(name: str) -> str:
 
 
 def run(args: argparse.Namespace) -> int:
-    literature = args.suite == "literature"
-    folder = literature_suite.TASKS if literature else ROOT / "tasks"
-    text = (folder / f"{args.split}.jsonl").read_text(encoding="utf-8")
+    literature, review = args.suite == "literature", args.suite == "review"
+    folder = literature_suite.TASKS if literature else review_suite.UNITS if review else ROOT / "tasks"
+    text = (folder / (f"{args.split}-units.jsonl" if review else f"{args.split}.jsonl")).read_text(encoding="utf-8")
     tasks = [json.loads(line) for line in text.splitlines()]
     if args.limit:
         tasks = tasks[:args.limit]
     papers = literature_suite.load_papers() if literature else None
-    conditions = args.conditions or (literature_suite.CONDITIONS if literature else CONDITIONS)
-    if set(conditions) - set(literature_suite.CONDITIONS if literature else CONDITIONS):
-        raise SystemExit(f"conditions for the {args.suite} suite: {literature_suite.CONDITIONS if literature else CONDITIONS}")
-    out = args.output / (f"literature-{args.split}" if literature else args.split)
+    allowed = ["review"] if review else literature_suite.CONDITIONS if literature else CONDITIONS
+    conditions = args.conditions or allowed
+    if set(conditions) - set(allowed):
+        raise SystemExit(f"conditions for the {args.suite} suite: {allowed}")
+    out = args.output / (f"literature-{args.split}" if literature else f"review-{args.split}" if review else args.split)
     out.mkdir(parents=True, exist_ok=True)
     manifest_path = out / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"backends": {}}
-    if literature:
+    if review:
+        manifest.update({"suite": "review", "split": args.split, "prompt_template_sha256": sha256_text(review_suite.PROMPT),
+                         "schema_sha256": sha256_text(json.dumps(review_suite.SCHEMA, sort_keys=True)),
+                         "units_sha256": sha256_text(text)})
+    elif literature:
         manifest.update({"suite": "literature", "split": args.split,
                          "prompt_template_sha256": sha256_text(literature_suite.PROMPT),
                          "schema_sha256": sha256_text(json.dumps(literature_suite.SCHEMA, sort_keys=True)),
@@ -399,11 +409,12 @@ def run(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--suite", choices=["clinvar", "literature"], default="clinvar")
+    parser.add_argument("--suite", choices=["clinvar", "literature", "review"], default="clinvar")
     parser.add_argument("--split", choices=["pilot", "test"], required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS))
-    parser.add_argument("--conditions", nargs="+", choices=sorted(set(CONDITIONS) | set(literature_suite.CONDITIONS)))
+    parser.add_argument("--conditions", nargs="+",
+                        choices=sorted(set(CONDITIONS) | set(literature_suite.CONDITIONS) | {"review"}))
     parser.add_argument("--limit", type=int)
     parser.add_argument("--workers", type=int, default=2, help="Concurrent calls per backend")
     parser.add_argument("--timeout", type=int, default=600, help="Seconds per call (three times this for a batch)")

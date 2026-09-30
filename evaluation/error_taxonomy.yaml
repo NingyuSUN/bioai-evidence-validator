@@ -98,8 +98,8 @@ failure_modes:
     status: partial
     rule_codes: [BEV017]
     negative_controls: [civic:negation_flip]
-    uncovered_form: A verbatim quote read with the wrong polarity passes grounding; only semantic review can catch it.
-    planned: ["#31", "#22"]
+    uncovered_form: A verbatim quote read with the wrong polarity passes grounding. In the LLM benchmark pilot, independent model review exposed flips on clear text but caught 1 of 5 natural misreadings, which all sat on mixed evidence.
+    planned: ["#31", "#23"]
 
   - id: EXT-3
     name: Certainty inflation
@@ -110,6 +110,7 @@ failure_modes:
     status: uncovered
     rule_codes: []
     negative_controls: []
+    note: In the LLM benchmark pilot, reviewer models recognised 8–9 of 12 hedged sentences as hedged; no admission rule uses that yet.
     planned: ["#31", "#21"]
 
   - id: EXT-4
@@ -244,7 +245,7 @@ failure_modes:
     status: uncovered
     rule_codes: []
     negative_controls: []
-    note: By design, model-produced evidence is typed as LLM output and cannot be a required type's only support (BEV008); error correlation is not yet measured.
+    note: By design, model-produced evidence is typed as LLM output and cannot be a required type's only support (BEV008). In the LLM benchmark pilot, reviewers from other vendors shared the extractors' reading on 4 of 5 natural misreadings.
     planned: ["#22"]
 
   - id: REV-1

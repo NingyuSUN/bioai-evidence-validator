@@ -76,8 +76,11 @@ def load_profile(data: bytes) -> dict[str, Any]:
     flags = {"require_human_acceptance", "allow_llm_only", "allow_string_match_only"}
     for name, use in profile["uses"].items():
         if (not nonblank(name) or not isinstance(use, dict)
-                or set(use) - {"verified_evidence_types"} != flags | {"required_evidence_types"}):
+                or set(use) - {"verified_evidence_types", "require_independent_review"}
+                != flags | {"required_evidence_types"}):
             raise ValueError(f"Invalid or incomplete use configuration: {name!r}")
+        if type(use.get("require_independent_review", False)) is not bool:
+            raise ValueError(f"Use {name!r}: require_independent_review must be true or false")
         if any(type(use[key]) is not bool for key in flags) or not _string_list(use["required_evidence_types"]):
             raise ValueError(f"Use {name!r} requires boolean flags and distinct evidence types")
         verified = use.get("verified_evidence_types", [])
@@ -208,6 +211,8 @@ def evaluate_profile(record: dict, profile: dict, verified: set[str] | None = No
             if len(methods) > 1 and methods <= {"llm_extraction", "normalized_string_match"}:
                 if not (contract["allow_llm_only"] and contract["allow_string_match_only"]):
                     add("BEV013", "review", context + " mixes only LLM extraction and string matching.", "$.evidence_items", [use])
+        if contract.get("require_independent_review"):
+            findings.extend(_independent_review(record, decisions, use))
         human = {d["decision"] for d in decisions if d["reviewer"]["agent_type"] == "human" and use in d["applies_to_uses"]}
         if contract["require_human_acceptance"] and "accept" not in human:
             add("BEV010", "error", "This use requires explicit human acceptance.", "$.adjudications", [use])
@@ -216,6 +221,23 @@ def evaluate_profile(record: dict, profile: dict, verified: set[str] | None = No
         if "defer" in human:
             add("BEV012", "review", "A human decision is deferred for this use.", "$.adjudications", [use])
     return findings
+
+
+def _independent_review(record: dict, decisions: list[dict], use: str) -> list[Finding]:
+    """BEV021: a use that asks for independent review needs an accepting non-human reviewer that created none
+    of the evidence. Such a reviewer can only send a record to a human (by rejecting, deferring or being
+    absent); it never admits one on its own authority, and it never rejects one."""
+    authors = {item["created_by"]["id"] for item in record["evidence_items"] if item.get("created_by")}
+    if record["statement"].get("created_by"):
+        authors.add(record["statement"]["created_by"]["id"])
+    reviews = [d for d in decisions if d["reviewer"]["agent_type"] != "human" and use in d["applies_to_uses"]
+               and d["reviewer"]["id"] not in authors]
+    verdicts = {d["decision"] for d in reviews}
+    if "accept" in verdicts and verdicts <= {"accept"}:
+        return []
+    message = ("An independent reviewer did not accept this use." if reviews
+               else "This use needs an accepting review by a non-human reviewer that created none of the evidence.")
+    return [Finding("BEV021", "review", message, "$.adjudications", [use])]
 
 
 def decide_uses(requested_uses: list[str], findings: list[Finding]) -> list[dict[str, Any]]:
