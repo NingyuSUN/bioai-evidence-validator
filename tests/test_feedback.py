@@ -84,6 +84,8 @@ def test_carry_keeps_verified_evidence_in_its_line():
     merged = carry(previous, {"bioev:item-1"}, other)
     assert [s["id"] for s in merged["source_artifacts"]] == ["bioev:other", "bioev:source-1"]
     assert merged["evidence_items"][1]["id"] == "bioev:item-1-2"  # a fresh id, no collision
+    changed = annotation("CL:0000625", [("CD8A", "call=up")])  # another claim: nothing is carried
+    assert carry(previous, {"bioev:item-1", "bioev:item-2"}, changed) == changed
 
 
 def test_revise_fixes_then_admits():

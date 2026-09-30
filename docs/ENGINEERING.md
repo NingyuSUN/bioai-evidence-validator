@@ -194,7 +194,7 @@ Two kinds of finding are not fed back. The record goes to a person as it is:
   flags it (BEV022), or it lacks an independent review (BEV021).
 - **Policy:** the use needs a human decision whatever the proposer does (BEV008–BEV013).
 
-Evidence verified in one attempt is carried into the next, so a revision can fix or replace what failed
+Evidence verified in one attempt is carried into the next while the claim stays the same, so a revision can fix or replace what failed
 but cannot withdraw verified evidence against its answer. The literature benchmark's agent loop
 (`evaluation/llm_benchmark/agent_loop.py`) showed why: before that rule, an agent whose record held a
 misquote and a verified quote against its decision dropped the latter and was admitted.

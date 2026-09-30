@@ -9,7 +9,8 @@ cue flags it (BEV022) or it lacks an independent review (BEV021); the agent is n
 evidence against its answer go away. Policy: the use needs a human decision whatever the agent does
 (LLM-only or string-match-only evidence where the profile forbids it, BEV008/009/013; human acceptance
 required, deferred or refused, BEV010/012/011). For the same reason, evidence verified in one attempt is carried
-into the next: a revision may fix or replace what failed, but not withdraw what was verified.
+into the next while the claim stays the same: a revision may fix or replace what failed, but not withdraw what
+was verified.
 
 `revise` runs the loop around any proposer (a model call, an agent, a person); nothing here calls a model.
 """
@@ -67,9 +68,19 @@ def _key(record: dict[str, Any], item: dict[str, Any]) -> tuple[str, str, str]:
     return sha, item["locator"], item.get("extracted_text") or ""
 
 
+def claim(record: dict[str, Any]) -> tuple[str, str, str]:
+    statement = record["statement"]
+    return statement["subject"]["id"], statement["predicate"], statement["object"]["id"]
+
+
 def carry(previous: dict[str, Any], verified: set[str], record: dict[str, Any]) -> dict[str, Any]:
-    """`record` plus the verified evidence of `previous` that it left out, in the evidence line it was in."""
+    """`record` plus the verified evidence of `previous` that it left out, in the evidence line it was in.
+
+    Only for the same claim: evidence lines are relative to their statement, so a record that states something
+    else (another cell type, the opposite predicate) is validated on its own evidence."""
     merged = copy.deepcopy(record)
+    if claim(previous) != claim(record):
+        return merged
     present = {_key(merged, item) for item in merged["evidence_items"]}
     directions = {i: line["direction"] for line in previous["statement"]["evidence_lines"] for i in line["evidence_item_ids"]}
     ids = {x["id"] for x in merged["evidence_items"]} | {s["id"] for s in merged["source_artifacts"]}
