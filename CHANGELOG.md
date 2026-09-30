@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add Python 3.14 to the supported package classifiers and Linux CI test matrix.
 - Add admitted and rejected `dataset-label` draft examples, covered by draft and
   installed-wheel checks.
 
