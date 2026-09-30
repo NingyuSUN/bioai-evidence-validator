@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add admitted and rejected `dataset-label` draft examples, covered by draft and
+  installed-wheel checks.
+
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
 - Add `bioevidence review` (`check`, `agreement`, `adjudication-sheet`, `score`, `freeze`)
