@@ -13,6 +13,7 @@ from . import review as review_module
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 from .grounding import SnapshotStore, SourceBytesGrounder
+from .identifiers import Assemblies, GeneGrounder, Genes, Ontology, OntologyGrounder, VariantGrounder
 from .literature import CATALOG, LiteratureGrounder, ground_record, http_fetch
 
 
@@ -27,6 +28,14 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--snapshot-dir", type=Path,
                           help="Directory of source snapshots named by SHA-256; recompute source hashes from them, "
                                "and check cited publications if it holds a literature.json from `ground`")
+    validate.add_argument("--ontology", type=Path, action="append", default=[],
+                          help="A pinned OBO release; check the ontology terms the record cites (repeatable)")
+    validate.add_argument("--term-root", action="append", default=[], metavar="KIND=CURIE",
+                          help="Terms for this entity type or locator key must descend from CURIE, e.g. "
+                               "cell_type=CL:0000000 (repeatable)")
+    validate.add_argument("--genes", type=Path, help="A pinned HGNC complete set (TSV); check human gene symbols")
+    validate.add_argument("--assembly-report", type=Path, action="append", default=[],
+                          help="A pinned NCBI assembly report; check HGVS variants and genome builds (repeatable)")
     ground = commands.add_parser("ground", help="Resolve cited publications and pin their metadata and open-access "
                                                 "full text (uses the network)")
     ground.add_argument("input", type=Path)
@@ -175,6 +184,19 @@ def _run(args) -> int:
         grounders.append(SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir)))
         if (args.snapshot_dir / CATALOG).exists():
             grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
+    if args.ontology:
+        roots: dict[str, list[str]] = {}
+        for rule in args.term_root:
+            kind, _, curie = rule.partition("=")
+            if not kind or not curie:
+                raise ValueError(f"--term-root must be KIND=CURIE, not {rule!r}")
+            roots.setdefault(kind, []).append(curie)
+        grounders.append(OntologyGrounder([Ontology.from_obo(path.read_bytes()) for path in args.ontology], roots,
+                                          locator_keys=list(roots)))
+    if args.genes:
+        grounders.append(GeneGrounder(Genes.from_hgnc(args.genes.read_bytes(), args.genes.name)))
+    if args.assembly_report:
+        grounders.append(VariantGrounder(Assemblies.from_reports(path.read_bytes() for path in args.assembly_report)))
     report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:

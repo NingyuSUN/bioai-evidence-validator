@@ -44,6 +44,9 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV020 | A required type the profile lists under `verified_evidence_types` has no item a grounder verified | Review affected use |
 | BEV021 | The use requires independent review, and no independent non-human reviewer accepted it (or one deferred or rejected) | Review affected use |
 | BEV022 | Semantic cue: a quote supporting a positive claim is negated, hedged (optional), or only about animals or cells for a human-scoped item | Review |
+| BEV023 | Grounding: a cited identifier is obsolete, withdrawn, or not its current name (a previous gene symbol or alias) | Reject |
+| BEV024 | Grounding: a cited identifier is malformed, or of the wrong kind for its place (e.g. not a cell type) | Reject |
+| BEV025 | Cross-check: a pinned reference resource contradicts the claim or its supporting evidence | Review |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -125,6 +128,79 @@ directory holds a `literature.json`. Grounding checks a record against the sourc
 it cannot tell whether that source is itself right, whether a verbatim quote really supports
 the claim (a correctly quoted sentence read with the wrong polarity passes), or anything about
 sources without a pinned snapshot and a grounder.
+
+### Identifiers, tables and reference resources
+
+These grounders are generic: they check what a record cites against a pinned release of a reference,
+whatever the domain. Their messages say what to fix, so a model can act on them (see the feedback loop
+below). Each grounder's name carries the release it used, and so does the report's `grounding` key.
+
+Identifiers are read from the statement's subject and object (`id`, `label`, `entity_type`), its scope
+tokens, and evidence locators written as `key=value` pairs separated by `;` (`cluster=3;gene=CD8A`).
+
+- `OntologyGrounder` (`identifiers`) checks terms against pinned OBO releases (Cell Ontology, HPO,
+  MONDO, UBERON …):
+  - the term exists (BEV016);
+  - it is not obsolete (BEV023, naming its replacement);
+  - its label is the term's name or an exact synonym, ignoring case, punctuation and a plain plural (BEV017, naming the
+    term that label belongs to);
+  - it is of the right kind: `roots` maps an entity type or locator key to the terms it must descend
+    from, so a `cell_type` must be under CL:0000000 (BEV024).
+- `GeneGrounder` checks human gene symbols and HGNC identifiers against a pinned HGNC complete set:
+  - an unknown symbol is BEV016;
+  - a previous symbol, an alias or a wrong case is BEV023, naming the approved symbol;
+  - a record scoped to another species is not checked (BEV015).
+- `VariantGrounder` checks HGVS descriptions on RefSeq sequences against pinned NCBI assembly reports:
+  - the description must be well formed and versioned (BEV024);
+  - a chromosome accession must be a real sequence (BEV016), on the genome build of the record's scope
+    (`GRCh38`, `GRCh37`, `hg19`, `hg38`; BEV017), with the position inside the chromosome (BEV016);
+  - variants on more than one build in one record are BEV017.
+- `TableGrounder` (`tables`) is the data counterpart of the quote check.
+  - An evidence item of a configured type names one row of a pinned table (TSV or CSV) by its key
+    columns in the locator, and may claim values from it in `extracted_text` (`logfc=2.4; pct_in=0.91`).
+  - A missing row is BEV016, naming the closest key values. Several matching rows are BEV015.
+  - A claimed value that differs from the table is BEV017; a number matches at the precision it is
+    written with.
+  - An item whose row exists and whose values match counts as verified.
+- `ReferenceGrounder` (`crosscheck`) compares a record with a pinned reference resource it does not cite,
+  a table of curated `subject`, `predicate`, `object` assertions. A disagreement sends the record to review
+  (BEV025) and never rejects it: references are partial and can be out of date, and their silence is not
+  support. It raises BEV025 in two cases:
+  - the reference asserts the opposite predicate for the statement's subject and object;
+  - supporting evidence names an entity (e.g. `gene=CD19`) that the reference relates (e.g. `marker_of`)
+    only to objects that conflict with the statement's object. By default a different term conflicts unless
+    the ontology makes it an ancestor or descendant. With `conflict="disjoint"`, only terms the ontology
+    declares disjoint conflict (`disjoint_from` on them or their ancestors, e.g. T cell and B cell), so a
+    marker the reference lists for a sibling type is not reported. That needs an ontology release that keeps
+    its disjointness axioms: the Cell Ontology's full `cl.obo` does, `cl-basic.obo` does not.
+
+```bash
+bioevidence validate record.json --ontology cl-basic.obo --term-root cell_type=CL:0000000     --genes hgnc_complete_set.txt --assembly-report GRCh38_assembly_report.txt
+```
+
+`TableGrounder` and `ReferenceGrounder` need their configuration (evidence types, keys, relation) and are
+used from Python.
+
+### The feedback loop
+
+`feedback.revise(propose, validator)` runs the loop around any proposer: a model call, an agent or a person.
+
+1. The proposer returns a record, and bioevidence validates it.
+2. Every finding the proposer can fix goes back as a reason that points at the part of the record
+   concerned ("evidence 2 (cluster=3;gene=CD8B): No row of the pinned table has cluster=3, gene=CD8B.
+   Closest gene values for cluster=3: CD8A.").
+3. The proposer may then revise, up to a set number of rounds.
+
+Two kinds of finding are not fed back. The record goes to a person as it is:
+
+- **Judgment:** its own evidence disagrees (BEV004), a reference contradicts it (BEV025), a semantic cue
+  flags it (BEV022), or it lacks an independent review (BEV021).
+- **Policy:** the use needs a human decision whatever the proposer does (BEV008–BEV013).
+
+Evidence verified in one attempt is carried into the next while the claim stays the same, so a revision can fix or replace what failed
+but cannot withdraw verified evidence against its answer. The literature benchmark's agent loop
+(`evaluation/llm_benchmark/agent_loop.py`) showed why: before that rule, an agent whose record held a
+misquote and a verified quote against its decision dropped the latter and was admitted.
 
 ## Semantic checks
 
