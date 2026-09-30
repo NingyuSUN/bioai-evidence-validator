@@ -22,7 +22,7 @@ def run(monkeypatch, tmp_path, *args):
 
 @pytest.mark.parametrize("fail_on,expected", [("review", 1), ("rejected", 0)])
 def test_drafts_fail_on_review_only_when_asked(monkeypatch, tmp_path, fail_on, expected):
-    code, summary, counts = run(monkeypatch, tmp_path, "--files", "examples/drafts/*.yaml",
+    code, summary, counts = run(monkeypatch, tmp_path, "--files", "examples/drafts/*claim.yaml",
                                 "--profile", "literature-claim", "--format", "draft", "--fail-on", fail_on)
     assert code == expected
     assert counts == {"admitted": 1, "review_required": 1, "rejected": 0, "error": 0}

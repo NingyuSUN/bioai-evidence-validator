@@ -8,6 +8,9 @@
   against the committed benchmark results.
 - The ClinVar case commits `results/faults.jsonl`, its per-case controlled-fault and
   trust-boundary outcomes.
+- Add Python 3.14 to the supported package classifiers and Linux CI test matrix.
+- Add admitted and rejected `dataset-label` draft examples, covered by draft and
+  installed-wheel checks.
 
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
