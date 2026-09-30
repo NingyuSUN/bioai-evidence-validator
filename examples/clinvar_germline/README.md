@@ -82,7 +82,16 @@ that lets an expert panel override lab submissions.
 | A. Policy reproduction | All 5,026 sampled variants × 3 uses | NCBI's own 2023-09 review status (0★ → no use; ≥1★ research; ≥2★ clinical; ≥3★ expert; conflicting → none) | Whether a profile plus a transparent importer reproduces an independently implemented policy |
 | B. Three-year stability | The 4,026 sampled 2023-09 P/LP variants, and separately the whole population | NCBI's 2026-09 aggregate classification | Whether 2023 decisions correspond to later conflict or downgrade |
 | C. Controlled faults | 16 seeds admitted for all uses × 10 specified faults | Authored fault specifications | Detection of injected contract violations |
-| D. Trust boundary | 16 no-criteria variants whose evidence is relabeled and given a fabricated expert review | Should be rejected | Whether the engine re-verifies importer claims (it does not) |
+| D. Trust boundary | 16 no-criteria variants relabeled with a fabricated expert review; 16 expert-panel variants with their dissenting submissions removed | Fabricated review: rejected; omitted dissent: review | What only the source can show: the rules alone admit these, grounding should not |
+
+Cohorts C and D are validated twice: by the full validator, and by the full validator with
+[source grounding](../../docs/ENGINEERING.md#source-grounding). `ClinVarGrounder` rebuilds the
+variant's evidence from the pinned sample and compares the record with it item by item:
+each cited submission must exist (BEV016) and match its review status, content, scope and
+direction; each derived aggregate must match the one recomputed from the submissions
+(BEV017); and a submission the record leaves out sends it to review (BEV018). Extraction
+methods are not compared; they describe how the record was made, not what the source says.
+The run also checks that grounding changes none of the 5,026 real-source decisions.
 
 **Destabilized** means the 2026-09 aggregate classification is conflicting, or includes
 Uncertain significance, Likely benign or Benign. Variants missing from 2026-09 or with other
@@ -90,7 +99,7 @@ classifications (e.g. risk allele only) are reported but excluded from denominat
 Intervals are Wilson 95%. The sample strata are equal-sized, so pooled sample rates are not
 population rates; population rates come from all 218,920 variants.
 
-## Observed results (0.7.0)
+## Observed results
 
 ![ClinVar benchmark: share of 2023 pathogenic classifications reclassified or conflicting by 2026, with and without a dissenting submission, and false admissions under controlled faults and the trust boundary](../../docs/assets/clinvar_germline_benchmark.svg)
 
@@ -133,10 +142,19 @@ Concordance between submitters is a weak signal on its own (2★ 2.19% vs 1★ 2
 dissent); expert review and the absence of any dissent are strong ones.
 
 **C/D.** Controlled faults: false admissions 160/160 schema-only, 64/160 with the pre-0.4.1
-aggregate quality gate, **0/160** full (80 review, 80 rejected), matching the VBO case.
-Trust boundary: **16/16 fabricated expert reviews were admitted** by every method. The engine
-cannot detect an importer that mislabels evidence; source-grounded ingestion (pinned hashes,
-this folder's importer) is the defense.
+aggregate quality gate, **0/160** full (80 review, 80 rejected), matching the VBO case. With
+grounding, the 16 injected dissents are rejected rather than reviewed, since the dissenting
+submission they cite does not exist in ClinVar (BEV016); no controlled fault is admitted.
+
+| Trust-boundary control | Schema-only | Aggregate quality | Full | Full + grounding |
+|---|---:|---:|---:|---:|
+| Fabricated expert review (expected: rejected) | 16/16 | 16/16 | 16/16 | **0/16** |
+| Omitted dissent (expected: review) | 16/16 | 16/16 | 16/16 | **0/16** |
+
+The rules alone admit every trust-boundary case: a record that mislabels its evidence or
+leaves out the dissent consistently looks sound. Grounding against the pinned sample rejects
+all 16 fabricated reviews (BEV017) and sends all 16 records with omitted dissent to review
+(BEV018), without changing any of the 5,026 real-source decisions.
 
 ## Interpretation limits
 

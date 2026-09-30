@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -217,9 +218,12 @@ class RecordValidator:
     """Snapshot a profile and compile schemas once for a consistent batch.
 
     A trusted custom LinkML schema may add constraints; baseline checks always run.
-    Source bytes and reviewer identities are supplied assertions, not authenticated here.
+    Source bytes and reviewer identities are supplied assertions, not authenticated here, unless
+    grounders (see `grounding`) recompute them from pinned source snapshots.
     """
-    def __init__(self, *, profile: str | Path = "general", schema_path: Path | None = None):
+    def __init__(self, *, profile: str | Path = "general", schema_path: Path | None = None,
+                 grounders: Sequence[Any] = ()):
+        self.grounders = list(grounders)
         profile_bytes = profile_path(profile).read_bytes()
         self._profile = load_profile(profile_bytes)
         self.profile_sha256 = sha256_bytes(profile_bytes)
@@ -246,10 +250,12 @@ class RecordValidator:
             findings.extend(_integrity_findings(record, self._profile))
         if not findings:
             findings.extend(evaluate_profile(record, self._profile))
+            for grounder in self.grounders:  # only structurally sound records are compared with their source
+                findings.extend(grounder.check(record))
         decisions = decide_uses(uses, findings)
         overall = ("rejected" if not decisions or any(f.severity == "error" for f in findings) else
                    "review_required" if any(x["admission_status"] == "review_required" for x in decisions) else "admitted")
-        return {
+        report = {
             "validator": "bioai-evidence-validator", "validator_version": __version__,
             "profile_id": self._profile["id"], "profile_version": self._profile["version"],
             "profile_sha256": self.profile_sha256,
@@ -259,7 +265,11 @@ class RecordValidator:
             "schema_valid": not any(f.rule_id == "SCHEMA" for f in findings),
             "overall_status": overall, "findings": [asdict(f) for f in findings], "use_decisions": decisions,
         }
+        if self.grounders:  # reports without grounding keep their exact previous shape
+            report["grounding"] = [grounder.name for grounder in self.grounders]
+        return report
 
 
-def validate_record(record: Any, *, profile: str | Path = "general", schema_path: Path | None = None) -> dict[str, Any]:
-    return RecordValidator(profile=profile, schema_path=schema_path).validate(record)
+def validate_record(record: Any, *, profile: str | Path = "general", schema_path: Path | None = None,
+                    grounders: Sequence[Any] = ()) -> dict[str, Any]:
+    return RecordValidator(profile=profile, schema_path=schema_path, grounders=grounders).validate(record)

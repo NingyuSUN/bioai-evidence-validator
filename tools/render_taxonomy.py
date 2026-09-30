@@ -41,9 +41,14 @@ def control_results() -> dict[str, Counter]:
                 continue
             counts = stats[f"{case}:{row['category']}"]
             counts["n"] += 1
-            for method in ("schema_only", "aggregate_quality", "full"):
+            for method in ("schema_only", "aggregate_quality", "full", "grounded"):
                 counts[method] += row[method] == "admitted"
     return dict(stats)
+
+
+def admitted(s: Counter) -> str:
+    rules = f" (rules alone: {s['full']})" if s["full"] != s["grounded"] else ""
+    return f"{s['grounded']}/{s['n']}{rules}"
 
 
 def planned(items: list[str]) -> str:
@@ -66,13 +71,14 @@ def render() -> str:
         "",
         "## Coverage matrix",
         "",
-        "Negative controls show how many injected cases the full validator admitted (0 is the goal).",
+        "Negative controls show how many injected cases the validator with grounding admitted (0 is the goal); where",
+        "the rules alone admit a different number, it follows in parentheses.",
         "",
         "| ID | Failure mode | Origin | Expected to catch it | Status | Negative controls: admitted / cases | Next |",
         "|---|---|---|---|---|---|---|",
     ]
     for m in modes:
-        controls = "<br>".join(f"`{c}` {stats[c]['full']}/{stats[c]['n']}" for c in m["negative_controls"]) or "—"
+        controls = "<br>".join(f"`{c}` {admitted(stats[c])}" for c in m["negative_controls"]) or "—"
         layers = ", ".join(LAYER_SHORT[layer] for layer in m["catch_layers"])
         out.append(f"| {m['id']} | {m['name']} | {m['stage']} | {layers} | {SYMBOL[m['status']]} | {controls} | "
                    f"{planned(m['planned'])} |")
@@ -93,13 +99,13 @@ def render() -> str:
             if m.get(key):
                 out += ["", f"*{label}:* {m[key]}"]
         if m["negative_controls"]:
-            out += ["", "| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Full validator admitted |",
-                    "|---|---:|---:|---:|---:|"]
+            out += ["", "| Negative control | Cases | Schema-only admitted | Aggregate gate admitted | Rules admitted | "
+                    "Rules + grounding admitted |", "|---|---:|---:|---:|---:|---:|"]
             for c in m["negative_controls"]:
                 s = stats[c]
                 case, category = c.split(":")
                 out.append(f"| [{case}]({CASE_PAGES[case]}) `{category}` | {s['n']} | {s['schema_only']} | "
-                           f"{s['aggregate_quality']} | {s['full']} |")
+                           f"{s['aggregate_quality']} | {s['full']} | {s['grounded']} |")
         if m["planned"]:
             out += ["", f"Planned: {planned(m['planned'])}"]
     return "\n".join(out) + "\n"

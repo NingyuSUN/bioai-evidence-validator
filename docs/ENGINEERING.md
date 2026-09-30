@@ -9,6 +9,7 @@
 3. Check profile binding, supported/distinct uses, IDs and references, and review targets.
    Integrity failures stop profile evaluation and reject all requested uses.
 4. Apply fixed evidence checks and the selected profile's declarative use contracts.
+   If grounders are given, compare the record with its pinned sources ([source grounding](#source-grounding)).
 5. Return findings and a decision for each use. Any rejection makes the overall status
    rejected; otherwise any review requirement makes it review_required.
 
@@ -34,6 +35,11 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV011 | Human rejection present for this use | Reject affected use |
 | BEV012 | Human deferral present for this use | Review affected use |
 | BEV013 | Only LLM and string-match support mixed within a required type, without both permissions | Review affected use |
+| BEV014 | Grounding: snapshot bytes do not hash to the record's frozen hash | Reject |
+| BEV015 | Grounding: the source cannot confirm it (bytes unavailable, or an item type the grounder cannot recompute) | Review |
+| BEV016 | Grounding: a cited identifier does not exist in the source | Reject |
+| BEV017 | Grounding: the record disagrees with what the source says | Reject |
+| BEV018 | Grounding: the source holds evidence the record leaves out | Review |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -48,8 +54,8 @@ between runs. Hashes identify inputs/configuration; they do not sign records or 
 that a source, source hash, label, or reviewer identity is authentic.
 
 Source artifacts require a declared version, retrieval time, and frozen hash. The optional
-observed hash is compared to that hash. Validation never retrieves source bytes or
-calculates their hashes. Only `build` hashes local files explicitly named in a draft; it
+observed hash is compared to that hash. Validation never retrieves source bytes; without
+grounders it does not calculate their hashes either. Only `build` hashes local files explicitly named in a draft; it
 does not fetch URIs. A profile can require a declared `independent_cohort_review`
 evidence item, but the engine cannot establish independence or evaluation validity.
 
@@ -57,6 +63,43 @@ Report writes use a temporary file and atomic replacement. Input, selected profi
 selected schema, and baseline schema paths cannot be the report destination. Operational
 failures leave no completed new report and preserve an existing report if replacement fails.
 CLI configuration is trusted, including schema import paths.
+
+## Source grounding
+
+The rules above judge what a record says about its evidence; they cannot tell whether it is
+true. Grounding moves that trust boundary toward the source. A grounder takes the exact
+source bytes a record names, recomputes what the record claims, and reports disagreements
+as BEV014–BEV018 findings. It is optional, offline and deterministic. Grounders run only on
+records that passed the schema and integrity checks, and add findings to the same per-use
+decisions. Reports gain a `grounding` key listing the grounders used; without grounders,
+reports keep their exact previous shape.
+
+- `SnapshotStore` holds local source bytes keyed by frozen SHA-256 and re-hashes them when
+  loaded, so a file is never trusted by its name. `SnapshotStore.from_directory` reads files
+  named `<sha256>` or `<sha256>.<ext>`.
+- `SourceBytesGrounder` is generic: it recomputes every source artifact's hash from the store
+  instead of trusting `observed_sha256` (BEV014, or BEV015 when the bytes are missing).
+- Domain grounders know one source format and live with their importers, outside the
+  engine: `VboGrounder` (term existence, name match, candidate resolution) and
+  `ClinVarGrounder` (submissions, review tiers, derived aggregates, directions, completeness).
+  A grounder returns no findings for records that do not cite its source.
+
+```bash
+bioevidence validate record.json --snapshot-dir snapshots/
+```
+
+```python
+from bioevidence_validator.engine import RecordValidator
+from bioevidence_validator.grounding import SnapshotStore, SourceBytesGrounder
+
+store = SnapshotStore.from_directory(Path("snapshots"))
+validator = RecordValidator(profile="general", grounders=[SourceBytesGrounder(store)])
+```
+
+The CLI runs the generic byte check only. Grounding checks a record against the source it
+cites; it cannot tell whether that source is itself right, and it covers only sources with
+a pinned snapshot and a grounder. Literature (quotes, PMIDs, DOIs) is the next step
+([#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)).
 
 `validate`: 0 admitted, 1 rejected, 2 review_required, 3 input/configuration/execution error.
 Argparse usage errors also exit 2, with usage text rather than a validation report.
@@ -106,10 +149,12 @@ review-required, custom-domain and draft-built records. It does not assess
 biological correctness, model calibration, or predictive performance.
 
 The [VBO case](../examples/vbo_canine/README.md) adds offline source verification and a
-separate real-source/controlled-fault evaluation. Its trust-boundary failures remain visible.
-The [ClinVar case](../examples/clinvar_germline/README.md) adds policy reproduction against
-an independent implementation (NCBI's review status) and a three-year outcome comparison;
-its fabricated-expert-review trust-boundary cohort is likewise admitted and reported.
+separate real-source/controlled-fault evaluation. The
+[ClinVar case](../examples/clinvar_germline/README.md) adds policy reproduction against
+an independent implementation (NCBI's review status) and a three-year outcome comparison.
+Each also reports a trust-boundary cohort that the rules alone admit and grounding catches
+(80/80 admitted without grounding, 0/80 with it), and checks that grounding changes no
+real-source decision.
 Both replay byte-identically from frozen, hash-checked sources, and CI compares each run
 with the committed results. [Standards alignment](STANDARDS.md) maps the record model to
 ECO, Biolink and GA4GH VA-Spec.

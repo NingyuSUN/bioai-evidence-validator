@@ -68,8 +68,9 @@ with tempfile.TemporaryDirectory() as directory:
     assert result.returncode == 0, result.stderr
     summary = json.loads(result.stdout)
     assert summary["cohorts"]["controlled_fault"]["full"]["false_admissions"] == 0
-    assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 16
-print("Installed wheel: real-source VBO case, required-type quality fix and explicit trust boundary verified.")
+    assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 48
+    assert summary["cohorts"]["trust_boundary"]["grounded"]["false_admissions"] == 0
+print("Installed wheel: real-source VBO case, required-type quality fix and source-grounded trust boundary verified.")
 
 with tempfile.TemporaryDirectory() as directory:
     output = Path(directory) / "clinvar"

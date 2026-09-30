@@ -29,7 +29,8 @@ In scope, for example:
 - crashes or unbounded resource use from crafted records, drafts or profiles;
 - the GitHub Action executing or exposing more than it documents.
 
-Documented limits are not vulnerabilities: the engine trusts supplied metadata and does not
-authenticate sources, hashes or reviewer identities (see the *trust boundary* cohorts in the
-benchmarks and [docs/ENGINEERING.md](docs/ENGINEERING.md)). Reports that show a practical
+Documented limits are not vulnerabilities: without grounders, the engine trusts supplied
+metadata; it never authenticates reviewer identities, and grounding checks a record only
+against the pinned sources it has (see the *trust boundary* cohorts in the benchmarks and
+[docs/ENGINEERING.md](docs/ENGINEERING.md)). Reports that show a practical
 exploit of those limits are still welcome.

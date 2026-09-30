@@ -12,6 +12,7 @@ import yaml
 from . import review as review_module
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
+from .grounding import SnapshotStore, SourceBytesGrounder
 
 
 def parser() -> argparse.ArgumentParser:
@@ -22,6 +23,8 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    validate.add_argument("--snapshot-dir", type=Path,
+                          help="Directory of source snapshots named by SHA-256; recompute source hashes from them")
     build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
     build.add_argument("draft", type=Path)
     build.add_argument("--output", type=Path)
@@ -144,7 +147,8 @@ def _run(args) -> int:
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     _check_depth(record)
-    report = validate_record(record, schema_path=args.schema, profile=args.profile)
+    grounders = [SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir))] if args.snapshot_dir else []
+    report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)

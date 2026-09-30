@@ -40,9 +40,16 @@ Validator routes a variant with any dissenting (VUS/LB/B) submission to review (
 
 ## C/D. Controlled faults and trust boundary (false admissions)
 
-| Cohort | Schema-only | Aggregate-quality ablation | Full |
-|---|---:|---:|---:|
-| controlled_fault | 160/160 | 64/160 | 0/160 |
-| trust_boundary | 16/16 | 16/16 | 16/16 |
+| Cohort | Schema-only | Aggregate-quality ablation | Full | Full + grounding |
+|---|---:|---:|---:|---:|
+| controlled_fault | 160/160 | 64/160 | 0/160 | 0/160 |
+| trust_boundary | 32/32 | 32/32 | 32/32 | 0/32 |
+
+| Trust-boundary control | Expected | Schema-only | Aggregate-quality ablation | Full | Full + grounding |
+|---|---|---:|---:|---:|---:|
+| fabricated_expert_review | rejected | 16/16 | 16/16 | 16/16 | 0/16 |
+| omitted_dissent | review_required | 16/16 | 16/16 | 16/16 | 0/16 |
+
+Grounding (source-bytes, clinvar-snapshot) recomputes each record's evidence from the pinned sample; it changed 0 of 5,026 real-source decisions.
 
 Stability is not correctness, and ClinVar's own review tiers influence later submissions. Strata are equal-sized, so pooled sample rates are not population rates. Observational; not for clinical use.
