@@ -13,6 +13,7 @@ from . import review as review_module
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 from .grounding import SnapshotStore, SourceBytesGrounder
+from .literature import CATALOG, LiteratureGrounder, ground_record, http_fetch
 
 
 def parser() -> argparse.ArgumentParser:
@@ -24,7 +25,17 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
     validate.add_argument("--snapshot-dir", type=Path,
-                          help="Directory of source snapshots named by SHA-256; recompute source hashes from them")
+                          help="Directory of source snapshots named by SHA-256; recompute source hashes from them, "
+                               "and check cited publications if it holds a literature.json from `ground`")
+    ground = commands.add_parser("ground", help="Resolve cited publications and pin their metadata and open-access "
+                                                "full text (uses the network)")
+    ground.add_argument("input", type=Path)
+    ground.add_argument("--snapshot-dir", type=Path, required=True)
+    ground.add_argument("--output", type=Path, required=True, help="The record with source hashes pinned")
+    ground.add_argument("--email", help="Contact address for the resolvers' User-Agent (polite use)")
+    ground.add_argument("--refresh", action="store_true", help="Resolve again even if already in the catalog")
+    ground.add_argument("--resolver", choices=["europepmc", "ncbi"], default="europepmc",
+                        help="Europe PMC (with Crossref for DOIs) or NCBI E-utilities")
     build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
     build.add_argument("draft", type=Path)
     build.add_argument("--output", type=Path)
@@ -140,6 +151,18 @@ def _run(args) -> int:
             print(json.dumps(result, indent=2))
         return 0
 
+    if args.command == "ground":
+        if args.output.resolve() == args.input.resolve():
+            raise ValueError("Output must not overwrite the input record")
+        record = json.loads(args.input.read_text(encoding="utf-8"),
+                            object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
+        _check_depth(record)
+        grounded, catalog = ground_record(record, args.snapshot_dir, http_fetch(args.email), refresh=args.refresh,
+                                          resolver=args.resolver)
+        _write_json(args.output, grounded)
+        print(f"{len(catalog['works'])} publication(s) in {args.snapshot_dir / CATALOG}")
+        return 0
+
     selected_profile = profile_path(args.profile)
     protected = [args.input, args.schema, selected_profile, default_schema_path()]
     if args.output and args.output.resolve() in {p.resolve() for p in protected}:
@@ -147,7 +170,11 @@ def _run(args) -> int:
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     _check_depth(record)
-    grounders = [SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir))] if args.snapshot_dir else []
+    grounders: list = []
+    if args.snapshot_dir:
+        grounders.append(SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir)))
+        if (args.snapshot_dir / CATALOG).exists():
+            grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
     report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:

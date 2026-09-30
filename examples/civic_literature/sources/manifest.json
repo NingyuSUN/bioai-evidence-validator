@@ -1,0 +1,595 @@
+{
+  "civic": {
+    "url": "https://civicdb.org/downloads/nightly/nightly-ClinicalEvidenceSummaries.tsv",
+    "sha256": "a618939c33c7cc9cc530be5f0a51fc330b29ad46b3f9a5bebeddcd871375e086",
+    "bytes": 4154685,
+    "retrieved_at": "2026-09-29T01:12:31+00:00",
+    "license": "CC0 1.0",
+    "rows_used": 189,
+    "projection_sha256": "3421d7f530953723a3abd660d1cbd9e764350f5c535af58177df0aaa7242e186"
+  },
+  "resolver": "NCBI E-utilities (esummary, esearch, efetch db=pmc)",
+  "retrieved_at": "2026-09-29T01:12:31+00:00",
+  "selection": {
+    "key": "bioai-civic-literature-v1",
+    "targets": {
+      "does_not_support": 50,
+      "supports_only": 100
+    },
+    "retracted_target": 20,
+    "licence_filter": "(\"cc by license\"[filter] OR \"cc0 license\"[filter])",
+    "papers_in_pmc": 1174,
+    "papers_openly_licensed": 315,
+    "retracted_query": "\"retracted publication\"[pt] AND \"pubmed pmc open access\"[filter] AND cancer[tiab] AND (mutation[tiab] OR variant[tiab])",
+    "licences_kept": [
+      "cc by",
+      "cc0"
+    ]
+  },
+  "corpus": {
+    "15696205": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "18371219": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "19775480": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "20141835": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "21365007": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "21494621": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "21666749": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22046346": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22081665": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "22194965": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22292935": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22403669": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22479427": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "22808142": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "22901364": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "23029227": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "23031422": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "23104868": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "23181703": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "23374602": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "23497317": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "24039832": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24088382": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24088390": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24098545": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "24236021": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24367492": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "24550739": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "24571676": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24586605": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "24586741": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24588908": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "24594804": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24708484": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24735930": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "24740294": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24758907": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24782778": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "24788118": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "24927325": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25082261": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "25216528": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25524464": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "25587029": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25658984": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25692060": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25766326": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25883647": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "25900183": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26146478": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26267899": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26304929": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26399631": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26516930": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26528855": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26544513": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26621817": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26634247": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "26674132": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "26674738": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "26709701": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26758680": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "26821351": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26872370": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26893365": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26894380": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26894859": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26918451": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26943774": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26956051": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "26989027": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26989536": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "26992226": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "27028764": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27032107": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27049722": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27086918": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27167191": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27172793": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27197561": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27302369": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27418251": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "27485109": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "27489350": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27489863": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "27562493": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27589690": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "27612423": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27819322": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27894077": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27900359": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "27998968": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "28077790": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "28094316": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "28103578": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "28330462": {
+      "stratum": "does_not_support",
+      "license": "cc0"
+    },
+    "28453554": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "28516360": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "28978004": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "29156677": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "29478821": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "29515777": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "29657128": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "29755131": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "29858576": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "30718506": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "30865549": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "30876455": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "31010895": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "31372595": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "31768625": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "32022484": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    },
+    "32087612": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "32502294": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "32668764": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "32822286": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "32852708": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "33536079": {
+      "stratum": "supports_only",
+      "license": "cc0"
+    },
+    "34247201": {
+      "stratum": "supports_only",
+      "license": "cc by"
+    },
+    "34272467": {
+      "stratum": "does_not_support",
+      "license": "cc by"
+    }
+  },
+  "retracted": {
+    "16609730": {
+      "license": "cc by"
+    },
+    "22066019": {
+      "license": "cc by"
+    },
+    "22443468": {
+      "license": "cc by"
+    },
+    "22703554": {
+      "license": "cc by"
+    },
+    "22912826": {
+      "license": "cc by"
+    },
+    "23272116": {
+      "license": "cc by"
+    },
+    "23565736": {
+      "license": "cc by"
+    },
+    "25025684": {
+      "license": "cc by"
+    },
+    "26378044": {
+      "license": "cc by"
+    },
+    "27769055": {
+      "license": "cc by"
+    },
+    "29158857": {
+      "license": "cc0"
+    },
+    "30001707": {
+      "license": "cc0"
+    },
+    "30998743": {
+      "license": "cc by"
+    },
+    "31151422": {
+      "license": "cc0"
+    },
+    "32432717": {
+      "license": "cc by"
+    },
+    "32441301": {
+      "license": "cc by"
+    },
+    "33552986": {
+      "license": "cc by"
+    },
+    "33572621": {
+      "license": "cc by"
+    },
+    "34306047": {
+      "license": "cc by"
+    },
+    "34457028": {
+      "license": "cc by"
+    }
+  },
+  "nonexistent_pmids": [
+    "99000001",
+    "99000002",
+    "99000003",
+    "99000004",
+    "99000005",
+    "99000006",
+    "99000007",
+    "99000008",
+    "99000009",
+    "99000010",
+    "99000011",
+    "99000012",
+    "99000013",
+    "99000014",
+    "99000015",
+    "99000016",
+    "99000017",
+    "99000018",
+    "99000019",
+    "99000020"
+  ]
+}

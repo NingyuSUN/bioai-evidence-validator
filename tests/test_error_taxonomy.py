@@ -40,11 +40,24 @@ def test_entries_are_well_formed():
             assert m["planned"], f"{m['id']}: say what will close the gap"
 
 
+def literature_controls():
+    folder = ROOT / "examples" / "civic_literature"
+    sys.path.insert(0, str(folder))
+    try:
+        spec = importlib.util.spec_from_file_location("tax_civic_run", folder / "run.py")
+        loaded = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(loaded)
+    finally:
+        sys.path.pop(0)
+    return {f"civic:{name}" for name in loaded.EXPECTED if name != "base"}
+
+
 def test_every_benchmark_fault_is_mapped_exactly_once():
     mapped = [c for m in MODES for c in m["negative_controls"]]
     assert len(mapped) == len(set(mapped)), "a negative control is mapped to two failure modes"
     in_code = (pipeline_faults("vbo", "vbo_canine", "tax_vbo_pipeline")
-               | pipeline_faults("clinvar", "clinvar_germline", "tax_clinvar_pipeline") | TRUST_BOUNDARY)
+               | pipeline_faults("clinvar", "clinvar_germline", "tax_clinvar_pipeline") | TRUST_BOUNDARY
+               | literature_controls())
     assert set(mapped) == in_code == set(STATS)
 
 

@@ -40,6 +40,8 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV016 | Grounding: a cited identifier does not exist in the source | Reject |
 | BEV017 | Grounding: the record disagrees with what the source says | Reject |
 | BEV018 | Grounding: the source holds evidence the record leaves out | Review |
+| BEV019 | Grounding: the cited source is retracted | Reject |
+| BEV020 | A required type the profile lists under `verified_evidence_types` has no item a grounder verified | Review affected use |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -69,7 +71,7 @@ CLI configuration is trusted, including schema import paths.
 The rules above judge what a record says about its evidence; they cannot tell whether it is
 true. Grounding moves that trust boundary toward the source. A grounder takes the exact
 source bytes a record names, recomputes what the record claims, and reports disagreements
-as BEV014–BEV018 findings. It is optional, offline and deterministic. Grounders run only on
+as BEV014–BEV019 findings. It is optional, offline and deterministic. Grounders run only on
 records that passed the schema and integrity checks, and add findings to the same per-use
 decisions. Reports gain a `grounding` key listing the grounders used; without grounders,
 reports keep their exact previous shape.
@@ -83,10 +85,30 @@ reports keep their exact previous shape.
   engine: `VboGrounder` (term existence, name match, candidate resolution) and
   `ClinVarGrounder` (submissions, review tiers, derived aggregates, directions, completeness).
   A grounder returns no findings for records that do not cite its source.
+- `LiteratureGrounder` is generic for publications (`source_type: publication` with a
+  `pmid:`, `pmcid:` or `doi:` URI). It reads what the network step `bioevidence ground` pinned:
+  the resolver's response and, for open-access papers, the PMC JATS full text. From those bytes
+  it recomputes whether the identifier exists (BEV016), whether the paper is retracted
+  (BEV019), whether the record's title and hash belong to that paper (BEV017), and whether each
+  quote (`extracted_text`) appears in the full text, at its paragraph when the locator ends in
+  `#<paragraph id>` (BEV017). Matching is by substring after normalising Unicode, quote marks,
+  dashes and spacing; a quote may leave out a trailing parenthetical reference, nothing else. A paper without open full text, or a quote under five words,
+  cannot be verified (BEV015): it is sent to review, never admitted silently.
+
+A profile use can list `verified_evidence_types` (a subset of its required types). Such a type
+counts only through items a grounder verified (`verified_items`); otherwise the use gets BEV020
+and goes to review, including when validation runs without grounders. Built-in profiles list
+none, so their decisions do not change.
 
 ```bash
-bioevidence validate record.json --snapshot-dir snapshots/
+bioevidence ground record.json --snapshot-dir snapshots/ --output pinned.json   # network: resolve and pin
+bioevidence validate pinned.json --snapshot-dir snapshots/                      # offline
 ```
+
+`ground` uses Europe PMC (with Crossref for DOIs it does not know) or, with `--resolver ncbi`,
+NCBI E-utilities. It writes content-addressed snapshots and `snapshots/literature.json`, and
+pins the record's source hash to them. Snapshots may be stored gzip-compressed
+(`<sha256>.xml.gz`); the name is the hash of the uncompressed bytes.
 
 ```python
 from bioevidence_validator.engine import RecordValidator
@@ -96,10 +118,11 @@ store = SnapshotStore.from_directory(Path("snapshots"))
 validator = RecordValidator(profile="general", grounders=[SourceBytesGrounder(store)])
 ```
 
-The CLI runs the generic byte check only. Grounding checks a record against the source it
-cites; it cannot tell whether that source is itself right, and it covers only sources with
-a pinned snapshot and a grounder. Literature (quotes, PMIDs, DOIs) is the next step
-([#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20)).
+With `--snapshot-dir`, the CLI runs the byte check, and the literature grounder when the
+directory holds a `literature.json`. Grounding checks a record against the source it cites;
+it cannot tell whether that source is itself right, whether a verbatim quote really supports
+the claim (a correctly quoted sentence read with the wrong polarity passes), or anything about
+sources without a pinned snapshot and a grounder.
 
 `validate`: 0 admitted, 1 rejected, 2 review_required, 3 input/configuration/execution error.
 Argparse usage errors also exit 2, with usage text rather than a validation report.

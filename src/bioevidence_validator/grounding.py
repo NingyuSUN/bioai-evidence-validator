@@ -11,12 +11,17 @@ Rule codes (all apply to every requested use):
   BEV016 error   a cited identifier does not exist in the source
   BEV017 error   the record disagrees with what the source says
   BEV018 review  the source holds evidence the record leaves out
+  BEV019 error   the cited source is retracted
+
+A grounder may also offer `verified_items(record)`: the evidence items it confirmed against their source.
+Only those count for evidence types a profile lists under `verified_evidence_types` (BEV020 otherwise).
 
 Domain grounders (which fields to recompute for a given source format) live with their importers,
 outside the engine; `SourceBytesGrounder` is generic.
 """
 from __future__ import annotations
 
+import gzip
 import hashlib
 from collections.abc import Callable
 from pathlib import Path
@@ -24,7 +29,8 @@ from typing import Any, Protocol
 
 from .engine import Finding
 
-SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review"}
+SEVERITY = {"BEV014": "error", "BEV015": "review", "BEV016": "error", "BEV017": "error", "BEV018": "review",
+            "BEV019": "error"}
 
 
 class Grounder(Protocol):
@@ -46,12 +52,16 @@ class SnapshotStore:
 
     @classmethod
     def from_directory(cls, directory: Path) -> SnapshotStore:
-        """Files named by their SHA-256, optionally with an extension (e.g. `ab12….json`)."""
-        loaders = {}
+        """Files named by their SHA-256, optionally with an extension (e.g. `ab12….json`). A `.gz` file is
+        decompressed first: its name is the hash of the uncompressed bytes."""
+        def unzip(path: Path) -> Callable[[], bytes]:
+            return lambda: gzip.decompress(path.read_bytes())
+
+        loaders: dict[str, Callable[[], bytes]] = {}
         for path in sorted(Path(directory).iterdir()):
             key = path.name.split(".", 1)[0].lower()
             if path.is_file() and len(key) == 64:
-                loaders[key] = path.read_bytes
+                loaders[key] = unzip(path) if path.suffix == ".gz" else path.read_bytes
         return cls(loaders)
 
     def _load(self, sha256: str) -> tuple[bytes | None, bool]:

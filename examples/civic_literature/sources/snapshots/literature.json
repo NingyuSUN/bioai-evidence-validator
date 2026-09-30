@@ -1,0 +1,1745 @@
+{
+  "version": 1,
+  "works": {
+    "pmid:15696205": {
+      "fulltext_sha256": "dbfec57f06bbbc20ad6db6555822adc575b142478af7c2a24ed749b383f35b78",
+      "license": "cc by",
+      "metadata_sha256": "d01f9a1eba78c420584937af9c55327b3db32a88e035e244e3b8ba3e889823de",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=15696205&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=545207&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:16609730": {
+      "fulltext_sha256": "e992bf62fb41e37ff9725817ed293421f0431697517e376944692b23f2c10b3c",
+      "license": "cc by",
+      "metadata_sha256": "09c517f0e241cdfa5f3177c20cc15813dec251c6ac048aa4ebcf6bfcf28c2937",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=16609730&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=1434790&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:18371219": {
+      "fulltext_sha256": "abbceeda5afc87b5d2f26150b35159a449bb0f8fb61d91256f8b8dacf2a2e35a",
+      "license": "cc by",
+      "metadata_sha256": "f23c712f47abf017e4a23ccf2512293ff3a317b27e010708698baba2a4681c03",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=18371219&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=2397526&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:19775480": {
+      "fulltext_sha256": "c5fdbf586f90a1e45c3ea1ab4087576dea90f32ce7a5e5ab3153046ac9ec418a",
+      "license": "cc by",
+      "metadata_sha256": "120a6e935f927eccab6f319fd8490641603389907afa7ca7bd13fcaa24767f83",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=19775480&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=2759966&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:20141835": {
+      "fulltext_sha256": "e4b65d59be14e6388fb829ec2c197d734477dc3832cfa8210863da4839ea95d1",
+      "license": "cc by",
+      "metadata_sha256": "b53824887b6c9736089c262bde1b728f95f43061cd7bf35a3fdccfc0bdde41d6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=20141835&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=2872605&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:21365007": {
+      "fulltext_sha256": "e2e6a88534c7c1e9b7115e87ead8182b2a55398c80f4c02d905584c5fed4f155",
+      "license": "cc by",
+      "metadata_sha256": "52faac57db0ad904a0f3495b909bc697daa630d5c3ec46761357022599cd6437",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=21365007&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3041820&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:21494621": {
+      "fulltext_sha256": "bd7ad6278a819eb82cdb566ddc17a658a231b7aeded48c7cb9c63d7341256fb2",
+      "license": "cc by",
+      "metadata_sha256": "f21ece545e98a19d445f9912e6fe81303fa15c44cb9268a2e0e41134879a8a2a",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=21494621&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3072987&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:21666749": {
+      "fulltext_sha256": "9ce0b5645d04c19d88f5620a6b49c9b30faa3b0b7d415435160e441faa83493b",
+      "license": "cc by",
+      "metadata_sha256": "cc9e87eabcec2250597b0ac05439c2092ff5d2ed6ecf2e114e6c195b778fbd5f",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=21666749&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3110189&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22046346": {
+      "fulltext_sha256": "9d09c43dcdaaec18048096d05a3479d61d9992cd9c39d14ea557da1ce9b75146",
+      "license": "cc by",
+      "metadata_sha256": "abfef1529b5aebd692c5422ad02fd5aef426c003c7de5a014600732b07834653",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22046346&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3203921&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22066019": {
+      "fulltext_sha256": "0b0a4febf474923703c2a93ec41ecf1d2db935c1a1baa6da5c5068b73c7426fc",
+      "license": "cc by",
+      "metadata_sha256": "46aa3917c486cf4d86083e91315141d7225b3b4f3bce2bce910401e1eec47d58",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22066019&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3204996&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22081665": {
+      "fulltext_sha256": "6fbb4c9b8b3e64701afe87c0de3abd41aa476aff7e400ea86a2f784ac119e901",
+      "license": "cc by",
+      "metadata_sha256": "fb30bf259cb9cb205d797b2d24632b594dbf764c754e66d2fcccc4b2ef2cd82d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22081665&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3260002&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22194965": {
+      "fulltext_sha256": "b234d3422c19d99bfc881a0353ecde25ee15ebe9a1bb8c8916aae5515eb959a5",
+      "license": "cc by",
+      "metadata_sha256": "7939ed352114e4e67f065cbd6f836d2680fc19d4642b0656aa0395ffe614fcf6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22194965&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3237573&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22292935": {
+      "fulltext_sha256": "e977f8a946d00f3a4aed19ac5059896c6e4d69e97749219403e09cd9ff5a3963",
+      "license": "cc by",
+      "metadata_sha256": "2db8d8bb26a09dcd5b2056dadf617a9b14528121840dc536aa59b8092b81b831",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22292935&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3299648&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22403669": {
+      "fulltext_sha256": "2c363612b8db42c0fc3be0400a5f9f8939120a2dda27b3bfbb8c28e88fdd42a7",
+      "license": "cc by",
+      "metadata_sha256": "5cf56d47762967f8bc7e4d46f6c83911e7e7698b701155f102add0e6d275cdba",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22403669&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3293822&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22443468": {
+      "fulltext_sha256": "4879279506421eb6c97d4234548823b2b7222df8be6d5e0b0e3aafba3559a112",
+      "license": "cc by",
+      "metadata_sha256": "7ea5885eb6ee10e3de6e7851b5e73663bbc416704e0fc103d45f3c0e11ea9ba3",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22443468&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3324370&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22479427": {
+      "fulltext_sha256": "bd105f20f2f5bea6b905e281d3e72a42041b086c3a223a06dff778da6111f66a",
+      "license": "cc by",
+      "metadata_sha256": "dd1eb1a928e84e7fe885dd126af60d88bd981fa369f1749b75f987b6e2da0575",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22479427&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3315579&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22703554": {
+      "fulltext_sha256": "d05198a54bbe91bdada0b1e7542f949064f0d9c8750031a3d98f11d7ff2a1772",
+      "license": "cc by",
+      "metadata_sha256": "64f63177993030597779504a0ebd9e365323e83a7da18f7b78ac9af078b89625",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22703554&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3470942&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22808142": {
+      "fulltext_sha256": "aa785c2e4d919fee36540b1577354f48c5b027fa8d928c0a041e05deaf5f9cc9",
+      "license": "cc by",
+      "metadata_sha256": "9433dee6ca46a1137f07d4e458e25f39888d33ad9ff60cc0cbc6b888427a7880",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22808142&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3396657&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22901364": {
+      "fulltext_sha256": "13b45de3b35e382d163f4e025cc7cff202984ae99a45d39271a5e5cc6812e270",
+      "license": "cc by",
+      "metadata_sha256": "a1a69155b47b14a2b4c021b5546db68de9a1a902a7251d3d02b83607e72c2f83",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22901364&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3548765&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:22912826": {
+      "fulltext_sha256": "9dc53ac8df0764df2deec17ed3474ebf9027d4e7dedecf642aa944f02aacff46",
+      "license": "cc by",
+      "metadata_sha256": "e9a3cd9e2fe615ca7ce3c9dd8c921d57ededc4eedbba8d0300a9c5f08c0b5186",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=22912826&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3422285&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23029227": {
+      "fulltext_sha256": "9f9ae53275627653abceecf603126a000275d7a622f7de49db3da712ac442f67",
+      "license": "cc by",
+      "metadata_sha256": "4ffdc301a603476fa88f0cea2e5aa1f0c1dbec57925fbe18b2c632bf19968a4a",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23029227&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3446943&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23031422": {
+      "fulltext_sha256": "6c8ad397b8e7fea7e3a2d8b26213959772b0df6c1e9c80d83ea37a0551c1848f",
+      "license": "cc by",
+      "metadata_sha256": "6e847d5d69452fd4fa9288d24641afe633e3059ca0d7d1a1f7401bd3094ec682",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23031422&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3473234&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23104868": {
+      "fulltext_sha256": "49ae617fc40e65380d6570759ab28d5f864cef4b1626be8c89828d6934c72c8d",
+      "license": "cc by",
+      "metadata_sha256": "30845194d9781277f3db60d34dc0d981a4ada9a85faf0eb0b51983a47ee11c31",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23104868&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3717947&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23181703": {
+      "fulltext_sha256": "5de1b04c2c92eb2780050bf9732836ec89d90e421db83b0037b1c3ded5ff71c8",
+      "license": "cc by",
+      "metadata_sha256": "90e05202ac08fc7f4e3c27707c3460df6ed25ffa76e061f4da747c3f6b5f0624",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23181703&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3515412&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23272116": {
+      "fulltext_sha256": "2cedecc192406544bfc75a5107eb0bebbd82539396a77f4109f933388cc49ee5",
+      "license": "cc by",
+      "metadata_sha256": "082ca4df8cb9ea92dbd37c5a272932427c9a9579189246b5d42c352272893250",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23272116&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3522696&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23374602": {
+      "fulltext_sha256": "c935970d54ce99d3e86a2e10fa12bdd832e01eed2c3eee805d17d83052cd38bc",
+      "license": "cc by",
+      "metadata_sha256": "68a8d9a5708d5e48c1f962bc3340c060ba45b7bc3ab0666a5a5efba13df7d544",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23374602&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3599697&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23497317": {
+      "fulltext_sha256": "ca0b1af77fb538ef681fac2a8c48883fbea105ddbac1ca8c047ecb8c995e24c1",
+      "license": "cc by",
+      "metadata_sha256": "c53293681974962e42a102c0b4c56fbe2c554d028341f0eb1d1914cf69ff36ec",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23497317&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3637582&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:23565736": {
+      "fulltext_sha256": "58d728e0042f12895a7fe5bcd9ffc784a8ebe4b018b787637d3f8e9f409bb852",
+      "license": "cc by",
+      "metadata_sha256": "b336a6f0fd7800f444c67479aff3dfd0a6b94d344d1a573b504f9fc646dce1c6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=23565736&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3635997&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24039832": {
+      "fulltext_sha256": "dd87e3eadf892a6031d324ea8254d75a1e28ebc18154e29bbd9a574af5d0260f",
+      "license": "cc by",
+      "metadata_sha256": "832f76a5d2090c4a56c78b1d83f60046290c71c3773c34f00b1bcc46024524fd",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24039832&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3769372&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24088382": {
+      "fulltext_sha256": "df1356170dfcafe0029ce10c6bd7e2ebf9fc530a3277d00c96a37566b56f59ce",
+      "license": "cc by",
+      "metadata_sha256": "ddfed9ed632f63d9e0de7464be907207e12afb0338c6b94ab1545033c39b7799",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24088382&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3850695&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24088390": {
+      "fulltext_sha256": "11423a71bd7630198f8d53a02084337937dd69d345e9cce8f70734f7ec25282f",
+      "license": "cc by",
+      "metadata_sha256": "df375de9e9a21888ff49b2f4d3cc7b9df46c66016d3319fd2437ef3f97668954",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24088390&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3850795&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24098545": {
+      "fulltext_sha256": "825f03f54b5f4cad9ae8657fabbeca1b5de714d92befd73c575373f071f6808a",
+      "license": "cc by",
+      "metadata_sha256": "ae5f1545e2ff8600835b1ddf62135f977a392c895e2fb1c33797c33c3a56302c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24098545&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3788742&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24236021": {
+      "fulltext_sha256": "43e04a4bb816a9f8329c0bce62f7045ea2600560f31b74ab10a21c7ce2316d79",
+      "license": "cc by",
+      "metadata_sha256": "da242cb0f808a4a306e32711aceccb3c8b3babb1a4ac3c30908ef7a905937ad4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24236021&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3827254&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24367492": {
+      "fulltext_sha256": "2172da40043fe8332b1b6846e22df1430c03817e1c7a5cd2304a10644b5f0330",
+      "license": "cc by",
+      "metadata_sha256": "5a0f196b3c9f44114cf7517cbdf1b126728eb7a299c8898dd6f70946e08f33f4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24367492&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3868649&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24550739": {
+      "fulltext_sha256": "2efafd976980984669e358e0a95bb7e946dcef47af04875124b516b681baad63",
+      "license": "cc0",
+      "metadata_sha256": "78adcbfef87c225b0fc5b452950149f969028c28267a3a1a2e49b27a255a566d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24550739&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3923676&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24571676": {
+      "fulltext_sha256": "24dfa06befa69bef50501c109e3a3df8a7e7b7d3a254dfb9f2ef4824afbc1ce0",
+      "license": "cc by",
+      "metadata_sha256": "44239433f4720909d2d1b0210b748e1a2bab277d7922f6e3e5ddae9188b88a24",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24571676&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3946262&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24586605": {
+      "fulltext_sha256": "c22612acd9a22e46ae45be6ef653ebb381385bda3126cbe4701655442a39262f",
+      "license": "cc by",
+      "metadata_sha256": "f8e75166867455a44c84392c0f7c953d403a9ae34cb1ded46d0bba0167fe1251",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24586605&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3930670&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24586741": {
+      "fulltext_sha256": "91e366b6f0a5f77fb5a77d1a209d7818576ce51274076f258ba21d21ef47ba93",
+      "license": "cc by",
+      "metadata_sha256": "2f4b5a7812002429e34488d6eaa0eaa0879a138341dab8d960141dab12ac0c57",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24586741&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3929689&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24588908": {
+      "fulltext_sha256": "419dc11cc971267db6bb1f44e654d80072d6d838cac33412fb8cda02a013d006",
+      "license": "cc0",
+      "metadata_sha256": "53e9e4bc118637a11d22f250222c19112e559b0412478ce7a0bd424ab8ff3557",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24588908&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3945937&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24594804": {
+      "fulltext_sha256": "6427e08ab4e73ead72262509c7e52c26df715cddc767b3404267a8f59ccab5e5",
+      "license": "cc by",
+      "metadata_sha256": "f01a516e2f018a30aaa73a98f9688b0bf93fd54ca9f2a32d611e5f6392179726",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24594804&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3940924&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24708484": {
+      "fulltext_sha256": "d9045b64e698af7234f58db562fef771d6a342858fa8f3b73530a00599fae93a",
+      "license": "cc by",
+      "metadata_sha256": "a36df735347285f860c1dcdfcde8577e156bc7c96a3e13f7a9df66cfd1a0a62e",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24708484&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4101833&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24735930": {
+      "fulltext_sha256": "99612be7361d04c563fc8e696c3ab8cd43794cb032ee6791dd90e6f28bf7fc00",
+      "license": "cc0",
+      "metadata_sha256": "cd8af7b3b8c3aa6db0cc8ea6a746f2b1cd90959a42478b8118b865aa7a8daadd",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24735930&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4021505&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24740294": {
+      "fulltext_sha256": "7cd5d1b9f916e78e02f433902eef7bc124e7cc124db75a7fc106ec56049cbf0c",
+      "license": "cc by",
+      "metadata_sha256": "376b566dea7327348f7ff42e2f4b77cf488c5645df20a46a24b801fdc88b7de6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24740294&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3989310&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24758907": {
+      "fulltext_sha256": "041e099d1bf11b016d6e0c5ff113756aa25d3dbb0d8caf5dbe9cd4d99653d406",
+      "license": "cc by",
+      "metadata_sha256": "8747998de5e4420361c093cd42ac0a7a2de84cd9ee82df6edbdb1892acfcd787",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24758907&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6000015&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24782778": {
+      "fulltext_sha256": "6f43f6a5b3d1da10212d23d08a93bc5ee8ad0da3f358d15e7357356456e7d65b",
+      "license": "cc by",
+      "metadata_sha256": "8ae3f2f43f14ad18bffff05d94bcfcf9251db289d4beddf9657f4c7b9d06cee2",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24782778&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3997001&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24788118": {
+      "fulltext_sha256": "5cf6baa68f085cd2884da911ab86153dbf133e2d31ef8feb07da92c7377cc609",
+      "license": "cc by",
+      "metadata_sha256": "c496a55175927825358df0ff82ed682a5cf940d5c117ebb8eb5164dbd240bbc0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24788118&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4006838&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:24927325": {
+      "fulltext_sha256": "ca8b160cc8b615c98c2341a2fd5560b1f256deae51f7463e5a33a03ee892ac20",
+      "license": "cc by",
+      "metadata_sha256": "ae5e41577a8ca5ebd271f72b927d597af18bd82d792f5422a80bf6c177ec845d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=24927325&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4057395&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25025684": {
+      "fulltext_sha256": "49513caba01a2f2d0d006a0b0e6a81d93bb0eaaf5ef014fef496f2d8125a85c1",
+      "license": "cc by",
+      "metadata_sha256": "126a37cb1d236368efe64c87f3f43da756818f3e5ad8c78b01ae44f0f645de7b",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25025684&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4099365&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25082261": {
+      "fulltext_sha256": "b17eefbc0071d693bfaf961a8eff083ba0f540cce83b90f0c53110a02358cbe3",
+      "license": "cc0",
+      "metadata_sha256": "47cfe36bcd0922015b913c41f3a451fa68a038e4f4f3a9240e022b0d9fc2e0e2",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25082261&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4237886&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25216528": {
+      "fulltext_sha256": "f3b6f5e8d342239dc754533d818d192aa1fe14dba1bd39dcbb4cf46aced0a2ff",
+      "license": "cc by",
+      "metadata_sha256": "10b4b8b71ab4267bec3ba7230463f16dd0a95058c5bc5caba73dc1d54783501c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25216528&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4196190&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25524464": {
+      "fulltext_sha256": "25acc0a087724eb7645e3f4734d99dc86fbcd698a3c6fda95fd25c2586b7a88f",
+      "license": "cc0",
+      "metadata_sha256": "46fce1898d83320976a6a65a228bd62d6872128904f9553702caf69bc914f2e0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25524464&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4279809&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25587029": {
+      "fulltext_sha256": "b907645482af0c317cb455007ebccbde804ca4429004d7a1fadec13f041462e4",
+      "license": "cc by",
+      "metadata_sha256": "45f4e9e8dfac1dd069242e871126ba5a1705eaaad9912f7a081884e479504195",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25587029&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4350358&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25658984": {
+      "fulltext_sha256": "3b1625c8d8de971c801d209400a01fba4f1c2378afec799618dd95d78294560a",
+      "license": "cc by",
+      "metadata_sha256": "9483d6edc57a78d2359059c352fa70a3a55bc058bd74b45e00156381b3b110b0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25658984&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4349257&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25692060": {
+      "fulltext_sha256": "d0bc289294d7158846890e9a3565c45ce022df465acf6771ce3e3fd2704f5c7a",
+      "license": "cc by",
+      "metadata_sha256": "8edc3475b0c92a3d50eab73c26380d9dd918b5b405c25b0292639b38ee8a80e0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25692060&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4322830&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25766326": {
+      "fulltext_sha256": "eaed9fa66fa3d7e409fa8de522d36ecbac7983a956d3e7e0311e0212ae2eab84",
+      "license": "cc by",
+      "metadata_sha256": "7e5264ad56ece9ab291801e43aca7df29ded7e43e937af4eb20575feb1cd8c4a",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25766326&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4385925&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25883647": {
+      "fulltext_sha256": "f16eeb25dd18b7e6a679b3a3b77a04e09ef1f4cf04374fece638d959734276ce",
+      "license": "cc by",
+      "metadata_sha256": "9f2316136f74cb793d91ae6c39396b25b19447b43b0abd6f6b8504e8a2c4f539",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25883647&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4390106&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:25900183": {
+      "fulltext_sha256": "482792cfce617f1d36751b9652e706ab9242daec1c868cc60876b09cf7df930b",
+      "license": "cc by",
+      "metadata_sha256": "316501b5c80c3eef42073af091a473019ca117c281903172ec117bd094584c14",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=25900183&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4455223&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26146478": {
+      "fulltext_sha256": "305ca979da5265b277fd46acf27154ac84aba01a8896e1379105ee160b8a6555",
+      "license": "cc by",
+      "metadata_sha256": "9ade23c9f290eb05ae686c9544e7eb38f69c3031e2055b3866779037f8d6b1c0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26146478&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4469840&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26267899": {
+      "fulltext_sha256": "66c3ed74e8fcb97f2749277d7d5824ac37e3f51edeff95ee8321c88691eb1e41",
+      "license": "cc by",
+      "metadata_sha256": "40177c2c7ab87b0c6b9b1352af9dc5ec211f2f3dbd73a5e9b5d0df7e2bfbcc9c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26267899&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4534317&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26304929": {
+      "fulltext_sha256": "6de9cc28a9dbf13f716a754b31cee2aaa7949fb9889ba85ae141a08c8f80a197",
+      "license": "cc by",
+      "metadata_sha256": "ea0a28aded98d4f8fb5c15db57f38ef697ccaec5b1091e1ea0fee0f4e3cb1ecc",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26304929&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4694971&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26378044": {
+      "fulltext_sha256": "77cd5e56f1083c5bc8cdab1a3e982c40dba6d6582730869f95770107402cf1d1",
+      "license": "cc by",
+      "metadata_sha256": "5d95a2f3d7bc5168022ebf322fc3b8d79d9c87ac102f775ed5fe5b9a52e41dca",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26378044&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4741799&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26399631": {
+      "fulltext_sha256": "d6cba7074db778fa4b169e74e2413b6dfbe90f7bb7ffaa9baab561fab3c8b5ca",
+      "license": "cc by",
+      "metadata_sha256": "02bcd12a89146c33c61a1a88d2a6b6ed227fa90f2ecf1df0857444127ccd595d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26399631&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4654747&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26516930": {
+      "fulltext_sha256": "7aa7fc9c3a1fbca5ecdbc640bc516ae99ad94b786135efc9270ac519628a60a3",
+      "license": "cc by",
+      "metadata_sha256": "bfa1e7fd7555baa9e695020c841f7745b8d0fb2f0bcf6726887272310402a173",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26516930&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4747379&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26528855": {
+      "fulltext_sha256": "f3a44ee14d9bfd0f4f3dc1fea4b3c6aede693f0e68232c69cb5c3ce6fe0afa45",
+      "license": "cc by",
+      "metadata_sha256": "62136560c8c682badb5f94ebf358c558ac38897555344ab7578d9599e56f8fc2",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26528855&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4747352&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26544513": {
+      "fulltext_sha256": "e39a968a18efe0802a801a527ad861df082eb73eefd79f1cc1effb131f09b315",
+      "license": "cc by",
+      "metadata_sha256": "59f4665eee147156026b5ff67aa43db7447772d7de43f6a6119092249e61f73b",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26544513&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4747218&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26621817": {
+      "fulltext_sha256": "de7f51626bc84597408c49ddfcfb2ac0423a2cf9ef80f22414c517a32d693c9e",
+      "license": "cc by",
+      "metadata_sha256": "9efdcc364eb2a287c84f641c215a34ce7da7ffa0c39d1565bf57413862b8b09c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26621817&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4664893&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26634247": {
+      "fulltext_sha256": "8e4db66b454912d40d62fb2f58cd91adb2e261ece8749ed12a4570db529e8a0a",
+      "license": "cc0",
+      "metadata_sha256": "f00c29e22185f91b7d291bc593bdc89a9c9d7b63874afdee6591c8a2306b1f3c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26634247&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4669670&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26674132": {
+      "fulltext_sha256": "d5addab2cee85d30c1dd9a3d3ad41e253fdfb1409be1fc318bc844e850e97be3",
+      "license": "cc0",
+      "metadata_sha256": "71a4c7a6c7872cc3fdee75f995791e77f58c5376be3b851cb16499870061aba7",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26674132&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4678532&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26674738": {
+      "fulltext_sha256": "7e4c0bebc5371e47ec1003c82f6d2541ddf7657d55cbd1cb5475963e33083fb2",
+      "license": "cc0",
+      "metadata_sha256": "99d60a90390e267ac7cbc2bd9c6b2b59765114c2ebc0e33a30068709316ea8ac",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26674738&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4682286&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26709701": {
+      "fulltext_sha256": "57c10a111228fdec61239248e58c96d2f7c3a265fb1bd7b04dd5854cee470916",
+      "license": "cc by",
+      "metadata_sha256": "774ca79dc67166b344b82224cc12a41b3319c4fd47d1bf13e0662033db3571a2",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26709701&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4692403&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26758680": {
+      "fulltext_sha256": "f79f9ebee98997f348902956bfb7216d27b64fae335148a1238377d791acd8e2",
+      "license": "cc by",
+      "metadata_sha256": "67a7ed2729822fc10476a4b6fd2e402ff32da579163c44bb8b383cbc3cdae653",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26758680&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4734836&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26821351": {
+      "fulltext_sha256": "c1ab21a3c729570842e91bc2db3324ed67db0f6db2c473b555faa2d418ca32bc",
+      "license": "cc by",
+      "metadata_sha256": "62b91d3a5796f405969a82a25d86aeb13f8833d4eea4561de025be483c1819e4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26821351&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4731059&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26872370": {
+      "fulltext_sha256": "c5c23ae0f7a5f48da17d7b94cb6467f5e0c145bc659bff9d2165c1ecbe7940e6",
+      "license": "cc by",
+      "metadata_sha256": "05ad290d65369adbe0539fe852d1a21388dc5920e6c699501bf3dbf4b00593b7",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26872370&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4924673&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26893365": {
+      "fulltext_sha256": "4a4baa4d6f8708eabfaf398556c5da9b83400fcdb6672b29879c3483b72ab50b",
+      "license": "cc by",
+      "metadata_sha256": "818e9925d086c7fe2eac89107d99c2782041b5132cd65fd1e29baa862b2fe4ac",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26893365&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4941289&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26894380": {
+      "fulltext_sha256": "bba6616ac25c0102e390cf8cf0cf328448fa9c6170ce1418190ca6e3baad4876",
+      "license": "cc by",
+      "metadata_sha256": "d07ed7428a8a0eafbf7816a4eef049671ee7da8bd2bbfd9d39ec6abc72d7df0a",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26894380&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4924755&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26894859": {
+      "fulltext_sha256": "61955190a1cf192b00c2ae4c952927e038469c3dbd5870116ccb9bd2f6be69bb",
+      "license": "cc by",
+      "metadata_sha256": "a24423bf85539c85eac68988a8cd74431fa9f798fb8bf92130f250c461a11455",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26894859&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4924735&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26918451": {
+      "fulltext_sha256": "01870ec4d86323661e11dcfbc77bb94aa1a7f08e8de04f924fc9259c5f0c22ed",
+      "license": "cc by",
+      "metadata_sha256": "7f34d77fd8c0a99e3e1efb8660b94ae4a4cf638d39e139db18663283bfd79dd0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26918451&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4991415&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26943774": {
+      "fulltext_sha256": "acdec3be940f9f05270bc4f420937169112e757de458ac9b9e44a26604fa454d",
+      "license": "cc by",
+      "metadata_sha256": "56220646d66e4fed6316f20574b3e76cdc69b28f720fe505844612b2490dd038",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26943774&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4951298&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26956051": {
+      "fulltext_sha256": "8f9894010217610028b872b0957044dd87713d9d618d36854715ff22f3da3acf",
+      "license": "cc by",
+      "metadata_sha256": "f4cca1b30550320fe23037dad92e7ecf4f333f9cf9eac15dabd061223611d047",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26956051&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4991441&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26989027": {
+      "fulltext_sha256": "7d344958ec22b5e9993b61418918ba1b2642ff937282e73ddd7ecb59f0a2aaa9",
+      "license": "cc by",
+      "metadata_sha256": "8002c890102c2d3365e1f6896240a44bd464492211ecd80dbf0247e6bc9e048a",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26989027&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5008360&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26989536": {
+      "fulltext_sha256": "c3d0893c84d91aa74e952550fae1c9bfede51ea34a56547a15ead09f111f6e23",
+      "license": "cc by",
+      "metadata_sha256": "d9bcfc55b238b81c0a1052f52bdda8670a17e89eae45148843f7cac5c62fd059",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26989536&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4775779&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:26992226": {
+      "fulltext_sha256": "c72a2a0c653d586a7c1a0cbb553fb1331604cf8b496c87d874847b786c57f5ed",
+      "license": "cc by",
+      "metadata_sha256": "40c8742e5f67f4067d2f2c76a30b2d59e7f756511a37f96dde5b915b2e073467",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=26992226&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5029699&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27028764": {
+      "fulltext_sha256": "553e62507522164c3d113bbbca40c078c27bd984d2fe59f2ce684fe029642bfd",
+      "license": "cc by",
+      "metadata_sha256": "76a831b4ef66125ac864e8425a99fd497b0ad9aa6353cbf21b546c08ccc8cc31",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27028764&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4814107&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27032107": {
+      "fulltext_sha256": "f0306fcc4fd149a9f88eb90d2d84448cbdad74fa4203d125768a2b422e0d2cf4",
+      "license": "cc by",
+      "metadata_sha256": "60e911c4e8c1569e9e300dff19acb013e67ad65ec6464eb2c8a5119fd3323257",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27032107&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4816447&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27049722": {
+      "fulltext_sha256": "857928bd8b42d3acd45da21457844b28a819ed84becb67fb3b853cce401f4397",
+      "license": "cc by",
+      "metadata_sha256": "cd5f298ee0348b5105e2ba20059460aaaa940032f8258b3b0a281d6c41183829",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27049722&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5045374&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27086918": {
+      "fulltext_sha256": "f282de8e87b08057305e3913a14eb5e56c5144d684a77d01eb83769d7873b066",
+      "license": "cc by",
+      "metadata_sha256": "e3e2dacc73164d264ae92e7bd9117390e374e01d7439bfa10d9dafb7c2ce64ae",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27086918&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5078015&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27167191": {
+      "fulltext_sha256": "b3ab6b819734ceb746b371a3e900c82395dfa0c987a9dff7e640f1d7c35a2236",
+      "license": "cc by",
+      "metadata_sha256": "134003820201c5633f5ac382408602dfe9efb9af3e2cd7085761903c84da4fcb",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27167191&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5129956&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27172793": {
+      "fulltext_sha256": "d587ee3b832ca0315e827ec89418bab9938b379c19d0ba6145584e69a1a19fac",
+      "license": "cc by",
+      "metadata_sha256": "fc61406d72fda6d75d023a04b79bbfa619b0e4ab8f0bebe1c476e1b1a9913b78",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27172793&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5095051&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27197561": {
+      "fulltext_sha256": "0833a700176377557279ac185da8eb889ce9a58651db7aeeef6704368a2361ba",
+      "license": "cc by",
+      "metadata_sha256": "2dec61a2fd7a6b21334aae251f4ef28fb3dabef63902315e6a1f67e7037ce4a0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27197561&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4873788&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27302369": {
+      "fulltext_sha256": "80844ac7ff6a5685eec15fb6fd32f3bf0d3d8c62b6568de7ffa5655ec068a206",
+      "license": "cc by",
+      "metadata_sha256": "d9f34b83613ee66e54eda14df84790cedee60ffc62a14d30210181b4a1042f2f",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27302369&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4912618&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27418251": {
+      "fulltext_sha256": "fc34e609fade7eb22761262298c1e2708e8f8071c5d6562385b9581e72c94579",
+      "license": "cc0",
+      "metadata_sha256": "a4be68ecb1fc2a3e832bc99129f27fefddc073923bc918b615e3466d1839d158",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27418251&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4946242&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27485109": {
+      "fulltext_sha256": "983926bc1757c82a1e6f825ad9d9706589ea45a465bf5f5250d6d4872b06b6e2",
+      "license": "cc0",
+      "metadata_sha256": "a509f98fcb4ce1f5ddb4af5a79e989bf02852bfbbc3c5e74e2776128a86497eb",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27485109&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4970247&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27489350": {
+      "fulltext_sha256": "4025a3dac350773b17de0b4b26e45947eea54210371c8522a0941acdf9e22642",
+      "license": "cc by",
+      "metadata_sha256": "7c64e389d768183d58727e03f9c9d45587ef7b99a0856bccbba47d09fd693b72",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27489350&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5347702&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27489863": {
+      "fulltext_sha256": "15ba9662514d9fb08fca47ab4d4fb27345c241954001524f8d33a22c09a5ba1b",
+      "license": "cc by",
+      "metadata_sha256": "b814ecee360714debf2224a5269a80485146c6004436aa7928efabf2f4e8eb1e",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27489863&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=4965259&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27562493": {
+      "fulltext_sha256": "d0468a17b56bef364567b2e7572e1625a1f115cf76ff9e913b22e60687b5ca69",
+      "license": "cc by",
+      "metadata_sha256": "a8fd322f198448a9929ee65dd1b98d746ca49d0a52adec09af619007452a68ec",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27562493&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5133269&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27589690": {
+      "fulltext_sha256": "d57baca8c40e80defca9b45ebaa8ad15606823d9a365109b3807699ad2f3ede0",
+      "license": "cc by",
+      "metadata_sha256": "518966ff52d7160aa41b809b5f9d88ac3891f076034bd7ef84664f69466c90f3",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27589690&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5342497&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27612423": {
+      "fulltext_sha256": "436c150327553c97d9bb21a1f2951be8df8b0f869ee93410644704a63a50ca71",
+      "license": "cc by",
+      "metadata_sha256": "78630452d2fd42cc6bbcef7b2069bf6a7d08d65ad656c2f63d525c9860d56d69",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27612423&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5356576&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27769055": {
+      "fulltext_sha256": "e9dd7dfc2b9e3704b4e5ce2c6b155e38765577523de40dfdef34cfa54108a2d3",
+      "license": "cc by",
+      "metadata_sha256": "0c5ab4764830f4cd4d84bfafe8c8ed0743905873fa161516ce90f8291df60b34",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27769055&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5363606&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27819322": {
+      "fulltext_sha256": "520c27c8a46a5648aefaaca8912180f5ab1e88a8833e2949bde1e391a3d2f3d5",
+      "license": "cc by",
+      "metadata_sha256": "4fa6b8171ba2cbb3c7667e557c2255a0591a06f55d4b17f9ba44f3d7ed2bb27e",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27819322&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5098242&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27894077": {
+      "fulltext_sha256": "3ba634ae93191ba12b8223869e34ea4ea93cbb02272ddfca5794293082c8a8ed",
+      "license": "cc by",
+      "metadata_sha256": "dd1aafbb50069b5707a96a148ba43b57d531e8c5f48fb56835d33eb3dbf74d61",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27894077&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5354859&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27900359": {
+      "fulltext_sha256": "8f0098f1183db2eadf1251fa18eace25da2857fed1b09d4c01a00c076232e7d7",
+      "license": "cc by",
+      "metadata_sha256": "953609d5b71fab2a6c9d02c129606fa75e6ac13c9435259053cff0d410f78b46",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27900359&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5111006&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:27998968": {
+      "fulltext_sha256": "289079172772b4271cf0fd3a973d8664d377e01bf93e760e0ed8a5887f6cfb07",
+      "license": "cc by",
+      "metadata_sha256": "ad56edeba17380d771f91a1cfbaa6936268ed881e1fb703ab1c9a5b7cd4f2d78",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=27998968&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5391708&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28077790": {
+      "fulltext_sha256": "602a9dc1a0e964b94eee72c11883e094f634e558bdd7b2fb6920ad0bd2f839fa",
+      "license": "cc by",
+      "metadata_sha256": "231d1102c882753f25c4e5d2542c6060084b103e9e48146f8e2c59f647c03be9",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28077790&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5355235&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28094316": {
+      "fulltext_sha256": "c6299ea311b4d846e5c64b2f5d067185adc122475b28ea1084c901aa50dd7a7b",
+      "license": "cc by",
+      "metadata_sha256": "02963401a8208d8d01399e0b6bfe17db64ec5733586fc1de10852ab41815e655",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28094316&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5240113&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28103578": {
+      "fulltext_sha256": "c7bda7a49ad32a26cc4894a533adc2939d92607922376dbcd306e53cb4f993bf",
+      "license": "cc by",
+      "metadata_sha256": "34a50edfc9a13f4b81f2247b78923fd6f3324b5e7a3989c240b67f585d7b501b",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28103578&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5355155&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28330462": {
+      "fulltext_sha256": "4caebd64cc3fb5a907a362c8aef8a58bd536d31b6202da22bd857d56dd53b55d",
+      "license": "cc0",
+      "metadata_sha256": "1e19ae88dba4a7bd73c4b2d78071c1e7c153d88e4bf86e4240a8e188c1d9341c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28330462&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5363054&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28453554": {
+      "fulltext_sha256": "a9eb17df599ee192e14fba3f44c29c201c8dc8b92841fb2f3e875123b63439b1",
+      "license": "cc by",
+      "metadata_sha256": "b6caac539c19a0cc51356f12bdb30fb4e51fbafb92ffa14e746c91cea73fa2e4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28453554&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5409185&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28516360": {
+      "fulltext_sha256": "3da77d67773b73d1cd30ab94e3339f31f174bfba461a3238710578dc08dfd9f8",
+      "license": "cc by",
+      "metadata_sha256": "9dfc6a237ad2b43d3052886ac840a8173d7b0fd1e8402716c3ee521021e48674",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28516360&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5613053&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:28978004": {
+      "fulltext_sha256": "97a5f44554e20b06c781e24d08f69ff669b32120987509a666ee1b032dce183a",
+      "license": "cc by",
+      "metadata_sha256": "ac5887e8f924c33d770eb3addcce05417db43a195d10f16481a6c3aef82071ad",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=28978004&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5620144&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29156677": {
+      "fulltext_sha256": "39bdf317935556a809e7c13ca728e97724b5d8d7007923de3b53bd54a7fdf78c",
+      "license": "cc by",
+      "metadata_sha256": "5cefcd3c4f383c60a61cd08ac253a3ef9ce47a73771a6478ffc2c61437701d11",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29156677&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5689567&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29158857": {
+      "fulltext_sha256": "118c8586cbd7f0acecbcb0dcae098122d43ee6e819099243c4824a3d23aeb498",
+      "license": "cc0",
+      "metadata_sha256": "01a61f5dbf7a491af2d6cfedcc8a9037e81f82250c8a8c1af185cccd3e9de093",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29158857&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5683587&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29478821": {
+      "fulltext_sha256": "d7d1c3c7de230bcea5d8f920eef60f09ac84a147858f25b67b39df5c9f4fe2da",
+      "license": "cc by",
+      "metadata_sha256": "0addcd749795c4378af51f3c82dd9e83e1f416fae1f6659a37dd9e2953ba8782",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29478821&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5846801&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29515777": {
+      "fulltext_sha256": "5bb3eb0839b44dfe466f7dcac6ff4cf59e1e092aba86d0e55d0fd61063816eaf",
+      "license": "cc by",
+      "metadata_sha256": "7bd060fc44afc71ae8b1bb81d2d2cff9cf2e9c83a68e50cba0deeedcba2f17b6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29515777&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5839408&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29657128": {
+      "fulltext_sha256": "2def7be62636420d1efcddadc8e220fa3cce2910743dc7c3988e66416febdf94",
+      "license": "cc by",
+      "metadata_sha256": "bf691ab236d6bbba9e7fcc7a14c8d50f64dbe975dc217bc7bc7af3a3c6711ed2",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29657128&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5953836&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29755131": {
+      "fulltext_sha256": "e8ac93c15041062ee93e0f75cb2f91f826bf2215bdd23294d79ee5f8c0070f36",
+      "license": "cc by",
+      "metadata_sha256": "5963ca4673c69e9a298e646ce9b1aefa16a4687a2500bd98faccfaca6d818142",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29755131&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6107480&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:29858576": {
+      "fulltext_sha256": "f4e7a4a054cb0ffc75a58f8842f7c27e78f1cad0c45dff85d9c37b2abaef6a4a",
+      "license": "cc by",
+      "metadata_sha256": "503c35cf8f944a65508580d3fbe2978a68ad34c349a863bc496c8c32951572bd",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=29858576&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=5984627&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:30001707": {
+      "fulltext_sha256": "98b8b58f8a9d22501ce2e55f746400cf529f9a77271d7a122d35714ab002b8b1",
+      "license": "cc0",
+      "metadata_sha256": "88aea10abb5275855c11a0a7c4fac294c94e187d784b000cf0affdec3c3ba0bf",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=30001707&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6043995&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:30718506": {
+      "fulltext_sha256": "416fc53683722d2defc2ee009dac2a09db0757220357da1c73f283887ba55cfd",
+      "license": "cc by",
+      "metadata_sha256": "0d637668db51c493f5e5d72faf5035be3cdb0159dfc2569d9c4e248972367dd6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=30718506&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6362083&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:30865549": {
+      "fulltext_sha256": "ae27c7a8bc0caf11349f5c21703e61c229c2073f732bed9378db18d05d25fc0b",
+      "license": "cc by",
+      "metadata_sha256": "4266d4fc1a52889b3f8c46682f0de7996b6e517394b92bc3bc7d37b5b4f3a636",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=30865549&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6494355&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:30876455": {
+      "fulltext_sha256": "c9f8164f6eb0c9a84176a01035f910b1c81090eaefe5a5e5fc734acea53334b7",
+      "license": "cc0",
+      "metadata_sha256": "8f284131da9e1e4ad4c749f3a8fb0e1426f58873f40041fa024bfdfa46c6f36d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=30876455&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6419470&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:30998743": {
+      "fulltext_sha256": "4ffd4ab612b3d5655639b134217e9afc2cfa870bfe7bc1b3d5b02217803a3dd0",
+      "license": "cc by",
+      "metadata_sha256": "c092a04e5cdbac67b0566a49aa47a8cf862d2cccb7280468345465229d005608",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=30998743&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6472789&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:31010895": {
+      "fulltext_sha256": "592680975eaf4a97aae1611dd2f24251f35edb139151f2881fcad1cb9a834a6e",
+      "license": "cc by",
+      "metadata_sha256": "b7e68a600d4fa758a64fae805d0484ee4be37948408727e9078401e83b2ba8ae",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=31010895&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6549557&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:31151422": {
+      "fulltext_sha256": "831c78aa42dd6ddf1c709bb944ab0c010033e116951da3ce57d7e9e619fa3d35",
+      "license": "cc0",
+      "metadata_sha256": "7e0bff5bdd411935c55190a09d24787d99d685ba6fbb14e20e8548b356de9406",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=31151422&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6545063&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:31372595": {
+      "fulltext_sha256": "36766714539144d27c8b5d9c6e397caebc14e4d74e4a9122e1293441907827e7",
+      "license": "cc by",
+      "metadata_sha256": "ab0dd491884c04038318c6862e964ae0617d20b11869337b54700e424ee71e2b",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=31372595&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6675034&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:31768625": {
+      "fulltext_sha256": "3fbb2e1689e667c2c43159e04111f1c1196bb8755f2759f2fea31fd4d254c14f",
+      "license": "cc by",
+      "metadata_sha256": "4cccc491aa48deaaf2f0643d35b1233dbce8f9c61e597302e8103d49a1cd69c9",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=31768625&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7085481&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32022484": {
+      "fulltext_sha256": "8900690eb4ac044891c2176887e2fd8516bb32fe91b23ccb68ab9f533a5a40b1",
+      "license": "cc by",
+      "metadata_sha256": "76c821e8c4fca77e0acbdbeec4fe1cb8e4e8c29a3d408a34af18ebd5d9280d34",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32022484&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7164374&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32087612": {
+      "fulltext_sha256": "dd4dbbb249735fe4dd9a74de97f510c9d7ecd76876b5b69260acea6b15a3f442",
+      "license": "cc by",
+      "metadata_sha256": "611ff3f69244cac53b508b62da7a8dfd1a1c80c38d3701da655530f1eb838f21",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32087612&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7163108&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32432717": {
+      "fulltext_sha256": "32c10ebb5701f30fd2df5bf378420f60b18bb5c45543403253370a0aaa9f7721",
+      "license": "cc by",
+      "metadata_sha256": "6ce796d4cad5c444a03f97690c661388b49ce7d08885d9fd5d45cccda21f7f40",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32432717&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7269917&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32441301": {
+      "fulltext_sha256": "83dcec7b95554a2eda5764fc60118e351f6a30a14fee92630413c0780f72c3f8",
+      "license": "cc by",
+      "metadata_sha256": "5ca16e83dffed167bd0c05961380c00199f2cb23ecd137d241ccde9a5bf3ecaa",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32441301&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7295634&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32502294": {
+      "fulltext_sha256": "637d7b6dd6a46756bc7eca3aab1701585b86cdd876378f7b5f71a93460f37718",
+      "license": "cc by",
+      "metadata_sha256": "dc2645ae79588ad2bd96846af0167b00b7692039067351a9d30c5c2b8a8dadf6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32502294&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7463346&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32668764": {
+      "fulltext_sha256": "5f4a667aa681ffe7de785c40da2ab58ade767e2a45ae5e0dea35e5eb98c01825",
+      "license": "cc by",
+      "metadata_sha256": "1a52a5e696c97e1e72f2d5ded69ebb7e6d6772c65d2533a2710f65ba49abdc05",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32668764&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7397208&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32822286": {
+      "fulltext_sha256": "0740486730b7f44c42d5f30664d891095b8a73eff3f369b4b9127ab5d68bb350",
+      "license": "cc by",
+      "metadata_sha256": "2f608c688926e3909df7568ca37bb0648b4a64fa1f29aaaae78a591717bab3cb",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32822286&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7655017&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:32852708": {
+      "fulltext_sha256": "20a31604953f2425f95350f5ef3585aa9a4e5a9bbd9891a800bdeb86d5e77408",
+      "license": "cc by",
+      "metadata_sha256": "3fc99e7cd0584cf35c5f9bf5b666ec92f35ddf3aac2cfceb94d04fcf946453fa",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32852708&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7599145&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:33536079": {
+      "fulltext_sha256": "ff77cc1a7e859928df07cceb1d3b6dbc6b3ae56dfb1b0b0156eb3bf04a135345",
+      "license": "cc0",
+      "metadata_sha256": "9425b3a037e29b2bd8c8796dbeb4088f1ed145a837f67361a393ab336202b0d1",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=33536079&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7860633&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:33552986": {
+      "fulltext_sha256": "f11075af605507a5406adda2400ac0abe53efb4cf8127a1314d60ae38eecf1ad",
+      "license": "cc by",
+      "metadata_sha256": "cab14e7e8e21b64044ade3c373db5d921e497a3183df9dceac6780d686c52000",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=33552986&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7860975&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:33572621": {
+      "fulltext_sha256": "ac20345d64294f841dd91144706ded45d9556cbb8a88ca36214b30835239ea81",
+      "license": "cc by",
+      "metadata_sha256": "a0e8645b5693a3c1cafb2bd46d9a4c12ea6dbce1e94e1c64743a1cee8015a7c6",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=33572621&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7922936&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:34247201": {
+      "fulltext_sha256": "4e80fe5519e6a913feca7f5045bd9a97fc398630fc1b18d50c5d71f009b98ba4",
+      "license": "cc by",
+      "metadata_sha256": "eebc0cda026891e09934480667c1b842f85b5a3613c098c46aef4bd9ed32a06d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=34247201&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8272721&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:34272467": {
+      "fulltext_sha256": "c4354ae0c3afbaa1510aedd84eb47e3dace8ed10717c893ff088d8641ded17ae",
+      "license": "cc by",
+      "metadata_sha256": "db7b12b3e59cf6e89c18d973c0861f77c87e000e66a37a6d0fb90dd2784f66a0",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=34272467&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8285406&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:34306047": {
+      "fulltext_sha256": "785c032666cac01f18a6a04e37a45160b301e6dd1469cb88df5849922bb14a41",
+      "license": "cc by",
+      "metadata_sha256": "7d4e035aa2aa94c5fc1f3e40959e6c3d4151ae11168aadf405e433cafd10e812",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=34306047&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8279879&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:34457028": {
+      "fulltext_sha256": "dbd47ffc81fd5f94ff5cac56f14ee5f8859b6019f9880e43ab9396634e9f3c08",
+      "license": "cc by",
+      "metadata_sha256": "453434d8218cc83d43846a38e4220790a4ffc3ca0e87a4960eab43bb92c9cbd4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=34457028&retmode=json&tool=bioai-evidence-validator",
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8397557&retmode=xml&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000001": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "31f28396da89af040cbb67f0107a18d0665927a7f7e30df101deeed1b05f7067",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000001&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000002": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "c7f5d1128fb67046d529a4c6f9b96de8c442c246a7fdf275b859c9a113662a8d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000002&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000003": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "f3ec6c3a409c902bb9281038a56eca9fa8522741a00c69f8261bc6ce96a681f4",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000003&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000004": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "2bd58f905148333b6bb3c31f14a4e25e2de294018074d295a90caa69ac497ebc",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000004&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000005": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "3888ee4e0a06f168ac5da29b1e19af8a16ab61d4e4edccfe1fdec348e42e9658",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000005&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000006": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "2e2baa8c92b43d421c6d5a01fee8b60d3f06ef2007feab16a5af47031207b107",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000006&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000007": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "a6071722c3de72f507a55fe85cd6ae694c284f0e439884155cf947b9f7c7abe5",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000007&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000008": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "8e65b6f76d7b5081a058edfbc1f61f1a7c4d8ee006cd9ffca5dbfd680b2088a9",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000008&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000009": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "583b20433c015af6a7c4892d8c30f57cfc9ba7acf8ac958640e681f733de8b88",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000009&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000010": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "5dd8a95355622e255154247f5d81ed0ca1a2a838dfbe226e0f834112a966ae1d",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000010&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000011": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "95f3d04a0cea91a58f4580be1a27e5c9c64e87da232bc9f27189df9ebd7bef73",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000011&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000012": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "f4a498eb66bfbf855261aa5ef641a52dcb37d5ab90278e4b9735beefa2eb4890",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000012&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000013": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "6c7d0250938793802c9e21fe04df0145edf136ae4ebbd9b2926ba6109842aa50",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000013&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000014": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "2f2d41e647eb8b83c7745b190be9a9feaca3e5871c5faeb26248cd01278defc5",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000014&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000015": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "b4188af54b3cdaf464a1a21e9044022d7a246aab7d66867ba5cb5c9f3b2dc507",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000015&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000016": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "ef698f92172b6c34cf7e83d20e3548766989a6b9f8d619aef66c1e4cab425b0b",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000016&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000017": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "1b51d68508cf7af876b7d60ef60905cbb8cc432a6643df91892009c55b8f2fb9",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000017&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000018": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "c5f8b1efa69011582c6ca5d590f09e2d913e9e0a3e23c5d0cb90ef2d5ce36c2c",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000018&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000019": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "bf6a5b4685c21ee04d0a4c6a6f17e9eda29a5f920d0b29292be565e742b6cea5",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000019&retmode=json&tool=bioai-evidence-validator"
+      ]
+    },
+    "pmid:99000020": {
+      "fulltext_sha256": null,
+      "license": null,
+      "metadata_sha256": "6ec84137aea4e778d2f025c520aa0bd44dfae8e79fce202d02e68d552b51691e",
+      "resolver": "ncbi",
+      "retrieved_at": "2026-09-29T01:12:31+00:00",
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=99000020&retmode=json&tool=bioai-evidence-validator"
+      ]
+    }
+  }
+}

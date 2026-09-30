@@ -19,8 +19,10 @@ ROOT = Path(__file__).resolve().parents[1]
 TAXONOMY = ROOT / "evaluation" / "error_taxonomy.yaml"
 PAGE = ROOT / "docs" / "ERROR_TAXONOMY.md"
 RESULTS = {"vbo": ROOT / "examples/vbo_canine/results/decisions.jsonl",
-           "clinvar": ROOT / "examples/clinvar_germline/results/faults.jsonl"}
-CASE_PAGES = {"vbo": "../examples/vbo_canine/README.md", "clinvar": "../examples/clinvar_germline/README.md"}
+           "clinvar": ROOT / "examples/clinvar_germline/results/faults.jsonl",
+           "civic": ROOT / "examples/civic_literature/results/controls.jsonl"}
+CASE_PAGES = {"vbo": "../examples/vbo_canine/README.md", "clinvar": "../examples/clinvar_germline/README.md",
+              "civic": "../examples/civic_literature/README.md"}
 ISSUES = "https://github.com/NingyuSUN/bioai-evidence-validator/issues/"
 SYMBOL = {"caught": "✅ caught", "partial": "🟡 partial", "exposed": "❌ exposed", "uncovered": "⬜ uncovered"}
 LAYER_SHORT = {"deterministic": "Rules", "grounding": "Grounding", "model_review": "Models", "human_review": "Experts",
@@ -37,6 +39,13 @@ def control_results() -> dict[str, Counter]:
     for case, path in RESULTS.items():
         for line in path.read_text(encoding="utf-8").splitlines():
             row = json.loads(line)
+            if case == "civic":  # literature controls exist only with grounding: no rules-only columns
+                if row["control"] != "base":
+                    counts = stats[f"civic:{row['control']}"]
+                    counts["n"] += 1
+                    counts["grounded"] += row["status"] == "admitted"
+                    counts["grounding_only"] = 1
+                continue
             if row["cohort"] == "real_source":
                 continue
             counts = stats[f"{case}:{row['category']}"]
@@ -47,7 +56,7 @@ def control_results() -> dict[str, Counter]:
 
 
 def admitted(s: Counter) -> str:
-    rules = f" (rules alone: {s['full']})" if s["full"] != s["grounded"] else ""
+    rules = f" (rules alone: {s['full']})" if s["full"] != s["grounded"] and not s["grounding_only"] else ""
     return f"{s['grounded']}/{s['n']}{rules}"
 
 
@@ -104,8 +113,9 @@ def render() -> str:
             for c in m["negative_controls"]:
                 s = stats[c]
                 case, category = c.split(":")
-                out.append(f"| [{case}]({CASE_PAGES[case]}) `{category}` | {s['n']} | {s['schema_only']} | "
-                           f"{s['aggregate_quality']} | {s['full']} | {s['grounded']} |")
+                rules = ["—"] * 3 if s["grounding_only"] else [s["schema_only"], s["aggregate_quality"], s["full"]]
+                out.append(f"| [{case}]({CASE_PAGES[case]}) `{category}` | {s['n']} | "
+                           + " | ".join(str(r) for r in rules) + f" | {s['grounded']} |")
         if m["planned"]:
             out += ["", f"Planned: {planned(m['planned'])}"]
     return "\n".join(out) + "\n"
