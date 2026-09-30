@@ -146,6 +146,95 @@ whose citations all verified (all three decisions right), rejected 37 for a wron
 paper or a PMID that does not exist, and sent 1 to review. It cannot turn these answers
 into good ones; that takes the source (the pilots above) or a curator.
 
+## Scenario 2: an agent that searches, reads and revises
+
+Scenario 1 shows what bioevidence blocks; this one shows it feeding back. The agent gets the claim and
+three tools run by the harness, so every model has the same tools and every step is logged: PubMed
+search, read a paper (its open full text, else its abstract) and submit (a decision and up to three
+citations with PMID, title and exact quote). Each submission is built into a record and validated under
+the CIViC literature profile; if it is not admitted, the verifier's reasons ("citation 2: The quote does
+not appear in the cited paper.") go back to the agent, which may revise (at most three submissions,
+eight actions). One run gives three views: the agent alone (first submission as given), behind a
+bioevidence gate (first submission checked) and in the feedback loop (final submission checked)
+([results](results/agent-pilot/summary.md), [agent_loop.py](agent_loop.py)). Six models, 18 tasks:
+
+| Configuration | Answered | Correct decision | Wrong direction | Answers with an invalid citation | Routed to a human |
+|---|---:|---:|---:|---:|---:|
+| Agent alone | 77/108 | 62/108 | 15/108 | 8/77 | 0/108 |
+| Agent + bioevidence gate | 69/108 | 55/108 | 14/108 | 0/69 | 8/108 |
+| Agent + bioevidence feedback loop | 73/108 | 58/108 | 15/108 | 0/73 | 4/108 |
+
+The 108 episodes made 317 searches, 163 reads and 117 submissions (median 106.5 s per episode, 34 MB
+downloaded); 4 steps failed (a CLI error or timeout) and are kept.
+
+What this shows:
+
+- With tools to read the paper, five of six models cited only what they had read: no invalid citation in
+  their first submissions. In scenario 1b, the same models without tools gave 38 of 50 answers with an
+  invalid citation.
+- Claude Haiku 4.5 did not: 8 of its 16 first submissions quoted text that is not in the paper, mostly a
+  verbatim stretch joined to reworded text. The gate stopped all eight. With the reasons as feedback it
+  revised 6 of them and 4 were then admitted; the other 4 still misquoted when they ran out of actions
+  or submissions, and went to a human. In the loop Haiku answered 12 of 18 with no invalid citation, against 8 of 18 behind the gate.
+- So the loop recovers answers a gate alone would lose, without letting an unverified citation through.
+  What gets through is set by the verifier, not by which model runs the agent.
+- It does not fix the direction of the decision. 12 of the 15 wrong-direction answers are on the three
+  claims CIViC curates as "does not support" from one paper; the agents searched the wider literature
+  and cited that paper in only 23 of 108 first submissions. Some of these answers may be defensible from
+  other papers, which is why such tasks need expert labels (#23) rather than a single CIViC record.
+
+### Scenario 2b: stances and a "conflicting" outcome
+
+Supports or does-not-support is the wrong question when the literature disagrees. So in this run each
+citation also carries its stance toward the claim (supports, contradicts or neutral), and the agent may
+decide "conflicting". The prompt also asks it to look for evidence both for and against the claim, so the
+two runs differ in both respects. Bioevidence decides the routing, not the agent:
+
+- Each stance becomes an evidence line. A record with both a supporting and a contradicting line goes to
+  an expert as conflicting (BEV004), whatever the agent decided.
+- A conflict is not fed back as an error, so the agent is never asked to make it go away.
+- A citation verified in one submission stays in the record through revisions: the agent may fix or
+  replace what failed, but not withdraw verified evidence. In a smoke test before this rule, an agent
+  whose record held a misquote and a verified quote against its decision dropped the latter and was
+  admitted.
+
+([results](results/agent-stance-pilot/summary.md)); six models, 18 tasks, all pooled:
+
+| Configuration | Answered | Correct decision | Wrong direction, admitted | Conflicting, to an expert | Answers with an invalid citation | Routed to a human |
+|---|---:|---:|---:|---:|---:|---:|
+| Scenario 2 loop (no stances) | 73/108 | 58/108 | 15/108 | – | 0/73 | 4/108 |
+| Agent alone | 80/108 | 59/108 | 12/108 | 9/108 (agent's own decision) | 10/80 | 0/108 |
+| Agent + bioevidence gate | 70/108 | 52/108 | 9/108 | 9/108 | 0/70 | 19/108 |
+| Agent + bioevidence feedback loop | 74/108 | 54/108 | 10/108 | 10/108 | 0/74 | 16/108 |
+
+"Routed to a human" counts the conflicting records and those still failing verification. The loop's
+outcomes by the direction of CIViC's record:
+
+| CIViC record | Episodes | Correct | Wrong, admitted | Conflicting | Stopped or failed verification |
+|---|---:|---:|---:|---:|---:|
+| Supports (13 claims), scenario 2 → 2b | 78 | 51 → 51 | 3 → 1 | – → 2 | 24 → 24 |
+| Does not support (5 claims), scenario 2 → 2b | 30 | 7 → 3 | 12 → 9 | – → 8 | 11 → 10 |
+
+What this shows:
+
+- Wrong decisions admitted without review fell from 15 to 10, and 10 records went to an expert as
+  conflicting. Eight of them are on the five contested claims; on the 13 claims whose literature agrees,
+  only 2 of 78 episodes were sent to an expert as conflicting.
+- Four "correct" does-not-support answers became conflicting: the agents found papers on both sides.
+  On these claims a conflicting record may be the better answer, but only expert labels (#23) can say.
+- The routing is enforced, not requested. Opus decided "does not support" while citing a paper that
+  supports the claim, and the record went to an expert as conflicting. In this run no agent tried to
+  drop a verified citation, so carrying them forward did not change an outcome here.
+- It works only when the agent finds the counter-evidence. On FGFR3 G697C all six agents again
+  decided "supports" from the same 2005 paper, and none cited evidence against it. These six answers are
+  6 of the 10 wrong ones that remain. A knowledge-base check would have caught them: CIViC holds two other
+  "does not support" records for G697C. Stances cannot.
+- Stances are the agent's reading and are not verified. On revision, Haiku relabelled a quote it had
+  first marked as contradicting as neutral. That record still failed verification, but relabelling is a gap
+  that verified quotes do not close.
+- One run, 18 tasks and a changed prompt: model-level numbers move between runs (GPT-5.6-Luna's first
+  submissions went from 0 to 3 invalid citations), so read these as directions, not rates.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were

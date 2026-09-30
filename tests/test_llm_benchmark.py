@@ -201,3 +201,90 @@ def test_claim_records_are_schema_valid():
               "citations": [{"pmid": "PMID 123", "title": "A title", "quote": "A quote of more than five words here."}]}
     report = RecordValidator(profile=claims.CASE / "profile.yaml").validate(verifier.record(task, answer))
     assert "SCHEMA" not in {f["rule_id"] for f in report["findings"]}
+
+
+@pytest.mark.parametrize("folder", ["agent-pilot", "agent-stance-pilot"])
+def test_agent_scenario_replays_from_committed_episodes(folder, tmp_path):
+    agent = load("agent_loop")
+    committed = BENCH / "results" / folder
+    (tmp_path / "episodes.jsonl").write_bytes((committed / "episodes.jsonl").read_bytes())
+    agent.score(tmp_path)
+    for name in ("summary.json", "summary.md"):
+        assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+def test_agent_views_gate_and_loop():
+    agent = load("agent_loop")
+    first = {"decision": "supports", "status": "rejected", "categories": ["quote_not_found"]}
+    last = {"decision": "supports", "status": "admitted", "categories": ["quote_found"]}
+    row = {"submissions": [first, last]}
+    assert agent.view(row, "agent") == {"final": "supports", "categories": ["quote_not_found"], "routed": False}
+    assert agent.view(row, "gate") == {"final": "stop", "categories": [], "routed": True}
+    assert agent.view(row, "loop") == {"final": "supports", "categories": ["quote_found"], "routed": False}
+    assert agent.view({"submissions": []}, "loop") == {"final": "stop", "categories": [], "routed": False}
+    stop = {"decision": "stop", "status": "rejected", "categories": []}
+    assert agent.view({"submissions": [stop]}, "gate")["routed"] is False
+
+
+def test_agent_steps_and_history():
+    agent = load("agent_loop")
+    assert agent.wsl_path(Path("C:/t/agent-work/x")) == "/mnt/c/t/agent-work/x"
+    step = dict.fromkeys(agent.FIELDS, "")
+    step.update(action="search", query="BRAF V600E vemurafenib", citations=[])
+    assert agent.check_step(step) is step
+    with pytest.raises(ValueError, match="decision"):
+        agent.check_step({**step, "action": "submit"})
+    with pytest.raises(ValueError, match="invalid step"):
+        agent.check_step({**step, "action": "browse"})
+    history = [f"[{n}] read pmid:{n}\n→ " + "x" * 1000 for n in range(1, 4)]
+    short = agent.compact(list(history))
+    assert short[0].endswith("read again if needed)") and short[1:] == history[1:]
+
+
+def test_stances_become_evidence_lines():
+    from bioevidence_validator.engine import RecordValidator
+
+    claims = load("score_claims")
+    verifier = claims.Verifier.__new__(claims.Verifier)
+    verifier.catalog = {"works": {}}
+    task = jsonl(BENCH / "literature_tasks" / "pilot.jsonl")[0]
+    cite = {"pmid": "PMID 1", "title": "A title", "quote": "A quote of more than five words here."}
+
+    def lines(decision, *stances):
+        record = verifier.record(task, {"decision": decision, "rationale": "",
+                                        "citations": [{**cite, "stance": s} for s in stances]})
+        return record, {line["direction"]: line["evidence_item_ids"] for line in record["statement"]["evidence_lines"]}
+
+    record, by = lines("supports", "supports", "contradicts", "neutral")
+    assert record["statement"]["predicate"] == "supports_significance"
+    assert by == {"supports": ["bioev:quote-1"], "contradicts": ["bioev:quote-2"], "neutral": ["bioev:quote-3"]}
+    codes = {f["rule_id"] for f in RecordValidator(profile=claims.CASE / "profile.yaml").validate(record)["findings"]}
+    assert "BEV004" in codes and "SCHEMA" not in codes
+    record, by = lines("does_not_support", "contradicts", "supports")
+    assert record["statement"]["predicate"] == "does_not_support_significance"
+    assert by == {"supports": ["bioev:quote-1"], "contradicts": ["bioev:quote-2"]}
+    record, by = lines("conflicting", "supports", "contradicts")
+    assert record["statement"]["predicate"] == "supports_significance" and set(by) == {"supports", "contradicts"}
+
+
+def test_agent_keeps_verified_citations_and_sends_conflicts_to_an_expert():
+    agent = load("agent_loop")
+    against = {"pmid": "PMID: 1", "title": "T", "quote": "Against the claim.", "stance": "contradicts"}
+    wrong = {"pmid": "PMID: 2", "title": "T", "quote": "Not in the paper.", "stance": "supports"}
+    first = {"submission": {"decision": "conflicting", "citations": [wrong, against]},
+             "verdict": {"citations": [{"category": "quote_not_found"}, {"category": "quote_found"}]}}
+    fixed = {**wrong, "quote": "In the paper."}
+    assert agent.carried([first], [fixed]) == [against]
+    assert agent.carried([first], [{**against, "pmid": "1", "quote": "Against  the claim."}]) == []
+    assert agent.to_expert({"status": "review_required", "codes": ["BEV004"]})
+    assert not agent.to_expert({"status": "review_required", "codes": ["BEV004", "BEV006"]})
+    row = {"submissions": [{"decision": "supports", "status": "review_required", "codes": ["BEV004"],
+                            "categories": ["quote_found", "quote_found"]}]}
+    assert agent.view(row, "agent")["final"] == "supports"
+    assert agent.view(row, "loop") == {"final": "conflicting", "categories": ["quote_found", "quote_found"],
+                                       "routed": True}
+    step = dict.fromkeys(agent.FIELDS, "")
+    step.update(action="submit", decision="conflicting", citations=[{**against, "stance": "unclear"}])
+    with pytest.raises(ValueError, match="stance"):
+        agent.check_step(step)
+    assert agent.check_step({**step, "citations": [against]})["decision"] == "conflicting"
