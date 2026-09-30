@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add an LLM benchmark (`evaluation/llm_benchmark`): six models (frontier and fast tiers of Claude, GPT
+  and Gemini) answer ClinVar and literature tasks with and without the source, and each answer is
+  scored alone and after bioevidence validation and grounding. Pilot sets only: with the source,
+  models quoted faithfully (165/165 literature quotes); without it they almost always abstained, and
+  grounding stopped the one reworded quote. The remaining errors were semantic (5/72 literature
+  answers the wrong way round on 2 tasks, with verbatim quotes), which text grounding cannot catch.
 - Add literature grounding (#20). `bioevidence ground` (network) resolves cited PMIDs, PMCIDs and
   DOIs with Europe PMC, Crossref or NCBI E-utilities and pins the resolver response and any
   open-access JATS full text; `LiteratureGrounder` (offline) checks identity, retraction, title

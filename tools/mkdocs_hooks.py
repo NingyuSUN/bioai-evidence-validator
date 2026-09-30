@@ -19,6 +19,7 @@ EXTRA_PAGES = {  # repository path -> site path
     "examples/clinvar_germline/README.md": "benchmarks/clinvar.md",
     "examples/vbo_canine/README.md": "benchmarks/vbo-canine.md",
     "examples/civic_literature/README.md": "benchmarks/civic-literature.md",
+    "evaluation/llm_benchmark/README.md": "benchmarks/llm-benchmark.md",
     "evaluation/clinvar_review/README.md": "benchmarks/clinvar-review.md",
     "evaluation/clinvar_review/RUBRIC.md": "benchmarks/clinvar-review-rubric.md",
     "evaluation/gold_standard/README.md": "review-tooling.md",

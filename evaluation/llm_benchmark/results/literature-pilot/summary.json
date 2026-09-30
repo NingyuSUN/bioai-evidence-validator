@@ -1,0 +1,1636 @@
+{
+  "answers_sha256": "61d7b1cd44fdd3378b5f639f646b5bc748b3ddc213dfd68fe858f51c29088efe",
+  "benchmark": "llm-literature-benchmark-v1",
+  "models": {
+    "claude-haiku": {
+      "cli_version": "2.1.283 (Claude Code)",
+      "model": "claude-haiku-4-5-20251001",
+      "tier": "fast"
+    },
+    "claude-opus": {
+      "cli_version": "2.1.283 (Claude Code)",
+      "model": "claude-opus-5-5",
+      "tier": "frontier"
+    },
+    "gemini-flash": {
+      "cli_version": "1.2.13",
+      "model": "gemini-3.8-flash-medium",
+      "tier": "fast"
+    },
+    "gemini-pro": {
+      "cli_version": "1.2.13",
+      "model": "gemini-3.1-pro-high",
+      "tier": "frontier"
+    },
+    "gpt-astra": {
+      "cli_version": "codex-cli 0.153.4",
+      "model": "gpt-6-astra",
+      "tier": "frontier"
+    },
+    "gpt-luna": {
+      "cli_version": "codex-cli 0.153.4",
+      "model": "gpt-5.6-luna",
+      "tier": "fast"
+    }
+  },
+  "results": {
+    "claude-haiku": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 30,
+          "n": 30,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8865,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "negative_detected": {
+          "events": 4,
+          "n": 4,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5101,
+            1.0
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 30,
+          "n": 30,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8865,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "negative_detected": {
+          "events": 4,
+          "n": 4,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5101,
+            1.0
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      }
+    },
+    "claude-opus": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 1,
+          "n": 2,
+          "rate": 0.5,
+          "wilson_95": [
+            0.0945,
+            0.9055
+          ]
+        },
+        "correct_decision": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 10,
+          "n": 12,
+          "rate": 0.8333,
+          "wilson_95": [
+            0.552,
+            0.953
+          ]
+        },
+        "hallucination": {
+          "events": 1,
+          "n": 2,
+          "rate": 0.5,
+          "wilson_95": [
+            0.0945,
+            0.9055
+          ]
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 7,
+          "n": 18,
+          "rate": 0.3889,
+          "wilson_95": [
+            0.2031,
+            0.6138
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 11,
+          "n": 12,
+          "rate": 0.9167,
+          "wilson_95": [
+            0.6461,
+            0.9851
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 29,
+          "n": 29,
+          "rate": 1.0,
+          "wilson_95": [
+            0.883,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 29,
+          "n": 29,
+          "rate": 1.0,
+          "wilson_95": [
+            0.883,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      }
+    },
+    "gemini-flash": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 28,
+          "n": 28,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8794,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 4,
+          "n": 4,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5101,
+            1.0
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 28,
+          "n": 28,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8794,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 4,
+          "n": 4,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5101,
+            1.0
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        }
+      }
+    },
+    "gemini-pro": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 7,
+          "n": 18,
+          "rate": 0.3889,
+          "wilson_95": [
+            0.2031,
+            0.6138
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 11,
+          "n": 12,
+          "rate": 0.9167,
+          "wilson_95": [
+            0.6461,
+            0.9851
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 1,
+          "n": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 7,
+          "n": 18,
+          "rate": 0.3889,
+          "wilson_95": [
+            0.2031,
+            0.6138
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 11,
+          "n": 12,
+          "rate": 0.9167,
+          "wilson_95": [
+            0.6461,
+            0.9851
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 1,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.7935
+          ]
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 25,
+          "n": 25,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8668,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 25,
+          "n": 25,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8668,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 17,
+          "n": 18,
+          "rate": 0.9444,
+          "wilson_95": [
+            0.7424,
+            0.9901
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 1,
+          "n": 12,
+          "rate": 0.0833,
+          "wilson_95": [
+            0.0149,
+            0.3539
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      }
+    },
+    "gpt-astra": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 27,
+          "n": 27,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8754,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 27,
+          "n": 27,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8754,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        }
+      }
+    },
+    "gpt-luna": {
+      "llm": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "correct_decision": {
+          "events": 6,
+          "n": 18,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1628,
+            0.5625
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 0,
+          "rate": null,
+          "wilson_95": null
+        },
+        "negative_detected": {
+          "events": 0,
+          "n": 4,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        }
+      },
+      "llm_paper": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 26,
+          "n": 26,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8713,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        }
+      },
+      "llm_paper_bioevidence": {
+        "answered": 18,
+        "citation_grounded": {
+          "events": 26,
+          "n": 26,
+          "rate": 1.0,
+          "wilson_95": [
+            0.8713,
+            1.0
+          ]
+        },
+        "correct_decision": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "correct_stop": {
+          "events": 6,
+          "n": 6,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6097,
+            1.0
+          ]
+        },
+        "false_stop": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "hallucination": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "negative_detected": {
+          "events": 3,
+          "n": 4,
+          "rate": 0.75,
+          "wilson_95": [
+            0.3006,
+            0.9544
+          ]
+        },
+        "tasks": 18,
+        "tool_use": 0,
+        "wrong_direction": {
+          "events": 2,
+          "n": 12,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.047,
+            0.448
+          ]
+        }
+      }
+    }
+  },
+  "split": "pilot",
+  "tasks": 18
+}

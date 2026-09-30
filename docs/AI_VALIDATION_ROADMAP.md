@@ -50,7 +50,7 @@ source → structured extraction → provenance → deterministic validation
 | Provenance | Can each item be traced to its source and method? | Source artifacts, locators, methods; PROV/ECO/VA-Spec mapping; locators and review tiers recomputed from pinned snapshots | Methods are self-declared | Signed attestations (future) |
 | Deterministic validation | Is the evidence sufficient for this use, by fixed rules? | Engine, profiles, per-type quality gates, audit reports | — | — |
 | Model/agent evaluation | What can model review replace, and where does it fail? | Blinded model-review runner (#17), pilot on 20 cases | No reference labels yet; error correlation unmeasured | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
-| Trust boundary | What does the system still take on faith? | Source grounding recomputes identifiers, review tiers, completeness, retractions and quotes from pinned snapshots (0/80 structured-source forgeries and 0/489 literature controls admitted) | Whether a verbatim quote supports the claim | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
+| Trust boundary | What does the system still take on faith? | Source grounding recomputes identifiers, review tiers, completeness, retractions and quotes from pinned snapshots (0/80 structured-source forgeries and 0/489 literature controls admitted) | Whether a verbatim quote supports the claim | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) |
 | Human review | What do experts conclude, and how reliably? | Protocol, `bioevidence review` tooling, blinded ClinVar kit | **No expert labels yet** | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) |
 
 ## How the work will be evaluated
@@ -79,6 +79,7 @@ source → structured extraction → provenance → deterministic validation
 | Done | [#19](https://github.com/NingyuSUN/bioai-evidence-validator/issues/19) | Source grounding, phase 1: recompute what the pinned snapshot can prove | — |
 | Now | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) | Expert review of the ClinVar packet (runs in parallel; experts' time) | — |
 | Done | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) | Source grounding, phase 2: verify cited literature and quotes | #19 |
+| Next | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) | Semantic support check: does a verbatim quote support the claim's direction? | #20 |
 | Next | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources | #18, #20 |
 | Next | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) | Model and agent evaluation against expert labels | #17, #23 |
 | Then | [#24](https://github.com/NingyuSUN/bioai-evidence-validator/issues/24) | Calibrated triage and audit of auto-admitted records | #23 |

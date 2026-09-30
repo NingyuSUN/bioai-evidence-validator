@@ -19,8 +19,8 @@ the rules alone admit a different number, it follows in parentheses.
 | SRC-3 | Retracted or superseded source | source | Grounding | 🟡 partial | `civic:retracted_source` 0/20 | [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25) |
 | SRC-4 | Source bytes changed | source | Rules, Grounding | ✅ caught | `vbo:source_hash_mismatch` 0/16<br>`clinvar:source_hash_mismatch` 0/16<br>`vbo:unpinned_source` 0/16 (rules alone: 16) | — |
 | EXT-1 | Fabricated or altered quote | extraction | Grounding | ✅ caught | `civic:altered_quote` 0/120 | — |
-| EXT-2 | Polarity error | extraction | Grounding, Models, Experts | 🟡 partial | `civic:negation_flip` 0/82 | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
-| EXT-3 | Certainty inflation | extraction | Models, Experts | ⬜ uncovered | — | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
+| EXT-2 | Polarity error | extraction | Grounding, Models, Experts | 🟡 partial | `civic:negation_flip` 0/82 | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
+| EXT-3 | Certainty inflation | extraction | Models, Experts | ⬜ uncovered | — | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
 | EXT-4 | Scope error | extraction | Rules, Grounding | 🟡 partial | `vbo:scope_mismatch` 0/16<br>`clinvar:somatic_scope` 0/16<br>`civic:species_swap` 0/27 | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) |
 | EXT-5 | Entity resolution error | extraction | Rules, Grounding | 🟡 partial | `vbo:missing_uniqueness` 0/16<br>`vbo:wrong_existing_target` 0/16 (rules alone: 16) | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
 | EXT-6 | Relation error | extraction | Rules, Models, Experts | ⬜ uncovered | — | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
@@ -166,7 +166,7 @@ Rule codes: `BEV017`
 |---|---:|---:|---:|---:|---:|
 | [civic](../examples/civic_literature/README.md) `negation_flip` | 82 | — | — | — | 0 |
 
-Planned: [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22)
+Planned: [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31), [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22)
 
 ### EXT-3 · Certainty inflation
 
@@ -176,7 +176,7 @@ A hedged, speculative or preliminary statement is extracted as an asserted findi
 
 *Example:* "These data suggest a possible role" extracted as an established association.
 
-Planned: [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21)
+Planned: [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31), [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21)
 
 ### EXT-4 · Scope error
 
