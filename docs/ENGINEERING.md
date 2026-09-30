@@ -140,7 +140,7 @@ uv build
 uv run --isolated --no-project --with ./dist/*.whl python tools/check_distribution.py
 ```
 
-CI runs on Linux/Python 3.11–3.13 and Windows/Python 3.13, and runs the GitHub Action on
+CI runs on Linux/Python 3.11–3.14 and Windows/Python 3.13, and runs the GitHub Action on
 Linux and Windows. Tests cover multi-domain acceptance, negative evidence cases,
 use-specific human review, strict configuration/JSON/draft parsing, baseline enforcement,
 context snapshots, audit digests, and CLI report behavior. The wheel smoke test imports

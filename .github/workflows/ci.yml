@@ -34,6 +34,8 @@ jobs:
             python: '3.12'
           - os: ubuntu-latest
             python: '3.13'
+          - os: ubuntu-latest
+            python: '3.14'
           - os: windows-latest
             python: '3.13'
     runs-on: ${{ matrix.os }}
@@ -70,7 +72,7 @@ jobs:
         id: drafts
         uses: ./
         with:
-          files: examples/drafts/*.yaml
+          files: examples/drafts/*claim.yaml
           profile: literature-claim
           format: draft
           fail-on: rejected

@@ -18,6 +18,9 @@
   and ClinVar records that omit dissent. Trust-boundary false admissions fall from 48/48 to
   0/48 (VBO) and 32/32 to 0/32 (ClinVar), with no change to any real-source decision.
 - Error taxonomy statuses are now judged with grounding: no failure mode is left exposed.
+- Add Python 3.14 to the supported package classifiers and Linux CI test matrix.
+- Add admitted and rejected `dataset-label` draft examples, covered by draft and
+  installed-wheel checks.
 
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 
