@@ -235,6 +235,72 @@ What this shows:
 - One run, 18 tasks and a changed prompt: model-level numbers move between runs (GPT-5.6-Luna's first
   submissions went from 0 to 3 invalid citations), so read these as directions, not rates.
 
+## Scenario 3: single-cell cell-type annotation
+
+The same loop outside the literature: each model annotates a cluster of a real single-cell dataset from
+its top 20 marker genes, giving a Cell Ontology term and the markers that support it or argue against it
+([case](../../examples/singlecell_celltype/README.md), [celltype_loop.py](celltype_loop.py),
+[results](results/celltype-pilot/summary.md)). The reference is each study's own author annotation.
+Answers are compared with it through the ontology: exact, coarser (an ancestor), finer (a descendant) or
+wrong; an identifier that is not a current cell-type term is invalid.
+
+Bioevidence checks each answer with generic grounders:
+- each cited marker must be one of the cluster's markers in the pinned table;
+- the Cell Ontology term must exist, be current, be a cell type and match its label;
+- gene symbols must be approved HGNC symbols;
+- ASCT+B markers are cross-checked against the Cell Ontology's disjoint lineages.
+
+Fixable findings go back to the model, at most three answers. A record with the model's own contradicting
+markers (BEV004) or an ASCT+B conflict (BEV025) goes to a person. Pilot, 24 clusters from six datasets, six
+models:
+
+| Configuration | Annotated | Exact | Coarser | Finer | Wrong or invalid | Answers with an identifier or marker error | Routed to a person |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Model alone | 138/144 | 41 | 21 | 17 | 59 | 38/138 | 0 |
+| Model + bioevidence gate | 56/144 | 32 | 13 | 1 | 10 | 0/56 | 82 |
+| Model + bioevidence feedback loop | 67/144 | 35 | 13 | 4 | 15 | 0/67 | 71 |
+
+What this shows:
+
+- **Identifiers.** Models write Cell Ontology identifiers that belong to other terms. In 35 of 138 first
+  answers the ID and the label disagreed, e.g.:
+  - "Paneth cell" under CL:0000147 (pigment cell);
+  - "hepatic sinusoidal endothelial cell" under CL:0000639 (a basophil of the pituitary);
+  - "intestinal crypt stem cell" under CL:0002089 (a mouse ILC term).
+
+  By model: Claude Haiku 4.5 and GPT-5.6-Luna each 12 of 23 answers with an identifier or marker error,
+  Gemini 3.8 Flash 7, Gemini 3.1 Pro 4, GPT-6-Astra 2, Claude Opus 5.5 1. A knowledge base stores the ID,
+  so these errors would enter it silently.
+
+  None was admitted. The fix does not depend on the model: the finding names the term the label belongs
+  to. In the loop 11 were fixed and admitted; 26 went to a person, most because the revised answer still
+  carried its own contradicting markers.
+- **Cell types.** Bioevidence cannot tell whether a cluster is an ILC2 or a Th2 cell. What its routing did
+  was concentrate wrong answers: 59 of 138 first answers were wrong or invalid (43%), against 10 of 56
+  admitted behind the gate (18%) and 15 of 67 in the loop (22%).
+- **Model-declared conflict is the strongest signal.** Answers in which the model cited a marker against
+  its own answer were wrong 63% of the time (39 of 62), against 26% (20 of 76) without. One example:
+  - Claude Haiku 4.5 called a pericyte cluster smooth muscle;
+  - it added that CCL2 and IGFBP7 suggest pericytes;
+  - that record went to a person.
+- **The ASCT+B cross-check was mostly noise.** It fired on 23 first answers, 13 of them wrong, but for
+  reasons that do not hold. For example, CD44 cited for pancreatic ductal cells was flagged because
+  ASCT+B happens to list CD44 only for a lung T cell. FCER1G for NK cells was flagged because it is listed
+  for basophils and neutrophils. ASCT+B biomarker lists say where a gene is a marker, not that it is
+  specific. Disjointness removed the within-lineage alarms, but a partial reference still cannot support
+  "only". This protocol should not use it as a conflict source; the generic grounder stays, for
+  references that state specificity or exclusion.
+- **The cost is the review load:** half of the annotations went to a person. Models cited markers against
+  their own answer in 64 of 144 first answers, because the prompt asked for "any that argue against it".
+  That is honest, and it carries the signal above, but it is more than a curation team can review.
+
+Limits:
+- Author labels are the reference. Some are coarse ("stem cell", "precursor cell") and some debatable, so
+  "wrong" is partly label noise; exact plus coarser plus finer is the fairer measure of agreement.
+- One run, 24 pilot clusters. The protocol, including the ASCT+B cross-check, was fixed before this run.
+  The lessons above are for the 46 held-out clusters, which must be run with a protocol frozen before
+  their results are seen.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were

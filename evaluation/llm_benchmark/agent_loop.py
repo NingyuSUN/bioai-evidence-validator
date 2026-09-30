@@ -94,26 +94,26 @@ def wsl_path(path: Path) -> str:
     return f"/mnt/{text[0].lower()}{text[2:]}" if re.match(r"^[A-Za-z]:/", text) else text
 
 
-def call_model(key: str, prompt: str, timeout: int = 600) -> tuple[dict, list[str]]:
-    """One fresh CLI call answering STEP_SCHEMA, through the WSL installs of Claude Code, Codex and Antigravity."""
+def call_model(key: str, prompt: str, timeout: int = 600, schema: dict | None = None) -> tuple[dict, list[str]]:
+    """One fresh CLI call answering `schema` (default STEP_SCHEMA), through the WSL installs of Claude Code, Codex and Antigravity."""
     spec = run_models.MODELS[key]
     with tempfile.TemporaryDirectory(prefix="agent-", dir=Path("C:/t/agent-work")) as directory:
         work = Path(directory)
-        (work / "schema.json").write_text(json.dumps(STEP_SCHEMA), encoding="utf-8")
+        (work / "schema.json").write_text(json.dumps(schema or STEP_SCHEMA), encoding="utf-8")
         (work / "prompt.txt").write_text(prompt, encoding="utf-8")
-        schema, folder = wsl_path(work / "schema.json"), wsl_path(work)
+        schema_file, folder = wsl_path(work / "schema.json"), wsl_path(work)
         if spec["cli"] == "claude":  # the WSL install; the Windows CLI's login can expire mid-run
             command = ("PATH=$(ls -d ~/.nvm/versions/node/*/bin | tail -1):$PATH claude -p --model "
                        f"{spec['model']} --tools '' --strict-mcp-config --no-session-persistence --output-format json "
-                       f"--json-schema \"$(cat {schema})\" < prompt.txt")
+                       f"--json-schema \"$(cat {schema_file})\" < prompt.txt")
             parse = run_models.claude_parse
         elif spec["cli"] == "codex":
             disable = " ".join(f"--disable {f}" for f in run_models.CODEX_DISABLED)
             command = (f"codex exec -m {spec['model']} --ignore-user-config {disable} --sandbox read-only "
-                       f"--skip-git-repo-check --ephemeral --json --output-schema {schema} -o last.json - < prompt.txt")
+                       f"--skip-git-repo-check --ephemeral --json --output-schema {schema_file} -o last.json - < prompt.txt")
             parse = run_models.codex_parse
         else:
-            command = (f"agy --model {spec['model']} --output-format stream-json --json-schema {schema} --sandbox "
+            command = (f"agy --model {spec['model']} --output-format stream-json --json-schema {schema_file} --sandbox "
                        f"--print-timeout {timeout}s --print \"$(cat prompt.txt)\"")
             parse = run_models.gemini_parse
         done = subprocess.run(["wsl.exe", "-e", "bash", "-lc", f"export PATH=$HOME/.local/bin:$PATH; cd {folder} && {command}"],

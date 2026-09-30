@@ -1,0 +1,159 @@
+{
+  "asctb": {
+    "assertions": 1027,
+    "organs": [
+      "kidney",
+      "liver",
+      "lung",
+      "pancreas",
+      "skin"
+    ],
+    "release": "ccf-releases v2.0",
+    "sha256": "351dbaacdd372af704594f4a36d889c324f807c12fd2cbc307aeba9cffcb3302"
+  },
+  "cell_ontology": {
+    "sha256": "7e19b4aef8e7fe7720b0c4474c6a5b8713c904ea9ab7b7d5d96f2cb28b8fc51f",
+    "version": "releases/2026-06-08"
+  },
+  "datasets": [
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 8444,
+      "clusters": 12,
+      "collection_doi": "10.1038/s41467-018-06318-7",
+      "collection_name": "Single cell RNA sequencing of human liver reveals distinct intrahepatic macrophage populations",
+      "dataset_id": "a43aa46b-bd16-47fe-bc3e-19a052624e79",
+      "dataset_version_id": "9681a962-f2d0-4d53-8127-7ac87f2bd799",
+      "h5ad_sha256": "9d9c24983830f1948033c4fcf0c139e735e35e05db50e3778f64c7f8b3db7bee",
+      "markers_sha256": "fe2ff2cb67d700473d6285d4b052a1d892278cfc5377937a37152123c8c6b98d",
+      "name": "liver",
+      "tissue": {
+        "label": "caudate lobe of liver",
+        "ontology_term_id": "UBERON:0001117",
+        "tissue_type": "tissue"
+      },
+      "title": "Liver",
+      "url": "https://datasets.cellxgene.cziscience.com/9681a962-f2d0-4d53-8127-7ac87f2bd799.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 6044,
+      "clusters": 18,
+      "collection_doi": "10.1073/pnas.2103240118",
+      "collection_name": "Single-cell analyses of renal cell cancers reveal insights into tumor microenvironment, cell of origin, and therapy response",
+      "dataset_id": "f801b7a9-80a6-4d09-9161-71474deb58ae",
+      "dataset_version_id": "5f0b9675-aed8-4870-8ad8-7a3f38037486",
+      "h5ad_sha256": "3215543bd2dc490db5ef247d082632aaa12392cac536e6cad41dd7f991b33f49",
+      "markers_sha256": "a8bc60d1f3d0c6496eba01eb18f3f2ec0226f329ff4fdc52033e41486fc3a58b",
+      "name": "kidney",
+      "tissue": {
+        "label": "kidney",
+        "ontology_term_id": "UBERON:0002113",
+        "tissue_type": "tissue"
+      },
+      "title": "normal - Single-cell analyses of renal cell cancers reveal insights into tumor microenvironment, cell of origin, and therapy response",
+      "url": "https://datasets.cellxgene.cziscience.com/5f0b9675-aed8-4870-8ad8-7a3f38037486.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 5200,
+      "clusters": 10,
+      "collection_doi": "10.1016/j.cell.2021.04.028",
+      "collection_name": "Charting human development using a multi-endodermal organ atlas and organoid models",
+      "dataset_id": "ee195b7d-184d-4dfa-9b1c-51a7e601ac11",
+      "dataset_version_id": "1f896487-282d-4303-a948-3cbdd1b721b0",
+      "h5ad_sha256": "c42a9fcf76fbc2905d8fe1fc24d29e88677298dea722fa1d7c2a268f0ad41b89",
+      "markers_sha256": "a468f9b74afc3d0b358e28c1b514c558558d49f69d688fe1758ac3348d6c6e56",
+      "name": "duodenum",
+      "tissue": {
+        "label": "duodenum",
+        "ontology_term_id": "UBERON:0002114",
+        "tissue_type": "tissue"
+      },
+      "title": "Adult duodenum",
+      "url": "https://datasets.cellxgene.cziscience.com/1f896487-282d-4303-a948-3cbdd1b721b0.h5ad"
+    },
+    {
+      "assay": [
+        "CEL-seq2"
+      ],
+      "cell_count": 2126,
+      "clusters": 7,
+      "collection_doi": "10.1016/j.cels.2016.09.002",
+      "collection_name": "Muraro Pancreas",
+      "dataset_id": "b07e5164-baf6-43d2-bdba-5a249d0da879",
+      "dataset_version_id": "ac56150b-add4-4336-9059-6d3d3ce17f3b",
+      "h5ad_sha256": "183673651cfa8c473a26641d42011d43be44eb2fea44e6e6ab8e2b0065d07483",
+      "markers_sha256": "c627f49dc8fd53ee164a2fab9a818d857d695937291aa809f194b4006b1a4c7d",
+      "name": "pancreas",
+      "tissue": {
+        "label": "pancreas",
+        "ontology_term_id": "UBERON:0001264",
+        "tissue_type": "tissue"
+      },
+      "title": "A Single-Cell Transcriptome Atlas of the Human Pancreas",
+      "url": "https://datasets.cellxgene.cziscience.com/ac56150b-add4-4336-9059-6d3d3ce17f3b.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 15457,
+      "clusters": 10,
+      "collection_doi": "10.1038/s42003-020-0922-4",
+      "collection_name": "Single-cell transcriptomes of the human skin reveal age-related loss of fibroblast priming",
+      "dataset_id": "124744b8-4681-474a-9894-683896122708",
+      "dataset_version_id": "1a6bbe2b-4eed-477a-97c9-f7a74d4874d7",
+      "h5ad_sha256": "0968cb3ccad509198e0aa37541c3f2301abcbfe81eefeec781abac80c15bc8ad",
+      "markers_sha256": "1dacf640d2c4d41b43f2b7e7d3b7a1fc13fe72ac383760d336886501afacfa1b",
+      "name": "skin",
+      "tissue": {
+        "label": "zone of skin",
+        "ontology_term_id": "UBERON:0000014",
+        "tissue_type": "tissue"
+      },
+      "title": "Single-cell transcriptomes of the human skin reveal age-related loss of fibroblast priming",
+      "url": "https://datasets.cellxgene.cziscience.com/1a6bbe2b-4eed-477a-97c9-f7a74d4874d7.h5ad"
+    },
+    {
+      "assay": [
+        "10x 5' v1"
+      ],
+      "cell_count": 4778,
+      "clusters": 13,
+      "collection_doi": "10.1016/j.cell.2022.11.005",
+      "collection_name": "A human fetal lung cell atlas uncovers proximal-distal gradients of differentiation and key regulators of epithelial fates",
+      "dataset_id": "62315937-e268-4fa5-a032-8f7d776f3a3f",
+      "dataset_version_id": "03a99fe4-e8ce-47c6-b912-d088271cc319",
+      "h5ad_sha256": "889617850ca9ba1ab7cec31d57bf11d6eec11b563fc07182e4f4b03695f838a3",
+      "markers_sha256": "0973035c1880e60359ca8af87b55d8fa125ff19bf059144cfc00ee98b3f2bbd3",
+      "name": "lung_t_nk_ilc",
+      "tissue": {
+        "label": "lung",
+        "ontology_term_id": "UBERON:0002048",
+        "tissue_type": "tissue"
+      },
+      "title": "T, NK and ILC",
+      "url": "https://datasets.cellxgene.cziscience.com/03a99fe4-e8ce-47c6-b912-d088271cc319.h5ad"
+    }
+  ],
+  "hgnc": {
+    "file": "hgnc_complete_set.txt",
+    "retrieved": "2026-09-30",
+    "sha256": "91d0ad20c34f26fb12c8cce3f80a65a6fc694f3a508040b19f6bfa29ae0d889e"
+  },
+  "key": "bioai-singlecell-celltype-v1",
+  "parameters": {
+    "min_cells": 30,
+    "min_pct": 0.25,
+    "pilot_per_dataset": 4,
+    "prompt_genes": 20,
+    "top_genes": 50
+  }
+}
