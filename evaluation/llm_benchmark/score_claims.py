@@ -107,6 +107,9 @@ def same_title(given: str, actual: str) -> bool:
     return bool(a and b) and len(a & b) / len(a | b) >= 0.5
 
 
+TURNED = {"supports": "contradicts", "contradicts": "supports"}
+
+
 class Verifier:
     def __init__(self, snapshots: Path):
         self.store = SnapshotStore.from_directory(snapshots)
@@ -140,11 +143,15 @@ class Verifier:
         return {**facts, "category": "quote_found" if found else "quote_not_found"}
 
     def record(self, task: dict, answer: dict) -> dict | None:
+        """The answer as an evidence record. A citation without a stance supports the decision; one with a stance
+        (toward the claim: supports, contradicts or neutral) goes into the evidence line of that direction, turned
+        around for a 'does not support' decision. A 'conflicting' decision states the claim, so its supporting and
+        contradicting lines both stand, and the engine sends it to review (BEV004)."""
         if answer["decision"] == "stop" or not answer["citations"]:
             return None
         claim = task["claim"]
-        direction = "supports" if answer["decision"] == "supports" else "does_not_support"
-        sources, items = [], []
+        direction = "does_not_support" if answer["decision"] == "does_not_support" else "supports"
+        sources, items, lines = [], [], {}
         for n, cited in enumerate(answer["citations"], start=1):
             key = pmid_of(cited["pmid"]) or f"unparsable:{n}"
             entry = self.catalog["works"].get(key, {})
@@ -156,6 +163,10 @@ class Verifier:
             items.append({"id": f"bioev:quote-{n}", "source_artifact_id": f"bioev:paper-{n}", "locator": "whole paper",
                           "extracted_text": cited["quote"], "evidence_type": "publication_quote",
                           "extraction_method": "llm_extraction", "scope": ["NCBITaxon:9606"]})
+            stance = cited.get("stance", "supports")
+            if "stance" in cited and direction == "does_not_support":
+                stance = TURNED.get(stance, stance)
+            lines.setdefault(stance, []).append(f"bioev:quote-{n}")
         return {
             "record_id": f"bioev:claim-{task['task_id']}", "profile_id": "civic-literature",
             "statement": {"id": f"bioev:claim-statement-{task['task_id']}",
@@ -164,8 +175,9 @@ class Verifier:
                           "object": {"id": f"civic.claim:{task['task_id']}", "entity_type": "clinical_significance",
                                      "label": f"{claim['significance']} in {claim['disease']}"},
                           "scope": ["NCBITaxon:9606"], "statement_status": "proposed",
-                          "evidence_lines": [{"id": "bioev:quote-line", "direction": "supports",
-                                              "evidence_item_ids": [i["id"] for i in items]}]},
+                          "evidence_lines": [{"id": "bioev:quote-line" + ("" if d == "supports" else f"-{d}"),
+                                              "direction": d, "evidence_item_ids": lines[d]}
+                                             for d in ("supports", "contradicts", "neutral") if d in lines]},
             "source_artifacts": sources, "evidence_items": items, "adjudications": [],
             "requested_uses": ["research_summary"],
         }

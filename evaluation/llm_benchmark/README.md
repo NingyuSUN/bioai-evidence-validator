@@ -183,6 +183,58 @@ What this shows:
   and cited that paper in only 23 of 108 first submissions. Some of these answers may be defensible from
   other papers, which is why such tasks need expert labels (#23) rather than a single CIViC record.
 
+### Scenario 2b: stances and a "conflicting" outcome
+
+Supports or does-not-support is the wrong question when the literature disagrees. So in this run each
+citation also carries its stance toward the claim (supports, contradicts or neutral), and the agent may
+decide "conflicting". The prompt also asks it to look for evidence both for and against the claim, so the
+two runs differ in both respects. Bioevidence decides the routing, not the agent:
+
+- Each stance becomes an evidence line. A record with both a supporting and a contradicting line goes to
+  an expert as conflicting (BEV004), whatever the agent decided.
+- A conflict is not fed back as an error, so the agent is never asked to make it go away.
+- A citation verified in one submission stays in the record through revisions: the agent may fix or
+  replace what failed, but not withdraw verified evidence. In a smoke test before this rule, an agent
+  whose record held a misquote and a verified quote against its decision dropped the latter and was
+  admitted.
+
+([results](results/agent-stance-pilot/summary.md)); six models, 18 tasks, all pooled:
+
+| Configuration | Answered | Correct decision | Wrong direction, admitted | Conflicting, to an expert | Answers with an invalid citation | Routed to a human |
+|---|---:|---:|---:|---:|---:|---:|
+| Scenario 2 loop (no stances) | 73/108 | 58/108 | 15/108 | – | 0/73 | 4/108 |
+| Agent alone | 80/108 | 59/108 | 12/108 | 9/108 (agent's own decision) | 10/80 | 0/108 |
+| Agent + bioevidence gate | 70/108 | 52/108 | 9/108 | 9/108 | 0/70 | 19/108 |
+| Agent + bioevidence feedback loop | 74/108 | 54/108 | 10/108 | 10/108 | 0/74 | 16/108 |
+
+"Routed to a human" counts the conflicting records and those still failing verification. The loop's
+outcomes by the direction of CIViC's record:
+
+| CIViC record | Episodes | Correct | Wrong, admitted | Conflicting | Stopped or failed verification |
+|---|---:|---:|---:|---:|---:|
+| Supports (13 claims), scenario 2 → 2b | 78 | 51 → 51 | 3 → 1 | – → 2 | 24 → 24 |
+| Does not support (5 claims), scenario 2 → 2b | 30 | 7 → 3 | 12 → 9 | – → 8 | 11 → 10 |
+
+What this shows:
+
+- Wrong decisions admitted without review fell from 15 to 10, and 10 records went to an expert as
+  conflicting. Eight of them are on the five contested claims; on the 13 claims whose literature agrees,
+  only 2 of 78 episodes were sent to an expert as conflicting.
+- Four "correct" does-not-support answers became conflicting: the agents found papers on both sides.
+  On these claims a conflicting record may be the better answer, but only expert labels (#23) can say.
+- The routing is enforced, not requested. Opus decided "does not support" while citing a paper that
+  supports the claim, and the record went to an expert as conflicting. In this run no agent tried to
+  drop a verified citation, so carrying them forward did not change an outcome here.
+- It works only when the agent finds the counter-evidence. On FGFR3 G697C all six agents again
+  decided "supports" from the same 2005 paper, and none cited evidence against it. These six answers are
+  6 of the 10 wrong ones that remain. A knowledge-base check would have caught them: CIViC holds two other
+  "does not support" records for G697C. Stances cannot.
+- Stances are the agent's reading and are not verified. On revision, Haiku relabelled a quote it had
+  first marked as contradicting as neutral. That record still failed verification, but relabelling is a gap
+  that verified quotes do not close.
+- One run, 18 tasks and a changed prompt: model-level numbers move between runs (GPT-5.6-Luna's first
+  submissions went from 0 to 3 invalid citations), so read these as directions, not rates.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were

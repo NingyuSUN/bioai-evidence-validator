@@ -7,10 +7,12 @@
 
 The agent gets a CIViC-style claim and three tools, run by this harness rather than the model's CLI (so every
 model has the same tools and every step is logged): `search` (PubMed), `read` (a paper's open full text, or
-its abstract) and `submit` (a decision with up to three citations: PMID, title, exact quote). A submission is
-built into an evidence record and validated with the literature grounder under the CIViC literature profile.
-If it is not admitted, the verifier's reasons go back to the agent, which may revise and submit again (at
-most three submissions, eight actions). Its first submission is made before any feedback, so one run yields:
+its abstract) and `submit` (a decision with up to three citations: PMID, title, exact quote, and the quote's
+stance toward the claim). The decision may be "conflicting" when the papers disagree. A submission is built
+into an evidence record, one evidence line per stance, and validated with the literature grounder under the
+CIViC literature profile: a record whose lines disagree goes to an expert (BEV004), however the agent decided.
+Any other submission that is not admitted gets the verifier's reasons back, and the agent may revise and
+submit again (at most three submissions, eight actions). Its first submission is made before any feedback, so one run yields:
 the agent alone (first submission as given), the agent behind a bioevidence gate (first submission checked)
 and the agent in a bioevidence feedback loop (final submission checked).
 
@@ -50,6 +52,11 @@ import score_claims  # noqa: E402
 MAX_STEPS, MAX_SUBMITS, CAP_BYTES = 8, 3, 100 * 1024 * 1024
 READ_CHARS, SNIPPET_CHARS = 30_000, 300
 FIELDS = ["thought", "action", "query", "pmid", "decision", "citations", "rationale"]
+DECISIONS = ["supports", "does_not_support", "conflicting", "stop"]
+STANCES = ["supports", "contradicts", "neutral"]
+CITATION = {"type": "object", "additionalProperties": False, "required": ["pmid", "title", "quote", "stance"],
+            "properties": {"pmid": {"type": "string"}, "title": {"type": "string"}, "quote": {"type": "string"},
+                           "stance": {"type": "string", "enum": STANCES}}}
 STEP_SCHEMA = {
     "type": "object", "additionalProperties": False, "required": FIELDS,
     "properties": {
@@ -57,13 +64,14 @@ STEP_SCHEMA = {
         "action": {"type": "string", "enum": ["search", "read", "submit"]},
         "query": {"type": "string"}, "pmid": {"type": "string"},
         "decision": {"type": "string"},  # checked in code: Gemini rejects an empty enum value
-        "citations": literature_suite.CLAIM_SCHEMA["properties"]["citations"],
+        "citations": {"type": "array", "items": CITATION},
         "rationale": {"type": "string"},
     },
 }
 PROMPT = """You are a literature curation agent for a cancer variant database. Find out what the published \
-literature says about the claim below using the tools, then submit an evidence record: your decision and up \
-to three citations (PMID, title, and an exact quote from text you read). Citations are checked against the papers.
+literature says about the claim below using the tools, looking for evidence both for and against it, then \
+submit an evidence record: your decision and up to three citations (PMID, title, an exact quote from text you \
+read, and the quote's stance toward the claim). Citations are checked against the papers.
 
 Claim:
 {claim}
@@ -71,8 +79,9 @@ Claim:
 Tools (one action per reply):
 - search: search PubMed; set "query".
 - read: read a paper by PMID (its open full text if there is one, otherwise its abstract); set "pmid".
-- submit: submit the record; set "decision" ("supports", "does_not_support", or "stop" if the literature \
-does not settle the claim) and "citations".
+- submit: submit the record; set "decision" ("supports" or "does_not_support" when the papers you read agree, \
+"conflicting" when they disagree, or "stop" if the literature does not settle the claim) and "citations", each \
+with "stance": "supports", "contradicts" or "neutral" toward the claim.
 Leave the fields an action does not use empty. Keep "thought" to one sentence. Use only these tools, not \
 your own tools, files or the web. You have {left} action(s) left{submits}.
 
@@ -117,10 +126,12 @@ def check_step(answer: Any) -> dict:
     if not isinstance(answer, dict) or set(answer) != set(FIELDS) or answer["action"] not in ("search", "read", "submit"):
         raise ValueError("invalid step")
     if answer["action"] == "submit":
-        if answer["decision"] not in literature_suite.DECISIONS:
-            raise ValueError("a submission needs a decision: supports, does_not_support or stop")
-        literature_suite.validate_claim({"decision": answer["decision"], "citations": answer["citations"],
-                                         "rationale": answer["rationale"]})
+        if answer["decision"] not in DECISIONS:
+            raise ValueError("a submission needs a decision: supports, does_not_support, conflicting or stop")
+        if not isinstance(answer["citations"], list) or not all(
+                isinstance(c, dict) and set(c) == set(CITATION["required"]) and all(isinstance(v, str) for v in c.values())
+                and c["stance"] in STANCES for c in answer["citations"]):
+            raise ValueError("each citation needs pmid, title, quote and a stance: supports, contradicts or neutral")
     return answer
 
 
@@ -215,23 +226,32 @@ class Library:
         for cited in submission["citations"]:
             if key := score_claims.pmid_of(cited["pmid"]):
                 self.resolve(key)
+        stances = {c["stance"] for c in submission["citations"]}
         with self.lock:
             catalog = json.loads(json.dumps(self.catalog))
         verifier = score_claims.Verifier.__new__(score_claims.Verifier)
         verifier.store, verifier.catalog = SnapshotStore.from_directory(self.snapshots), catalog
         verifier.validator = RecordValidator(profile=score_claims.CASE / "profile.yaml", grounders=[
             SourceBytesGrounder(verifier.store), literature.LiteratureGrounder(verifier.store, catalog)])
+        citations = [verifier.citation(c) for c in submission["citations"]]
+        if submission["decision"] == "conflicting" and not {"supports", "contradicts"} <= stances:
+            # The harness's own check: the record would state the claim with one side only.
+            return {"status": "rejected", "codes": ["STANCE"], "citations": citations,
+                    "reasons": ["A 'conflicting' decision needs a citation that supports the claim and one that "
+                                "contradicts it."]}
         record = verifier.record(task, submission)
         if record is None:
             return {"status": "not_submitted", "codes": [], "reasons": ["The record has no decision or no citation."]}
         report = verifier.validator.validate(record)
         reasons = []
         for f in report["findings"]:
-            match = re.search(r"\[(\d+)\]", f["field_path"])
+            if f["rule_id"] == "BEV004":
+                continue  # disagreeing evidence is not an error to fix: it goes to an expert (see `to_expert`)
+            match = re.match(r"\$\.(?:evidence_items|source_artifacts)\[(\d+)\]", f["field_path"])
             where = f"citation {int(match.group(1)) + 1}: " if match else ""
             reasons.append(where + f["message"])
         return {"status": report["overall_status"], "codes": sorted({f["rule_id"] for f in report["findings"]}),
-                "reasons": sorted(set(reasons)), "citations": [verifier.citation(c) for c in submission["citations"]]}
+                "reasons": sorted(set(reasons)), "citations": citations}
 
 
 def episode(key: str, task: dict, library: Library) -> dict:
@@ -264,14 +284,17 @@ def episode(key: str, task: dict, library: Library) -> dict:
                 record["pmid"] = answer["pmid"]
             else:
                 submission = {k: answer[k] for k in ("decision", "citations", "rationale")}
+                submission["citations"] = submission["citations"] + carried(submissions, submission["citations"])
                 verdict = library.check(task, submission)
                 submissions.append({"step": step, "submission": submission, "verdict": verdict})
                 record["status"] = verdict["status"]
-                if verdict["status"] == "admitted" or submission["decision"] == "stop" or len(submissions) >= MAX_SUBMITS:
+                if (verdict["status"] == "admitted" or submission["decision"] == "stop" or len(submissions) >= MAX_SUBMITS
+                        or to_expert(verdict)):
                     steps.append({**record, "seconds": round(time.monotonic() - started, 1)})
                     break
                 observation = ("The verifier did not admit the record. Reasons: " + " | ".join(verdict["reasons"])
-                               + f" You may revise and submit again ({MAX_SUBMITS - len(submissions)} left).")
+                               + " Verified citations stay in the record; you may fix or replace the others and submit "
+                               f"again ({MAX_SUBMITS - len(submissions)} left).")
         except (ValueError, OSError, ET.ParseError) as exc:
             record["error"] = f"{type(exc).__name__}: {exc}"[:300]
             observation = f"The action failed: {record['error']}"
@@ -281,6 +304,27 @@ def episode(key: str, task: dict, library: Library) -> dict:
         history = compact(history)
     return {"model": key, "task_id": task["task_id"], "steps": steps, "submissions": submissions,
             "finished_at": dt.datetime.now(dt.UTC).isoformat()}
+
+
+def carried(submissions: list[dict], citations: list[dict]) -> list[dict]:
+    """Citations verified in an earlier submission and left out of this one. They stay in the record: a revision may
+    fix or replace what failed, but not withdraw verified evidence, such as a quote against the decision."""
+    def same(c: dict) -> tuple:
+        return score_claims.pmid_of(c["pmid"]), literature.normalize(c["quote"])
+
+    seen, kept = {same(c) for c in citations}, []
+    for previous in submissions:
+        for cited, check in zip(previous["submission"]["citations"], previous["verdict"].get("citations", []), strict=False):
+            if check["category"] == "quote_found" and same(cited) not in seen:
+                seen.add(same(cited))
+                kept.append(cited)
+    return kept
+
+
+def to_expert(verdict: dict) -> bool:
+    """Disagreeing evidence lines, and nothing else wrong: the record goes to an expert as it is. This is not fed
+    back, so the agent is never pushed to drop the evidence against its decision."""
+    return verdict["status"] == "review_required" and verdict["codes"] == ["BEV004"]
 
 
 def compact(history: list[str]) -> list[str]:
@@ -350,6 +394,8 @@ VIEWS = [("agent", "Agent alone (first submission)"), ("gate", "Agent + bioevide
 
 
 def view(row: dict, name: str) -> dict:
+    """What a view delivers: a decision ("conflicting" included, or "stop"), its citations' categories, and whether it
+    went to a human. Behind bioevidence, a record whose evidence lines disagree goes to an expert as conflicting."""
     subs = row["submissions"]
     if not subs:
         return {"final": "stop", "categories": [], "routed": False}
@@ -357,9 +403,11 @@ def view(row: dict, name: str) -> dict:
     if name == "agent":
         return {"final": first["decision"], "categories": first["categories"], "routed": False}
     chosen = first if name == "gate" else last
-    admitted = chosen["status"] == "admitted"
-    return {"final": chosen["decision"] if admitted else "stop", "categories": chosen["categories"] if admitted else [],
-            "routed": not admitted and chosen["decision"] != "stop"}
+    if chosen["status"] == "admitted":
+        return {"final": chosen["decision"], "categories": chosen["categories"], "routed": False}
+    if to_expert(chosen):
+        return {"final": "conflicting", "categories": chosen["categories"], "routed": True}
+    return {"final": "stop", "categories": [], "routed": chosen["decision"] != "stop"}
 
 
 def score(results: Path) -> dict:
@@ -374,8 +422,9 @@ def score(results: Path) -> dict:
             "tasks": len(mine),
             "answered": score_claims.rate(len(delivered), len(mine)),
             "correct_decision": score_claims.rate(sum(v["final"] == expected[r["task_id"]] for r, v in views), len(mine)),
-            "wrong_direction": score_claims.rate(sum(v["final"] not in ("stop", expected[r["task_id"]]) for r, v in views),
-                                                 len(mine)),
+            "wrong_direction": score_claims.rate(sum(v["final"] in ("supports", "does_not_support") and
+                                                     v["final"] != expected[r["task_id"]] for r, v in views), len(mine)),
+            "conflicting": score_claims.rate(sum(v["final"] == "conflicting" for _, v in views), len(mine)),
             "invalid_citation": score_claims.rate(sum(any(c in score_claims.INVALID for c in v["categories"])
                                                       for _, v in delivered), len(delivered)),
             "only_verified_citations": score_claims.rate(sum(bool(v["categories"]) and all(c == "quote_found" for c in
@@ -388,7 +437,8 @@ def score(results: Path) -> dict:
     revised = [r for r in rows if len(r["submissions"]) > 1]
     rescued = sum(r["submissions"][0]["status"] != "admitted" and r["submissions"][-1]["status"] == "admitted"
                   for r in revised)
-    summary = {"benchmark": "llm-literature-agent-v1", "split": "pilot", "results": results_by_model, "pooled": pooled,
+    stances = any("stance" in c for r in rows for s in r["submissions"] for c in s["citations"])
+    summary = {"benchmark": "llm-literature-agent-v2" if stances else "llm-literature-agent-v1", "split": "pilot", "results": results_by_model, "pooled": pooled,
                "episodes": len(rows), "revised": len(revised), "rescued_by_feedback": rescued,
                "actions": {a: sum(r["actions"].count(a) for r in rows) for a in ("search", "read", "submit", "error")},
                "median_seconds": sorted(r["seconds"] for r in rows)[len(rows) // 2] if rows else None,
@@ -402,18 +452,24 @@ def score(results: Path) -> dict:
 
 def render(summary: dict) -> str:
     f = score_claims.fraction
-    lines = ["# Literature benchmark, scenario 2: an agent that searches and reads (pilot set)", "",
+    v2 = summary["benchmark"].endswith("v2")
+    lines = [f"# Literature benchmark, scenario {'2b' if v2 else '2'}: an agent that searches and reads"
+             f"{', with stances' if v2 else ''} (pilot set)", "",
              "The agent gets the claim and three tools (PubMed search, read a paper, submit). Bioevidence checks each "
              "submission; in the loop, its reasons go back to the agent, which may revise (at most three submissions, "
-             "eight actions).", "",
-             "| Model | View | Answered | Correct decision | Wrong direction | Answers with an invalid citation | "
-             "Answers with only verified citations | Routed to a human |", "|---|---|---:|---:|---:|---:|---:|---:|"]
+             "eight actions)." + (" Each citation carries its stance toward the claim, and the agent may decide "
+                                  "\"conflicting\"; behind bioevidence, a record whose evidence lines disagree goes to "
+                                  "an expert as conflicting." if v2 else ""), "",
+             "| Model | View | Answered | Correct decision | Wrong direction | Conflicting | Answers with an invalid "
+             "citation | Answers with only verified citations | Routed to a human |",
+             "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
     blocks = [(score_claims.MODEL_NAMES[m], v) for m, v in summary["results"].items()] + [("All models", summary["pooled"])]
     for name, views in blocks:
         for key, label in VIEWS:
             m = views[key]
             lines.append(f"| {name} | {label} | {f(m['answered'])} | {f(m['correct_decision'])} | "
-                         f"{f(m['wrong_direction'])} | {f(m['invalid_citation'])} | {f(m['only_verified_citations'])} | "
+                         f"{f(m['wrong_direction'])} | {f(m['conflicting'])} | {f(m['invalid_citation'])} | "
+                         f"{f(m['only_verified_citations'])} | "
                          f"{f(m['routed_to_human'])} |")
     a = summary["actions"]
     lines += ["", f"{summary['episodes']} episodes; {a['search']} searches, {a['read']} reads, {a['submit']} submissions, "
