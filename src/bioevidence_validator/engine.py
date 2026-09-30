@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
 from collections.abc import Sequence
@@ -10,6 +11,7 @@ from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
 from linkml.generators.jsonschemagen import JsonSchemaGenerator
+from linkml_runtime.utils.schemaview import SchemaView
 
 from . import __version__
 from .config import load_mapping, nonblank
@@ -34,6 +36,37 @@ def _resource_path(kind: str, filename: str) -> Path:
 
 def default_schema_path() -> Path:
     return _resource_path("schema", "bioevidence_core.yaml")
+
+
+@functools.cache
+def _eco_meanings(schema_path: str) -> dict[str, str]:
+    enum = SchemaView(schema_path).get_enum("ExtractionMethod")
+    if enum is None:
+        raise ValueError("LinkML schema is missing ExtractionMethod")
+    return {name: str(v.meaning) for name, v in enum.permissible_values.items() if v.meaning}
+
+
+def _evidence_eco_annotations(record: Any) -> list[dict[str, Any]]:
+    meanings = _eco_meanings(str(default_schema_path()))
+    items = record.get("evidence_items") if isinstance(record, dict) else None
+    if not isinstance(items, list):
+        return []
+
+    annotations = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        item_id = item.get("id")
+        method = item.get("extraction_method")
+        if isinstance(item_id, str) and isinstance(method, str):
+            annotations.append(
+                {
+                    "evidence_item_id": item_id,
+                    "extraction_method": method,
+                    "eco_curie": meanings.get(method),
+                }
+            )
+    return annotations
 
 
 def generate_json_schema(schema_path: Path | None = None) -> dict[str, Any]:
@@ -275,7 +308,7 @@ class RecordValidator:
         self.schema_sha256 = (self.schema_sources[0]["sha256"] if len(paths) == 1 else
                               sha256_bytes(json.dumps(self._schemas, sort_keys=True, separators=(",", ":")).encode()))
 
-    def validate(self, record: Any) -> dict[str, Any]:
+    def validate(self, record: Any, *, annotate_eco: bool = False) -> dict[str, Any]:
         canonical = json.dumps(record, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
         requested = record.get("requested_uses") if isinstance(record, dict) else None
         uses = list(dict.fromkeys(use for use in requested if isinstance(use, str))) if isinstance(requested, list) else []
@@ -307,9 +340,13 @@ class RecordValidator:
         }
         if self.grounders:  # reports without grounding keep their exact previous shape
             report["grounding"] = [grounder.name for grounder in self.grounders]
+        if annotate_eco:
+            report["evidence_eco_annotations"] = _evidence_eco_annotations(record)
         return report
 
 
 def validate_record(record: Any, *, profile: str | Path = "general", schema_path: Path | None = None,
-                    grounders: Sequence[Any] = ()) -> dict[str, Any]:
-    return RecordValidator(profile=profile, schema_path=schema_path, grounders=grounders).validate(record)
+                    grounders: Sequence[Any] = (), annotate_eco: bool = False) -> dict[str, Any]:
+    return RecordValidator(profile=profile, schema_path=schema_path, grounders=grounders).validate(
+        record, annotate_eco=annotate_eco
+    )

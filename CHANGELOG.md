@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add opt-in ECO annotations to validation reports through `--annotate-eco` and the
+  matching Python API keyword; mappings come from the packaged LinkML schema.
+- Default validation behavior and report contents remain unchanged.
+
 - Benchmark scenario 2 (`agent_loop.py`): an agent searches PubMed, reads papers and submits a
   decision with citations; bioevidence checks each submission and returns its reasons, and the agent
   may revise. Five of six models cited only what they had read; Claude Haiku 4.5 misquoted in 8 of
