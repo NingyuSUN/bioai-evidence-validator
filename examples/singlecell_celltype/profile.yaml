@@ -1,0 +1,28 @@
+id: singlecell-celltype
+version: 0.1.0
+description: Cell-type annotation of a single-cell RNA-seq cluster from its marker genes. A marker gene counts only
+  when a grounder has found it among the cluster's markers in the pinned marker table; model-cited markers are
+  allowed for a research summary on that condition, while a reference annotation needs a human's acceptance.
+predicates:
+- has_cell_type
+subject_types:
+- cell_cluster
+object_types:
+- cell_type
+uses:
+  research_summary:
+    required_evidence_types:
+    - marker_gene
+    verified_evidence_types:
+    - marker_gene
+    require_human_acceptance: false
+    allow_llm_only: true
+    allow_string_match_only: false
+  reference_annotation:
+    required_evidence_types:
+    - marker_gene
+    verified_evidence_types:
+    - marker_gene
+    require_human_acceptance: true
+    allow_llm_only: true
+    allow_string_match_only: false
