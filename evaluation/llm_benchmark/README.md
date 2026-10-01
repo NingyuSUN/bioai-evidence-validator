@@ -294,12 +294,56 @@ What this shows:
   their own answer in 64 of 144 first answers, because the prompt asked for "any that argue against it".
   That is honest, and it carries the signal above, but it is more than a curation team can review.
 
+### Held-out test split (protocol 2)
+
+Two lessons from the pilot became protocol 2, committed before the 46 held-out clusters were run:
+
+- contradicting markers are asked for only when some clearly point to another cell type (a mixed cluster,
+  doublets);
+- the ASCT+B cross-check is left out.
+
+Nothing was changed after the results were seen ([results](results/celltype-test/summary.md)). Six models,
+46 clusters:
+
+| Configuration | Annotated | Exact | Coarser | Finer | Wrong or invalid | Answers with an identifier or marker error | Routed to a person |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Model alone | 276/276 | 117 | 33 | 26 | 100 | 63/276 | 0 |
+| Model + bioevidence gate | 198/276 | 113 | 27 | 21 | 37 | 0/198 | 78 |
+| Model + bioevidence feedback loop | 255/276 | 138 | 31 | 36 | 50 | 0/255 | 21 |
+
+What this shows:
+
+- **The loop makes the annotations better, not only safer.**
+  - Answers compatible with the authors' term (exact, coarser or finer) rose from 176 to 205.
+  - Exact matches rose from 117 to 138.
+  - Wrong or invalid fell from 100 (36% of answers) to 50 admitted (20% of what was admitted).
+  - Only 21 of 276 (8%) went to a person, against 71 of 144 (49%) in the pilot.
+- **Most of the gain is identifiers.**
+  - 62 first answers gave a Cell Ontology ID that does not match its label, or is not a current cell type.
+  - By model: Claude Haiku 4.5 had 23 of 46 answers with an identifier or marker error, GPT-5.6-Luna 16,
+    Gemini 3.1 Pro 10, Gemini 3.8 Flash 9, Claude Opus 5.5 4, GPT-6-Astra 1.
+  - The finding names the term the label belongs to, so the model can correct the ID to what it meant.
+  - Outcome: 56 of the 62 were fixed and admitted (25 exact, 14 finer, 4 coarser, 13 wrong); 3 went to a
+    person and 3 were still rejected after three answers.
+  - None of these identifier errors depends on which model made it, and none was admitted.
+- **The model's own conflict is now a sharp signal.**
+  - Only 17 first answers cited markers against their own answer (protocol 1: 64 of 144).
+  - 14 of those 17 were wrong (82%), against 33% of the rest.
+  - In the loop, 13 of the 18 records sent to an expert were wrong.
+- **What remains is semantic, and much of it is the reference.** 50 admitted answers disagree with the
+  authors' term with valid identifiers and real markers.
+  - 7 called the duodenal cluster the authors label "B cell" a plasma cell. Its top markers are JCHAIN and
+    MZB1, so the models are probably right, but in the Cell Ontology a plasma cell is not a B cell.
+  - 11 called a "mesenchymal cell" a fibroblast or pancreatic stellate cell.
+  - Others are real fine-grained confusions: NK T cells called gamma-delta T cells (5), memory CD4 T cells
+    called naive (5), an ILC3 called a Th17 cell.
+
+  Bioevidence cannot see these; expert labels and an audit of admitted records (#23, #24) can.
+
 Limits:
 - Author labels are the reference. Some are coarse ("stem cell", "precursor cell") and some debatable, so
   "wrong" is partly label noise; exact plus coarser plus finer is the fairer measure of agreement.
-- One run, 24 pilot clusters. The protocol, including the ASCT+B cross-check, was fixed before this run.
-  The lessons above are for the 46 held-out clusters, which must be run with a protocol frozen before
-  their results are seen.
+- One run per split. The test split has 46 clusters from the same six datasets as the pilot.
 
 ## Semantic checks (#31)
 

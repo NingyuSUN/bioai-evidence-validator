@@ -111,8 +111,9 @@ def test_problems_are_looked_up_directly(case):
     assert loop.gene_token(" CD3E;x=1 ") == "CD3E_x_1"
 
 
-def test_pilot_scores_replay_from_committed_episodes(tmp_path):
-    committed = ROOT / "evaluation" / "llm_benchmark" / "results" / "celltype-pilot"
+@pytest.mark.parametrize("folder", ["celltype-pilot", "celltype-test"])
+def test_scores_replay_from_committed_episodes(folder, tmp_path):
+    committed = ROOT / "evaluation" / "llm_benchmark" / "results" / folder
     (tmp_path / "episodes.jsonl").write_bytes((committed / "episodes.jsonl").read_bytes())
     loop.score(tmp_path)
     for name in ("summary.json", "summary.md"):
