@@ -14,6 +14,11 @@ source bytes, and HuBMAP ASCT+B (a supporting marker that the reference assigns 
 types sends the record to an expert). The episode is `bioevidence_validator.feedback.revise`: fixable
 findings go back to the model, at most three answers; conflicts go to an expert unchanged.
 
+Two protocols, each fixed before the split it was run on. Protocol 1 (the pilot) asked for markers that argue
+against the answer and cross-checked supporting markers with ASCT+B. Protocol 2 (the held-out test split), from
+what the pilot showed, asks for contradicting markers only when some clearly point to another cell type (a mixed
+cluster, doublets), and leaves out the ASCT+B cross-check, whose biomarker lists are not specificity statements.
+
 One run gives three views: the model alone (its first answer as given), behind a bioevidence gate (its first
 answer, validated) and in the feedback loop (its last answer, validated). Scoring is independent of the
 grounders: each answer is compared with the authors' term using the ontology (exact, coarser, finer or
@@ -63,7 +68,7 @@ SCHEMA = {
         "rationale": {"type": "string"},
     },
 }
-PROMPT = """This cluster comes from a single-cell RNA-seq dataset of {species} {tissue} ({assay}). Its top marker \
+PROMPT_V1 = """This cluster comes from a single-cell RNA-seq dataset of {species} {tissue} ({assay}). Its top marker \
 genes, ranked by log fold change against all other cells of the dataset (logfc: difference of mean log-normalised \
 expression; pct_in and pct_out: fraction of cells expressing the gene inside and outside the cluster):
 
@@ -74,6 +79,19 @@ Which cell type is this cluster? Give its Cell Ontology term (the CL identifier 
 marker genes of this cluster that support it, and any that argue against it. If the markers do not identify a \
 cell type, set "decision" to "uncertain". Answer from what you know: do not run commands, search the web or read \
 files."""
+PROMPT = """This cluster comes from a single-cell RNA-seq dataset of {species} {tissue} ({assay}). Its top marker \
+genes, ranked by log fold change against all other cells of the dataset (logfc: difference of mean log-normalised \
+expression; pct_in and pct_out: fraction of cells expressing the gene inside and outside the cluster):
+
+gene\tlogfc\tpct_in\tpct_out
+{table}
+
+Which cell type is this cluster? Give its Cell Ontology term (the CL identifier and the term's name) and the \
+marker genes of this cluster that support it (stance "supports"). Only if some of its markers clearly point to a \
+different cell type, for example in a mixed cluster or doublets, list those with stance "contradicts". If the \
+markers do not identify a cell type, set "decision" to "uncertain". Answer from what you know: do not run \
+commands, search the web or read files."""
+PROMPTS = {1: PROMPT_V1, 2: PROMPT}
 REVISION = """{prompt}
 
 Your previous answer:
@@ -104,20 +122,22 @@ class Case:
         self.versions = {d["markers_sha256"]: d["dataset_version_id"] for d in self.manifest["datasets"]}
         self.tables = {sha: parse_table(self.store.get(sha) or b"")[1] for sha in self.versions}
 
-    def validator(self) -> RecordValidator:
-        return RecordValidator(profile=CASE / "profile.yaml", grounders=[
-            SourceBytesGrounder(self.store), TableGrounder(self.store, ["marker_gene"]),
-            OntologyGrounder([self.ontology], roots={"cell_type": ["CL:0000000"]}), GeneGrounder(self.genes),
-            ReferenceGrounder.from_table(self.reference, label="ASCT+B", evidence_key="gene", relation="marker_of",
-                                         ontology=self.ontology, conflict="disjoint")])
+    def validator(self, protocol: int = 2) -> RecordValidator:
+        grounders: list = [SourceBytesGrounder(self.store), TableGrounder(self.store, ["marker_gene"]),
+                           OntologyGrounder([self.ontology], roots={"cell_type": ["CL:0000000"]}), GeneGrounder(self.genes)]
+        if protocol == 1:
+            grounders.append(ReferenceGrounder.from_table(self.reference, label="ASCT+B", evidence_key="gene",
+                                                          relation="marker_of", ontology=self.ontology,
+                                                          conflict="disjoint"))
+        return RecordValidator(profile=CASE / "profile.yaml", grounders=grounders)
 
     def markers(self, task: dict) -> set[str]:
         return {r["gene"] for r in self.tables[task["markers_sha256"]] if r["cluster"] == task["cluster"]}
 
 
-def prompt(task: dict) -> str:
+def prompt(task: dict, protocol: int = 2) -> str:
     table = "\n".join(f"{m['gene']}\t{m['logfc']}\t{m['pct_in']}\t{m['pct_out']}" for m in task["markers"])
-    return PROMPT.format(species=task["species"], tissue=task["tissue"], assay=task["assay"], table=table)
+    return PROMPTS[protocol].format(species=task["species"], tissue=task["tissue"], assay=task["assay"], table=table)
 
 
 def check_answer(answer: Any) -> dict:
@@ -165,12 +185,12 @@ def record(case: Case, task: dict, answer: dict) -> dict | None:
     }
 
 
-def episode(key: str, task: dict, case: Case) -> dict:
-    validator, calls, last = case.validator(), [], {}
+def episode(key: str, task: dict, case: Case, protocol: int = 2) -> dict:
+    validator, calls, last = case.validator(protocol), [], {}
 
     def propose(reasons: list[str]) -> dict | None:
-        text = prompt(task) if not reasons else REVISION.format(
-            prompt=prompt(task), previous=json.dumps(last["answer"], ensure_ascii=False),
+        text = prompt(task, protocol) if not reasons else REVISION.format(
+            prompt=prompt(task, protocol), previous=json.dumps(last["answer"], ensure_ascii=False),
             reasons="\n".join(f"- {r}" for r in reasons))
         started, answer, error, tools = time.monotonic(), None, None, []
         for _ in range(2):  # one retry on an invalid answer or a tool call of the CLI's own
@@ -189,7 +209,7 @@ def episode(key: str, task: dict, case: Case) -> dict:
         return record(case, task, answer)
 
     attempts = feedback.revise(propose, validator, rounds=ROUNDS)
-    return {"model": key, "task_id": task["task_id"], "calls": calls,
+    return {"model": key, "task_id": task["task_id"], **({"protocol": protocol} if protocol != 1 else {}), "calls": calls,
             "attempts": [{"status": a.report["overall_status"],
                           "codes": sorted({f["rule_id"] for f in a.report["findings"]}),
                           "to_expert": feedback.to_expert(a.report),
@@ -199,7 +219,7 @@ def episode(key: str, task: dict, case: Case) -> dict:
             "finished_at": dt.datetime.now(dt.UTC).isoformat()}
 
 
-def run(output: Path, split: str, models: list[str], workers: int, limit: int | None) -> int:
+def run(output: Path, split: str, models: list[str], workers: int, limit: int | None, protocol: int = 2) -> int:
     case = Case()
     tasks = [t for t in case.tasks.values() if t["split"] == split][:limit]
     Path("C:/t/agent-work").mkdir(parents=True, exist_ok=True)
@@ -212,7 +232,7 @@ def run(output: Path, split: str, models: list[str], workers: int, limit: int | 
     def work(job):
         key, task, path = job
         with slots[key]:
-            result = episode(key, task, case)
+            result = episode(key, task, case, protocol)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return result
@@ -316,7 +336,8 @@ def score(results: Path) -> dict:
                 "to_an_expert_as_conflict": rate(sum(v["expert"] for _, v in views), len(mine))}
 
     split = case.tasks[rows[0]["task_id"]]["split"] if rows else "pilot"
-    summary = {"benchmark": "singlecell-celltype-v1", "split": split,
+    protocol = rows[0].get("protocol", 1) if rows else 2
+    summary = {"benchmark": f"singlecell-celltype-v{protocol}", "split": split,
                "results": {m: {n: metrics([r for r in rows if r["model"] == m], n) for n, _ in VIEWS} for m in models},
                "pooled": {n: metrics(rows, n) for n, _ in VIEWS}, "episodes": len(rows),
                "calls": sum(len(r["calls"]) for r in rows), "failed_calls": sum(c["error"] is not None
@@ -334,7 +355,9 @@ def score(results: Path) -> dict:
 
 def render(summary: dict) -> str:
     f = score_claims.fraction
-    lines = [f"# Single-cell cell-type annotation ({summary['split']} set)", "",
+    protocol = int(summary["benchmark"].rsplit("v", 1)[1])
+    lines = [f"# Single-cell cell-type annotation ({summary['split']} set"
+             + (f", protocol {protocol})" if protocol != 1 else ")"), "",
              "Each model annotates one cluster from its top 20 marker genes with a Cell Ontology term and the markers "
              "that support it. Compared with the authors' term: exact, coarser (an ancestor), finer (a descendant) or "
              "wrong; an identifier that is not a current cell type term is invalid.", "",
@@ -366,6 +389,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--models", nargs="+", choices=list(run_models.MODELS), default=list(run_models.MODELS))
     r.add_argument("--workers", type=int, default=2)
     r.add_argument("--limit", type=int)
+    r.add_argument("--protocol", type=int, choices=sorted(PROMPTS), default=2)
     c = steps.add_parser("collect")
     c.add_argument("--output", type=Path, required=True)
     c.add_argument("--results", type=Path, required=True)
@@ -378,7 +402,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.step == "score":
         score(args.results)
         return 0
-    return run(args.output, args.split, args.models, args.workers, args.limit)
+    return run(args.output, args.split, args.models, args.workers, args.limit, args.protocol)
 
 
 if __name__ == "__main__":

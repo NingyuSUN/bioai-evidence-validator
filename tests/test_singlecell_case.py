@@ -83,7 +83,7 @@ def test_validator_admits_a_grounded_answer_and_explains_errors(case):
 
 
 def test_reference_cross_check_uses_disjointness(case):
-    validator, task = case.validator(), hepatocytes(case)
+    validator, task = case.validator(protocol=1), hepatocytes(case)
     grounder = next(g for g in validator.grounders if g.name == "reference:ASCT+B")
     record = loop.record(case, task, answer("CL:0000182", "hepatocyte", "APOC3"))
     listed = {row["subject"] for row in grounder.assertions if row["object"] == "CL:0000236"}  # B cell markers
@@ -127,3 +127,11 @@ def test_views_follow_the_attempts():
     assert loop.view(row, "loop")["answer"]["cell_type_label"] == "T cell"
     assert loop.view({"calls": [{"answer": None}], "attempts": []}, "gate") == {"answer": None, "routed": False,
                                                                                 "expert": False}
+
+
+def test_protocol_2_drops_the_reference_check_and_narrows_contradicting_markers(case):
+    task = hepatocytes(case)
+    assert [g.name for g in case.validator(protocol=1).grounders][-1] == "reference:ASCT+B"
+    assert not any(g.name.startswith("reference:") for g in case.validator().grounders)
+    assert "any that argue against it" in loop.prompt(task, 1) and "Only if some of its markers" in loop.prompt(task)
+    assert loop.prompt(task, 1).split("Which cell type")[0] == loop.prompt(task).split("Which cell type")[0]
