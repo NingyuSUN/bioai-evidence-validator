@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add the single-cell cell-type annotation case (`examples/singlecell_celltype`): marker tables derived
+  from six CELLxGENE datasets annotated by their authors, with the Cell Ontology, HGNC and ASCT+B pinned.
+  Benchmark scenario 3 runs six models on it, alone and in the feedback loop. In the pilot, 35 of 138 first
+  answers gave a Cell Ontology ID that belongs to another term; none was admitted. Wrong or invalid
+  annotations fell from 43% of answers to 18% of those admitted behind the gate, at the cost of half
+  the annotations going to a person. The ASCT+B cross-check proved to be noise as a conflict source.
+  Protocol 2 (contradicting markers only for mixed clusters, no ASCT+B), frozen before the 46 held-out
+  clusters were run: identifier errors in 62 of 276 answers, none admitted; in the feedback loop,
+  answers compatible with the authors' term rose from 176 to 205, wrong or invalid fell from 36% of
+  answers to 20% of those admitted, and 8% of annotations went to a person.
 - Add generic grounders that check what a record cites against pinned reference releases, with
   messages that say what to fix: `OntologyGrounder` (ontology terms: existence, obsoletion, label,
   kind), `GeneGrounder` (HGNC symbols, previous symbols and aliases), `VariantGrounder` (HGVS form,
