@@ -345,6 +345,59 @@ Limits:
   "wrong" is partly label noise; exact plus coarser plus finer is the fairer measure of agreement.
 - One run per split. The test split has 46 clusters from the same six datasets as the pilot.
 
+### External split (protocol 3): the definition check did not transfer
+
+Protocol 3 adds the Cell Ontology definition check (`bioevidence_validator.definitions`, BEV026) to
+protocol 2. The check compares the markers a claimed term is defined to have or lack with the cluster's
+measurements:
+- a defining marker detected in under 10% of cells is a contradiction;
+- an excluded marker detected in half or more, and higher than elsewhere, is a contradiction.
+
+The thresholds were set on the 70 clusters of the first six datasets. There, the 20 first answers the check
+flagged were wrong 70% of the time, against 38% overall. Protocol 3 was committed before it was run on six
+datasets from other studies, 81 clusters, mostly immune ([results](results/celltype-external/summary.md)).
+The gate is reported both with and without the check, on the same first answers.
+
+| Configuration | Annotated | Compatible (exact + coarser + finer) | Exact | Wrong or invalid | Routed to a person |
+|---|---:|---:|---:|---:|---:|
+| Model alone | 479/486 | 278 | 169 | 201 | 0 |
+| Model + gate without the definition check | 362/486 | 242 | 154 | 120 | 117 |
+| Model + gate with it | 302/486 | 202 | 114 | 100 | 177 |
+| Model + feedback loop with it | 390/486 | 242 | 125 | 148 | 89 |
+
+**What this shows: a negative result.**
+
+- **On new data the check flagged answers no better than chance.** It flagged 88 first answers: 41 wrong,
+  43 exactly the authors' term and 4 finer. That is 47% wrong, against 42% wrong overall. Behind the gate it
+  stopped 20 more wrong answers and 40 more correct ones, and left the error rate of what was admitted
+  unchanged (33% with and without it).
+- **It pushed models away from correct answers.** In the loop, the check's findings go back to the model,
+  and models believed them. Of 40 answers that matched the authors' term exactly and were revised:
+  - 15 were changed to a wrong term, 8 of which were then admitted;
+  - 12 became coarser or finer;
+  - 13 stayed exact.
+
+  As a result, compatible answers in the loop (242) fell below the model alone (278).
+- **The cause is transcripts against proteins.** The Cell Ontology defines cell types by surface proteins,
+  and several definitions do not hold at the mRNA level:
+  - a mast cell is defined by CCR3, detected in 0% of all four mast cell clusters;
+  - a neutrophil is defined by CEACAM8 (CD66b), also undetected;
+  - a natural killer cell is defined as lacking CD3 epsilon, yet CD3E transcripts are detected in 50–68% of
+    NK and ILC3 cells.
+
+  These rules fire on the authors' own labels: 11 of 81 external clusters. The development datasets had
+  almost no mast cells or neutrophils, so the problem did not show before.
+- **The identifier layer held.** 70 of 479 first answers had an identifier error (GPT-5.6-Luna 33,
+  Claude Haiku 4.5 23), and none was admitted.
+
+Two lessons:
+- **Feed back only findings that are facts.** An identifier that belongs to another term is a fact. A
+  definition that may not hold for transcripts is not, and a model in a feedback loop treats any finding as
+  an instruction. A finding of uncertain precision belongs with a person, not in the model's next prompt.
+- **Validate before transferring.** A protein-level definition can become a transcript-level check only for
+  markers shown to be reliable at the mRNA level, for example against CITE-seq data that measures both.
+  That needs its own validation on data not used to choose the markers.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were
