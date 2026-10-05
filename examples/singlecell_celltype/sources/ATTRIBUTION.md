@@ -15,6 +15,17 @@ redistributed; `manifest.json` records each file's SHA-256 and dataset version. 
 | skin | Single-cell transcriptomes of the human skin reveal age-related loss of fibroblast priming | *Commun Biol* 2020, [10.1038/s42003-020-0922-4](https://doi.org/10.1038/s42003-020-0922-4) |
 | lung_t_nk_ilc | T, NK and ILC, in *A human fetal lung cell atlas uncovers proximal-distal gradients of differentiation and key regulators of epithelial fates* | *Cell* 2022, [10.1016/j.cell.2022.11.005](https://doi.org/10.1016/j.cell.2022.11.005) |
 
+External datasets (the `external` split), from other studies:
+
+| Name | Dataset | Publication |
+|---|---|---|
+| blood_bone_marrow | blood and bone marrow from a healthy young donor, in *Single-cell proteo-genomic reference maps of the hematopoietic system enable the purification and massive profiling of precisely defined cell states* (a targeted gene panel) | *Nat Immunol* 2021, [10.1038/s41590-021-01059-0](https://doi.org/10.1038/s41590-021-01059-0) |
+| tonsil_t | Human tonsil T cells scRNA, in *Single-cell analysis of human B cell maturation predicts how antibody class switching shapes selection dynamics* | *Sci Immunol* 2021, [10.1126/sciimmunol.abe6291](https://doi.org/10.1126/sciimmunol.abe6291) |
+| kidney_immune | Mature kidney dataset: immune, in *Spatiotemporal immune zonation of the human kidney* | *Science* 2019, [10.1126/science.aat5031](https://doi.org/10.1126/science.aat5031) |
+| endometrium_immune | Immune cells from five healthy donors, in *Cellular heterogeneity and dynamics of the human uterus in healthy premenopausal women* | *PNAS* 2024, [10.1073/pnas.2404775121](https://doi.org/10.1073/pnas.2404775121) |
+| bladder_immune | Adult bladder immune subset, in *Exploring the Utility of snRNA-seq in Profiling Human Bladder Tissue: A Comprehensive Comparison with scRNA-seq* | *iScience*, [10.1016/j.isci.2024.111628](https://doi.org/10.1016/j.isci.2024.111628) |
+| fetal_intestine | Immune, in *Spatiotemporal analysis of human intestinal development at single-cell resolution* | *Cell* 2021, [10.1016/j.cell.2020.12.016](https://doi.org/10.1016/j.cell.2020.12.016) |
+
 Reference releases, redistributed unchanged (gzip-compressed) in `snapshots/`:
 
 - **Cell Ontology**, release 2026-06-08, full `cl.obo`

@@ -18,6 +18,10 @@ Two protocols, each fixed before the split it was run on. Protocol 1 (the pilot)
 against the answer and cross-checked supporting markers with ASCT+B. Protocol 2 (the held-out test split), from
 what the pilot showed, asks for contradicting markers only when some clearly point to another cell type (a mixed
 cluster, doublets), and leaves out the ASCT+B cross-check, whose biomarker lists are not specificity statements.
+Protocol 3 (the external split, six datasets from other studies) keeps protocol 2 and adds the Cell Ontology
+definition check (`bioevidence_validator.definitions`): a claimed term whose defining markers the cluster's
+measurements contradict (a CD8 T cell in which CD4 is detected in most cells) goes back to the model with the
+measurement, as a finding to review (BEV026). Its thresholds were set on the first six datasets.
 
 One run gives three views: the model alone (its first answer as given), behind a bioevidence gate (its first
 answer, validated) and in the feedback loop (its last answer, validated). Scoring is independent of the
@@ -27,6 +31,7 @@ wrong), and its identifiers and markers are looked up directly.
 from __future__ import annotations
 
 import argparse
+import collections
 import concurrent.futures
 import datetime as dt
 import hashlib
@@ -40,6 +45,7 @@ from typing import Any
 
 from bioevidence_validator import feedback
 from bioevidence_validator.crosscheck import ReferenceGrounder
+from bioevidence_validator.definitions import DefinitionGrounder, MarkerDefinitions
 from bioevidence_validator.engine import RecordValidator
 from bioevidence_validator.grounding import SnapshotStore, SourceBytesGrounder
 from bioevidence_validator.identifiers import GeneGrounder, Genes, Ontology, OntologyGrounder, _label_key
@@ -91,7 +97,7 @@ marker genes of this cluster that support it (stance "supports"). Only if some o
 different cell type, for example in a mixed cluster or doublets, list those with stance "contradicts". If the \
 markers do not identify a cell type, set "decision" to "uncertain". Answer from what you know: do not run \
 commands, search the web or read files."""
-PROMPTS = {1: PROMPT_V1, 2: PROMPT}
+PROMPTS = {1: PROMPT_V1, 2: PROMPT, 3: PROMPT}
 REVISION = """{prompt}
 
 Your previous answer:
@@ -121,6 +127,16 @@ class Case:
         self.tasks = {t["task_id"]: t for t in load_jsonl(SOURCES / "tasks.jsonl")}
         self.versions = {d["markers_sha256"]: d["dataset_version_id"] for d in self.manifest["datasets"]}
         self.tables = {sha: parse_table(self.store.get(sha) or b"")[1] for sha in self.versions}
+        self.panels: dict[str, dict[str, dict[str, tuple[float, float]]]] = {}
+        for dataset in self.manifest["datasets"]:
+            for row in parse_table(self.store.get(dataset["panel_sha256"]) or b"")[1]:
+                cluster = self.panels.setdefault(dataset["name"], {}).setdefault(row["cluster"], {})
+                cluster[row["gene"]] = (float(row["pct_in"]), float(row["logfc"]))
+
+    def measure(self, record: dict) -> dict[str, tuple[float, float]] | None:
+        """The definition panel of the record's cluster (`cluster:<dataset>/<cluster>`)."""
+        dataset, _, cluster = record["statement"]["subject"]["id"].removeprefix("cluster:").partition("/")
+        return self.panels.get(dataset, {}).get(cluster)
 
     def validator(self, protocol: int = 2) -> RecordValidator:
         grounders: list = [SourceBytesGrounder(self.store), TableGrounder(self.store, ["marker_gene"]),
@@ -129,6 +145,8 @@ class Case:
             grounders.append(ReferenceGrounder.from_table(self.reference, label="ASCT+B", evidence_key="gene",
                                                           relation="marker_of", ontology=self.ontology,
                                                           conflict="disjoint"))
+        if protocol >= 3:
+            grounders.append(DefinitionGrounder(MarkerDefinitions(self.ontology, self.genes), self.measure))
         return RecordValidator(profile=CASE / "profile.yaml", grounders=grounders)
 
     def markers(self, task: dict) -> set[str]:
@@ -294,6 +312,12 @@ def problems(case: Case, task: dict, answer: dict) -> list[str]:
 
 VIEWS = [("model", "Model alone (first answer)"), ("gate", "Model + bioevidence gate (first answer)"),
          ("loop", "Model + bioevidence feedback loop (last answer)")]
+# Protocol 3 only: the gate as protocol 2 would have it, on the same first answers (the prompts are the same).
+WITHOUT_DEFINITIONS = ("gate_without_definitions", "Model + gate without the definition check (first answer)")
+
+
+def views_for(protocol: int) -> list[tuple[str, str]]:
+    return VIEWS[:2] + [WITHOUT_DEFINITIONS] + VIEWS[2:] if protocol >= 3 else VIEWS
 
 
 def view(row: dict, name: str) -> dict:
@@ -305,10 +329,11 @@ def view(row: dict, name: str) -> dict:
         return {"answer": first if first and first["decision"] == "annotate" else None, "routed": False, "expert": False}
     if not attempts:
         return {"answer": None, "routed": False, "expert": False}
-    chosen = attempts[0] if name == "gate" else attempts[-1]
-    index = 0 if name == "gate" else len(attempts) - 1
+    first = name in ("gate", WITHOUT_DEFINITIONS[0])
+    chosen = attempts[0] if first else attempts[-1]
+    index = 0 if first else len(attempts) - 1
     annotating = [a for a in answered if a["decision"] == "annotate" and a["cell_type_id"].strip()]
-    if chosen["status"] == "admitted":
+    if chosen["status"] == "admitted" or (name == WITHOUT_DEFINITIONS[0] and set(chosen["codes"]) == {"BEV026"}):
         return {"answer": annotating[index], "routed": False, "expert": False}
     return {"answer": None, "routed": True, "expert": chosen["to_expert"]}
 
@@ -337,15 +362,23 @@ def score(results: Path) -> dict:
 
     split = case.tasks[rows[0]["task_id"]]["split"] if rows else "pilot"
     protocol = rows[0].get("protocol", 1) if rows else 2
+    names = views_for(protocol)
     summary = {"benchmark": f"singlecell-celltype-v{protocol}", "split": split,
-               "results": {m: {n: metrics([r for r in rows if r["model"] == m], n) for n, _ in VIEWS} for m in models},
-               "pooled": {n: metrics(rows, n) for n, _ in VIEWS}, "episodes": len(rows),
+               "results": {m: {n: metrics([r for r in rows if r["model"] == m], n) for n, _ in names} for m in models},
+               "pooled": {n: metrics(rows, n) for n, _ in names}, "episodes": len(rows),
                "calls": sum(len(r["calls"]) for r in rows), "failed_calls": sum(c["error"] is not None
                                                                               for r in rows for c in r["calls"]),
                "revised": sum(len(r["attempts"]) > 1 for r in rows),
                "codes": {c: sum(c in a["codes"] for r in rows for a in r["attempts"])
                          for c in sorted({c for r in rows for a in r["attempts"] for c in a["codes"]})},
                "episodes_sha256": hashlib.sha256((results / "episodes.jsonl").read_bytes()).hexdigest()}
+    if protocol >= 3:  # first answers the definition check flagged, by how they compare with the authors' term
+        flagged = collections.Counter()
+        for r in rows:
+            got = [c["answer"] for c in r["calls"] if c["answer"] and c["answer"]["decision"] == "annotate"]
+            if r["attempts"] and "BEV026" in r["attempts"][0]["codes"]:
+                flagged[outcome(case, truth[r["task_id"]]["term"], got[0])] += 1
+        summary["definition_flags_on_first_answers"] = dict(sorted(flagged.items()))
     (results / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8",
                                           newline="\n")
     (results / "summary.md").write_text(render(summary), encoding="utf-8", newline="\n")
@@ -365,7 +398,7 @@ def render(summary: dict) -> str:
              "or marker error | Routed to a person |", "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     blocks = [(score_claims.MODEL_NAMES[m], v) for m, v in summary["results"].items()] + [("All models", summary["pooled"])]
     for name, views in blocks:
-        for key, label in VIEWS:
+        for key, label in views_for(protocol):
             m = views[key]
             lines.append(f"| {name} | {label} | {f(m['answered'])} | {f(m['exact'])} | {f(m['coarser'])} | "
                          f"{f(m['finer'])} | {f(m['wrong'])} | {f(m['invalid'])} | "
@@ -377,6 +410,9 @@ def render(summary: dict) -> str:
               "", f"{summary['episodes']} episodes, {summary['calls']} model calls ({summary['failed_calls']} failed), "
               f"{summary['revised']} revised after feedback. Rule codes raised across all records: "
               + ", ".join(f"{c} {n}" for c, n in summary["codes"].items()) + ".", ""]
+    if "definition_flags_on_first_answers" in summary:
+        lines[-1:] = ["", "First answers the definition check flagged, by comparison with the authors' term: "
+                      + ", ".join(f"{k} {n}" for k, n in summary["definition_flags_on_first_answers"].items()) + ".", ""]
     return "\n".join(lines)
 
 
@@ -385,11 +421,11 @@ def main(argv: list[str] | None = None) -> int:
     steps = parser.add_subparsers(dest="step", required=True)
     r = steps.add_parser("run")
     r.add_argument("--output", type=Path, required=True)
-    r.add_argument("--split", choices=["pilot", "test"], default="pilot")
+    r.add_argument("--split", choices=["pilot", "test", "external"], default="pilot")
     r.add_argument("--models", nargs="+", choices=list(run_models.MODELS), default=list(run_models.MODELS))
     r.add_argument("--workers", type=int, default=2)
     r.add_argument("--limit", type=int)
-    r.add_argument("--protocol", type=int, choices=sorted(PROMPTS), default=2)
+    r.add_argument("--protocol", type=int, choices=sorted(PROMPTS), default=3)
     c = steps.add_parser("collect")
     c.add_argument("--output", type=Path, required=True)
     c.add_argument("--results", type=Path, required=True)

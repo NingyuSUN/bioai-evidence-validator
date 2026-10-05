@@ -75,10 +75,13 @@ class Term:
     replaced_by: list[str] = field(default_factory=list)
     consider: list[str] = field(default_factory=list)
     disjoint: list[str] = field(default_factory=list)
+    relations: list[tuple[str, str]] = field(default_factory=list)  # (relation, target): relationship, intersection_of
+    short_labels: list[str] = field(default_factory=list)  # gene names of a protein term: PRO short labels, gene-based synonyms
 
 
 class Ontology:
-    """The terms of one pinned OBO release: names, exact synonyms, `is_a` parents, obsoletion, disjointness."""
+    """The terms of one pinned OBO release: names, exact synonyms, `is_a` parents, obsoletion, disjointness, and
+    the relations that logical definitions use (e.g. `has plasma membrane part` a protein)."""
 
     def __init__(self, terms: dict[str, Term], prefix: str, version: str):
         self.terms, self.prefix, self.version = terms, prefix, version
@@ -112,8 +115,12 @@ class Ontology:
                     terms[value] = term
                 elif tag == "name":
                     term.name = value
-                elif tag == "synonym" and (match := re.match(r'"((?:[^"\\]|\\.)*)" EXACT\b', value)):
-                    term.synonyms.append(match.group(1).replace('\\"', '"'))
+                elif tag == "synonym" and (match := re.match(r'"((?:[^"\\]|\\.)*)" (\w+)', value)):
+                    text = match.group(1).replace('\\"', '"')
+                    if match.group(2) == "EXACT":
+                        term.synonyms.append(text)
+                    if "PRO-short-label" in value or "Gene-based" in value:
+                        term.short_labels.append(text)
                 elif tag == "is_a":
                     term.parents.append(value.split()[0])
                 elif tag == "is_obsolete":
@@ -124,6 +131,10 @@ class Ontology:
                     term.consider.append(value)
                 elif tag == "disjoint_from":
                     term.disjoint.append(value)
+                elif tag in ("relationship", "intersection_of") and len(value.split()) == 2:
+                    pair = (value.split()[0], value.split()[1])
+                    if pair not in term.relations:
+                        term.relations.append(pair)
         # `ontology: cl` or `ontology: cl/cl-basic`; a release file may also hold a few terms of other ontologies
         prefix = header.get("ontology", "").split("/")[0].upper()
         version = header.get("data-version", "") or header.get("date", "")
