@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add generic grounders that check what a record cites against pinned reference releases, with
+  messages that say what to fix: `OntologyGrounder` (ontology terms: existence, obsoletion, label,
+  kind), `GeneGrounder` (HGNC symbols, previous symbols and aliases), `VariantGrounder` (HGVS form,
+  RefSeq accession, genome build, position), `TableGrounder` (rows and values of a pinned table) and
+  `ReferenceGrounder` (a curated reference resource that contradicts the claim or its evidence).
+  New codes BEV023 (obsolete or superseded identifier), BEV024 (malformed or wrong kind) and BEV025
+  (reference conflict, review only). `bioevidence validate` gains `--ontology`, `--term-root`,
+  `--genes` and `--assembly-report`.
+- Add `feedback`, the validate–feedback–revise loop around any proposer: fixable findings go back as
+  reasons, conflicts and policy decisions go to a person unchanged, and verified evidence is carried
+  through revisions.
 - Benchmark scenario 2 (`agent_loop.py`): an agent searches PubMed, reads papers and submits a
   decision with citations; bioevidence checks each submission and returns its reasons, and the agent
   may revise. Five of six models cited only what they had read; Claude Haiku 4.5 misquoted in 8 of
