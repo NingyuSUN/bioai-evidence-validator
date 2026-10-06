@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `tools/reproduce.py`: one command regenerates every committed benchmark table, summary and figure
+  offline (18 steps, about three minutes) and compares each with the repository; CI runs it on every
+  change. It caught the ClinVar and VBO figures still captioned v0.7.0 after the release, now fixed.
+- Add the funnel figure (`docs/assets/ai_validation_funnel.svg`): single-cell held-out answers, stage
+  by stage, from the first check through feedback to what was admitted and how it compares with the
+  authors' terms. Cell-type summaries now record these stages.
 ## 0.8.0 — AI validation: grounding, generic grounders, the feedback loop and benchmarks
 
 Bioevidence now checks AI output against pinned sources and reference releases, feeds fixable

@@ -95,6 +95,10 @@ The same loop corrects identifiers in single-cell annotation. Claude Haiku 4.5 l
 
 Its second answer, `CL:0000173`, was admitted and is exactly the authors' annotation.
 
+Across all 276 held-out annotations, stage by stage:
+
+![Funnel for the single-cell held-out clusters: of 276 first answers, 198 pass every check, 63 have a wrong identifier or marker and are sent back, 15 contradict themselves and go to a person; after feedback 255 are admitted and 21 go to a person; of the admitted, 205 agree with the authors' term and 50 disagree; the expert audit of admitted records is not yet run](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/ai_validation_funnel.svg)
+
 **Failure handling**, each in the code and exercised in the runs:
 
 | Failure | Detected by | Handling |
@@ -240,6 +244,24 @@ More: [draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/
 
 ![ClinVar benchmark: share of 2023 pathogenic classifications reclassified or conflicting by 2026, with and without a dissenting submission, and false admissions under controlled faults and the trust boundary](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/clinvar_germline_benchmark.svg)
 
+## Reproduce every number
+
+```bash
+uv run --frozen --with matplotlib==3.11.2 python tools/reproduce.py
+```
+
+One command regenerates every committed benchmark table, summary and figure, offline, in about three minutes,
+and compares each with the repository byte for byte (text files with line endings normalised). It runs 18 steps,
+also run in CI on every change:
+- the three real-data cases;
+- ten LLM-benchmark result sets;
+- the task files and the error taxonomy;
+- the figures.
+
+Model calls, agent runs and downloads are not repeated. What they produced is committed and pinned by
+SHA-256: model answers, agent episodes, the verification of cited papers, and source snapshots. `--write` updates the
+committed files and `--list` shows the steps.
+
 ## Limits
 
 - **Admission is not truth.** It means the record meets the selected profile: its evidence exists in the
@@ -256,8 +278,8 @@ More: [draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/
 Tracked in the [AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) (#26):
 - expert review of the benchmark cases (#23);
 - calibrated triage and audit sampling of admitted records, to measure what still gets through (#24);
-- one-command reproduction of every benchmark, a funnel figure, and a validation dossier for release
-  0.8.0 (#25).
+- a validation dossier structured like FDA's draft AI credibility framework (#25). One-command reproduction
+  and the funnel figure are done.
 
 ## Contributing and citing
 

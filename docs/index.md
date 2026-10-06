@@ -91,6 +91,10 @@ The same loop corrects identifiers in single-cell annotation. Claude Haiku 4.5 l
 
 Its second answer, `CL:0000173`, was admitted and is exactly the authors' annotation.
 
+Across all 276 held-out annotations, stage by stage:
+
+![Funnel for the single-cell held-out clusters: of 276 first answers, 198 pass every check, 63 have a wrong identifier or marker and are sent back, 15 contradict themselves and go to a person; after feedback 255 are admitted and 21 go to a person; of the admitted, 205 agree with the authors' term and 50 disagree; the expert audit of admitted records is not yet run](assets/ai_validation_funnel.svg)
+
 **Failure handling**, each in the code and exercised in the runs:
 
 | Failure | Detected by | Handling |

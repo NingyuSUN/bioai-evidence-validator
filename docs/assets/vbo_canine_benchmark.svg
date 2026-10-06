@@ -2985,7 +2985,7 @@ z
    </g>
   </g>
   <g id="text_42">
-   <!-- Source: NingyuSUN/bioai-evidence-validator v0.7.0 · VBO v2026-04-15 · examples/vbo_canine/results/summary.json -->
+   <!-- Source: NingyuSUN/bioai-evidence-validator v0.8.0 · VBO v2026-04-15 · examples/vbo_canine/results/summary.json -->
    <g style="fill: #687b89" transform="translate(19.584 379.08) scale(0.075 -0.075)">
     <defs>
      <path id="DejaVuSans-1d" d="M 750 794 
@@ -3107,7 +3107,7 @@ z
     <use xlink:href="#DejaVuSans-59" transform="translate(2244.59375 0)"/>
     <use xlink:href="#DejaVuSans-13" transform="translate(2303.78125 0)"/>
     <use xlink:href="#DejaVuSans-11" transform="translate(2367.40625 0)"/>
-    <use xlink:href="#DejaVuSans-1a" transform="translate(2399.1875 0)"/>
+    <use xlink:href="#DejaVuSans-1b" transform="translate(2399.1875 0)"/>
     <use xlink:href="#DejaVuSans-11" transform="translate(2462.8125 0)"/>
     <use xlink:href="#DejaVuSans-13" transform="translate(2494.59375 0)"/>
     <use xlink:href="#DejaVuSans-3" transform="translate(2558.21875 0)"/>

@@ -2,8 +2,8 @@
 
     uv run --with matplotlib python evaluation/llm_benchmark/plot.py
 
-Reads results/*/summary.json and writes docs/assets/ai_validation_results.svg. Output is deterministic for a given
-matplotlib version (fixed SVG ids, no timestamp).
+Reads results/*/summary.json and writes docs/assets/ai_validation_results.svg and ai_validation_funnel.svg. Output
+is deterministic for a given matplotlib version (fixed SVG ids, no timestamp); reproduce.py pins it.
 """
 from __future__ import annotations
 
@@ -103,9 +103,65 @@ def style(ax) -> None:
         spine.set_visible(False)
 
 
+def funnel_figure(output: Path) -> None:
+    """Stage by stage, from the models' first answers to admitted records, for the single-cell held-out split."""
+    stages = load("celltype-test")["funnel"]
+    first, fixed, final, ref = (stages[k] for k in ("first_answer", "fixable_after_feedback", "final",
+                                                      "admitted_against_reference"))
+    errors = sum(n for k, n in first.items() if k not in ("passed", "conflict, to a person", "no annotation"))
+    conflicts = first.get("conflict, to a person", 0)
+    rows = [
+        ("1  First answer, checked", [(first["passed"], GOOD), (errors, BAD), (conflicts, PERSON)],
+         f"{first['passed']} pass · {errors} wrong identifier or marker, sent back with the correction · "
+         f"{conflicts} contradict themselves, to a person"),
+        ("2  After feedback (up to three answers)", [(final["admitted"], GOOD), (final["to a person"], PERSON)],
+         f"{fixed.get('admitted', 0)} of the {errors} errors corrected by the model and admitted · "
+         f"{final['to a person']} to a person in all"),
+        ("3  Admitted, against the authors' term", [(ref["compatible"], GOOD), (ref["disagrees"], BAD)],
+         f"{ref['compatible']} agree (exact, coarser or finer) · {ref['disagrees']} disagree: fine-grained confusions "
+         "and label noise"),
+    ]
+    total = sum(first.values())
+    plt.rcParams.update({"svg.hashsalt": "bioevidence-funnel", "font.family": "DejaVu Sans"})
+    fig, ax = plt.subplots(figsize=(9.6, 4.6))
+    fig.patch.set_facecolor(SURFACE)
+    for y, (_, parts, note) in enumerate(rows):
+        left = 0
+        for value, color in parts:
+            if value:
+                ax.barh(y, value, left=left, height=0.5, color=color, edgecolor=SURFACE, linewidth=2)
+                ax.text(left + value / 2, y, str(value), ha="center", va="center", fontsize=9, color=INK,
+                        fontweight="bold")
+            left += value
+        ax.text(0, y + 0.42, note, va="center", fontsize=8, color=TEXT)
+    audit = len(rows)
+    ax.barh(audit, final["admitted"], height=0.5, color=SURFACE, edgecolor=MUTED, linewidth=1, linestyle=(0, (4, 3)))
+    ax.text(final["admitted"] / 2, audit, "not yet run (#23, #24)", ha="center", va="center", fontsize=9, color=MUTED)
+    ax.text(0, audit + 0.42, "An expert audit of a random sample of admitted records would measure what still gets "
+            "through", va="center", fontsize=8, color=TEXT)
+    ax.set_yticks(range(len(rows) + 1), [label for label, _, _ in rows] + ["4  Expert audit of admitted records"])
+    ax.set_ylim(audit + 0.75, -0.5)
+    ax.set_xlim(0, total * 1.02)
+    ax.set_xticks([0, total / 4, total / 2, 3 * total / 4, total], ["0", "25%", "50%", "75%", f"{total} answers"])
+    style(ax)
+    ax.text(0, 1.13, "From AI answer to admitted record", transform=ax.transAxes, fontsize=12, fontweight="bold",
+            color=INK)
+    ax.text(0, 1.05, "Single-cell annotation, held-out clusters: 6 models × 46 clusters, the same pipeline for every "
+            "model", transform=ax.transAxes, fontsize=8, color=MUTED)
+    ax.legend(handles=[Patch(color=GOOD, label="Continues: passes, admitted, agrees"),
+                       Patch(color=BAD, label="Error: caught, or found against the reference"),
+                       Patch(color=PERSON, label="Sent to a person")],
+              loc="upper left", bbox_to_anchor=(0, -0.09), ncol=3, frameon=False, fontsize=8, labelcolor=TEXT,
+              handlelength=1.2, columnspacing=1.4)
+    fig.subplots_adjust(left=0.29, right=0.97, top=0.84, bottom=0.14)
+    fig.savefig(output, format="svg", facecolor=SURFACE, metadata={"Date": None})
+    plt.close(fig)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=REPO / "docs" / "assets" / "ai_validation_results.svg")
+    parser.add_argument("--funnel", type=Path, default=REPO / "docs" / "assets" / "ai_validation_funnel.svg")
     args = parser.parse_args(argv)
     plt.rcParams.update({"svg.hashsalt": "bioevidence", "font.family": "DejaVu Sans"})
     fig, (top, bottom) = plt.subplots(2, 1, figsize=(9.6, 6.6), gridspec_kw={"hspace": 1.05})
@@ -114,7 +170,9 @@ def main(argv: list[str] | None = None) -> int:
     error_panel(bottom)
     fig.subplots_adjust(left=0.27, right=0.82, top=0.88, bottom=0.07)
     fig.savefig(args.output, format="svg", facecolor=SURFACE, metadata={"Date": None})
-    print(f"wrote {args.output}")
+    plt.close(fig)
+    funnel_figure(args.funnel)
+    print(f"wrote {args.output} and {args.funnel}")
     return 0
 
 

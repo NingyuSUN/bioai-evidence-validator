@@ -38,3 +38,5 @@ Errors in the models' first answers (all models): label mismatch 69/479, marker 
 486 episodes, 673 model calls (0 failed), 131 revised after feedback. Rule codes raised across all records: BEV004 69, BEV016 7, BEV017 95, BEV023 1, BEV026 140.
 
 First answers the definition check flagged, by comparison with the authors' term: exact 43, finer 4, wrong 41.
+
+Funnel. First answers: conflict, to a person 36, definition contradicted 71, identifier error 70, no annotation 7, passed 302. Answers with a fixable finding, after feedback: admitted 88, to a person 53. Final: admitted 390, no annotation 7, to a person 89. Admitted, against the authors' term: compatible 242, disagrees 148. Expert audit of admitted records: not yet run.
