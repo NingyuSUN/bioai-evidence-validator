@@ -131,6 +131,7 @@ result rest on that alone (`BEV008`). The manually curated version of the same c
 | I want to… | Read |
 |---|---|
 | See the AI benchmarks | [LLM benchmark](benchmarks/llm-benchmark.md), [single-cell annotation](benchmarks/singlecell.md) |
+| Judge whether it is fit for a use | [Validation dossier](VALIDATION_DOSSIER.md) |
 | Write records quickly or from LLM output | [Drafts](DRAFTS.md) |
 | Encode my domain's admission policy | [Profiles](PROFILES.md), [community profiles](community-profiles.md) |
 | Check records in pull requests | [GitHub Action](https://github.com/NingyuSUN/bioai-evidence-validator#quickstart) |

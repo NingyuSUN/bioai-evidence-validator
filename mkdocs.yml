@@ -55,6 +55,7 @@ nav:
   - Reference:
       - Engineering contract: ENGINEERING.md
       - Standards alignment: STANDARDS.md
+      - Validation dossier: VALIDATION_DOSSIER.md
       - AI validation roadmap: AI_VALIDATION_ROADMAP.md
       - Error taxonomy: ERROR_TAXONOMY.md
   - Design:

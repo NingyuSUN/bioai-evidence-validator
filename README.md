@@ -273,13 +273,17 @@ committed files and `--list` shows the steps.
   was run once.
 - **Not for clinical use.**
 
+What is and is not established, in the structure of FDA's draft AI credibility framework (question of interest,
+context of use, model risk, credibility evidence, adequacy): the
+[validation dossier](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/VALIDATION_DOSSIER.md).
+
 ## Roadmap
 
 Tracked in the [AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) (#26):
 - expert review of the benchmark cases (#23);
 - calibrated triage and audit sampling of admitted records, to measure what still gets through (#24);
-- a validation dossier structured like FDA's draft AI credibility framework (#25). One-command reproduction
-  and the funnel figure are done.
+- the [validation dossier](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/VALIDATION_DOSSIER.md),
+  structured after FDA's draft AI credibility framework, states what is established and what is not (#25).
 
 ## Contributing and citing
 
