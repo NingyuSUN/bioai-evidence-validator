@@ -47,6 +47,7 @@ nav:
       - VBO canine name mapping: benchmarks/vbo-canine.md
       - CIViC literature grounding: benchmarks/civic-literature.md
       - "LLM benchmark: models alone vs. with bioevidence": benchmarks/llm-benchmark.md
+      - Single-cell cell-type annotation: benchmarks/singlecell.md
       - Building a gold standard: GOLD_STANDARD.md
       - Review tooling and templates: review-tooling.md
       - ClinVar expert-review kit: benchmarks/clinvar-review.md
