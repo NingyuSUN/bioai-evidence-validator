@@ -16,6 +16,28 @@
   "episodes": 486,
   "episodes_sha256": "5448d9f04936064a7df715ac9e48e59e630f30c8bb539a81555fb11e4769a705",
   "failed_calls": 0,
+  "funnel": {
+    "admitted_against_reference": {
+      "compatible": 242,
+      "disagrees": 148
+    },
+    "final": {
+      "admitted": 390,
+      "no annotation": 7,
+      "to a person": 89
+    },
+    "first_answer": {
+      "conflict, to a person": 36,
+      "definition contradicted": 71,
+      "identifier error": 70,
+      "no annotation": 7,
+      "passed": 302
+    },
+    "fixable_after_feedback": {
+      "admitted": 88,
+      "to a person": 53
+    }
+  },
   "pooled": {
     "gate": {
       "answered": {

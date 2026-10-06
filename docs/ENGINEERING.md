@@ -297,7 +297,17 @@ uv sync --frozen --extra dev
 uv run --frozen pytest
 uv build
 uv run --isolated --no-project --with ./dist/*.whl python tools/check_distribution.py
+uv run --frozen --with matplotlib==3.11.2 python tools/reproduce.py   # every benchmark result and figure
 ```
+
+`tools/reproduce.py` regenerates every committed benchmark table, summary and figure offline from what is
+committed, and compares each with the repository: text with line endings normalised, everything else byte for
+byte. What it replays from:
+- for the real-data cases, the hash-checked source snapshots;
+- for the LLM benchmark, the recorded model answers, agent episodes and paper verifications;
+- for the figures, the summaries, with matplotlib pinned.
+
+CI runs it on every change, and a test fails if a results directory or figure is not covered by one of its steps.
 
 CI runs on Linux/Python 3.11–3.14 and Windows/Python 3.13, and runs the GitHub Action on
 Linux and Windows. Tests cover multi-domain acceptance, negative evidence cases,

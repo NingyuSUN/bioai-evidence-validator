@@ -29,3 +29,5 @@ Each model annotates one cluster from its top 20 marker genes with a Cell Ontolo
 Errors in the models' first answers (all models): label mismatch 35/138, marker not in data 3/138, no markers 0/138, not a cell type 0/138, obsolete id 2/138, unapproved symbol 0/138, unknown id 1/138.
 
 144 episodes, 185 model calls (0 failed), 38 revised after feedback. Rule codes raised across all records: BEV004 87, BEV016 4, BEV017 39, BEV023 2, BEV025 29.
+
+Funnel. First answers: conflict, to a person 44, identifier error 38, no annotation 6, passed 56. Answers with a fixable finding, after feedback: admitted 11, to a person 27. Final: admitted 67, no annotation 6, to a person 71. Admitted, against the authors' term: compatible 52, disagrees 15. Expert audit of admitted records: not yet run.

@@ -10,6 +10,26 @@
   "episodes": 276,
   "episodes_sha256": "1826196d4e1b645b90612b674708c850332ca35f38e141fe47e253cdd10b3fa0",
   "failed_calls": 0,
+  "funnel": {
+    "admitted_against_reference": {
+      "compatible": 205,
+      "disagrees": 50
+    },
+    "final": {
+      "admitted": 255,
+      "to a person": 21
+    },
+    "first_answer": {
+      "conflict, to a person": 15,
+      "identifier error": 62,
+      "marker not in the data": 1,
+      "passed": 198
+    },
+    "fixable_after_feedback": {
+      "admitted": 57,
+      "to a person": 6
+    }
+  },
   "pooled": {
     "gate": {
       "answered": {

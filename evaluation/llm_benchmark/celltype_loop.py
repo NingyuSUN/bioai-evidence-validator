@@ -379,11 +379,50 @@ def score(results: Path) -> dict:
             if r["attempts"] and "BEV026" in r["attempts"][0]["codes"]:
                 flagged[outcome(case, truth[r["task_id"]]["term"], got[0])] += 1
         summary["definition_flags_on_first_answers"] = dict(sorted(flagged.items()))
+    summary["funnel"] = funnel(case, truth, rows)
     (results / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8",
                                           newline="\n")
     (results / "summary.md").write_text(render(summary), encoding="utf-8", newline="\n")
     print(render(summary))
     return summary
+
+
+def first_answer_stage(attempt: dict) -> str:
+    """What the checks found in an episode's first record, most decisive first."""
+    if attempt["status"] == "admitted":
+        return "passed"
+    fixable = [f for f in attempt["findings"] if f["rule_id"] not in feedback.EXPERT]
+    if any(f["rule_id"] in ("BEV017", "BEV023", "BEV024") or (f["rule_id"] == "BEV016" and f["where"].startswith("object"))
+           for f in fixable):
+        return "identifier error"
+    if any(f["rule_id"] == "BEV016" for f in fixable):
+        return "marker not in the data"
+    if any(f["rule_id"] == "BEV026" for f in fixable):
+        return "definition contradicted"
+    return "conflict, to a person" if attempt["to_expert"] else "other finding"
+
+
+def funnel(case: Case, truth: dict, rows: list[dict]) -> dict:
+    """Stage by stage: the first answer's checks, what feedback did with the fixable ones, and how the admitted
+    annotations compare with the authors' terms. The expert audit of admitted records is not yet run (#24)."""
+    first, final, fixed, reference = (collections.Counter() for _ in range(4))
+    for r in rows:
+        if not r["attempts"]:
+            first["no annotation"] += 1
+            final["no annotation"] += 1
+            continue
+        stage = first_answer_stage(r["attempts"][0])
+        first[stage] += 1
+        last = r["attempts"][-1]
+        final["admitted" if last["status"] == "admitted" else "to a person"] += 1
+        if stage not in ("passed", "conflict, to a person"):
+            fixed["admitted" if last["status"] == "admitted" else "to a person"] += 1
+        if last["status"] == "admitted":
+            got = [c["answer"] for c in r["calls"] if c["answer"] and c["answer"]["decision"] == "annotate"]
+            kind = outcome(case, truth[r["task_id"]]["term"], got[len(r["attempts"]) - 1])
+            reference["compatible" if kind in ("exact", "coarser", "finer") else "disagrees"] += 1
+    return {"first_answer": dict(sorted(first.items())), "fixable_after_feedback": dict(sorted(fixed.items())),
+            "final": dict(sorted(final.items())), "admitted_against_reference": dict(sorted(reference.items()))}
 
 
 def render(summary: dict) -> str:
@@ -413,6 +452,15 @@ def render(summary: dict) -> str:
     if "definition_flags_on_first_answers" in summary:
         lines[-1:] = ["", "First answers the definition check flagged, by comparison with the authors' term: "
                       + ", ".join(f"{k} {n}" for k, n in summary["definition_flags_on_first_answers"].items()) + ".", ""]
+    if "funnel" in summary:
+        stages = summary["funnel"]
+
+        def listed(counts: dict) -> str:
+            return ", ".join(f"{k} {n}" for k, n in counts.items())
+        lines[-1:] = ["", f"Funnel. First answers: {listed(stages['first_answer'])}. Answers with a fixable finding, after "
+                      f"feedback: {listed(stages['fixable_after_feedback'])}. Final: {listed(stages['final'])}. Admitted, "
+                      f"against the authors' term: {listed(stages['admitted_against_reference'])}. Expert audit of "
+                      "admitted records: not yet run.", ""]
     return "\n".join(lines)
 
 
