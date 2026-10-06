@@ -111,7 +111,7 @@ def test_problems_are_looked_up_directly(case):
     assert loop.gene_token(" CD3E;x=1 ") == "CD3E_x_1"
 
 
-@pytest.mark.parametrize("folder", ["celltype-pilot", "celltype-test"])
+@pytest.mark.parametrize("folder", ["celltype-pilot", "celltype-test", "celltype-external"])
 def test_scores_replay_from_committed_episodes(folder, tmp_path):
     committed = ROOT / "evaluation" / "llm_benchmark" / "results" / folder
     (tmp_path / "episodes.jsonl").write_bytes((committed / "episodes.jsonl").read_bytes())
@@ -136,3 +136,28 @@ def test_protocol_2_drops_the_reference_check_and_narrows_contradicting_markers(
     assert not any(g.name.startswith("reference:") for g in case.validator().grounders)
     assert "any that argue against it" in loop.prompt(task, 1) and "Only if some of its markers" in loop.prompt(task)
     assert loop.prompt(task, 1).split("Which cell type")[0] == loop.prompt(task).split("Which cell type")[0]
+
+
+def test_protocol_3_adds_the_definition_check(case):
+    assert case.validator(protocol=3).grounders[-1].name.startswith("definitions:CL@")
+    assert not any(g.name.startswith("definitions:") for g in case.validator(protocol=2).grounders)
+    task = hepatocytes(case)
+    record = loop.record(case, task, answer("CL:0000182", "hepatocyte", "APOC3"))
+    panel = case.measure(record)
+    assert panel and all(0 <= pct <= 1 for pct, _ in panel.values())
+    t_cell = loop.record(case, task, answer("CL:0000625", "CD8-positive, alpha-beta T cell", "APOC3"))
+    findings = case.validator(protocol=3).grounders[-1].check(t_cell)
+    assert [f.rule_id for f in findings] == ["BEV026"] and "CD8" in findings[0].message  # no CD8 in hepatocytes
+    assert {t["split"] for t in case.tasks.values()} == {"pilot", "test", "external"}
+    assert loop.prompt(task, 3) == loop.prompt(task, 2)
+
+
+def test_gate_without_definitions_admits_what_only_the_definition_check_stopped():
+    row = {"calls": [{"answer": answer("CL:0000625", "CD8-positive, alpha-beta T cell", "CD8A")}],
+           "attempts": [{"status": "review_required", "codes": ["BEV026"], "to_expert": False}]}
+    assert loop.view(row, "gate")["answer"] is None
+    assert loop.view(row, "gate_without_definitions")["answer"]["cell_type_id"] == "CL:0000625"
+    row["attempts"][0]["codes"] = ["BEV017", "BEV026"]
+    assert loop.view(row, "gate_without_definitions")["answer"] is None
+    assert [n for n, _ in loop.views_for(3)] == ["model", "gate", "gate_without_definitions", "loop"]
+    assert loop.views_for(2) == loop.VIEWS

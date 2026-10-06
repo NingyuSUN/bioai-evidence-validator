@@ -19,6 +19,11 @@ None of it is committed except as the derived, content-addressed snapshots below
    cell type with a CL identifier, and its gene biomarkers under their current HGNC symbols.
 4. Tasks. One per cluster: the tissue, the assay and the top PROMPT_GENES markers with their statistics. Per
    dataset, clusters in keyed-hash order go to the pilot split (PILOT_PER_DATASET) and the rest to the test split.
+5. Definition panels. For every cluster, `pct_in` and `logfc` of every gene that a Cell Ontology presence or
+   absence axiom mentions (`bioevidence_validator.definitions`), whether or not it is a marker of the cluster.
+6. External datasets. When DIR also holds `selected-v2.json` and `h5ad-v2/`, six more datasets from other
+   studies are added the same way, all of their clusters in the `external` split: a held-out set for checks
+   designed on the first six.
 
 Outputs in sources/: `snapshots/<sha256>.<ext>.gz` (marker tables, the Cell Ontology release, the HGNC set, the
 ASCT+B reference), `tasks.jsonl`, `truth.jsonl`, `manifest.json` and `ATTRIBUTION.md`.
@@ -37,6 +42,7 @@ import anndata
 import numpy as np
 import scipy.sparse as sp
 
+from bioevidence_validator.definitions import MarkerDefinitions
 from bioevidence_validator.identifiers import Genes, Ontology
 
 ROOT = Path(__file__).resolve().parent
@@ -66,8 +72,8 @@ def tsv(columns: list[str], rows: list[dict]) -> bytes:
     return out.getvalue().encode()
 
 
-def markers(path: Path, genes: Genes, ontology: Ontology) -> tuple[list[dict], list[dict]]:
-    """(marker rows, clusters) for one dataset."""
+def markers(path: Path, genes: Genes, ontology: Ontology, panel: set[str]) -> tuple[list[dict], list[dict], list[dict]]:
+    """(marker rows, clusters, definition panel rows) for one dataset."""
     data = anndata.read_h5ad(path)
     counts = data.raw.X if data.raw is not None else data.X
     var = data.raw.var if data.raw is not None else data.var
@@ -89,7 +95,8 @@ def markers(path: Path, genes: Genes, ontology: Ontology) -> tuple[list[dict], l
     labels = dict(zip(terms, data.obs["cell_type"].astype(str), strict=True))
     total, total_expressed, cells = (np.asarray(normalised.sum(axis=0)).ravel(),
                                      np.asarray(expressed.sum(axis=0)).ravel(), len(terms))
-    rows, clusters = [], []
+    rows, clusters, panel_rows = [], [], []
+    measured = [i for i, g in enumerate(symbols) if g in panel]
     usable = sorted(t for t in set(terms) if t.startswith("CL:") and (terms == t).sum() >= MIN_CELLS)
     for n, term in enumerate(usable, start=1):
         mask = terms == term
@@ -102,6 +109,8 @@ def markers(path: Path, genes: Genes, ontology: Ontology) -> tuple[list[dict], l
         ranked = sorted((i for i in range(len(symbols)) if pct_in[i] >= MIN_PCT and logfc[i] > 0),
                         key=lambda i: (-round(logfc[i], 6), symbols[i]))[:TOP_GENES]
         cluster = f"c{n:02d}"
+        panel_rows += [{"cluster": cluster, "gene": symbols[i], "pct_in": f"{pct_in[i]:.3f}", "logfc": f"{logfc[i]:.3f}"}
+                       for i in sorted(measured, key=lambda i: symbols[i])]
         rows += [{"cluster": cluster, "gene": symbols[i], "rank": rank, "logfc": f"{logfc[i]:.3f}",
                   "pct_in": f"{pct_in[i]:.3f}", "pct_out": f"{pct_out[i]:.3f}"} for rank, i in enumerate(ranked, start=1)]
         truth, note = term, ""
@@ -111,7 +120,7 @@ def markers(path: Path, genes: Genes, ontology: Ontology) -> tuple[list[dict], l
         clusters.append({"cluster": cluster, "author_term": term, "author_label": labels[term], "term": truth,
                          "label": ontology.terms[truth].name if truth in ontology.terms else labels[term],
                          "cells": int(inside), "note": note})
-    return rows, clusters
+    return rows, clusters, panel_rows
 
 
 def asctb(directory: Path, genes: Genes) -> list[dict]:
@@ -142,6 +151,8 @@ def main(argv: list[str] | None = None) -> int:
     data = args.data
     cl_bytes, hgnc_bytes = (data / "ref/cl.obo").read_bytes(), (data / "ref/hgnc_complete_set.txt").read_bytes()
     ontology, genes = Ontology.from_obo(cl_bytes), Genes.from_hgnc(hgnc_bytes)
+    definitions = MarkerDefinitions(ontology, genes)
+    panel = {g for t in ontology.terms if t.startswith("CL:") for _, _, gs in definitions.of(t) for g in gs}
     manifest = {"key": KEY, "parameters": {"min_cells": MIN_CELLS, "top_genes": TOP_GENES, "prompt_genes": PROMPT_GENES,
                                            "min_pct": MIN_PCT, "pilot_per_dataset": PILOT_PER_DATASET},
                 "cell_ontology": {"version": ontology.version, "sha256": pin(cl_bytes, "obo")},
@@ -151,21 +162,27 @@ def main(argv: list[str] | None = None) -> int:
     manifest["asctb"] = {"organs": sorted(set(ORGANS.values())), "release": "ccf-releases v2.0", "assertions": len(reference),
                          "sha256": pin(tsv(["subject", "predicate", "object", "object_label", "organ"], reference), "tsv")}
     tasks, truth = [], []
-    for meta in json.loads((data / "selected.json").read_text(encoding="utf-8")):
-        h5ad = data / "h5ad" / f"{meta['name']}.h5ad"
-        rows, clusters = markers(h5ad, genes, ontology)
+    groups = [("development", data / "selected.json", data / "h5ad"), ("external", data / "selected-v2.json", data / "h5ad-v2")]
+    selected = [(group, meta, folder) for group, listing, folder in groups if listing.exists()
+                for meta in json.loads(listing.read_text(encoding="utf-8"))]
+    manifest["parameters"]["definition_panel_genes"] = len(panel)
+    for group, meta, folder in selected:
+        h5ad = folder / f"{meta['name']}.h5ad"
+        rows, clusters, panel_rows = markers(h5ad, genes, ontology, panel)
         table = pin(tsv(["cluster", "gene", "rank", "logfc", "pct_in", "pct_out"], rows), "tsv")
+        panel_table = pin(tsv(["cluster", "gene", "pct_in", "logfc"], panel_rows), "tsv")
         manifest["datasets"].append({**{k: meta[k] for k in ("name", "dataset_id", "dataset_version_id", "title",
                                                                "collection_name", "collection_doi", "cell_count", "url")},
                                      "tissue": meta["tissue"][0], "assay": [a["label"] for a in meta["assay"]],
                                      "h5ad_sha256": sha256(h5ad.read_bytes()), "markers_sha256": table,
-                                     "clusters": len(clusters)})
+                                     "panel_sha256": panel_table, "clusters": len(clusters), "group": group})
         order = sorted(clusters, key=lambda c: sha256(f"{KEY}:{meta['dataset_id']}:{c['cluster']}".encode()))
         pilot = {c["cluster"] for c in order[:PILOT_PER_DATASET]}
         for c in clusters:
             task_id = "ct-" + sha256(f"{meta['dataset_id']}:{c['cluster']}".encode())[:10]
             top = [r for r in rows if r["cluster"] == c["cluster"]][:PROMPT_GENES]
-            tasks.append({"task_id": task_id, "split": "pilot" if c["cluster"] in pilot else "test",
+            split = "external" if group == "external" else "pilot" if c["cluster"] in pilot else "test"
+            tasks.append({"task_id": task_id, "split": split,
                           "dataset": meta["name"], "cluster": c["cluster"], "tissue": meta["tissue"][0]["label"],
                           "assay": ", ".join(a["label"] for a in meta["assay"]), "species": "Homo sapiens",
                           "markers_sha256": table,
@@ -176,7 +193,8 @@ def main(argv: list[str] | None = None) -> int:
                                     newline="\n")
     (SOURCES / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8",
                                            newline="\n")
-    print(f"{len(tasks)} tasks ({sum(t['split'] == 'pilot' for t in tasks)} pilot), {len(reference)} ASCT+B assertions")
+    splits = {s: sum(t["split"] == s for t in tasks) for s in ("pilot", "test", "external")}
+    print(f"{len(tasks)} tasks {splits}, {len(reference)} ASCT+B assertions, {len(panel)} definition panel genes")
     return 0
 
 

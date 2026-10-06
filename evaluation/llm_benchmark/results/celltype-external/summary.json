@@ -1,0 +1,4405 @@
+{
+  "benchmark": "singlecell-celltype-v3",
+  "calls": 673,
+  "codes": {
+    "BEV004": 69,
+    "BEV016": 7,
+    "BEV017": 95,
+    "BEV023": 1,
+    "BEV026": 140
+  },
+  "definition_flags_on_first_answers": {
+    "exact": 43,
+    "finer": 4,
+    "wrong": 41
+  },
+  "episodes": 486,
+  "episodes_sha256": "5448d9f04936064a7df715ac9e48e59e630f30c8bb539a81555fb11e4769a705",
+  "failed_calls": 0,
+  "pooled": {
+    "gate": {
+      "answered": {
+        "events": 302,
+        "n": 486,
+        "rate": 0.6214,
+        "wilson_95": [
+          0.5775,
+          0.6634
+        ]
+      },
+      "coarser": {
+        "events": 70,
+        "n": 486,
+        "rate": 0.144,
+        "wilson_95": [
+          0.1156,
+          0.178
+        ]
+      },
+      "compatible": {
+        "events": 202,
+        "n": 486,
+        "rate": 0.4156,
+        "wilson_95": [
+          0.3727,
+          0.4599
+        ]
+      },
+      "error_label_mismatch": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_marker_not_in_data": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_no_markers": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_not_a_cell_type": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_obsolete_id": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_unapproved_symbol": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "error_unknown_id": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "exact": {
+        "events": 114,
+        "n": 486,
+        "rate": 0.2346,
+        "wilson_95": [
+          0.1991,
+          0.2742
+        ]
+      },
+      "finer": {
+        "events": 18,
+        "n": 486,
+        "rate": 0.037,
+        "wilson_95": [
+          0.0236,
+          0.0578
+        ]
+      },
+      "invalid": {
+        "events": 0,
+        "n": 486,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0078
+        ]
+      },
+      "routed_to_a_person": {
+        "events": 177,
+        "n": 486,
+        "rate": 0.3642,
+        "wilson_95": [
+          0.3226,
+          0.4079
+        ]
+      },
+      "tasks": 486,
+      "to_an_expert_as_conflict": {
+        "events": 36,
+        "n": 486,
+        "rate": 0.0741,
+        "wilson_95": [
+          0.054,
+          0.1008
+        ]
+      },
+      "with_identifier_or_marker_error": {
+        "events": 0,
+        "n": 302,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0126
+        ]
+      },
+      "wrong": {
+        "events": 100,
+        "n": 486,
+        "rate": 0.2058,
+        "wilson_95": [
+          0.1722,
+          0.2439
+        ]
+      }
+    },
+    "gate_without_definitions": {
+      "answered": {
+        "events": 362,
+        "n": 486,
+        "rate": 0.7449,
+        "wilson_95": [
+          0.7043,
+          0.7816
+        ]
+      },
+      "coarser": {
+        "events": 70,
+        "n": 486,
+        "rate": 0.144,
+        "wilson_95": [
+          0.1156,
+          0.178
+        ]
+      },
+      "compatible": {
+        "events": 242,
+        "n": 486,
+        "rate": 0.4979,
+        "wilson_95": [
+          0.4537,
+          0.5422
+        ]
+      },
+      "error_label_mismatch": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_marker_not_in_data": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_no_markers": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_not_a_cell_type": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_obsolete_id": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_unapproved_symbol": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "error_unknown_id": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "exact": {
+        "events": 154,
+        "n": 486,
+        "rate": 0.3169,
+        "wilson_95": [
+          0.2771,
+          0.3595
+        ]
+      },
+      "finer": {
+        "events": 18,
+        "n": 486,
+        "rate": 0.037,
+        "wilson_95": [
+          0.0236,
+          0.0578
+        ]
+      },
+      "invalid": {
+        "events": 0,
+        "n": 486,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0078
+        ]
+      },
+      "routed_to_a_person": {
+        "events": 117,
+        "n": 486,
+        "rate": 0.2407,
+        "wilson_95": [
+          0.2049,
+          0.2807
+        ]
+      },
+      "tasks": 486,
+      "to_an_expert_as_conflict": {
+        "events": 36,
+        "n": 486,
+        "rate": 0.0741,
+        "wilson_95": [
+          0.054,
+          0.1008
+        ]
+      },
+      "with_identifier_or_marker_error": {
+        "events": 0,
+        "n": 362,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0105
+        ]
+      },
+      "wrong": {
+        "events": 120,
+        "n": 486,
+        "rate": 0.2469,
+        "wilson_95": [
+          0.2107,
+          0.2871
+        ]
+      }
+    },
+    "loop": {
+      "answered": {
+        "events": 390,
+        "n": 486,
+        "rate": 0.8025,
+        "wilson_95": [
+          0.7648,
+          0.8354
+        ]
+      },
+      "coarser": {
+        "events": 85,
+        "n": 486,
+        "rate": 0.1749,
+        "wilson_95": [
+          0.1437,
+          0.2112
+        ]
+      },
+      "compatible": {
+        "events": 242,
+        "n": 486,
+        "rate": 0.4979,
+        "wilson_95": [
+          0.4537,
+          0.5422
+        ]
+      },
+      "error_label_mismatch": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_marker_not_in_data": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_no_markers": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_not_a_cell_type": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_obsolete_id": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_unapproved_symbol": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "error_unknown_id": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "exact": {
+        "events": 125,
+        "n": 486,
+        "rate": 0.2572,
+        "wilson_95": [
+          0.2204,
+          0.2979
+        ]
+      },
+      "finer": {
+        "events": 32,
+        "n": 486,
+        "rate": 0.0658,
+        "wilson_95": [
+          0.047,
+          0.0915
+        ]
+      },
+      "invalid": {
+        "events": 0,
+        "n": 486,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0078
+        ]
+      },
+      "routed_to_a_person": {
+        "events": 89,
+        "n": 486,
+        "rate": 0.1831,
+        "wilson_95": [
+          0.1513,
+          0.22
+        ]
+      },
+      "tasks": 486,
+      "to_an_expert_as_conflict": {
+        "events": 48,
+        "n": 486,
+        "rate": 0.0988,
+        "wilson_95": [
+          0.0753,
+          0.1285
+        ]
+      },
+      "with_identifier_or_marker_error": {
+        "events": 0,
+        "n": 390,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0098
+        ]
+      },
+      "wrong": {
+        "events": 148,
+        "n": 486,
+        "rate": 0.3045,
+        "wilson_95": [
+          0.2653,
+          0.3468
+        ]
+      }
+    },
+    "model": {
+      "answered": {
+        "events": 479,
+        "n": 486,
+        "rate": 0.9856,
+        "wilson_95": [
+          0.9706,
+          0.993
+        ]
+      },
+      "coarser": {
+        "events": 80,
+        "n": 486,
+        "rate": 0.1646,
+        "wilson_95": [
+          0.1343,
+          0.2002
+        ]
+      },
+      "compatible": {
+        "events": 278,
+        "n": 486,
+        "rate": 0.572,
+        "wilson_95": [
+          0.5276,
+          0.6153
+        ]
+      },
+      "error_label_mismatch": {
+        "events": 69,
+        "n": 479,
+        "rate": 0.1441,
+        "wilson_95": [
+          0.1154,
+          0.1783
+        ]
+      },
+      "error_marker_not_in_data": {
+        "events": 0,
+        "n": 479,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.008
+        ]
+      },
+      "error_no_markers": {
+        "events": 0,
+        "n": 479,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.008
+        ]
+      },
+      "error_not_a_cell_type": {
+        "events": 0,
+        "n": 479,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.008
+        ]
+      },
+      "error_obsolete_id": {
+        "events": 1,
+        "n": 479,
+        "rate": 0.0021,
+        "wilson_95": [
+          0.0004,
+          0.0117
+        ]
+      },
+      "error_unapproved_symbol": {
+        "events": 0,
+        "n": 479,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.008
+        ]
+      },
+      "error_unknown_id": {
+        "events": 0,
+        "n": 479,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.008
+        ]
+      },
+      "exact": {
+        "events": 169,
+        "n": 486,
+        "rate": 0.3477,
+        "wilson_95": [
+          0.3067,
+          0.3911
+        ]
+      },
+      "finer": {
+        "events": 29,
+        "n": 486,
+        "rate": 0.0597,
+        "wilson_95": [
+          0.0419,
+          0.0844
+        ]
+      },
+      "invalid": {
+        "events": 1,
+        "n": 486,
+        "rate": 0.0021,
+        "wilson_95": [
+          0.0004,
+          0.0116
+        ]
+      },
+      "routed_to_a_person": {
+        "events": 0,
+        "n": 486,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0078
+        ]
+      },
+      "tasks": 486,
+      "to_an_expert_as_conflict": {
+        "events": 0,
+        "n": 486,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0078
+        ]
+      },
+      "with_identifier_or_marker_error": {
+        "events": 70,
+        "n": 479,
+        "rate": 0.1461,
+        "wilson_95": [
+          0.1173,
+          0.1806
+        ]
+      },
+      "wrong": {
+        "events": 200,
+        "n": 486,
+        "rate": 0.4115,
+        "wilson_95": [
+          0.3686,
+          0.4558
+        ]
+      }
+    }
+  },
+  "results": {
+    "claude-haiku": {
+      "gate": {
+        "answered": {
+          "events": 40,
+          "n": 81,
+          "rate": 0.4938,
+          "wilson_95": [
+            0.3877,
+            0.6005
+          ]
+        },
+        "coarser": {
+          "events": 18,
+          "n": 81,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.1454,
+            0.3242
+          ]
+        },
+        "compatible": {
+          "events": 28,
+          "n": 81,
+          "rate": 0.3457,
+          "wilson_95": [
+            0.2512,
+            0.4541
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "exact": {
+          "events": 9,
+          "n": 81,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.0596,
+            0.1979
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 41,
+          "n": 81,
+          "rate": 0.5062,
+          "wilson_95": [
+            0.3995,
+            0.6123
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 9,
+          "n": 81,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.0596,
+            0.1979
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 40,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0876
+          ]
+        },
+        "wrong": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 45,
+          "n": 81,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.4473,
+            0.6588
+          ]
+        },
+        "coarser": {
+          "events": 18,
+          "n": 81,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.1454,
+            0.3242
+          ]
+        },
+        "compatible": {
+          "events": 33,
+          "n": 81,
+          "rate": 0.4074,
+          "wilson_95": [
+            0.307,
+            0.5162
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "exact": {
+          "events": 14,
+          "n": 81,
+          "rate": 0.1728,
+          "wilson_95": [
+            0.1058,
+            0.2695
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 36,
+          "n": 81,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.3412,
+            0.5527
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 9,
+          "n": 81,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.0596,
+            0.1979
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 45,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0787
+          ]
+        },
+        "wrong": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 59,
+          "n": 81,
+          "rate": 0.7284,
+          "wilson_95": [
+            0.6228,
+            0.8133
+          ]
+        },
+        "coarser": {
+          "events": 21,
+          "n": 81,
+          "rate": 0.2593,
+          "wilson_95": [
+            0.1763,
+            0.364
+          ]
+        },
+        "compatible": {
+          "events": 39,
+          "n": 81,
+          "rate": 0.4815,
+          "wilson_95": [
+            0.376,
+            0.5886
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "exact": {
+          "events": 13,
+          "n": 81,
+          "rate": 0.1605,
+          "wilson_95": [
+            0.0963,
+            0.2555
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 22,
+          "n": 81,
+          "rate": 0.2716,
+          "wilson_95": [
+            0.1867,
+            0.3772
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 13,
+          "n": 81,
+          "rate": 0.1605,
+          "wilson_95": [
+            0.0963,
+            0.2555
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 59,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0611
+          ]
+        },
+        "wrong": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 81,
+          "n": 81,
+          "rate": 1.0,
+          "wilson_95": [
+            0.9547,
+            1.0
+          ]
+        },
+        "coarser": {
+          "events": 18,
+          "n": 81,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.1454,
+            0.3242
+          ]
+        },
+        "compatible": {
+          "events": 40,
+          "n": 81,
+          "rate": 0.4938,
+          "wilson_95": [
+            0.3877,
+            0.6005
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 22,
+          "n": 81,
+          "rate": 0.2716,
+          "wilson_95": [
+            0.1867,
+            0.3772
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "exact": {
+          "events": 17,
+          "n": 81,
+          "rate": 0.2099,
+          "wilson_95": [
+            0.1354,
+            0.3107
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 23,
+          "n": 81,
+          "rate": 0.284,
+          "wilson_95": [
+            0.1973,
+            0.3902
+          ]
+        },
+        "wrong": {
+          "events": 40,
+          "n": 81,
+          "rate": 0.4938,
+          "wilson_95": [
+            0.3877,
+            0.6005
+          ]
+        }
+      }
+    },
+    "claude-opus": {
+      "gate": {
+        "answered": {
+          "events": 62,
+          "n": 81,
+          "rate": 0.7654,
+          "wilson_95": [
+            0.6625,
+            0.8444
+          ]
+        },
+        "coarser": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        },
+        "compatible": {
+          "events": 44,
+          "n": 81,
+          "rate": 0.5432,
+          "wilson_95": [
+            0.4352,
+            0.6473
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "exact": {
+          "events": 24,
+          "n": 81,
+          "rate": 0.2963,
+          "wilson_95": [
+            0.2079,
+            0.4031
+          ]
+        },
+        "finer": {
+          "events": 8,
+          "n": 81,
+          "rate": 0.0988,
+          "wilson_95": [
+            0.0509,
+            0.183
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 17,
+          "n": 81,
+          "rate": 0.2099,
+          "wilson_95": [
+            0.1354,
+            0.3107
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 62,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0583
+          ]
+        },
+        "wrong": {
+          "events": 18,
+          "n": 81,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.1454,
+            0.3242
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 75,
+          "n": 81,
+          "rate": 0.9259,
+          "wilson_95": [
+            0.8477,
+            0.9656
+          ]
+        },
+        "coarser": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        },
+        "compatible": {
+          "events": 54,
+          "n": 81,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.5585,
+            0.7597
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "exact": {
+          "events": 34,
+          "n": 81,
+          "rate": 0.4198,
+          "wilson_95": [
+            0.3183,
+            0.5285
+          ]
+        },
+        "finer": {
+          "events": 8,
+          "n": 81,
+          "rate": 0.0988,
+          "wilson_95": [
+            0.0509,
+            0.183
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 4,
+          "n": 81,
+          "rate": 0.0494,
+          "wilson_95": [
+            0.0194,
+            0.1202
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 75,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0487
+          ]
+        },
+        "wrong": {
+          "events": 21,
+          "n": 81,
+          "rate": 0.2593,
+          "wilson_95": [
+            0.1763,
+            0.364
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 70,
+          "n": 81,
+          "rate": 0.8642,
+          "wilson_95": [
+            0.773,
+            0.9224
+          ]
+        },
+        "coarser": {
+          "events": 15,
+          "n": 81,
+          "rate": 0.1852,
+          "wilson_95": [
+            0.1156,
+            0.2833
+          ]
+        },
+        "compatible": {
+          "events": 47,
+          "n": 81,
+          "rate": 0.5802,
+          "wilson_95": [
+            0.4715,
+            0.6817
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "exact": {
+          "events": 24,
+          "n": 81,
+          "rate": 0.2963,
+          "wilson_95": [
+            0.2079,
+            0.4031
+          ]
+        },
+        "finer": {
+          "events": 8,
+          "n": 81,
+          "rate": 0.0988,
+          "wilson_95": [
+            0.0509,
+            0.183
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 9,
+          "n": 81,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.0596,
+            0.1979
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "wrong": {
+          "events": 23,
+          "n": 81,
+          "rate": 0.284,
+          "wilson_95": [
+            0.1973,
+            0.3902
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 79,
+          "n": 81,
+          "rate": 0.9753,
+          "wilson_95": [
+            0.9144,
+            0.9932
+          ]
+        },
+        "coarser": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        },
+        "compatible": {
+          "events": 55,
+          "n": 81,
+          "rate": 0.679,
+          "wilson_95": [
+            0.5712,
+            0.7706
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "exact": {
+          "events": 35,
+          "n": 81,
+          "rate": 0.4321,
+          "wilson_95": [
+            0.3297,
+            0.5406
+          ]
+        },
+        "finer": {
+          "events": 8,
+          "n": 81,
+          "rate": 0.0988,
+          "wilson_95": [
+            0.0509,
+            0.183
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "wrong": {
+          "events": 24,
+          "n": 81,
+          "rate": 0.2963,
+          "wilson_95": [
+            0.2079,
+            0.4031
+          ]
+        }
+      }
+    },
+    "gemini-flash": {
+      "gate": {
+        "answered": {
+          "events": 51,
+          "n": 81,
+          "rate": 0.6296,
+          "wilson_95": [
+            0.5208,
+            0.7267
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 35,
+          "n": 81,
+          "rate": 0.4321,
+          "wilson_95": [
+            0.3297,
+            0.5406
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "exact": {
+          "events": 22,
+          "n": 81,
+          "rate": 0.2716,
+          "wilson_95": [
+            0.1867,
+            0.3772
+          ]
+        },
+        "finer": {
+          "events": 2,
+          "n": 81,
+          "rate": 0.0247,
+          "wilson_95": [
+            0.0068,
+            0.0856
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 29,
+          "n": 81,
+          "rate": 0.358,
+          "wilson_95": [
+            0.2622,
+            0.4667
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 10,
+          "n": 81,
+          "rate": 0.1235,
+          "wilson_95": [
+            0.0685,
+            0.2126
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 51,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.07
+          ]
+        },
+        "wrong": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 61,
+          "n": 81,
+          "rate": 0.7531,
+          "wilson_95": [
+            0.6492,
+            0.8341
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 41,
+          "n": 81,
+          "rate": 0.5062,
+          "wilson_95": [
+            0.3995,
+            0.6123
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "exact": {
+          "events": 28,
+          "n": 81,
+          "rate": 0.3457,
+          "wilson_95": [
+            0.2512,
+            0.4541
+          ]
+        },
+        "finer": {
+          "events": 2,
+          "n": 81,
+          "rate": 0.0247,
+          "wilson_95": [
+            0.0068,
+            0.0856
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 19,
+          "n": 81,
+          "rate": 0.2346,
+          "wilson_95": [
+            0.1556,
+            0.3375
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 10,
+          "n": 81,
+          "rate": 0.1235,
+          "wilson_95": [
+            0.0685,
+            0.2126
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 61,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0592
+          ]
+        },
+        "wrong": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 60,
+          "n": 81,
+          "rate": 0.7407,
+          "wilson_95": [
+            0.636,
+            0.8237
+          ]
+        },
+        "coarser": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        },
+        "compatible": {
+          "events": 38,
+          "n": 81,
+          "rate": 0.4691,
+          "wilson_95": [
+            0.3643,
+            0.5767
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "exact": {
+          "events": 23,
+          "n": 81,
+          "rate": 0.284,
+          "wilson_95": [
+            0.1973,
+            0.3902
+          ]
+        },
+        "finer": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 13,
+          "n": 81,
+          "rate": 0.1605,
+          "wilson_95": [
+            0.0963,
+            0.2555
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 60,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0602
+          ]
+        },
+        "wrong": {
+          "events": 22,
+          "n": 81,
+          "rate": 0.2716,
+          "wilson_95": [
+            0.1867,
+            0.3772
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 80,
+          "n": 81,
+          "rate": 0.9877,
+          "wilson_95": [
+            0.9333,
+            0.9978
+          ]
+        },
+        "coarser": {
+          "events": 13,
+          "n": 81,
+          "rate": 0.1605,
+          "wilson_95": [
+            0.0963,
+            0.2555
+          ]
+        },
+        "compatible": {
+          "events": 48,
+          "n": 81,
+          "rate": 0.5926,
+          "wilson_95": [
+            0.4838,
+            0.693
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 6,
+          "n": 80,
+          "rate": 0.075,
+          "wilson_95": [
+            0.0348,
+            0.1541
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "exact": {
+          "events": 32,
+          "n": 81,
+          "rate": 0.3951,
+          "wilson_95": [
+            0.2957,
+            0.5039
+          ]
+        },
+        "finer": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 6,
+          "n": 80,
+          "rate": 0.075,
+          "wilson_95": [
+            0.0348,
+            0.1541
+          ]
+        },
+        "wrong": {
+          "events": 32,
+          "n": 81,
+          "rate": 0.3951,
+          "wilson_95": [
+            0.2957,
+            0.5039
+          ]
+        }
+      }
+    },
+    "gemini-pro": {
+      "gate": {
+        "answered": {
+          "events": 55,
+          "n": 81,
+          "rate": 0.679,
+          "wilson_95": [
+            0.5712,
+            0.7706
+          ]
+        },
+        "coarser": {
+          "events": 15,
+          "n": 81,
+          "rate": 0.1852,
+          "wilson_95": [
+            0.1156,
+            0.2833
+          ]
+        },
+        "compatible": {
+          "events": 39,
+          "n": 81,
+          "rate": 0.4815,
+          "wilson_95": [
+            0.376,
+            0.5886
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "exact": {
+          "events": 23,
+          "n": 81,
+          "rate": 0.284,
+          "wilson_95": [
+            0.1973,
+            0.3902
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 25,
+          "n": 81,
+          "rate": 0.3086,
+          "wilson_95": [
+            0.2186,
+            0.416
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 7,
+          "n": 81,
+          "rate": 0.0864,
+          "wilson_95": [
+            0.0425,
+            0.1678
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 55,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0653
+          ]
+        },
+        "wrong": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 65,
+          "n": 81,
+          "rate": 0.8025,
+          "wilson_95": [
+            0.703,
+            0.8746
+          ]
+        },
+        "coarser": {
+          "events": 15,
+          "n": 81,
+          "rate": 0.1852,
+          "wilson_95": [
+            0.1156,
+            0.2833
+          ]
+        },
+        "compatible": {
+          "events": 45,
+          "n": 81,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.4473,
+            0.6588
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "exact": {
+          "events": 29,
+          "n": 81,
+          "rate": 0.358,
+          "wilson_95": [
+            0.2622,
+            0.4667
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 15,
+          "n": 81,
+          "rate": 0.1852,
+          "wilson_95": [
+            0.1156,
+            0.2833
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 7,
+          "n": 81,
+          "rate": 0.0864,
+          "wilson_95": [
+            0.0425,
+            0.1678
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 65,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0558
+          ]
+        },
+        "wrong": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 70,
+          "n": 81,
+          "rate": 0.8642,
+          "wilson_95": [
+            0.773,
+            0.9224
+          ]
+        },
+        "coarser": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        },
+        "compatible": {
+          "events": 45,
+          "n": 81,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.4473,
+            0.6588
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "exact": {
+          "events": 23,
+          "n": 81,
+          "rate": 0.284,
+          "wilson_95": [
+            0.1973,
+            0.3902
+          ]
+        },
+        "finer": {
+          "events": 2,
+          "n": 81,
+          "rate": 0.0247,
+          "wilson_95": [
+            0.0068,
+            0.0856
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 10,
+          "n": 81,
+          "rate": 0.1235,
+          "wilson_95": [
+            0.0685,
+            0.2126
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 8,
+          "n": 81,
+          "rate": 0.0988,
+          "wilson_95": [
+            0.0509,
+            0.183
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 70,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.052
+          ]
+        },
+        "wrong": {
+          "events": 25,
+          "n": 81,
+          "rate": 0.3086,
+          "wilson_95": [
+            0.2186,
+            0.416
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 80,
+          "n": 81,
+          "rate": 0.9877,
+          "wilson_95": [
+            0.9333,
+            0.9978
+          ]
+        },
+        "coarser": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        },
+        "compatible": {
+          "events": 49,
+          "n": 81,
+          "rate": 0.6049,
+          "wilson_95": [
+            0.4961,
+            0.7043
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 6,
+          "n": 80,
+          "rate": 0.075,
+          "wilson_95": [
+            0.0348,
+            0.1541
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "exact": {
+          "events": 32,
+          "n": 81,
+          "rate": 0.3951,
+          "wilson_95": [
+            0.2957,
+            0.5039
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 6,
+          "n": 80,
+          "rate": 0.075,
+          "wilson_95": [
+            0.0348,
+            0.1541
+          ]
+        },
+        "wrong": {
+          "events": 31,
+          "n": 81,
+          "rate": 0.3827,
+          "wilson_95": [
+            0.2845,
+            0.4916
+          ]
+        }
+      }
+    },
+    "gpt-astra": {
+      "gate": {
+        "answered": {
+          "events": 63,
+          "n": 81,
+          "rate": 0.7778,
+          "wilson_95": [
+            0.6758,
+            0.8546
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 41,
+          "n": 81,
+          "rate": 0.5062,
+          "wilson_95": [
+            0.3995,
+            0.6123
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "exact": {
+          "events": 25,
+          "n": 81,
+          "rate": 0.3086,
+          "wilson_95": [
+            0.2186,
+            0.416
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 63,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0575
+          ]
+        },
+        "wrong": {
+          "events": 22,
+          "n": 81,
+          "rate": 0.2716,
+          "wilson_95": [
+            0.1867,
+            0.3772
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 74,
+          "n": 81,
+          "rate": 0.9136,
+          "wilson_95": [
+            0.8322,
+            0.9575
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 48,
+          "n": 81,
+          "rate": 0.5926,
+          "wilson_95": [
+            0.4838,
+            0.693
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "exact": {
+          "events": 32,
+          "n": 81,
+          "rate": 0.3951,
+          "wilson_95": [
+            0.2957,
+            0.5039
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 74,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0493
+          ]
+        },
+        "wrong": {
+          "events": 26,
+          "n": 81,
+          "rate": 0.321,
+          "wilson_95": [
+            0.2294,
+            0.4288
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 67,
+          "n": 81,
+          "rate": 0.8272,
+          "wilson_95": [
+            0.7305,
+            0.8942
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 42,
+          "n": 81,
+          "rate": 0.5185,
+          "wilson_95": [
+            0.4114,
+            0.624
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "exact": {
+          "events": 26,
+          "n": 81,
+          "rate": 0.321,
+          "wilson_95": [
+            0.2294,
+            0.4288
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 12,
+          "n": 81,
+          "rate": 0.1481,
+          "wilson_95": [
+            0.0868,
+            0.2413
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 4,
+          "n": 81,
+          "rate": 0.0494,
+          "wilson_95": [
+            0.0194,
+            0.1202
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 67,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0542
+          ]
+        },
+        "wrong": {
+          "events": 25,
+          "n": 81,
+          "rate": 0.3086,
+          "wilson_95": [
+            0.2186,
+            0.416
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 79,
+          "n": 81,
+          "rate": 0.9753,
+          "wilson_95": [
+            0.9144,
+            0.9932
+          ]
+        },
+        "coarser": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "compatible": {
+          "events": 49,
+          "n": 81,
+          "rate": 0.6049,
+          "wilson_95": [
+            0.4961,
+            0.7043
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 2,
+          "n": 79,
+          "rate": 0.0253,
+          "wilson_95": [
+            0.007,
+            0.0877
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 79,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0464
+          ]
+        },
+        "exact": {
+          "events": 33,
+          "n": 81,
+          "rate": 0.4074,
+          "wilson_95": [
+            0.307,
+            0.5162
+          ]
+        },
+        "finer": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 2,
+          "n": 79,
+          "rate": 0.0253,
+          "wilson_95": [
+            0.007,
+            0.0877
+          ]
+        },
+        "wrong": {
+          "events": 30,
+          "n": 81,
+          "rate": 0.3704,
+          "wilson_95": [
+            0.2733,
+            0.4792
+          ]
+        }
+      }
+    },
+    "gpt-luna": {
+      "gate": {
+        "answered": {
+          "events": 31,
+          "n": 81,
+          "rate": 0.3827,
+          "wilson_95": [
+            0.2845,
+            0.4916
+          ]
+        },
+        "coarser": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "compatible": {
+          "events": 15,
+          "n": 81,
+          "rate": 0.1852,
+          "wilson_95": [
+            0.1156,
+            0.2833
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "exact": {
+          "events": 11,
+          "n": 81,
+          "rate": 0.1358,
+          "wilson_95": [
+            0.0776,
+            0.227
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 49,
+          "n": 81,
+          "rate": 0.6049,
+          "wilson_95": [
+            0.4961,
+            0.7043
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 4,
+          "n": 81,
+          "rate": 0.0494,
+          "wilson_95": [
+            0.0194,
+            0.1202
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 31,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1103
+          ]
+        },
+        "wrong": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        }
+      },
+      "gate_without_definitions": {
+        "answered": {
+          "events": 42,
+          "n": 81,
+          "rate": 0.5185,
+          "wilson_95": [
+            0.4114,
+            0.624
+          ]
+        },
+        "coarser": {
+          "events": 3,
+          "n": 81,
+          "rate": 0.037,
+          "wilson_95": [
+            0.0127,
+            0.1033
+          ]
+        },
+        "compatible": {
+          "events": 21,
+          "n": 81,
+          "rate": 0.2593,
+          "wilson_95": [
+            0.1763,
+            0.364
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "exact": {
+          "events": 17,
+          "n": 81,
+          "rate": 0.2099,
+          "wilson_95": [
+            0.1354,
+            0.3107
+          ]
+        },
+        "finer": {
+          "events": 1,
+          "n": 81,
+          "rate": 0.0123,
+          "wilson_95": [
+            0.0022,
+            0.0667
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 38,
+          "n": 81,
+          "rate": 0.4691,
+          "wilson_95": [
+            0.3643,
+            0.5767
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 4,
+          "n": 81,
+          "rate": 0.0494,
+          "wilson_95": [
+            0.0194,
+            0.1202
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 42,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0838
+          ]
+        },
+        "wrong": {
+          "events": 21,
+          "n": 81,
+          "rate": 0.2593,
+          "wilson_95": [
+            0.1763,
+            0.364
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 64,
+          "n": 81,
+          "rate": 0.7901,
+          "wilson_95": [
+            0.6893,
+            0.8646
+          ]
+        },
+        "coarser": {
+          "events": 6,
+          "n": 81,
+          "rate": 0.0741,
+          "wilson_95": [
+            0.0344,
+            0.1523
+          ]
+        },
+        "compatible": {
+          "events": 31,
+          "n": 81,
+          "rate": 0.3827,
+          "wilson_95": [
+            0.2845,
+            0.4916
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "exact": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        },
+        "finer": {
+          "events": 9,
+          "n": 81,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.0596,
+            0.1979
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 16,
+          "n": 81,
+          "rate": 0.1975,
+          "wilson_95": [
+            0.1254,
+            0.297
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 5,
+          "n": 81,
+          "rate": 0.0617,
+          "wilson_95": [
+            0.0267,
+            0.1365
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 0,
+          "n": 64,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0566
+          ]
+        },
+        "wrong": {
+          "events": 33,
+          "n": 81,
+          "rate": 0.4074,
+          "wilson_95": [
+            0.307,
+            0.5162
+          ]
+        }
+      },
+      "model": {
+        "answered": {
+          "events": 80,
+          "n": 81,
+          "rate": 0.9877,
+          "wilson_95": [
+            0.9333,
+            0.9978
+          ]
+        },
+        "coarser": {
+          "events": 10,
+          "n": 81,
+          "rate": 0.1235,
+          "wilson_95": [
+            0.0685,
+            0.2126
+          ]
+        },
+        "compatible": {
+          "events": 37,
+          "n": 81,
+          "rate": 0.4568,
+          "wilson_95": [
+            0.3527,
+            0.5648
+          ]
+        },
+        "error_label_mismatch": {
+          "events": 33,
+          "n": 80,
+          "rate": 0.4125,
+          "wilson_95": [
+            0.3111,
+            0.522
+          ]
+        },
+        "error_marker_not_in_data": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_no_markers": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_not_a_cell_type": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_obsolete_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unapproved_symbol": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "error_unknown_id": {
+          "events": 0,
+          "n": 80,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0458
+          ]
+        },
+        "exact": {
+          "events": 20,
+          "n": 81,
+          "rate": 0.2469,
+          "wilson_95": [
+            0.1659,
+            0.3508
+          ]
+        },
+        "finer": {
+          "events": 7,
+          "n": 81,
+          "rate": 0.0864,
+          "wilson_95": [
+            0.0425,
+            0.1678
+          ]
+        },
+        "invalid": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "routed_to_a_person": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "tasks": 81,
+        "to_an_expert_as_conflict": {
+          "events": 0,
+          "n": 81,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0453
+          ]
+        },
+        "with_identifier_or_marker_error": {
+          "events": 33,
+          "n": 80,
+          "rate": 0.4125,
+          "wilson_95": [
+            0.3111,
+            0.522
+          ]
+        },
+        "wrong": {
+          "events": 43,
+          "n": 81,
+          "rate": 0.5309,
+          "wilson_95": [
+            0.4233,
+            0.6357
+          ]
+        }
+      }
+    }
+  },
+  "revised": 131,
+  "split": "external"
+}

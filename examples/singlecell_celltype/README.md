@@ -54,6 +54,12 @@ in about one answer in five. Bioevidence admitted none of these errors. In its f
 - answers compatible with the authors' term rose from 176 to 205 of 276;
 - 8% of the annotations went to a person.
 
+The external split, six datasets from other studies (81 clusters, mostly immune), tested the Cell Ontology
+definition check (protocol 3). The result was negative. Protein-level definitions such as "a mast cell has
+CCR3" or "an NK cell lacks CD3 epsilon" do not hold for transcripts. The check therefore flagged correct
+annotations as often as wrong ones, and fed back to the models it turned correct answers into wrong ones.
+The identifier layer held there too: 70 of 479 answers had an identifier error, and none was admitted.
+
 ## Limits
 
 - Author labels are the reference, at the granularity each study chose ("myeloid leukocyte", "stem cell").

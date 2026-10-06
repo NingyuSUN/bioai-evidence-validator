@@ -47,6 +47,7 @@ evidence items), and duplicate source/item/line/adjudication IDs cannot be admit
 | BEV023 | Grounding: a cited identifier is obsolete, withdrawn, or not its current name (a previous gene symbol or alias) | Reject |
 | BEV024 | Grounding: a cited identifier is malformed, or of the wrong kind for its place (e.g. not a cell type) | Reject |
 | BEV025 | Cross-check: a pinned reference resource contradicts the claim or its supporting evidence | Review |
+| BEV026 | Definition check: measurements contradict a marker the ontology defines the claimed term to have or lack | Review |
 
 A human acceptance does not erase contradictions, missing evidence, source mismatches,
 or other human rejection/deferral. Low-strength extraction permissions are explicit
@@ -180,6 +181,47 @@ bioevidence validate record.json --ontology cl-basic.obo --term-root cell_type=C
 
 `TableGrounder` and `ReferenceGrounder` need their configuration (evidence types, keys, relation) and are
 used from Python.
+
+### Ontology definitions as checks
+
+Many Cell Ontology terms are defined by marker proteins. A CD8-positive, alpha-beta T cell `has plasma membrane
+part` the CD8 co-receptor and `lacks plasma membrane part` CD4; a natural killer cell lacks CD3 epsilon. These
+axioms belong to a pinned release, not to a judgment about one dataset, so they can be checked against
+measurements without knowing the right answer.
+
+- `MarkerDefinitions` (`definitions`) collects each term's presence and absence axioms, its own and inherited
+  through `is_a`. It maps each protein to HGNC genes:
+  - by its PRO short label or gene-based synonym;
+  - as a family (`Fcgr3` is FCGR3A and FCGR3B);
+  - through the components of a complex (the CD8 co-receptor is CD8A and CD8B);
+  - or through the protein a modified form belongs to.
+- It leaves some axioms out:
+  - isoform-specific markers (CD45RA), which gene-level counts cannot see;
+  - axioms about relative amounts, which compare with another cell type rather than with the rest of a
+    dataset.
+
+  It needs the full `cl.obo`, which keeps the logical definitions.
+- `DefinitionGrounder` compares the claimed term with `measure(record)`, which gives each gene's detection rate
+  and log fold change for the record's subject. It raises BEV026 in two cases:
+  - **presence:** every gene of a defining protein is detected in fewer than 10% of the cells;
+  - **absence:** a gene of an excluded protein is detected in at least half of them and more than elsewhere.
+
+  The thresholds were set on the single-cell case's first six datasets, before it was run on six others.
+
+BEV026 sends a record to review and does not reject it, because a transcript is not a protein and some
+definitions are written for one species. In the feedback loop it goes back to the proposer together with the
+measurement. The proposer cannot make the finding go away by leaving evidence out, because the check reads the
+data, not the evidence the proposer cites. The check is **experimental**.
+
+**It did not transfer to new data.** On the single-cell case's external split, the thresholds set on the
+first six datasets flagged wrong annotations no better than chance (47% against 42%). The cause was definitions
+that do not hold for transcripts:
+- mast cells defined by CCR3, and neutrophils by CEACAM8, whose transcripts are not detected;
+- NK cells defined as lacking CD3 epsilon, although their CD3E transcripts are.
+
+Fed back to models, these findings turned correct answers into wrong ones (see the benchmark README). Use it
+on transcript data only with markers validated at the mRNA level, since the loop passes its findings to the
+proposer as they are.
 
 ### The feedback loop
 
