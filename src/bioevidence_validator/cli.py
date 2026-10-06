@@ -9,6 +9,7 @@ from pathlib import Path
 
 import yaml
 
+from . import audit as audit_module
 from . import review as review_module
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
@@ -85,6 +86,29 @@ def parser() -> argparse.ArgumentParser:
     frozen.add_argument("--frozen-at", required=True, help="ISO 8601 time of the freeze")
     frozen.add_argument("--min-reviewers", type=int, default=2)
     frozen.add_argument("--output", type=Path, required=True)
+    sample = steps.add_parser("audit-sample", help="Seeded random sample of auto-admitted records for an expert audit")
+    sample.add_argument("--predictions", type=Path, required=True)
+    sample.add_argument("--method", required=True, help="The method whose routes are audited")
+    sample.add_argument("--use", required=True, help="The requested use whose admissions are audited")
+    size = sample.add_mutually_exclusive_group(required=True)
+    size.add_argument("--size", type=int, help="Admitted records to audit")
+    size.add_argument("--target", type=float,
+                      help="Audit enough admitted records to bound their error rate below this if none is wrong")
+    sample.add_argument("--confidence", type=float, default=0.95)
+    sample.add_argument("--controls", type=int, default=0,
+                        help="Records from the other routes to mix in, so auditors cannot tell the routes apart")
+    sample.add_argument("--seed", type=int, required=True)
+    sample.add_argument("--profile-id", required=True)
+    sample.add_argument("--split", default="test", choices=sorted(review_module.SPLITS))
+    sample.add_argument("--output-dir", type=Path, required=True,
+                        help="Writes audit_sheet.csv for the auditors and audit_manifest.json, which stays with you")
+    audited = steps.add_parser("audit-score", help="Error rate of each route, with an exact upper bound")
+    audited.add_argument("--manifest", type=Path, required=True)
+    audited.add_argument("--annotations", type=Path, required=True)
+    audited.add_argument("--adjudications", type=Path)
+    audited.add_argument("--min-reviewers", type=int, default=1)
+    audited.add_argument("--confidence", type=float, default=0.95)
+    audited.add_argument("--output", type=Path)
     return result
 
 
@@ -210,8 +234,31 @@ def _run(args) -> int:
     return 0
 
 
+def _audit_sample(args) -> int:
+    rv, au = review_module, audit_module
+    size = args.size if args.size is not None else au.sample_size(args.target, args.confidence)
+    sheet_path, manifest_path = args.output_dir / "audit_sheet.csv", args.output_dir / "audit_manifest.json"
+    if sheet_path.exists() or manifest_path.exists():
+        raise ValueError(f"{args.output_dir} already holds an audit; refusing to overwrite it")
+    sheet, manifest = au.audit_sample(rv.load_predictions(args.predictions), method=args.method, use=args.use,
+                                      size=size, seed=args.seed, profile_id=args.profile_id, controls=args.controls,
+                                      split=args.split, confidence=args.confidence,
+                                      predictions_sha256=rv.sha256_file(args.predictions))
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    rv.write_csv(sheet_path, sheet, rv.ANNOTATION_COLUMNS + rv.OPTIONAL_ANNOTATION_COLUMNS)
+    _write_json(manifest_path, manifest)
+    picked = manifest["sample"]
+    print(f"{len(sheet)} records to audit ({picked['admitted']} auto-admitted, {picked['controls']} controls) in "
+          f"{sheet_path}. If none of the auto-admitted is wrong, their error rate is below "
+          f"{100 * manifest['if_no_errors_admitted_error_below']:.2f}% at {100 * args.confidence:g}% "
+          f"confidence. Keep {manifest_path.name} from the auditors.")
+    return 0
+
+
 def _review(args) -> int:
     rv = review_module
+    if args.step == "audit-sample":
+        return _audit_sample(args)
     annotations = rv.load_annotations(args.annotations)
     if args.step == "check":
         adjudications = rv.load_adjudications(args.adjudications, annotations) if args.adjudications else []
@@ -232,8 +279,15 @@ def _review(args) -> int:
         rv.write_csv(args.output, rows, rv.ADJUDICATION_COLUMNS)
         print(f"{len(rows)} disagreement(s) to adjudicate; {len(incomplete)} unit(s) with too few reviews")
         return 0
-    adjudications = rv.load_adjudications(args.adjudications, annotations)
+    adjudications = rv.load_adjudications(args.adjudications, annotations) if args.adjudications else []
     final = rv.resolve(annotations, adjudications, min_reviewers=args.min_reviewers)
+    if args.step == "audit-score":
+        manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+        report = audit_module.audit_score(manifest, final, annotations, confidence=args.confidence)
+        if args.output:
+            _write_json(args.output, report)
+        print(audit_module.render_audit(report), end="")
+        return 0
     if args.step == "score":
         report = rv.score(final, rv.load_predictions(args.predictions), split=args.split)
         if args.output:

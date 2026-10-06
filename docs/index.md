@@ -105,9 +105,10 @@ Across all 276 held-out annotations, stage by stage:
 | PubMed rate limits, server errors | `Library.fetch` | Exponential backoff on 429 and 5xx, a response cache, a 100 MB download cap |
 | Wrong paper, retracted paper, quote not in the paper | `LiteratureGrounder` (BEV016, BEV017, BEV019) | The reason goes back to the model; at most three submissions |
 | ID of another term, obsolete term, gene alias | `OntologyGrounder`, `GeneGrounder` (BEV017, BEV023, BEV024) | The reason goes back, naming the correct identifier |
-| The model's own evidence contradicts its answer | BEV004 | Sent to a person; not fed back, so the model is never asked to hide it |
+| The model's own evidence contradicts its answer | BEV004 | Sent to a person; not fed back, so the model is never asked to hide it. Flagged answers were wrong 82% of the time vs 33% ([routing evidence](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/risk-signals/summary.md)) |
 | A revision drops evidence that was verified | `feedback.carry` | The verified evidence is carried into the revision |
 | Still not admitted after the last round | `feedback.revise` | Sent to a person |
+| Admitted but wrong | A seeded random audit (`bioevidence review audit-sample`, `audit-score`) | Each route's error rate with an exact upper bound; a [dry run](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/celltype-audit/summary.md) shows the held-out route misses a 5% target |
 | A long batch is interrupted | One file per episode | A rerun skips finished episodes |
 
 How the checks work, rule by rule: [engineering contract](ENGINEERING.md).

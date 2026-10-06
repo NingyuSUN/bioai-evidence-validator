@@ -109,9 +109,10 @@ Across all 276 held-out annotations, stage by stage:
 | PubMed rate limits, server errors | `Library.fetch` | Exponential backoff on 429 and 5xx, a response cache, a 100 MB download cap |
 | Wrong paper, retracted paper, quote not in the paper | `LiteratureGrounder` (BEV016, BEV017, BEV019) | The reason goes back to the model; at most three submissions |
 | ID of another term, obsolete term, gene alias | `OntologyGrounder`, `GeneGrounder` (BEV017, BEV023, BEV024) | The reason goes back, naming the correct identifier |
-| The model's own evidence contradicts its answer | BEV004 | Sent to a person; not fed back, so the model is never asked to hide it |
+| The model's own evidence contradicts its answer | BEV004 | Sent to a person; not fed back, so the model is never asked to hide it. Flagged answers were wrong 82% of the time vs 33% ([routing evidence](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/risk-signals/summary.md)) |
 | A revision drops evidence that was verified | `feedback.carry` | The verified evidence is carried into the revision |
 | Still not admitted after the last round | `feedback.revise` | Sent to a person |
+| Admitted but wrong | A seeded random audit (`bioevidence review audit-sample`, `audit-score`) | Each route's error rate with an exact upper bound; a [dry run](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/celltype-audit/summary.md) shows the held-out route misses a 5% target |
 | A long batch is interrupted | One file per episode | A rerun skips finished episodes (used when a 486-episode run hit a time limit) |
 
 ## How it works
@@ -251,10 +252,11 @@ uv run --frozen --with matplotlib==3.11.2 python tools/reproduce.py
 ```
 
 One command regenerates every committed benchmark table, summary and figure, offline, in about three minutes,
-and compares each with the repository byte for byte (text files with line endings normalised). It runs 18 steps,
+and compares each with the repository byte for byte (text files with line endings normalised). It runs 20 steps,
 also run in CI on every change:
 - the three real-data cases;
 - ten LLM-benchmark result sets;
+- the routing evidence and the audit dry run;
 - the task files and the error taxonomy;
 - the figures.
 
@@ -281,7 +283,8 @@ context of use, model risk, credibility evidence, adequacy): the
 
 Tracked in the [AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) (#26):
 - expert review of the benchmark cases (#23);
-- calibrated triage and audit sampling of admitted records, to measure what still gets through (#24);
+- an expert audit of admitted records with `bioevidence review audit-sample` and `audit-score`, which bound
+  the error rate of what still gets through. The tool and a dry run are done (#24); the audit needs experts.
 - the [validation dossier](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/VALIDATION_DOSSIER.md),
   structured after FDA's draft AI credibility framework, states what is established and what is not (#25).
 

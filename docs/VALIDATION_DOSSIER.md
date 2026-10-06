@@ -15,7 +15,8 @@ State: release 0.8.0, October 2026.
 |---|---|---|
 | Admitted records carry no invalid identifier or citation | 0 of 721 admitted AI answers across four experiments (upper bound 0.5%); models alone produced such errors in 10–76% of answers | **Established** |
 | The feedback loop corrects fixable errors without hiding evidence | Single-cell held-out: 57 of 63 answers with identifier or marker errors corrected and admitted; verified evidence cannot be withdrawn | **Established** |
-| Admitted records are semantically correct | 19.6% [15.2, 24.9] of admitted single-cell annotations disagree with the authors' term. Part of this is label noise. No expert audit yet | **Not established** |
+| Admitted records are semantically correct | 19.6% [15.2, 24.9] of admitted single-cell annotations disagree with the authors' term. Part of this is label noise. The audit tool is ready and was checked in a dry run; no expert audit yet | **Not established** |
+| Default routing rests on signals that predict errors | BEV004 answers were wrong 82% vs 33% (held-out) and 70% vs 38% (external); the opt-in signals (semantic cues, ASCT+B, definitions) showed no such effect and stay off | **Established** for BEV004 |
 | Routing load is workable | 7.6% [5.0, 11.3] of single-cell annotations sent to a person (held-out) | **Plausible**, one run |
 | A new semantic check (Cell Ontology definitions) helps | No better than chance on external data, and harmful when fed back | **Refuted**; kept experimental |
 
@@ -75,7 +76,9 @@ consequence**, the impact of a wrong decision.
   - protocols fixed before results are seen;
   - negative controls;
   - full reproducibility;
-  - a measure of what still gets through. That last one needs an expert audit, which has not been done.
+  - a measure of what still gets through. That last one needs an expert audit, which has not been done. The
+    procedure and its statistics are ready (`bioevidence review audit-sample`, `audit-score`), and a dry run
+    with the authors' labels as a stand-in recovered the census rate (19.6%) inside its interval.
 
 ## 4. Credibility assessment plan
 
@@ -173,7 +176,7 @@ Fed back in the loop, its findings turned 15 correct answers into wrong ones. Co
 - **One run was resumed.** The external run hit a time limit at 321 of 486 episodes and was resumed. Episodes are
   independent, and none was repeated.
 - **Two planned evaluations have not been done.** The literature held-out set was built but not run, and no expert
-  review or audit of admitted records has been done (#23, #24).
+  review or audit of admitted records has been done (#23). The audit tooling is in place (#24).
 
 ## 7. Adequacy for the context of use
 
@@ -199,7 +202,8 @@ Proposed acceptance criteria for the next evaluation, to be fixed before it is r
   protocol, and compare per model. The integrity result should not move; the semantic result can.
 - **Reference change.** A new Cell Ontology, HGNC or ClinVar release changes the pinned snapshots. Re-run
   `tools/reproduce.py` and the affected splits, and keep the earlier snapshots for comparison.
-- **Monitoring in use.** Audit a random sample of admitted records on a schedule (#24), and report the audited
+- **Monitoring in use.** Audit a random sample of admitted records on a schedule with
+  `bioevidence review audit-sample` and `audit-score` (#24), and report the audited
   error rate with its interval next to the figures above.
 
 ## Sources

@@ -1,0 +1,70 @@
+{
+  "method": "llm-feedback-loop",
+  "requested_use": "research_summary",
+  "confidence": 0.95,
+  "seed": 20261006,
+  "population": {
+    "admitted": 255,
+    "rejected": 3,
+    "review_required": 18
+  },
+  "routes": {
+    "admitted": {
+      "audited": 59,
+      "errors": 14,
+      "uncertain": 0,
+      "route_name": "auto-admitted",
+      "population": 255,
+      "share_of_records": 0.9239,
+      "error_rate": 0.2373,
+      "error_rate_wilson_95": [
+        0.146946,
+        0.359749
+      ],
+      "error_rate_upper_bound": 0.345827,
+      "errors_in_route_at_most": 89,
+      "audit_minutes": null,
+      "expert_minutes_estimated": null,
+      "share_of_expert_time": null
+    },
+    "rejected": {
+      "audited": 2,
+      "errors": 0,
+      "uncertain": 0,
+      "route_name": "rejected",
+      "population": 3,
+      "share_of_records": 0.0109,
+      "error_rate": 0.0,
+      "error_rate_wilson_95": [
+        0.0,
+        0.65762
+      ],
+      "error_rate_upper_bound": 0.776394,
+      "errors_in_route_at_most": 3,
+      "audit_minutes": null,
+      "expert_minutes_estimated": null,
+      "share_of_expert_time": null
+    },
+    "review_required": {
+      "audited": 8,
+      "errors": 1,
+      "uncertain": 0,
+      "route_name": "expert review",
+      "population": 18,
+      "share_of_records": 0.0652,
+      "error_rate": 0.125,
+      "error_rate_wilson_95": [
+        0.022417,
+        0.470888
+      ],
+      "error_rate_upper_bound": 0.47068,
+      "errors_in_route_at_most": 9,
+      "audit_minutes": null,
+      "expert_minutes_estimated": null,
+      "share_of_expert_time": null
+    }
+  },
+  "not_yet_audited": [],
+  "admitted_error_upper_bound": 0.345827,
+  "expert_minutes_estimated": null
+}

@@ -1,0 +1,119 @@
+{
+  "audit": {
+    "admitted_error_upper_bound": 0.345827,
+    "confidence": 0.95,
+    "expert_minutes_estimated": null,
+    "method": "llm-feedback-loop",
+    "not_yet_audited": [],
+    "population": {
+      "admitted": 255,
+      "rejected": 3,
+      "review_required": 18
+    },
+    "requested_use": "research_summary",
+    "routes": {
+      "admitted": {
+        "audit_minutes": null,
+        "audited": 59,
+        "error_rate": 0.2373,
+        "error_rate_upper_bound": 0.345827,
+        "error_rate_wilson_95": [
+          0.146946,
+          0.359749
+        ],
+        "errors": 14,
+        "errors_in_route_at_most": 89,
+        "expert_minutes_estimated": null,
+        "population": 255,
+        "route_name": "auto-admitted",
+        "share_of_expert_time": null,
+        "share_of_records": 0.9239,
+        "uncertain": 0
+      },
+      "rejected": {
+        "audit_minutes": null,
+        "audited": 2,
+        "error_rate": 0.0,
+        "error_rate_upper_bound": 0.776394,
+        "error_rate_wilson_95": [
+          0.0,
+          0.65762
+        ],
+        "errors": 0,
+        "errors_in_route_at_most": 3,
+        "expert_minutes_estimated": null,
+        "population": 3,
+        "route_name": "rejected",
+        "share_of_expert_time": null,
+        "share_of_records": 0.0109,
+        "uncertain": 0
+      },
+      "review_required": {
+        "audit_minutes": null,
+        "audited": 8,
+        "error_rate": 0.125,
+        "error_rate_upper_bound": 0.47068,
+        "error_rate_wilson_95": [
+          0.022417,
+          0.470888
+        ],
+        "errors": 1,
+        "errors_in_route_at_most": 9,
+        "expert_minutes_estimated": null,
+        "population": 18,
+        "route_name": "expert review",
+        "share_of_expert_time": null,
+        "share_of_records": 0.0652,
+        "uncertain": 0
+      }
+    },
+    "seed": 20261006
+  },
+  "census": {
+    "admitted": {
+      "audit_error_rate": 0.2373,
+      "audit_upper_bound": 0.345827,
+      "audit_wilson_95": [
+        0.146946,
+        0.359749
+      ],
+      "census_below_upper_bound": true,
+      "census_error_rate": 0.1961,
+      "census_errors": 50,
+      "census_records": 255,
+      "census_within_wilson": true
+    },
+    "rejected": {
+      "audit_error_rate": 0.0,
+      "audit_upper_bound": 0.776394,
+      "audit_wilson_95": [
+        0.0,
+        0.65762
+      ],
+      "census_below_upper_bound": true,
+      "census_error_rate": 0.0,
+      "census_errors": 0,
+      "census_records": 3,
+      "census_within_wilson": true
+    },
+    "review_required": {
+      "audit_error_rate": 0.125,
+      "audit_upper_bound": 0.47068,
+      "audit_wilson_95": [
+        0.022417,
+        0.470888
+      ],
+      "census_below_upper_bound": true,
+      "census_error_rate": 0.2778,
+      "census_errors": 5,
+      "census_records": 18,
+      "census_within_wilson": true
+    }
+  },
+  "controls": 10,
+  "dry_run": "audit of the single-cell held-out results with a stand-in auditor (#24)",
+  "episodes_sha256": "1826196d4e1b645b90612b674708c850332ca35f38e141fe47e253cdd10b3fa0",
+  "seed": 20261006,
+  "stand_in": "stand-in: the dataset authors' cluster labels (not an expert)",
+  "target": 0.05
+}

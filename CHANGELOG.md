@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add audit sampling (`audit`; `bioevidence review audit-sample` and `audit-score`, #24). A seeded random
+  sample of auto-admitted records, sized from a target (`--target 0.01` audits 299 records: no error found
+  bounds the rate below 1% at 95%), with blind controls from the other routes and a manifest kept from the
+  auditors. Scoring reports each route's share of records, error rate with Wilson and exact one-sided
+  (Clopper–Pearson) bounds, and share of expert time from `minutes_spent`.
+- Add the routing evidence (`evaluation/llm_benchmark/risk_signals.py`): whether each signal that sends a
+  record to a person predicts a wrong answer. BEV004, the only one on by default, is shown on every split
+  (82% vs 33% wrong on the single-cell held-out split); the opt-in signals BEV022, BEV025 and BEV026 are not.
+- Add an audit dry run on the single-cell held-out results with the authors' labels as a stand-in auditor:
+  14 errors in 59 sampled auto-admitted records, below 34.6% at 95%; the census rate, 19.6%, lies inside.
+  `tools/reproduce.py` now runs 20 steps.
 - Add the validation dossier (`docs/VALIDATION_DOSSIER.md`), structured after the seven steps of FDA's
   draft AI credibility framework: question of interest, context of use, model risk, credibility plan,
   execution, results with deviations, and adequacy. Identifier and citation integrity of admitted records
