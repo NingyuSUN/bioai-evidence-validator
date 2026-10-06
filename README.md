@@ -180,12 +180,11 @@ pip install bioai-evidence-validator
 bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim   # exit 2: review required
 ```
 
-The released package (0.7.0) has the engine, profiles, drafts and source grounding. The literature,
-ontology, gene, variant, table and reference grounders, and the feedback loop, are on `main` and will
-be in 0.8.0. Until then, install from GitHub:
+From version 0.8.0 the package also includes the literature, ontology, gene, variant, table and
+reference grounders, and the feedback loop. For example, to check a cell-type annotation against a pinned
+Cell Ontology release and the HGNC gene set:
 
 ```bash
-pip install "bioai-evidence-validator @ git+https://github.com/NingyuSUN/bioai-evidence-validator"
 bioevidence validate record.json --ontology cl.obo --term-root cell_type=CL:0000000 --genes hgnc_complete_set.txt
 ```
 
@@ -216,7 +215,7 @@ Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input o
 To check records in a pull request, use the GitHub Action:
 
 ```yaml
-- uses: NingyuSUN/bioai-evidence-validator@v0.7.0
+- uses: NingyuSUN/bioai-evidence-validator@v0.8.0
   with:
     files: records/**/*.yaml
     format: draft

@@ -20,9 +20,7 @@ below is measured on real data with six models from Anthropic, OpenAI and Google
 pip install bioai-evidence-validator
 ```
 
-The released package (0.7.0) has the engine, profiles, drafts and source grounding. The grounders and
-the feedback loop below are on `main` and will be in 0.8.0. Until then, install from GitHub:
-`pip install "bioai-evidence-validator @ git+https://github.com/NingyuSUN/bioai-evidence-validator"`.
+From version 0.8.0 the package includes the grounders and the feedback loop described below.
 Try it without installing anything:
 [quickstart notebook on Colab](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb).
 

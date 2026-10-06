@@ -12,7 +12,7 @@ from bioevidence_validator.engine import default_schema_path, profile_path, vali
 root = Path(__file__).resolve().parents[1]
 package = Path(bioevidence_validator.__file__).resolve().parent
 assert root / "src" not in package.parents
-assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.7.0"
+assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.8.0"
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()

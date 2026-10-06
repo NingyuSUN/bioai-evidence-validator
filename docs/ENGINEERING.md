@@ -1,4 +1,4 @@
-# Engineering contract — 0.7.0
+# Engineering contract — 0.8.0
 
 ## Validation stages
 
