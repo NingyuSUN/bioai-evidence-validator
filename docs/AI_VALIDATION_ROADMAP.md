@@ -82,8 +82,8 @@ source → structured extraction → provenance → deterministic validation
 | Now | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) | Semantic support check: does a verbatim quote support the claim's direction? | #20 |
 | Next | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources | #18, #20 |
 | Next | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) | Model and agent evaluation against expert labels | #17, #23 |
-| Then | [#24](https://github.com/NingyuSUN/bioai-evidence-validator/issues/24) | Calibrated triage and audit of auto-admitted records | #23 |
-| Last | [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25) | Reproducible benchmark, funnel figure and validation dossier | all |
+| Done | [#24](https://github.com/NingyuSUN/bioai-evidence-validator/issues/24) | Calibrated triage and audit of auto-admitted records (tooling, routing evidence and a dry run; the expert audit needs #23) | #23 |
+| Done | [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25) | Reproducible benchmark, funnel figure and validation dossier | all |
 
 ## Definition of done for 0.8.0
 

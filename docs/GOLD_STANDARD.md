@@ -113,6 +113,32 @@ rather than discarding difficult cases silently. Report reviewer agreement befor
 adjudication (`bioevidence review agreement`). Any statistical intervals should respect concept-level dependence; do not
 treat multiple aliases or mutations of one concept as independent samples.
 
+## Auditing what is admitted automatically
+
+A reference set measures a method once. In use, the question is how many auto-admitted records are wrong.
+An audit answers it on a seeded random sample:
+
+1. Export one prediction per record and use, in the format `bioevidence review score` reads, with the route the
+   method took: `admitted`, `review_required` or `rejected`.
+2. `bioevidence review audit-sample` draws the sample. `--target 0.01` sizes it so that, if no audited record
+   is wrong, the auto-admitted error rate is below 1% at 95% confidence: 299 records (149 for 2%, 59 for 5%,
+   29 for 10%). `--controls` mixes in records from the other routes, in shuffled order, so auditors cannot tell
+   a record's route. The manifest records the seed, each route's size and the sampled hashes; keep it from the
+   auditors.
+3. Auditors label the sheet as in this protocol, blind to the route, the model and each other, and record
+   `minutes_spent`.
+4. `bioevidence review audit-score` reports each route's error rate with an exact one-sided upper bound. An
+   auto-admitted record is an error when the auditor would not admit it for the use or its claim is incorrect;
+   a record on another route, when the auditor would have admitted it as it was.
+
+Report the bound with the rate: "2 errors in 300 audited, below 2.1% at 95% confidence". Audit again when the
+model, prompts, profile or references change. One auditor per record is the default for audits
+(`--min-reviewers 1`); disagreements between several still need adjudication.
+
+Records reach a person for one of three reasons: they cannot be verified, the use requires a person, or a risk
+signal flags them. A risk signal belongs in routing only when it is shown to predict errors; the evidence for
+each is in [`results/risk-signals`](../evaluation/llm_benchmark/results/risk-signals/summary.md).
+
 An improvement against this reference can support a claim about the defined curation
 task. It does not establish breed-genotype membership, universal biological truth, or
 clinical validity.

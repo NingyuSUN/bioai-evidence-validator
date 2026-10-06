@@ -244,6 +244,25 @@ but cannot withdraw verified evidence against its answer. The literature benchma
 (`evaluation/llm_benchmark/agent_loop.py`) showed why: before that rule, an agent whose record held a
 misquote and a verified quote against its decision dropped the latter and was admitted.
 
+### Routing evidence and audits
+
+A record reaches a person because it cannot be verified (BEV006, BEV015, BEV018, BEV020), because the use requires
+a person (BEV008–BEV013, BEV021), or because a risk signal flags it. The first two are admission policy. A risk
+signal routes by default only when it is shown to predict a wrong answer.
+`evaluation/llm_benchmark/risk_signals.py` measures this on the first answers of the committed runs:
+
+| Signal | Default | Wrong when flagged vs otherwise | Verdict |
+|---|---|---|---|
+| BEV004 contradicting evidence line | on | held-out 82% vs 33%; external 70% vs 38%; literature pilot 91% vs 16% | shown |
+| BEV022 semantic cue | opt-in | literature pilot 4% vs 9% | not shown |
+| BEV025 reference conflict (ASCT+B) | opt-in | single-cell pilot 57% vs 40% | not shown |
+| BEV026 definition contradicted | opt-in, experimental | external 47% vs 41% | not shown |
+
+What routing lets through is measured by an audit (`audit`, `bioevidence review audit-sample` and `audit-score`):
+a seeded random sample of auto-admitted records, optionally mixed with blind controls from the other routes, and
+each route's error rate with an exact one-sided (Clopper–Pearson) upper bound. The procedure is in
+[the gold-standard workflow](GOLD_STANDARD.md#auditing-what-is-admitted-automatically).
+
 ## Semantic checks
 
 Grounding proves that a quote is real; it cannot tell whether the quote supports the claim.

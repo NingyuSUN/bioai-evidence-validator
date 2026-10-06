@@ -448,6 +448,40 @@ Which need experts: evidence that is mixed, depends on the endpoint, or where th
 every model disagree; these are exactly the cases the expert review (#23) is for. Five errors on two
 tasks are too few for rates; the held-out test set would measure them with intervals.
 
+## Routing evidence and the audit (#24)
+
+**Which signals should send a record to a person?** Only those shown to predict a wrong answer.
+[`results/risk-signals`](results/risk-signals/summary.md) compares, on first answers, how often an answer was wrong
+when a signal fired and when it did not:
+
+| Signal | Default | Split | Wrong when flagged | Wrong otherwise | Risk ratio (95% CI) |
+|---|---|---|---:|---:|---:|
+| BEV004 contradicting evidence | on | single-cell held-out | 14/17 (82%) | 86/259 (33%) | 2.48 (1.87–3.28) |
+| | | single-cell external | 38/54 (70%) | 163/425 (38%) | 1.83 (1.49–2.27) |
+| | | literature agent pilot | 10/11 (91%) | 11/69 (16%) | 5.7 (3.21–10.12) |
+| BEV022 semantic cue | opt-in | literature pilot | 1/24 (4%) | 4/44 (9%) | 0.46 (0.05–3.87) |
+| BEV025 ASCT+B conflict | opt-in | single-cell pilot | 13/23 (57%) | 46/115 (40%) | 1.41 (0.93–2.16) |
+| BEV026 definition contradicted | opt-in | single-cell external | 41/88 (47%) | 160/391 (41%) | 1.14 (0.88–1.47) |
+
+The only risk signal on by default, BEV004, is shown on every split. The opt-in ones are not, and stay off by
+default. The criterion was set after the runs: the risk ratio's interval lies above 1 on a held-out or external
+split.
+
+**What gets through?** An audit of a seeded random sample of auto-admitted records answers that with an upper
+bound. No expert has audited these records yet, so
+[`results/celltype-audit`](results/celltype-audit/summary.md) is a dry run on the held-out split. It runs the
+whole procedure with a stand-in auditor, the dataset authors' labels:
+1. export the loop's routes;
+2. `bioevidence review audit-sample --target 0.05 --controls 10` draws 59 auto-admitted records and 10 others;
+3. a [packet](results/celltype-audit/audit_packet.md) shows each record without its route, model or the
+   authors' label;
+4. `bioevidence review audit-score` scores it.
+
+The stand-in found 14 errors in 59, so the auto-admitted error rate is below 34.6% at 95% confidence (23.7%,
+Wilson 14.7–36.0%). Because the authors' labels cover every record, the census can be checked: 50 of 255
+(19.6%), inside the interval. The route does not meet a 5% target. A deployment would learn from such an audit
+that these annotations need review, or a better model, before research summaries rely on them.
+
 ## Run
 
 ```bash
