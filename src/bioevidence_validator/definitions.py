@@ -9,6 +9,12 @@ the definition of the term it claims (BEV026). That is not proof the record is w
 differ, and some definitions are written for one species), so the finding sends the record to review; in a
 feedback loop it goes back to the proposer with the measurement, which no omission can hide.
 
+**Experimental.** On transcript data the check did not transfer to new datasets: several protein definitions do
+not hold for mRNA (mast cell CCR3, neutrophil CEACAM8, NK cells lacking CD3 epsilon), and it flagged correct
+annotations as often as wrong ones. Fed back to models, its findings turned correct answers into wrong ones
+(evaluation/llm_benchmark/README.md, external split). Use it on transcripts only with markers validated at the
+mRNA level.
+
 `MarkerDefinitions` collects, for each term, its presence (`RO:0002104` has plasma membrane part) and absence
 (`CL:4030046` lacks plasma membrane part) axioms, its own and inherited through `is_a`, and maps each protein
 to genes: by its PRO short label or gene-based synonym (`CD4`, `HLA-DRA`; `Fcgr3` names the FCGR3A/FCGR3B

@@ -211,7 +211,7 @@ measurements without knowing the right answer.
 BEV026 sends a record to review and does not reject it, because a transcript is not a protein and some
 definitions are written for one species. In the feedback loop it goes back to the proposer together with the
 measurement. The proposer cannot make the finding go away by leaving evidence out, because the check reads the
-data, not the evidence the proposer cites.
+data, not the evidence the proposer cites. The check is **experimental**.
 
 **It did not transfer to new data.** On the single-cell case's external split, the thresholds set on the
 first six datasets flagged wrong annotations no better than chance (47% against 42%). The cause was definitions
@@ -219,9 +219,9 @@ that do not hold for transcripts:
 - mast cells defined by CCR3, and neutrophils by CEACAM8, whose transcripts are not detected;
 - NK cells defined as lacking CD3 epsilon, although their CD3E transcripts are.
 
-Fed back to models, these findings turned correct answers into wrong ones (see the benchmark README). So use
-it on transcript data only with markers validated at the mRNA level, and route its findings to a person rather
-than back to a model.
+Fed back to models, these findings turned correct answers into wrong ones (see the benchmark README). Use it
+on transcript data only with markers validated at the mRNA level, since the loop passes its findings to the
+proposer as they are.
 
 ### The feedback loop
 

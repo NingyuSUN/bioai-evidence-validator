@@ -11,6 +11,7 @@
   than chance (47% against 42%), because several protein definitions (mast cell CCR3, neutrophil
   CEACAM8, NK cells lacking CD3 epsilon) do not hold for transcripts. Fed back in the loop, its findings
   turned 15 correct answers into wrong ones. Identifier errors (70 of 479 answers) were still all caught.
+  The check is marked experimental; its findings still go back to the proposer in the feedback loop.
 - Add the single-cell cell-type annotation case (`examples/singlecell_celltype`): marker tables derived
   from six CELLxGENE datasets annotated by their authors, with the Cell Ontology, HGNC and ASCT+B pinned.
   Benchmark scenario 3 runs six models on it, alone and in the feedback loop. In the pilot, 35 of 138 first
