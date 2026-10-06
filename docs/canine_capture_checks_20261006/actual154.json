@@ -1,0 +1,3188 @@
+{
+  "format_version": "canine-capture-report-1",
+  "overall_status": "review_required",
+  "requirements_consistency_counts": {
+    "verified": 154,
+    "review_required": 0,
+    "rejected": 0
+  },
+  "validator": "canine-capture-1",
+  "package_base_version": "0.8.0",
+  "source_route_count": 154,
+  "source_route_count_is_not_sample_or_unique_locus_count": true,
+  "events": [
+    {
+      "event_id": "CAN-WISDOM-5",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1068",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1103",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1104",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1105",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1106",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1107",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1138",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1145",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1171",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "GDNA_GERMLINE_TARGET_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "RNA_ONLY_SOURCE_GDNA_CAUSAL_ANCHOR_HELD",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1192",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1237",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1253",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1264",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1300",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1323",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1361",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1386",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1437",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1487",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1686",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1687",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1706",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1744",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1771",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1772",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1858",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1880",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1923",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1934",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1936",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:363",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:424",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:631",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:633",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:636",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:637",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:638",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:680",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:681",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:688",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:690",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:694",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:697",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:698",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "GDNA_GERMLINE_TARGET_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "LESION_SOMATIC_RESEARCH_NOT_GERMLINE_SCREENING",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:699",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:701",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:703",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:704",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:705",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:708",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:709",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:710",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:729",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "GDNA_GERMLINE_TARGET_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "RNA_ONLY_SOURCE_GDNA_CAUSAL_ANCHOR_HELD",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:730",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:733",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:734",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:754",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:756",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:757",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:819",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:853",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:855",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:924",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:925",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:943",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:956",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:989",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "CAN-MANUAL-1",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "DISEASE_ASSOCIATION_CONFLICT_REQUIRES_REVIEW"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "CAN-MANUAL-2",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "DISEASE_ASSOCIATION_CONFLICT_REQUIRES_REVIEW"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "CAN-MANUAL-3",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1045",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1086",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1093",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1097",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1114",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1129",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1216",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1234",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1249",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1250",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1259",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1274",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1276",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1284",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1334",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1338",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1399",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1460",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1470",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1492",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1497",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1570",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1571",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1613",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1615",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1616",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1678",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1697",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1714",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1721",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1754",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1770",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1775",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1784",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1808",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1812",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1856",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1890",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1916",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1919",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:1922",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:369",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:419",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:425",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:56",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:570",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:574",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:575",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:577",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:581",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:583",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:584",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:585",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:606",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:608",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:612",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:632",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:634",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:635",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:639",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:640",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:641",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:642",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:643",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:675",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:683",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:693",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:700",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:702",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:706",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:728",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:750",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:752",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:790",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:804",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:898",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:928",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:929",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:950",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:953",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED",
+        "INSERTION_PAYLOAD_OR_TSD_NOT_RECOVERED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:971",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:986",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    },
+    {
+      "event_id": "OMIA:988",
+      "findings": [],
+      "unresolved_evidence": [
+        "NO_INDEPENDENT_PANEL_EXPERIMENTAL_PERFORMANCE",
+        "EFFECTIVE_READ_AND_FRAGMENT_DISTRIBUTIONS_NOT_ESTABLISHED",
+        "FINAL_CAPTURE_NOT_DEFINED"
+      ],
+      "design_status": "review_required",
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "scope": "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED",
+      "requirements_status": "verified"
+    }
+  ],
+  "context_checks": [
+    {
+      "source_event_id": "OMIA:694",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": false,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Relative insertion offsets disagree; no normalization is inferred.",
+          "field_path": "source_target_offsets"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CACGTGCTATCTATACAATGGAATACTACTCAGCTATAAAAAAGAATGAAATCTTGCTAGGTGTGACACACAGATGGACCATGAAATAAGTCAGACAGAG",
+      "target_right100": "AAAGACAAGTACTGTATGATTTCACTCATGTGCGGAATCTAAAAAAATGAAACAAATGAAACAAACAAAACAAAACCGAAATGGAGGGAACAAATTGGTG",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:853",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CTTTAGTTTCCTTGTTTATGCATTGGGGAGAGTCATATTTGTCTTTTTATCTTTCTAGAAAATGGAATATGTTAAGATAATTCCTATTCAAGTGCTTTGA",
+      "target_right100": "ACTCTTCAAAGAAAAGACACCTCAAAATCTACAGCATAATTGAGGTATCAGATTTTTGCCACTTTTTACTATTATGATTTTATTCACTAGCATTTATTTT",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:855",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CTTTAGTTTCCTTGTTTATGCATTGGGGAGAGTCATATTTGTCTTTTTATCTTTCTAGAAAATGGAATATGTTAAGATAATTCCTATTCAAGTGCTTTGA",
+      "target_right100": "ACTCTTCAAAGAAAAGACACCTCAAAATCTACAGCATAATTGAGGTATCAGATTTTTGCCACTTTTTACTATTATGATTTTATTCACTAGCATTTATTTT",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:819",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Relative insertion offsets disagree; no normalization is inferred.",
+          "field_path": "source_target_offsets"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "GGTTGAATAACGTTTACCTAATTACAGTCCCAGATATTTGTTAAGAATACCTGGAAAGTTCAATTTATAGTTAAGCAATTTACTTAAAATATTTTCTTTC",
+      "target_right100": "TTTCTTTTTTTTTAATGTTTTCCTTTGAGGATTTCCTTTGAAAGCTTAGTCACTCAAATAAAAAATTCCTAAGCAGCACACATTAAGTTGCATATGCAAT",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:924",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TTTATAGAACTTTACAAAACACTTTTATTTTTTCTAGGTGGTTGGTTCTAGCTATTGCCATGGTACGTTTTTATATGGAAAAAGGAACACACAAAGGTTT",
+      "target_right100": "ATATAAAAGTATTCAGAAGACACTTAAATTTTTCCAGACATTTGCCTTGCTTGAGGTAAGTTTTCAGTGATGCTGTTTTTCCATTGTACTATTTTTTTGA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:733",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1923",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CCTTTTTGGCAAATGTTAAGTATTATATCTTTATTTTAGGTAAAACCTGAGCTTTTTTTTTTTTTGCCTTAGCATTGTTAGCATGTTTATTTTCATTTAT",
+      "target_right100": "AGGGAAAAACATCAGAGGCACTTGCCAAGCTAATTTCACTACAAGCTACAGAAGCAACTATTGTAACTCTTGACTCTGATAATATTCTCCTAAGGTATTT",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:1138",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "AACAAACAAAATGCTTCAATTTATACAACAAAACTCACCAAAAATGTTGGTCTTCACAGTAAGTGCAAGATGAGTATTATTCCTTAAAATTTCAAGGGCT",
+      "target_right100": "TTCACAAATGTAATATTTTCAAAGTTTTGTCCATTTACTTCCATTATCTTGAGAAAAGTATTTGAAAAATATAAATTAAGAGAGAAACAATATTAATTAC",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1171",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1192",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": false,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Relative insertion offsets disagree; no normalization is inferred.",
+          "field_path": "source_target_offsets"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TCCATTCCTACCCCTTGCTTCAAGATGGCTGAGCCTTTTTCAGGGATGTGTGTGTGAGGTGGCGGCAGGTCTCTGTAAACCACTTCTCATGTTCCTTTTC",
+      "target_right100": "AGACTGGGGATGGTGTGAATGATGCTCCTGCCCTGAAGAAATCGGAGATCGGCATTGCCATGGGCTCGGGCACAGCAGTGGCTAAAACTGCCTCTGAAAT",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1253",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original accession remains null; follow-up accession is a producer assertion, not independently replayed assembly mapping.",
+          "field_path": "source_accession_version"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TTATTATAGGAAAGGTCTAACATTTAAGAGTTTATGTTTGAGAACAGACAAGCATTCCCAAACCATTATAAATTAGCTTAAATAAAAATGGTGTCCTTTC",
+      "target_right100": "AAAATACCTCTCACTTCTTTCCTGAAATCCAGCACAGCTATGAAAGCGGAAGAGATAAGCTAATTAGAACAGATGGGGAGAGACAATTTCTTTATTCTAA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1361",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TTTCCAGTGTCCACAGGAGGTCCACACCCAGCCCCTTGAGCAGCAGGTAAAATCCAATGGCAAAACTGAACAGGAAGAAAGTAATGAGAAAATATTTCTT",
+      "target_right100": "GAGGCTGGCATTGTAGATGCTCTGGATGTGGCGGAAAGTTTCAGCAACAGCAATGCCTGCGTGGAAGAAAGAATGGCTGTGAGAAATAGGGAAGACTCTG",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:1487",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:1687",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "ATCTCCTATTGATAATTCCTCCCAACAGAACATGTTAAGATAGGAGGGACAGCATGATGCTCACCACGCTCTCTCCTGAGGGTCACTCAACACGTCATAT",
+      "target_right100": "GCTGCTTGGATTAATTTAAATTGTTCAGCGGCTTCTGCGGCATTATCCAGATTTTTATCTGTTAAAAATAAAGTCACAGATATTCAGTCAGCAAACAAGT",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:1706",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "AGTAATTGATAGCAACTTGAATCCAGAAACTAAACTACTAAATTCTTTTAGGATACCTGAGAGATTTGACTCTGGATTTAGACATCTGAGCTAAACTTTG",
+      "target_right100": "ATGGGAGTCATAAGCTTTAGCCCGGATTGTCAGGAGTTTCTGCAATTCTTTCATTCTTTGCTTCTGCTTAGTTAGGATCCGATTTCTCTCTTCTTCCAAC",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:699",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": false,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CCCTTGAGCAGAATGAGCCGGGAAGAATTGGAGGACAGCTTGTTTCGTCTTCGTGAAGAGCACATGTTGGTGAAGGAGCTTTCTTGGAAGCAACAGGATG",
+      "target_right100": "AGATCAAAAGGTACCTTGTGTTCTCCTTAAGTCTTTTTTTTTTTTTTTTTAACATTTTATTTAATTATTCACAAGAGATAGAGAGACAGGCAGAGACATA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:701",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:703",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original accession remains null; follow-up accession is a producer assertion, not independently replayed assembly mapping.",
+          "field_path": "source_accession_version"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Relative insertion offsets disagree; no normalization is inferred.",
+          "field_path": "source_target_offsets"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "CTCCCCACTTAGTAAATAGGAATATAGTGTAAATAGATTGAAAGGAGGTGAAAACTTTAGGATTCAATGCAAATCCTAAAGTAGTATACAACATTCATAT",
+      "target_right100": "ATGGCTTCTTATCTCATAGCAATAGTATTCTCATAATGATGTATATGACATTCATACTTATGGTAAGATGCTTTTGACTCAAAAGTTAAACAAAAATGGT",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:704",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "ACAACATGTTCTGTGCTGGCTTCCATGAGGGAGGTAAAGATTCATGCCAGGGCGATAGTGGGGGACCCCATGTCACCGAAGTAGAAGGCATAAGTTTCTT",
+      "target_right100": "AACTGGGATTATTAGCTGGGGTGAAGAGTGTGCGATGAAAGGGAAGTATGGAATATATACCAAGGTGTCCCGGTATGTCAACTGGATTAAAGAAAAGACG",
+      "engineering_status": "verified"
+    },
+    {
+      "source_event_id": "OMIA:705",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Relative insertion offsets disagree; no normalization is inferred.",
+          "field_path": "source_target_offsets"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TTACAAAATTTGATTCTGGAACACCTATTCTATTTCCGTGAAGATGATGGATTCCTGAGCCAAATGTTCTTTTCATGAAGGGTTTGAAAACTTTCCATGA",
+      "target_right100": "AAATAATGCAATTAACCTTTTAGTTTGAGACTATATTCATTGATTAGATTTTAAAAATATTGATGGGCCTGCTTCTCAGAAGTGACAAGGATAGGCCTCA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:708",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "TAACACTGGTGACTAATATATGTTAAATGCTTGGTTATAGCAGTTTAAGAATTTTCTTTTTGTCATTTAATGATAGAGGAGAAGATACCATTGTTAAAGA",
+      "target_right100": "CTGGAAATTTAAAGCAGTAACCTGAGGAAATGACATTTTACTGAGGTAATAACACAATTCACACAAAGAAAGAAGAAAACAGAAATGAAGCTTTAAGAAA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:710",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:729",
+      "computed_endpoint_geometry_consistent": null,
+      "complete_context_equal": null,
+      "local_100bp_each_flank_equal": null,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Endpoint mapping is absent or ambiguous.",
+          "field_path": "point_candidate_mappings"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Genomic anchor or source/target bytes remain unavailable.",
+          "field_path": "context_references"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:925",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": false,
+      "local_100bp_each_flank_equal": true,
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Complete window difference/ambiguity retained even if local flanks match.",
+          "field_path": "complete_context"
+        }
+      ],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "AAACAGTAGCGGCCTGTTTTTTAATTTTTCTTCTCTTTCTTCTAGTTCTTGTTGGTATTCTCTCATCCTTTCCTTTTCACTCTTTCTAAAATCAAATAAA",
+      "target_right100": "AGGAAGGGAATTTTAAAAAGAAATAATAATTTGCACATACAACATTTAGCTTAGATGACAAATCAGAAATTAAATTATGAGCATGGCTTACAATTTACCA",
+      "engineering_status": "review_required"
+    },
+    {
+      "source_event_id": "OMIA:956",
+      "computed_endpoint_geometry_consistent": true,
+      "complete_context_equal": true,
+      "local_100bp_each_flank_equal": true,
+      "findings": [],
+      "source_TSD_length_is_only_a_producer_assertion": true,
+      "target_left100": "GATGAAGAGCTTCTTGGCCAGGTCCACAGTGTCACCGTCAGGCTGGCTAGGATACCTCTGGGTGCCGAAGATAAAGGTCTGCTCCAGCTGGAAGGCATTC",
+      "target_right100": "TTGTCAAACTGGTGCTGTTGGAAGGGAATGCCTTGGACCAGGCTCTCAACCAGCATCTCCATGAAGAGCCGCCAGCGGGGGGTGTAGTAGTCAGCCACCA",
+      "engineering_status": "verified"
+    }
+  ],
+  "template_checks": [
+    {
+      "id": "FGF4_CFA12_SHARED_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "FGF4_CFA12_SHARED_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "FGF4_CFA12_SHARED_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "HACD1_PTPLA_SINE_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "HACD1_PTPLA_SINE_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "HACD1_PTPLA_SINE_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "ATP7A_SINE_DERIVED_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "ATP7A_SINE_DERIVED_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "ATP7A_SINE_DERIVED_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "FAM161A_ESD_SINE_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "FAM161A_ESD_SINE_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "FAM161A_ESD_SINE_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "G6PC1_POLYA_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "G6PC1_POLYA_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "G6PC1_POLYA_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "RAPGEF6_POLYT_WT_BOUNDARY",
+      "engineering_status": "verified",
+      "findings": [],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "RAPGEF6_POLYT_PROPOSED_MUTANT_LEFT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    },
+    {
+      "id": "RAPGEF6_POLYT_PROPOSED_MUTANT_RIGHT_JUNCTION",
+      "engineering_status": "review_required",
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Proposed mutant payload reconstruction is not independently replayed by this contract.",
+          "field_path": "sequence"
+        }
+      ],
+      "mutant_sequence_reconstruction_performed": false,
+      "capture_specificity_verified": false,
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false
+    }
+  ],
+  "findings": [],
+  "input_sha256": "0f8f03b6227a1d39ec5df3dacf51e1115a8b6ad03fb97002b3c5cfabe6756974",
+  "implementation_sha256": {
+    "canine_capture.py": "9f8f8b9cb056cca09a715ced5c40c36bc3ebcf2e92c363ce0cbecf266cc0cc4b",
+    "canine.py": "098e4ee6263931802e24b59dca9bf979c0e565336c1ba3654783153a1366e7ba",
+    "grounding.py": "ebfe096fe6d40aa7a991eac0461252e015364ef352e50719912addc08f92e915"
+  },
+  "source_snapshot_hashes": [
+    "00134d37ee1fa7969ae7bae42c5ead75b038f6a65b3b810c4e347ddb4b8406e7",
+    "048ecc7e2bfec455aa0d1faae9c82e35d4b5f33dabb7c2e3a105759095ccbc70",
+    "0ba13bbbaf1a9678030d021ce609a0937502cfdcafa37b946238dd48e57e837b",
+    "0e03ed960552793a58a6a30beec652d6b732fec0bef6e1769c35bae372691f1b",
+    "111d6467934994afbbc5a922fc4b208ffbe02392d6bd948deef24518e6699a04",
+    "1383699dae7dd58f3a2c5af88b81192ce4cc4a06fa1c3d86c3db5bdf7701aeda",
+    "1c61cb5720514a6466499510286bfb2c8e27bb9ffe3fe918a9b5de4a7bbe2402",
+    "2058dc9361be97ad380c315576124fed0820a8514bed7000994e6ede95f619a7",
+    "233a05fdbeb0209dcf3bf2a11dcdc2f77f65a8a1bb075abc8cd4ba986a6c4e74",
+    "24fedc4b13cbf21980a6e77d97572fbfb177fee8fc42d27b42a02fe431e18bb0",
+    "257ffc0fa80845c7f9a56e2234d272012655c4450f53bbdd267a1ea7e08fb0f9",
+    "2585a39efea03b213a1054577ae18c706c88894d4352e8824adf193259a76594",
+    "2647f414339e2ade1a606c8bafbdf56075890c26c7f97129f12200c3b3ab15eb",
+    "2871c2142547064a0fc0871afbfea17ae28c234b1085dce84084abcb2263646c",
+    "2a1ccf35d5cd84d19050f8f3a66e0dff643d084ee0bc9439b89716c73353ceeb",
+    "2b54fc27aa32359844af0d98955db715276e10df080704b9c2f66b1ee895b6bc",
+    "2c4051fd278473525ec3adfc9e5106cb6ea85d927872763a98f09b0c8f7ed67d",
+    "305bcd991fd0daf06f64668bb5b239623301c7db8bea811f532bf5230a74b51f",
+    "32a20398c85bba0f8fa17262f8adc2cf36ac4355cb0c2823cac5944983ebc7c5",
+    "33bb35c300d9dd7b5baec449cfcab6c1275ac43ff0e782a2121c193bed85f462",
+    "3538e630214157619926659ed50b230772e5afaed770902d338034c3a7da05c9",
+    "36c30941972cdeb9cc2f5757a7a63e4b61bb9f08da5b8851e5e7a097a286db72",
+    "3cbf9de2fba55dc9417abae1aa6a95e4d03a8ffb17b77ce6e0f5ff1eeb365c57",
+    "3d590b5aa301e702894205a680291dc700044f70994069a5b50d260966a9759a",
+    "4104ae5a1ac57bfc3f24c175a13bf377d20a4acaf63331bfc244e958e3190807",
+    "42e02b1252d5947ce5574068ea2422a685a2813708a99623fb3b191090a0dcc9",
+    "435a1b7dda10b8026538e0a8bc30d17360996bd8f77b3c5a82a5492623d57f93",
+    "44a05d0765c9f8d0e5cba5e65f5762619fa5641981a7157acf34e68d2da8eb7e",
+    "44f6ad0c33605b5132042e84029887df3d0cc3a16e49aa9d645e925bfe9dbbdd",
+    "480d56eab4cef19639f7864b1e5082160ce9dd478bddba7804daefdf49e91bb4",
+    "493fe0b8b4e89468cd5a32af9de7d9189cec2550ba17f9ee8c3296e07df49d18",
+    "49b6643c07b5ef37db63daa6d89d2c4a4e7b2dd44690a6e33526549f551025c6",
+    "4ad52a0addf1f4d70cd08bf9ec7c4a88aa43dc6715002a61d47539d470e0fa28",
+    "4d407ead2b8351dbeaf0f9a27eac6e754c707f4424742fef8cd80e0af53412af",
+    "4ffadb7a8a1ed0a95c53fa25b38f125d9430eb1fd0737d15d4337aac96bd42d7",
+    "55c0c75c41c44801f289fbbc0af4eee5920dadb04c2bd885fcb2626bbe6f2f77",
+    "63f3901366ae9199a97788a40302c3cecf8b4da49120a322f20e74e14d147c1f",
+    "64a6b4f070f4987ab7e516aaa26d7d750efecddc9b22083f833d2fdfd952bad5",
+    "65670efc31dd1a8ebb3d2422d35e234996d694dea7f6a3765be03a373c9c3332",
+    "66bfdc2fac991b420904f6e7c6ff090a4128dd794f474992c43faf0d6e793829",
+    "6bfe309fbb3ea4a7bbbd8e402e273cac8aa3608a6f94724b391824a6762ee494",
+    "72a5f8e324295f1b9f6b319a5f59313dc3461124a2dd43e391c4c597d5e8ab46",
+    "740955e2afbd36da521bfe9b03fda4cd217517786f832da3806bcf51287c3a42",
+    "75ca43647cc0a07353796d10a347ae79cbb0c3f62ab748aae83d441e819f6f0b",
+    "75cc71d494166ceb04ad8964ec92dd2f246920bee2652942d457e30368b6efb1",
+    "76bad8e166f9b5509af2d8c364442a715b1e4592aeeacffc65b2d0ddfc8e1778",
+    "7914d55b7879980c02e1f4e52fcb5856a4e7e6079e766bbd817b5c9e128d43fc",
+    "82f11994db7fbb9a27b39a8a3b02f8b7650a8d957e20ee0a0c20f3366886add6",
+    "84098db20e66d945949ed28d0dd02a90cbb97f60571e7e36c45457c48979a5ce",
+    "84b10534d89df4c8a4879757940c42d9d10e93ee88340796313a21007f815047",
+    "8af13a5d7ef606c564a1199af3d30e3b84472ab791742ed96332008c3f83bdfd",
+    "8f9c1e9d289d71317089f4be46d1f3e6db21e3dafc3ec2841c963e2869b25cf7",
+    "91df6d42428febe23eeebaab4955f53e3eb6cf7873c497540462c708dcf991e8",
+    "93e897168773d510f94931104370663674a815a75da5be18a722e4a3fb555450",
+    "950fa4cdd8e837a0d70183f7ec635452b2d6d7d594fd11dbd755b50adac9e1ab",
+    "95714a39b37b59f06ede787eb38bfe342b80af9ff87c2286031acb7d6ab948b9",
+    "95aef34d7fdab46a3612fcadbdbfa35ba1838c92c320dcc9e9e1757148742aa9",
+    "986c9e33f554274082c25ba675a5de3e693c32c176a2923bab22aa0a20b20f8a",
+    "99174ed95caf68807f712cde61baf8e6af47e6abe03235ecea18dbd23c7bcc7a",
+    "9a8ae306cd7077ead5befe5b9740fe86fa02fcb8872095a1e0b2db9f2d2b1c48",
+    "9b30f98c7c77fdafdfb436f7b23324b3542227b03fb6d4dd18191a987d2a5e2f",
+    "9cf9822032c79e7837e81069fe661a00564537a90e5dc52808c4e847fe1d0461",
+    "a4ffa5c1b31405c685a225f1ffa3bd2433bf3182ab1ac4597b056264e027f087",
+    "a6ad76bb092078816e510f0fca66a6651d97ec15572c222cf01b093b1090de3b",
+    "aac6a2c4754a8136e701b729eb05221e7ab8097329a31914668839e433e16a47",
+    "aca6c3767fe379d77d1a4e3ed8678dd06a25ee622be7b755a51db7b143167b04",
+    "af86b0d0275b3d38e2963f9b41dbbefacc76d66704c54f866444d69def6b55cd",
+    "af9962720d365671000cd1856ef991b651213191a8773d7fe976c9724fa4e718",
+    "b5ecb5ca35ba69682809a7b5be4cd203022e5e94148ae526e75512ab340a0f5d",
+    "c0b7ea42f62954984fdd95d97e9a3ca556148f93120fa45d4ae1d62bfc44cfe1",
+    "c15406cb2953f75e53031c8fb6c07553fc930f126872ba87c076bf27e2ec2782",
+    "c3623f60e645a365c25fd78e7e306adbca918a9cf23901f470deba7680a6f052",
+    "c6957e97dcac3995fe88fbb4452ffdbefcdefdd21b04b6013ca1114964229acc",
+    "cd2b09a6ff7331c78e641ffef716925b52973743f8efc2e3b79aacf789de886d",
+    "cdb71ce6218554800ea58cee5b0ec600a068040c301906be89a8b4bac5b8e77f",
+    "cf7194437273cda4f468aa29d6a2d70f64287daf36a2e68bf93c3b94588182aa",
+    "cfc0ad29504e6b5d52f055befb0e6e6df0d68b143f397913944a4f054185d888",
+    "d82f7364882f4be1c61bf56ae16e8521b21723cf2fd4eb8ab396d5c69cb1660f",
+    "d85628a3cb740bf7bf2503de9fdeea6d58f35c87c19ae92a24b3521f8b75c17c",
+    "da6aed65d2d12075027b3854b5ec3915002236311183cda0597ea7b5d76188ec",
+    "dfa6217b6a918bc8262361d2340a0f00b8526e86888d0ca664efb8147ed0d2f6",
+    "dff90aad4d541180f91b8f2f77b18037d969ef6a36c17ae66c6337dea757f42b",
+    "e3fecceaf583e2dd03029faa44a5e5dc2e1eee59c73b128211dbeaefabde2c40",
+    "e5676d25c43f2bf010647ae67ca6f1e0a1577a36c3be0ddb9088e5a5425ab55c",
+    "e76ff92a578377d8ca5bb8f0cbbd9b10e3b30693172f4c70e72d6c0bc7cc7aa2",
+    "e79a00ba911fa29c597604afcef83382ee93bb51a9b8c0f406d8d66b23fecfb3",
+    "e7f9688e0a99144082ad4b73675cb23d6b52352598b9214455f0cf0b99d44c13",
+    "e83416207907600acd975e870ae44ea5d4984d759b3ccca937f026b508a3098b",
+    "e92fc1dde7801464bf859462e3896af9b43b03df703d9158ad95bf4aaa14ab51",
+    "ec2b08a7d6440220c0f65fca756863c2f0f7aa0c5e7f86e0212c24374bd28214",
+    "efb8826dff3fca84c2387b490b903744a4bc7eeca1547892127eeabeaf3c4475",
+    "f9d16dfb0a81f9ccfcb4c34c831fbcd9639fbb3cccf90e157001330d51bbdbd1",
+    "fa9d5dae191e6286d99a5b0c20f27e1cf7efa2c7323fe04112efdfa98e670606",
+    "fc8dbb16026b650fe82e7cad9a3d8a57cbd935423d82092ceb04c60a85bb5603"
+  ],
+  "source_snapshot_hashes_are_declared_dependencies_not_all_verified": true,
+  "scope": "Source-bound canine NGS draft consistency, independent endpoint arithmetic and pinned context replay only",
+  "limitations": [
+    "Does not authenticate receipt producers or rehash whole genomes/chains",
+    "Mutant payloads, phase, capture chemistry, uniqueness and sample performance are not independently established",
+    "Does not adjudicate disease causality or population-wide risk"
+  ],
+  "clinical_interpretation_assessed": false,
+  "whole_reference_specificity_performed": false,
+  "experimental_samples_evaluated": 0,
+  "assay_validated": false,
+  "probe_ready": false,
+  "orderable": false,
+  "reportable": false
+}

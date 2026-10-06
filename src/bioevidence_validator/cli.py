@@ -11,6 +11,7 @@ import yaml
 
 from . import review as review_module
 from .canine import validate_canine_panel
+from .canine_capture import validate_canine_capture
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 from .grounding import SnapshotStore, SourceBytesGrounder
@@ -60,6 +61,10 @@ def parser() -> argparse.ArgumentParser:
     canine.add_argument("input", type=Path)
     canine.add_argument("--snapshot-dir", type=Path, required=True)
     canine.add_argument("--output", type=Path)
+    capture = commands.add_parser("canine-capture", help="Replay source-bound canine NGS requirements and reference contexts offline; retains assay holds")
+    capture.add_argument("input", type=Path)
+    capture.add_argument("--snapshot-dir", type=Path, required=True)
+    capture.add_argument("--output", type=Path)
 
     review = commands.add_parser("review", help="Independent human review: agreement, adjudication, scoring")
     steps = review.add_subparsers(dest="step", required=True)
@@ -137,14 +142,15 @@ def _write_json(path: Path, value: dict) -> None:
 
 
 def _run(args) -> int:
-    if args.command == "canine-panel":
+    if args.command in {"canine-panel", "canine-capture"}:
         if args.output and (args.output.resolve() == args.input.resolve()
                             or args.output.resolve().is_relative_to(args.snapshot_dir.resolve())):
             raise ValueError("Output must not overwrite an input or reference snapshot")
         document = json.loads(args.input.read_text(encoding="utf-8"),
                               object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
         _check_depth(document)
-        report = validate_canine_panel(document, SnapshotStore.from_directory(args.snapshot_dir))
+        validator = validate_canine_panel if args.command == "canine-panel" else validate_canine_capture
+        report = validator(document, SnapshotStore.from_directory(args.snapshot_dir))
         if args.output:
             _write_json(args.output, report)
         else:

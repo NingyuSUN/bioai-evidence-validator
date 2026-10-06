@@ -1,0 +1,10 @@
+{
+  "format_version": "canine-capture-1",
+  "taxon": "NCBITaxon:9615",
+  "requirements_snapshot_sha256": "3538e630214157619926659ed50b230772e5afaed770902d338034c3a7da05c9",
+  "method_constraints_snapshot_sha256": "cdb71ce6218554800ea58cee5b0ec600a068040c301906be89a8b4bac5b8e77f",
+  "context_mapping_snapshot_sha256": "42e02b1252d5947ce5574068ea2422a685a2813708a99623fb3b191090a0dcc9",
+  "context_checks_snapshot_sha256": "6bfe309fbb3ea4a7bbbd8e402e273cac8aa3608a6f94724b391824a6762ee494",
+  "target_reference_receipt_snapshot_sha256": "44f6ad0c33605b5132042e84029887df3d0cc3a16e49aa9d645e925bfe9dbbdd",
+  "templates_snapshot_sha256": "95714a39b37b59f06ede787eb38bfe342b80af9ff87c2286031acb7d6ab948b9"
+}

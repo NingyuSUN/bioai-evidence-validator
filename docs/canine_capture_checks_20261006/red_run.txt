@@ -1,0 +1,375 @@
+FFFFFFFFFFFFFFFFF                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_consistent_requirements_do_not_release_an_assay _____________
+
+    def test_consistent_requirements_do_not_release_an_assay():
+        doc, raw, _, _ = fixture()
+>       report = run(doc, raw)
+                 ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'a6286b14b2963e67ec388429e575e2af481e124820ec8003ae9cef06b3ecd463', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_ test_unsupported_admission_and_inference_flags_are_rejected[PE300_guarantees_complete_repeat_length] _
+
+field = 'PE300_guarantees_complete_repeat_length'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '16b04e1a23aa6309cd863b4eb1735075b9871312d6c5369e4e7140d11219860e', 'taxon': 'NCBITaxon:9615'}
+raw = {'16b04e1a23aa6309cd863b4eb1735075b9871312d6c5369e4e7140d11219860e': b'{"schema": "canine-all-ngs-route-requirements-1...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_ test_unsupported_admission_and_inference_flags_are_rejected[total_copy_number_establishes_phase] _
+
+field = 'total_copy_number_establishes_phase'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '14f29188b819daf58c66df3695046659b73772bfa2cd9988fd80b438e75c761a', 'taxon': 'NCBITaxon:9615'}
+raw = {'14f29188b819daf58c66df3695046659b73772bfa2cd9988fd80b438e75c761a': b'{"schema": "canine-all-ngs-route-requirements-1...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_ test_unsupported_admission_and_inference_flags_are_rejected[normal_copy_number_excludes_event] _
+
+field = 'normal_copy_number_excludes_event'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '65ebfe94e08769ba93062bd43734979a383bd2b50d1b05f030eea2a5d5ca1d35', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_ test_unsupported_admission_and_inference_flags_are_rejected[germline_panel_admission_approved] _
+
+field = 'germline_panel_admission_approved'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '88fb81d0360ddce397ead8773aaf49990345c4528fd31605e2379417bca444aa', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_ test_unsupported_admission_and_inference_flags_are_rejected[assay_validated] _
+
+field = 'assay_validated'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'ffc0ef6d36af50a6e9d4dc9d09ad4e05e14632e878c44da7523edd84f2354d19', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...mpleteness_verified": false, "assay_validated": false, "probe_ready": false, "orderable": false, "reportable": false}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+___ test_unsupported_admission_and_inference_flags_are_rejected[probe_ready] ___
+
+field = 'probe_ready'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'c1fce15f9d2b3c01298101e223e56801a74d76d17a4f1087b277fcb3ff791230', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+____ test_unsupported_admission_and_inference_flags_are_rejected[orderable] ____
+
+field = 'orderable'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '874c57bb40f837fcaa5874d6bfd907e0246cd53753c78d10fdf0fcd4cd65471b', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+___ test_unsupported_admission_and_inference_flags_are_rejected[reportable] ____
+
+field = 'reportable'
+
+    @pytest.mark.parametrize("field", ["PE300_guarantees_complete_repeat_length", "total_copy_number_establishes_phase",
+        "normal_copy_number_excludes_event", "germline_panel_admission_approved", "assay_validated", "probe_ready", "orderable", "reportable"])
+    def test_unsupported_admission_and_inference_flags_are_rejected(field):
+        doc, raw, payload, _ = fixture(); payload["records"][0][field] = True; rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'def76f1667d870542f6f16ed566d1fe372716113c71c6283cd812957b562892c', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...mpleteness_verified": false, "assay_validated": false, "probe_ready": false, "orderable": false, "reportable": false}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_________ test_normal_dosage_and_one_junction_cannot_define_inversion __________
+
+    def test_normal_dosage_and_one_junction_cannot_define_inversion():
+        doc, raw, payload, _ = fixture(); payload["records"][0]["required_ngs_evidence"] = ["normalized_depth_vs_comparable_controls"]
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '6bd0a7323e8a664b0426aed72ccd07f8cc4b5c63f0bb903cfb336f70c19853ff', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_______ test_RNA_or_lesion_source_is_not_silently_a_germline_target[RNA] _______
+
+kind = 'RNA'
+
+    @pytest.mark.parametrize("kind", ["RNA", "SOMATIC"])
+    def test_RNA_or_lesion_source_is_not_silently_a_germline_target(kind):
+        doc, raw, payload, _ = fixture(kind); payload["records"][0]["scope"] = "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED"
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '72ea04c6728db7ca5bf40769354f4cc6df12cb3865a19ce33b87b97cd864479d', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...e2b8bd9b189ef86eea7b2ff02d1e7fcdb07ccca46bd': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "RNA"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_____ test_RNA_or_lesion_source_is_not_silently_a_germline_target[SOMATIC] _____
+
+kind = 'SOMATIC'
+
+    @pytest.mark.parametrize("kind", ["RNA", "SOMATIC"])
+    def test_RNA_or_lesion_source_is_not_silently_a_germline_target(kind):
+        doc, raw, payload, _ = fixture(kind); payload["records"][0]["scope"] = "GENOMIC_CANDIDATE_TARGET_IN_DRAFT_NOT_ADMITTED"
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '094559df7bb7410c7197243b828e458b7972b31094b86843f8b6231a1a27e5f7', 'taxon': 'NCBITaxon:9615'}
+raw = {'094559df7bb7410c7197243b828e458b7972b31094b86843f8b6231a1a27e5f7': b'{"schema": "canine-all-ngs-route-requirements-1...14372d711747c832c20b471e3ae9fbb6aa9766d': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "SOMATIC"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+______________ test_source_kind_cannot_be_changed_to_bypass_rules ______________
+
+    def test_source_kind_cannot_be_changed_to_bypass_rules():
+        doc, raw, payload, _ = fixture(); payload["records"][0]["plan_kind"] = "SMALL"
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '07597d875a7e374ec5b01c69a19ce97b1a88c198693c8e4166bd83e608d244ce', 'taxon': 'NCBITaxon:9615'}
+raw = {'07597d875a7e374ec5b01c69a19ce97b1a88c198693c8e4166bd83e608d244ce': b'{"schema": "canine-all-ngs-route-requirements-1...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_____ test_shared_retrogene_coding_reads_do_not_establish_insertion_locus ______
+
+    def test_shared_retrogene_coding_reads_do_not_establish_insertion_locus():
+        doc, raw, payload, _ = fixture(); payload["records"][0]["copy_count_from_shared_FGF4_coding_reads_is_locus_specific"] = True
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'f21589c6ed62a1d0cbbdcecfceb1c4b3de7e5fe27a2154c8f1129f1a4ecb48e1', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...mpleteness_verified": false, "assay_validated": false, "probe_ready": false, "orderable": false, "reportable": false}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+_______________ test_counterevidence_is_not_clinical_acceptance ________________
+
+    def test_counterevidence_is_not_clinical_acceptance():
+        doc, raw, payload, _ = fixture()
+        payload["records"][0]["interpretation_review"] = {"counterevidence_pmids": ["25661582"], "causal_disease_claim_accepted": True}
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': '1c19e9395a8a600361bc59fc63c40b99b4c4ae6e5f96b469c4518f0a767c5d8a', 'taxon': 'NCBITaxon:9615'}
+raw = {'1c19e9395a8a600361bc59fc63c40b99b4c4ae6e5f96b469c4518f0a767c5d8a': b'{"schema": "canine-all-ngs-route-requirements-1...7493a9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+______ test_two_300bp_reads_do_not_establish_a_contiguous_600bp_fragment _______
+
+    def test_two_300bp_reads_do_not_establish_a_contiguous_600bp_fragment():
+        doc, raw, payload, constraints = fixture(); constraints["sequencing"]["PE300_is_guaranteed_contiguous_600bp"] = True
+        rebind(doc, raw, constraints, "method_constraints_snapshot_sha256")
+        payload["records"][0]["method_constraints_binding"]["sha256"] = doc["method_constraints_snapshot_sha256"]
+        rebind(doc, raw, payload)
+>       assert run(doc, raw)["overall_status"] == "rejected"
+               ^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '2b12c2ca1b812709e33300165983ec3cc8b4b269...ements_snapshot_sha256': 'f01bb2d6e8878cefcc34ae72a76c1d3ea7c10301b4c49ce8ce6e0c4c9b8a7e73', 'taxon': 'NCBITaxon:9615'}
+raw = {'2b12c2ca1b812709e33300165983ec3cc8b4b269d5424eda26e3fb6e2ad3d37e': b'{"schema": "canine-ngs-capture-constraints-1", ...9630deb10751e7a3661a66baa7bb14': b'{"event_id": "authored:1", "gene_original": "F8", "plan_kind": "X_INVERSION"}', ...}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+___ test_missing_source_bytes_require_review_and_tampered_bytes_are_rejected ___
+
+    def test_missing_source_bytes_require_review_and_tampered_bytes_are_rejected():
+        doc, raw, payload, _ = fixture(); key = payload["records"][0]["source_record_binding"]["sha256"]
+        missing = copy.copy(raw); missing.pop(key)
+>       assert run(doc, missing)["requirements_consistency_counts"]["review_required"] == 1
+               ^^^^^^^^^^^^^^^^^
+
+tests/test_canine_capture.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'format_version': 'canine-capture-1', 'method_constraints_snapshot_sha256': '3427e7307a1c1b6c5da790a9e20d9c1a6c92204a...ements_snapshot_sha256': 'a6286b14b2963e67ec388429e575e2af481e124820ec8003ae9cef06b3ecd463', 'taxon': 'NCBITaxon:9615'}
+raw = {'3427e7307a1c1b6c5da790a9e20d9c1a6c92204a9e76c6a0677bee3004d0bd58': b'{"schema": "canine-ngs-capture-constraints-1", ...mpleteness_verified": false, "assay_validated": false, "probe_ready": false, "orderable": false, "reportable": false}'}
+
+    def run(document, raw):
+>       from bioevidence_validator.canine_capture import validate_canine_capture
+E       ModuleNotFoundError: No module named 'bioevidence_validator.canine_capture'
+
+tests/test_canine_capture.py:52: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_canine_capture.py::test_consistent_requirements_do_not_release_an_assay
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[PE300_guarantees_complete_repeat_length]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[total_copy_number_establishes_phase]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[normal_copy_number_excludes_event]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[germline_panel_admission_approved]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[assay_validated]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[probe_ready]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[orderable]
+FAILED tests/test_canine_capture.py::test_unsupported_admission_and_inference_flags_are_rejected[reportable]
+FAILED tests/test_canine_capture.py::test_normal_dosage_and_one_junction_cannot_define_inversion
+FAILED tests/test_canine_capture.py::test_RNA_or_lesion_source_is_not_silently_a_germline_target[RNA]
+FAILED tests/test_canine_capture.py::test_RNA_or_lesion_source_is_not_silently_a_germline_target[SOMATIC]
+FAILED tests/test_canine_capture.py::test_source_kind_cannot_be_changed_to_bypass_rules
+FAILED tests/test_canine_capture.py::test_shared_retrogene_coding_reads_do_not_establish_insertion_locus
+FAILED tests/test_canine_capture.py::test_counterevidence_is_not_clinical_acceptance
+FAILED tests/test_canine_capture.py::test_two_300bp_reads_do_not_establish_a_contiguous_600bp_fragment
+FAILED tests/test_canine_capture.py::test_missing_source_bytes_require_review_and_tampered_bytes_are_rejected

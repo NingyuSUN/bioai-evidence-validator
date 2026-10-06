@@ -179,6 +179,9 @@ The `canine-panel-validation` specialization branch also provides an offline
 canine variant/reference consistency command. See
 [the contract and limits](docs/CANINE_PANEL_VALIDATION.md). Its engineering
 report does not make evidence-admission or assay-performance decisions.
+The branch also adds `canine-capture` for source-bound NGS requirements and
+independent endpoint/context replay. See [the capture contract](docs/CANINE_CAPTURE_VALIDATION.md)
+and [the 154-route frozen example](examples/canine_capture/README.md).
 
 ```bash
 pip install bioai-evidence-validator

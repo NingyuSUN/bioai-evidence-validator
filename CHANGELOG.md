@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- On the canine specialization branch, add `canine-capture`: offline source-byte
+  verification of 154 NGS draft routes, method constraints, reciprocal inversion
+  and compound-phase requirements, independent signed TSD endpoint arithmetic,
+  oriented reference-context replay and WT template reconstruction. Preserve
+  complete-window differences, missing anchors, unknown insert payloads and
+  disease-association conflicts. Proposed mutant templates remain unverified;
+  no ordering, clinical interpretation or assay-performance approval is granted.
+
 - On the `canine-panel-validation` branch, add an offline canine panel consistency
   command. It consumes complete strings in a documented RefSeq genomic subset,
   checks both endpoints and actual pinned source bases, and compares whole

@@ -93,3 +93,11 @@ with tempfile.TemporaryDirectory() as directory:
     run("canine-panel", root / "examples/canine_panel/panel.json", "--snapshot-dir",
         root / "examples/canine_panel/sources", expected=2)
 print("Installed wheel: six real canine reference cases and nine authored fault controls replay; no assay admission.")
+
+assert (package / "canine_capture.py").exists()
+report = json.loads(run("canine-capture", root / "examples/canine_capture/panel.json", "--snapshot-dir",
+                       root / "examples/canine_capture/sources", expected=2).stdout)
+assert report["source_route_count"] == 154
+assert report["requirements_consistency_counts"]["verified"] == 154
+assert not any(report[k] for k in ["assay_validated", "probe_ready", "orderable", "reportable"])
+print("Installed wheel: 154 canine NGS routes and pinned contexts replay; assay holds retained.")

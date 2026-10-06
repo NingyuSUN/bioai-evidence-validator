@@ -1,0 +1,667 @@
+{
+  "note": "Hashes apply to decompressed original bytes. These are source-derived development fixtures, not sample truth or independently adjudicated clinical labels.",
+  "schema": "canine-capture-snapshot-export-1",
+  "snapshots": {
+    "00134d37ee1fa7969ae7bae42c5ead75b038f6a65b3b810c4e347ddb4b8406e7": {
+      "gzip_bytes": 7002,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_757.json"
+      ],
+      "uncompressed_bytes": 23540
+    },
+    "048ecc7e2bfec455aa0d1faae9c82e35d4b5f33dabb7c2e3a105759095ccbc70": {
+      "gzip_bytes": 8048,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_697.json"
+      ],
+      "uncompressed_bytes": 28385
+    },
+    "0ba13bbbaf1a9678030d021ce609a0937502cfdcafa37b946238dd48e57e837b": {
+      "gzip_bytes": 7679,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_756.json"
+      ],
+      "uncompressed_bytes": 28954
+    },
+    "0e03ed960552793a58a6a30beec652d6b732fec0bef6e1769c35bae372691f1b": {
+      "gzip_bytes": 8753,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1923.json"
+      ],
+      "uncompressed_bytes": 32017
+    },
+    "111d6467934994afbbc5a922fc4b208ffbe02392d6bd948deef24518e6699a04": {
+      "gzip_bytes": 7978,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1107.json"
+      ],
+      "uncompressed_bytes": 28185
+    },
+    "1383699dae7dd58f3a2c5af88b81192ce4cc4a06fa1c3d86c3db5bdf7701aeda": {
+      "gzip_bytes": 6523,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_638.json"
+      ],
+      "uncompressed_bytes": 20666
+    },
+    "1c61cb5720514a6466499510286bfb2c8e27bb9ffe3fe918a9b5de4a7bbe2402": {
+      "gzip_bytes": 60016,
+      "original_paths": [
+        "research/panel_draft_v2_20261006/data/disease_event_registry.tsv"
+      ],
+      "uncompressed_bytes": 273712
+    },
+    "2058dc9361be97ad380c315576124fed0820a8514bed7000994e6ede95f619a7": {
+      "gzip_bytes": 6767,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_631.json"
+      ],
+      "uncompressed_bytes": 22294
+    },
+    "233a05fdbeb0209dcf3bf2a11dcdc2f77f65a8a1bb075abc8cd4ba986a6c4e74": {
+      "gzip_bytes": 7688,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1171.json"
+      ],
+      "uncompressed_bytes": 25474
+    },
+    "24fedc4b13cbf21980a6e77d97572fbfb177fee8fc42d27b42a02fe431e18bb0": {
+      "gzip_bytes": 8180,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_704.json"
+      ],
+      "uncompressed_bytes": 27552
+    },
+    "257ffc0fa80845c7f9a56e2234d272012655c4450f53bbdd267a1ea7e08fb0f9": {
+      "gzip_bytes": 8168,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_705.json"
+      ],
+      "uncompressed_bytes": 27512
+    },
+    "2585a39efea03b213a1054577ae18c706c88894d4352e8824adf193259a76594": {
+      "gzip_bytes": 7080,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/CAN-WISDOM-5.json"
+      ],
+      "uncompressed_bytes": 22864
+    },
+    "2647f414339e2ade1a606c8bafbdf56075890c26c7f97129f12200c3b3ab15eb": {
+      "gzip_bytes": 892,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1687_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2204
+    },
+    "2871c2142547064a0fc0871afbfea17ae28c234b1085dce84084abcb2263646c": {
+      "gzip_bytes": 7929,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1104.json"
+      ],
+      "uncompressed_bytes": 27962
+    },
+    "2a1ccf35d5cd84d19050f8f3a66e0dff643d084ee0bc9439b89716c73353ceeb": {
+      "gzip_bytes": 6594,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_424.json"
+      ],
+      "uncompressed_bytes": 21864
+    },
+    "2b54fc27aa32359844af0d98955db715276e10df080704b9c2f66b1ee895b6bc": {
+      "gzip_bytes": 848,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1253_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2152
+    },
+    "2c4051fd278473525ec3adfc9e5106cb6ea85d927872763a98f09b0c8f7ed67d": {
+      "gzip_bytes": 8407,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_925.json"
+      ],
+      "uncompressed_bytes": 32116
+    },
+    "305bcd991fd0daf06f64668bb5b239623301c7db8bea811f532bf5230a74b51f": {
+      "gzip_bytes": 849,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1192_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2152
+    },
+    "32a20398c85bba0f8fa17262f8adc2cf36ac4355cb0c2823cac5944983ebc7c5": {
+      "gzip_bytes": 8630,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1138.json"
+      ],
+      "uncompressed_bytes": 35180
+    },
+    "33bb35c300d9dd7b5baec449cfcab6c1275ac43ff0e782a2121c193bed85f462": {
+      "gzip_bytes": 854,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_705_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2155
+    },
+    "3538e630214157619926659ed50b230772e5afaed770902d338034c3a7da05c9": {
+      "gzip_bytes": 532755,
+      "original_paths": [
+        "research/ngs_all_routes_20261006/data/ngs_event_requirements.json"
+      ],
+      "uncompressed_bytes": 4153219
+    },
+    "36c30941972cdeb9cc2f5757a7a63e4b61bb9f08da5b8851e5e7a097a286db72": {
+      "gzip_bytes": 7936,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1103.json"
+      ],
+      "uncompressed_bytes": 28031
+    },
+    "3cbf9de2fba55dc9417abae1aa6a95e4d03a8ffb17b77ce6e0f5ff1eeb365c57": {
+      "gzip_bytes": 8064,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1300.json"
+      ],
+      "uncompressed_bytes": 28126
+    },
+    "3d590b5aa301e702894205a680291dc700044f70994069a5b50d260966a9759a": {
+      "gzip_bytes": 10509,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1934.json"
+      ],
+      "uncompressed_bytes": 31902
+    },
+    "4104ae5a1ac57bfc3f24c175a13bf377d20a4acaf63331bfc244e958e3190807": {
+      "gzip_bytes": 830,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1138_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "42e02b1252d5947ce5574068ea2422a685a2813708a99623fb3b191090a0dcc9": {
+      "gzip_bytes": 8779,
+      "original_paths": [
+        "research/ngs_capture_resume_20261006/data/target_context_mapping.json"
+      ],
+      "uncompressed_bytes": 71011
+    },
+    "435a1b7dda10b8026538e0a8bc30d17360996bd8f77b3c5a82a5492623d57f93": {
+      "gzip_bytes": 6829,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_363.json"
+      ],
+      "uncompressed_bytes": 22451
+    },
+    "44a05d0765c9f8d0e5cba5e65f5762619fa5641981a7157acf34e68d2da8eb7e": {
+      "gzip_bytes": 8632,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_855.json"
+      ],
+      "uncompressed_bytes": 31275
+    },
+    "44f6ad0c33605b5132042e84029887df3d0cc3a16e49aa9d645e925bfe9dbbdd": {
+      "gzip_bytes": 13012,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/runtime/target_context_sequences.json"
+      ],
+      "uncompressed_bytes": 40481
+    },
+    "480d56eab4cef19639f7864b1e5082160ce9dd478bddba7804daefdf49e91bb4": {
+      "gzip_bytes": 6457,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_690.json"
+      ],
+      "uncompressed_bytes": 20627
+    },
+    "493fe0b8b4e89468cd5a32af9de7d9189cec2550ba17f9ee8c3296e07df49d18": {
+      "gzip_bytes": 8332,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1192.json"
+      ],
+      "uncompressed_bytes": 28555
+    },
+    "49b6643c07b5ef37db63daa6d89d2c4a4e7b2dd44690a6e33526549f551025c6": {
+      "gzip_bytes": 852,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_699_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "4ad52a0addf1f4d70cd08bf9ec7c4a88aa43dc6715002a61d47539d470e0fa28": {
+      "gzip_bytes": 8366,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1361.json"
+      ],
+      "uncompressed_bytes": 30048
+    },
+    "4d407ead2b8351dbeaf0f9a27eac6e754c707f4424742fef8cd80e0af53412af": {
+      "gzip_bytes": 6256,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_681.json"
+      ],
+      "uncompressed_bytes": 19755
+    },
+    "4ffadb7a8a1ed0a95c53fa25b38f125d9430eb1fd0737d15d4337aac96bd42d7": {
+      "gzip_bytes": 7163,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_754.json"
+      ],
+      "uncompressed_bytes": 26109
+    },
+    "55c0c75c41c44801f289fbbc0af4eee5920dadb04c2bd885fcb2626bbe6f2f77": {
+      "gzip_bytes": 8089,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_699.json"
+      ],
+      "uncompressed_bytes": 27173
+    },
+    "63f3901366ae9199a97788a40302c3cecf8b4da49120a322f20e74e14d147c1f": {
+      "gzip_bytes": 8528,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1687.json"
+      ],
+      "uncompressed_bytes": 30792
+    },
+    "64a6b4f070f4987ab7e516aaa26d7d750efecddc9b22083f833d2fdfd952bad5": {
+      "gzip_bytes": 7771,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_701.json"
+      ],
+      "uncompressed_bytes": 26159
+    },
+    "65670efc31dd1a8ebb3d2422d35e234996d694dea7f6a3765be03a373c9c3332": {
+      "gzip_bytes": 8546,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_694.json"
+      ],
+      "uncompressed_bytes": 30751
+    },
+    "66bfdc2fac991b420904f6e7c6ff090a4128dd794f474992c43faf0d6e793829": {
+      "gzip_bytes": 6466,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_698.json"
+      ],
+      "uncompressed_bytes": 19935
+    },
+    "6bfe309fbb3ea4a7bbbd8e402e273cac8aa3608a6f94724b391824a6762ee494": {
+      "gzip_bytes": 23354,
+      "original_paths": [
+        "research/ngs_capture_resume_20261006/validation/target_context_checks.json"
+      ],
+      "uncompressed_bytes": 230658
+    },
+    "72a5f8e324295f1b9f6b319a5f59313dc3461124a2dd43e391c4c597d5e8ab46": {
+      "gzip_bytes": 6437,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1264.json"
+      ],
+      "uncompressed_bytes": 20300
+    },
+    "740955e2afbd36da521bfe9b03fda4cd217517786f832da3806bcf51287c3a42": {
+      "gzip_bytes": 8538,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_710.json"
+      ],
+      "uncompressed_bytes": 31977
+    },
+    "75ca43647cc0a07353796d10a347ae79cbb0c3f62ab748aae83d441e819f6f0b": {
+      "gzip_bytes": 6555,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_633.json"
+      ],
+      "uncompressed_bytes": 20690
+    },
+    "75cc71d494166ceb04ad8964ec92dd2f246920bee2652942d457e30368b6efb1": {
+      "gzip_bytes": 7889,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1323.json"
+      ],
+      "uncompressed_bytes": 25858
+    },
+    "76bad8e166f9b5509af2d8c364442a715b1e4592aeeacffc65b2d0ddfc8e1778": {
+      "gzip_bytes": 8639,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_733.json"
+      ],
+      "uncompressed_bytes": 32113
+    },
+    "7914d55b7879980c02e1f4e52fcb5856a4e7e6079e766bbd817b5c9e128d43fc": {
+      "gzip_bytes": 8622,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1706.json"
+      ],
+      "uncompressed_bytes": 30400
+    },
+    "82f11994db7fbb9a27b39a8a3b02f8b7650a8d957e20ee0a0c20f3366886add6": {
+      "gzip_bytes": 7099,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1437.json"
+      ],
+      "uncompressed_bytes": 23955
+    },
+    "84098db20e66d945949ed28d0dd02a90cbb97f60571e7e36c45457c48979a5ce": {
+      "gzip_bytes": 6485,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1771.json"
+      ],
+      "uncompressed_bytes": 20729
+    },
+    "84b10534d89df4c8a4879757940c42d9d10e93ee88340796313a21007f815047": {
+      "gzip_bytes": 879,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1706_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2205
+    },
+    "8af13a5d7ef606c564a1199af3d30e3b84472ab791742ed96332008c3f83bdfd": {
+      "gzip_bytes": 6922,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_734.json"
+      ],
+      "uncompressed_bytes": 22656
+    },
+    "8f9c1e9d289d71317089f4be46d1f3e6db21e3dafc3ec2841c963e2869b25cf7": {
+      "gzip_bytes": 6810,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1386.json"
+      ],
+      "uncompressed_bytes": 22530
+    },
+    "91df6d42428febe23eeebaab4955f53e3eb6cf7873c497540462c708dcf991e8": {
+      "gzip_bytes": 6334,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1237.json"
+      ],
+      "uncompressed_bytes": 19715
+    },
+    "93e897168773d510f94931104370663674a815a75da5be18a722e4a3fb555450": {
+      "gzip_bytes": 8406,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_943.json"
+      ],
+      "uncompressed_bytes": 28429
+    },
+    "950fa4cdd8e837a0d70183f7ec635452b2d6d7d594fd11dbd755b50adac9e1ab": {
+      "gzip_bytes": 7004,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_709.json"
+      ],
+      "uncompressed_bytes": 23450
+    },
+    "95714a39b37b59f06ede787eb38bfe342b80af9ff87c2286031acb7d6ab948b9": {
+      "gzip_bytes": 4062,
+      "original_paths": [
+        "research/ngs_capture_resume_20261006/data/proposed_junction_templates.NOT_ORDERABLE.json"
+      ],
+      "uncompressed_bytes": 32192
+    },
+    "95aef34d7fdab46a3612fcadbdbfa35ba1838c92c320dcc9e9e1757148742aa9": {
+      "gzip_bytes": 7119,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_730.json"
+      ],
+      "uncompressed_bytes": 23214
+    },
+    "986c9e33f554274082c25ba675a5de3e693c32c176a2923bab22aa0a20b20f8a": {
+      "gzip_bytes": 8459,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1487.json"
+      ],
+      "uncompressed_bytes": 31563
+    },
+    "99174ed95caf68807f712cde61baf8e6af47e6abe03235ecea18dbd23c7bcc7a": {
+      "gzip_bytes": 8823,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1880.json"
+      ],
+      "uncompressed_bytes": 44326
+    },
+    "9a8ae306cd7077ead5befe5b9740fe86fa02fcb8872095a1e0b2db9f2d2b1c48": {
+      "gzip_bytes": 830,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_703_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2142
+    },
+    "9b30f98c7c77fdafdfb436f7b23324b3542227b03fb6d4dd18191a987d2a5e2f": {
+      "gzip_bytes": 7541,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1772.json"
+      ],
+      "uncompressed_bytes": 26340
+    },
+    "9cf9822032c79e7837e81069fe661a00564537a90e5dc52808c4e847fe1d0461": {
+      "gzip_bytes": 8295,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1253.json"
+      ],
+      "uncompressed_bytes": 28594
+    },
+    "a4ffa5c1b31405c685a225f1ffa3bd2433bf3182ab1ac4597b056264e027f087": {
+      "gzip_bytes": 830,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_924_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2153
+    },
+    "a6ad76bb092078816e510f0fca66a6651d97ec15572c222cf01b093b1090de3b": {
+      "gzip_bytes": 8398,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_703.json"
+      ],
+      "uncompressed_bytes": 29299
+    },
+    "aac6a2c4754a8136e701b729eb05221e7ab8097329a31914668839e433e16a47": {
+      "gzip_bytes": 8054,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_924.json"
+      ],
+      "uncompressed_bytes": 27163
+    },
+    "aca6c3767fe379d77d1a4e3ed8678dd06a25ee622be7b755a51db7b143167b04": {
+      "gzip_bytes": 6542,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1936.json"
+      ],
+      "uncompressed_bytes": 20809
+    },
+    "af86b0d0275b3d38e2963f9b41dbbefacc76d66704c54f866444d69def6b55cd": {
+      "gzip_bytes": 843,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_956_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2153
+    },
+    "af9962720d365671000cd1856ef991b651213191a8773d7fe976c9724fa4e718": {
+      "gzip_bytes": 830,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_853_source_context_2002bp.fasta",
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_855_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "b5ecb5ca35ba69682809a7b5be4cd203022e5e94148ae526e75512ab340a0f5d": {
+      "gzip_bytes": 7917,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1105.json"
+      ],
+      "uncompressed_bytes": 27989
+    },
+    "c0b7ea42f62954984fdd95d97e9a3ca556148f93120fa45d4ae1d62bfc44cfe1": {
+      "gzip_bytes": 6985,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1145.json"
+      ],
+      "uncompressed_bytes": 20943
+    },
+    "c15406cb2953f75e53031c8fb6c07553fc930f126872ba87c076bf27e2ec2782": {
+      "gzip_bytes": 6682,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_637.json"
+      ],
+      "uncompressed_bytes": 21433
+    },
+    "c3623f60e645a365c25fd78e7e306adbca918a9cf23901f470deba7680a6f052": {
+      "gzip_bytes": 8014,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_708.json"
+      ],
+      "uncompressed_bytes": 26995
+    },
+    "c6957e97dcac3995fe88fbb4452ffdbefcdefdd21b04b6013ca1114964229acc": {
+      "gzip_bytes": 7249,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1744.json"
+      ],
+      "uncompressed_bytes": 25719
+    },
+    "cd2b09a6ff7331c78e641ffef716925b52973743f8efc2e3b79aacf789de886d": {
+      "gzip_bytes": 840,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_694_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "cdb71ce6218554800ea58cee5b0ec600a068040c301906be89a8b4bac5b8e77f": {
+      "gzip_bytes": 1441,
+      "original_paths": [
+        "research/ngs_capture_constraints_pe300_20261006/constraints.json"
+      ],
+      "uncompressed_bytes": 3069
+    },
+    "cf7194437273cda4f468aa29d6a2d70f64287daf36a2e68bf93c3b94588182aa": {
+      "gzip_bytes": 8141,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_819.json"
+      ],
+      "uncompressed_bytes": 27313
+    },
+    "cfc0ad29504e6b5d52f055befb0e6e6df0d68b143f397913944a4f054185d888": {
+      "gzip_bytes": 4145,
+      "original_paths": [
+        "research/cnv_sv_design_20261006/data/event_parts.tsv"
+      ],
+      "uncompressed_bytes": 29916
+    },
+    "d82f7364882f4be1c61bf56ae16e8521b21723cf2fd4eb8ab396d5c69cb1660f": {
+      "gzip_bytes": 7725,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_729.json"
+      ],
+      "uncompressed_bytes": 25148
+    },
+    "d85628a3cb740bf7bf2503de9fdeea6d58f35c87c19ae92a24b3521f8b75c17c": {
+      "gzip_bytes": 862,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_704_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2155
+    },
+    "da6aed65d2d12075027b3854b5ec3915002236311183cda0597ea7b5d76188ec": {
+      "gzip_bytes": 8508,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_853.json"
+      ],
+      "uncompressed_bytes": 30475
+    },
+    "dfa6217b6a918bc8262361d2340a0f00b8526e86888d0ca664efb8147ed0d2f6": {
+      "gzip_bytes": 7185,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1068.json"
+      ],
+      "uncompressed_bytes": 24970
+    },
+    "dff90aad4d541180f91b8f2f77b18037d969ef6a36c17ae66c6337dea757f42b": {
+      "gzip_bytes": 7590,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1858.json"
+      ],
+      "uncompressed_bytes": 26710
+    },
+    "e3fecceaf583e2dd03029faa44a5e5dc2e1eee59c73b128211dbeaefabde2c40": {
+      "gzip_bytes": 7086,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_989.json"
+      ],
+      "uncompressed_bytes": 22512
+    },
+    "e5676d25c43f2bf010647ae67ca6f1e0a1577a36c3be0ddb9088e5a5425ab55c": {
+      "gzip_bytes": 851,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1361_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2153
+    },
+    "e76ff92a578377d8ca5bb8f0cbbd9b10e3b30693172f4c70e72d6c0bc7cc7aa2": {
+      "gzip_bytes": 833,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_925_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "e79a00ba911fa29c597604afcef83382ee93bb51a9b8c0f406d8d66b23fecfb3": {
+      "gzip_bytes": 847,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_708_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2153
+    },
+    "e7f9688e0a99144082ad4b73675cb23d6b52352598b9214455f0cf0b99d44c13": {
+      "gzip_bytes": 6970,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1686.json"
+      ],
+      "uncompressed_bytes": 22797
+    },
+    "e83416207907600acd975e870ae44ea5d4984d759b3ccca937f026b508a3098b": {
+      "gzip_bytes": 7908,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_1106.json"
+      ],
+      "uncompressed_bytes": 27952
+    },
+    "e92fc1dde7801464bf859462e3896af9b43b03df703d9158ad95bf4aaa14ab51": {
+      "gzip_bytes": 878,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_1923_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2204
+    },
+    "ec2b08a7d6440220c0f65fca756863c2f0f7aa0c5e7f86e0212c24374bd28214": {
+      "gzip_bytes": 6799,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_688.json"
+      ],
+      "uncompressed_bytes": 21503
+    },
+    "efb8826dff3fca84c2387b490b903744a4bc7eeca1547892127eeabeaf3c4475": {
+      "gzip_bytes": 834,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/source_followup/windows/OMIA_819_source_context_2002bp.fasta"
+      ],
+      "uncompressed_bytes": 2154
+    },
+    "f9d16dfb0a81f9ccfcb4c34c831fbcd9639fbb3cccf90e157001330d51bbdbd1": {
+      "gzip_bytes": 6440,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_636.json"
+      ],
+      "uncompressed_bytes": 21062
+    },
+    "fa9d5dae191e6286d99a5b0c20f27e1cf7efa2c7323fe04112efdfa98e670606": {
+      "gzip_bytes": 8316,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_956.json"
+      ],
+      "uncompressed_bytes": 28461
+    },
+    "fc8dbb16026b650fe82e7cad9a3d8a57cbd935423d82092ceb04c60a85bb5603": {
+      "gzip_bytes": 7350,
+      "original_paths": [
+        "research/cnv_sv_target_checks_20261006/assay_plans/events/OMIA_680.json"
+      ],
+      "uncompressed_bytes": 24778
+    }
+  },
+  "source_panel_commit": "14735e23fdd288c56b2cabf54120edb7722dbce6",
+  "source_route_count": 154
+}

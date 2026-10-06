@@ -1,0 +1,80 @@
+{
+  "actual_source_route_count": 154,
+  "assay_validated": false,
+  "branch": "canine-panel-validation",
+  "commands": {
+    "actual154": ".venv/bin/python -m bioevidence_validator.cli canine-capture examples/canine_capture/panel.json --snapshot-dir examples/canine_capture/sources --output docs/canine_capture_checks_20261006/actual154.json",
+    "full_suite": ".venv/bin/pytest --cov",
+    "installed_wheel_suite": "PYTHONPATH=/tmp/canine-capture-installed-final .venv/bin/python tools/check_distribution.py",
+    "lint": ".venv/bin/ruff check .",
+    "preservation": "python3 research/bioevidence_capture_20261006/verify_capture.py . ../bioevidence-canine-validation research/bioevidence_capture_20261006/capture_report.json --output research/bioevidence_capture_20261006/verification.json",
+    "source_export": "python3 research/bioevidence_capture_20261006/export_snapshots.py . ../bioevidence-canine-validation/examples/canine_capture",
+    "type_check": ".venv/bin/mypy",
+    "wheel_build": "UV_CACHE_DIR=/tmp/canine-bioevidence-uv-cache uv build --offline --wheel --out-dir /tmp/canine-capture-wheel",
+    "wheel_install": "UV_CACHE_DIR=/tmp/canine-bioevidence-uv-cache uv pip install --no-deps --target /tmp/canine-capture-installed-final /tmp/canine-capture-wheel/bioai_evidence_validator-0.8.0-py3-none-any.whl"
+  },
+  "coverage_percent": 98.84,
+  "exit_codes": {
+    "actual154_cli": 2,
+    "full_suite": 0,
+    "installed_wheel_suite": 0,
+    "mypy": 0,
+    "ruff": 0,
+    "wheel_build": 0,
+    "wheel_install": 0
+  },
+  "experimental_samples_evaluated": 0,
+  "full_suite_passed": 670,
+  "implementation_sha256": {
+    "canine.py": "098e4ee6263931802e24b59dca9bf979c0e565336c1ba3654783153a1366e7ba",
+    "canine_capture.py": "9f8f8b9cb056cca09a715ced5c40c36bc3ebcf2e92c363ce0cbecf266cc0cc4b",
+    "grounding.py": "ebfe096fe6d40aa7a991eac0461252e015364ef352e50719912addc08f92e915"
+  },
+  "limitations": "Software consistency on authored controls and reused frozen development sources, not independent assay or clinical validation; no cross-platform matrix rerun.",
+  "new_capture_test_cases": 106,
+  "orderable": false,
+  "parent_commit": "7b2a8f0f7e7f189c51123849939354bffd1cea21",
+  "probe_ready": false,
+  "push_status": "NOT_PUSHED",
+  "python_version": "3.12.14",
+  "receipts": {
+    "actual154.json": {
+      "bytes": 114239,
+      "sha256": "6cd32b9c549a146483212386738a736fe00c9b802f5bcc0e907623132935d210"
+    },
+    "distribution.txt": {
+      "bytes": 497,
+      "sha256": "ff16187a43b1a5e85c4d4feacc1fa01e28456819e71fe41181996b9a907e94f5"
+    },
+    "full_suite.txt": {
+      "bytes": 2272,
+      "sha256": "cc7e58a5e5d4cd024d601a59680abe932472221bf86b54e8c7e33e8713bacd85"
+    },
+    "mypy.txt": {
+      "bytes": 44,
+      "sha256": "ca16d6d1a06c6903f5407ba5268cb8b5eb5d8c7811b7532282916ec31807c328"
+    },
+    "ruff.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "wheel_build.txt": {
+      "bytes": 111,
+      "sha256": "18245bdd37cf0af8be125a563f600d34c32dbd8e3e258d35c30937f3a41a1eff"
+    },
+    "wheel_install.txt": {
+      "bytes": 259,
+      "sha256": "1e9f250b7cc41f20e9324ce8e8ede0e25102d296136fbb921b4568f814981972"
+    }
+  },
+  "reportable": false,
+  "requirements_consistency_counts": {
+    "rejected": 0,
+    "review_required": 0,
+    "verified": 154
+  },
+  "schema": "canine-capture-software-validation-1",
+  "source_panel_commit": "14735e23fdd288c56b2cabf54120edb7722dbce6",
+  "source_snapshot_dependencies": 94,
+  "wheel_sha256": "0da2fd246b9905c5e0070d8e9a569ac01b395d9397839b76acc6bdd641a40559"
+}

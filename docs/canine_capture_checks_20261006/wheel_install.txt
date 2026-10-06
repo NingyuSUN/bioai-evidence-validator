@@ -1,0 +1,5 @@
+Using CPython 3.12.14 interpreter at: .venv/bin/python3
+Resolved 1 package in 4ms
+Prepared 1 package in 15ms
+Installed 1 package in 6ms
+ + bioai-evidence-validator==0.8.0 (from file:///tmp/canine-capture-wheel/bioai_evidence_validator-0.8.0-py3-none-any.whl)
