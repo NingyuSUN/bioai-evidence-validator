@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add the validation dossier (`docs/VALIDATION_DOSSIER.md`), structured after the seven steps of FDA's
+  draft AI credibility framework: question of interest, context of use, model risk, credibility plan,
+  execution, results with deviations, and adequacy. Identifier and citation integrity of admitted records
+  is established (0 of 721); semantic correctness is not, pending an expert audit.
 - Add `tools/reproduce.py`: one command regenerates every committed benchmark table, summary and figure
   offline (18 steps, about three minutes) and compares each with the repository; CI runs it on every
   change. It caught the ClinVar and VBO figures still captioned v0.7.0 after the release, now fixed.
