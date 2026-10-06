@@ -1,0 +1,17 @@
+{
+  "gene": "ABCB1",
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049235.1&rettype=fasta&retmode=text&seq_start=13684156&seq_stop=13684356&strand=1",
+  "reference_accession": "NC_049235.1",
+  "requested_1based_inclusive_start": 13684156,
+  "requested_1based_inclusive_end": 13684356,
+  "variant_1based_inclusive_start": 13684256,
+  "variant_1based_inclusive_end": 13684256,
+  "retrieved_at_utc": "2026-10-06T01:59:39.956953+00:00",
+  "source_service": "Official NCBI nuccore EFetch exact accession-version plus-strand interval",
+  "status": 200,
+  "bytes": 378,
+  "sha256": "ecf94bd7d6f797dcfc5c0be3f90ab01d645b841f99aa738afc7ccf9b4107ed7b",
+  "fasta": ">NC_049235.1:13684156-13684356 Canis lupus familiaris isolate Mischka breed German Shepherd chromosome 14, alternate assembly UU_Cfam_GSD_1.0, whole genome shotgun sequence\nAAACAAAAGACTCAAACCTTTCAAGTTCTTTCTTTTGTCCTCCAAAGGCAATCACAGTTCTGATTGCTGC\nTAAGACTTCTTCAGCTACTGCTCCAGCTTTTGCATAGGCCAAGAGTTCTTTATCAGTAAATGAAGATAGT\nATCTGTTTAAAAATTCAATTTCAGATCATTTAATATTCTTTAATGAAGGCAAAGCTGTATC\n\n",
+  "variant_reference_sequence": "T",
+  "sequence_sha256": "6dde1e6f878cf8058dbfe2822c8f4702604ac9ea895d4999539f0817f9ac3000"
+}

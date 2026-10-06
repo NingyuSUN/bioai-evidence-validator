@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- On the `canine-panel-validation` branch, add an offline canine panel consistency
+  command. It consumes complete strings in a documented RefSeq genomic subset,
+  checks both endpoints and actual pinned source bases, and compares whole
+  oriented source/target slices. Compound components, unknown insert bases,
+  original/corrected descriptions and held issues remain explicit. Engineering
+  status is separate from admission, pathogenicity, whole-genome specificity and
+  assay validation. Preserve decimal canine assembly names in assembly reports;
+  continue to normalize human `.pN` patch suffixes.
+
 ## 0.8.0 — AI validation: grounding, generic grounders, the feedback loop and benchmarks
 
 Bioevidence now checks AI output against pinned sources and reference releases, feeds fixable

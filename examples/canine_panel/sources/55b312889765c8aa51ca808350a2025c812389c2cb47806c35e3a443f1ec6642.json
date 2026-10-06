@@ -1,0 +1,17 @@
+{
+  "gene": "AGRN",
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_006587.4&rettype=fasta&retmode=text&seq_start=56346511&seq_stop=56346711&strand=1",
+  "reference_accession": "NC_006587.4",
+  "requested_1based_inclusive_start": 56346511,
+  "requested_1based_inclusive_end": 56346711,
+  "variant_1based_inclusive_start": 56346611,
+  "variant_1based_inclusive_end": 56346611,
+  "retrieved_at_utc": "2026-10-06T01:59:38.894473+00:00",
+  "source_service": "Official NCBI nuccore EFetch exact accession-version plus-strand interval",
+  "status": 200,
+  "bytes": 368,
+  "sha256": "96c64ec001b735957e657e0cc9e9d89cbef05d68a0b584311e462b51112ebea2",
+  "fasta": ">NC_006587.4:56346511-56346711 Canis lupus familiaris isolate Tasha breed boxer chromosome 5, alternate assembly Dog10K_Boxer_Tasha, whole genome shotgun sequence\nGCCCGTGGGCCCAGTGGTTTGCTCCTCTACAATGGGCAGAAAACAGACGGCAAGGGGGACTTTGTGTCAC\nTGGCGTTGCATGACCGCTTCTTGGAATTCCGCTATGACCTGGGCAAGGGAGCAGCGGTCATCAGGTGCGC\nCCTCGTGGCTGGGCATGGGGGTGAGGCTGGGGACACTCTGGGGTGGCCGGCTGGCAGGGCC\n\n",
+  "variant_reference_sequence": "G",
+  "sequence_sha256": "5ea8261bde4a5fc47883ea95cad088f851cf2737c69b11df89f9f098c2e308ad"
+}

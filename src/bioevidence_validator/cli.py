@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 
 from . import review as review_module
+from .canine import validate_canine_panel
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 from .grounding import SnapshotStore, SourceBytesGrounder
@@ -55,6 +56,10 @@ def parser() -> argparse.ArgumentParser:
     generate.add_argument("--output", type=Path, required=True)
     generate.add_argument("--schema", type=Path, default=default_schema_path())
     commands.add_parser("profiles", help="List built-in profiles and their use contracts")
+    canine = commands.add_parser("canine-panel", help="Check pinned canine variant source/target consistency offline; no admission or assay decision")
+    canine.add_argument("input", type=Path)
+    canine.add_argument("--snapshot-dir", type=Path, required=True)
+    canine.add_argument("--output", type=Path)
 
     review = commands.add_parser("review", help="Independent human review: agreement, adjudication, scoring")
     steps = review.add_subparsers(dest="step", required=True)
@@ -132,6 +137,20 @@ def _write_json(path: Path, value: dict) -> None:
 
 
 def _run(args) -> int:
+    if args.command == "canine-panel":
+        if args.output and (args.output.resolve() == args.input.resolve()
+                            or args.output.resolve().is_relative_to(args.snapshot_dir.resolve())):
+            raise ValueError("Output must not overwrite an input or reference snapshot")
+        document = json.loads(args.input.read_text(encoding="utf-8"),
+                              object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
+        _check_depth(document)
+        report = validate_canine_panel(document, SnapshotStore.from_directory(args.snapshot_dir))
+        if args.output:
+            _write_json(args.output, report)
+        else:
+            print(json.dumps(report, indent=2))
+        return {"verified": 0, "review_required": 2, "rejected": 1}[report["overall_status"]]
+
     if args.command == "generate-schema":
         if args.output.resolve() in {args.schema.resolve(), default_schema_path().resolve()}:
             raise ValueError("Output must not overwrite the schema")

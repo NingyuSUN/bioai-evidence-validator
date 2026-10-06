@@ -1,0 +1,64 @@
+{
+  "assay_validated": false,
+  "authored_controls": [
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "wrong_ref",
+      "observed": "rejected"
+    },
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "wrong_accession_version",
+      "observed": "rejected"
+    },
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "wrong_assembly",
+      "observed": "rejected"
+    },
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "target_shift",
+      "observed": "rejected"
+    },
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "second_endpoint",
+      "observed": "rejected"
+    },
+    {
+      "expected": "rejected",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "receipt_whole_hash",
+      "observed": "rejected"
+    },
+    {
+      "expected": "review_required",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "snapshot_hash",
+      "observed": "review_required"
+    },
+    {
+      "expected": "review_required",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "missing_source",
+      "observed": "review_required"
+    },
+    {
+      "expected": "review_required",
+      "label_origin": "AUTHORED_FAULT_ON_REAL_SOURCE_CASE",
+      "name": "retained_hold",
+      "observed": "review_required"
+    }
+  ],
+  "clinical_accuracy_assessed": false,
+  "complete_oriented_context_matches": 6,
+  "context_bases": 1219,
+  "independent_labels_available": false,
+  "source_cases": 6
+}

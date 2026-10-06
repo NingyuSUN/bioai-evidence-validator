@@ -1,0 +1,320 @@
+{
+  "admission_assessed": false,
+  "assay_validated": false,
+  "clinical_interpretation_assessed": false,
+  "engineering_status_counts": {
+    "rejected": 0,
+    "review_required": 2,
+    "verified": 4
+  },
+  "events": [
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_006587.4:g.56346611G>A",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 0,
+          "end1": 56346611,
+          "inserted_length": 1,
+          "inserted_sequence_known": true,
+          "operation": "substitution",
+          "start1": 56346611
+        }
+      ],
+      "context_length_bp": 201,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "A",
+      "declared_event_ref": "G",
+      "declared_reference_contract": {
+        "source_assembly": "Dog10K_Boxer_Tasha",
+        "source_reference": "OMIA:1921:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 56745125,
+        "target_reference": "OMIA:1921:target",
+        "target_start1": 56745125,
+        "target_strand": "+"
+      },
+      "engineering_status": "verified",
+      "event_alt": "A",
+      "event_ref": "G",
+      "findings": [],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1921",
+      "original_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_006587.4:g.56346611G>A",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    },
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_049235.1:g.13684256del",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 1,
+          "end1": 13684256,
+          "inserted_length": 0,
+          "inserted_sequence_known": true,
+          "operation": "del",
+          "start1": 13684256
+        }
+      ],
+      "context_length_bp": 201,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "",
+      "declared_event_ref": "T",
+      "declared_reference_contract": {
+        "source_assembly": "UU_Cfam_GSD_1.0",
+        "source_reference": "OMIA:1937:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 13684256,
+        "target_reference": "OMIA:1937:target",
+        "target_start1": 13684256,
+        "target_strand": "+"
+      },
+      "engineering_status": "review_required",
+      "event_alt": "",
+      "event_ref": "T",
+      "findings": [
+        {
+          "field_path": "held_reasons",
+          "message": "Held source issue retained: Catalogue type delins disagrees with the single-base deletion supported by genomic HGVS and primary evidence.",
+          "rule_id": "BEV015",
+          "severity": "review"
+        }
+      ],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1937",
+      "original_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_049235.1:g.13684256del",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    },
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_049235.1:g.490062_490075del",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 14,
+          "end1": 490075,
+          "inserted_length": 0,
+          "inserted_sequence_known": true,
+          "operation": "del",
+          "start1": 490062
+        }
+      ],
+      "context_length_bp": 214,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "",
+      "declared_event_ref": "GGGCGGCGGGCGCG",
+      "declared_reference_contract": {
+        "source_assembly": "UU_Cfam_GSD_1.0",
+        "source_reference": "OMIA:1942:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 490075,
+        "target_reference": "OMIA:1942:target",
+        "target_start1": 490062,
+        "target_strand": "+"
+      },
+      "engineering_status": "verified",
+      "event_alt": "",
+      "event_ref": "GGGCGGCGGGCGCG",
+      "findings": [],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1942",
+      "original_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_049235.1:g.490062_490075del",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    },
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_049256.1:g.23980049A>G",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 0,
+          "end1": 23980049,
+          "inserted_length": 1,
+          "inserted_sequence_known": true,
+          "operation": "substitution",
+          "start1": 23980049
+        }
+      ],
+      "context_length_bp": 201,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "G",
+      "declared_event_ref": "A",
+      "declared_reference_contract": {
+        "source_assembly": "UU_Cfam_GSD_1.0",
+        "source_reference": "OMIA:1944:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 23980049,
+        "target_reference": "OMIA:1944:target",
+        "target_start1": 23980049,
+        "target_strand": "+"
+      },
+      "engineering_status": "verified",
+      "event_alt": "G",
+      "event_ref": "A",
+      "findings": [],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1944",
+      "original_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_049256.1:g.23980049A>G",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    },
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_049254.1:g.26065244G>A",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 0,
+          "end1": 26065244,
+          "inserted_length": 1,
+          "inserted_sequence_known": true,
+          "operation": "substitution",
+          "start1": 26065244
+        }
+      ],
+      "context_length_bp": 201,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "A",
+      "declared_event_ref": "G",
+      "declared_reference_contract": {
+        "source_assembly": "UU_Cfam_GSD_1.0",
+        "source_reference": "OMIA:1945:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 26065244,
+        "target_reference": "OMIA:1945:target",
+        "target_start1": 26065244,
+        "target_strand": "+"
+      },
+      "engineering_status": "verified",
+      "event_alt": "A",
+      "event_ref": "G",
+      "findings": [],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1945",
+      "original_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_049254.1:g.26065244G>A",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    },
+    {
+      "allele_phase": "NOT_VERIFIED",
+      "assay_validated": false,
+      "candidate_hgvs": "NC_049222.1:g.114529289T>G",
+      "candidate_hgvs_status": "SUPPORTED_SUBSET_PARSED",
+      "components": [
+        {
+          "deleted_length": 0,
+          "end1": 114529289,
+          "inserted_length": 1,
+          "inserted_sequence_known": true,
+          "operation": "substitution",
+          "start1": 114529289
+        }
+      ],
+      "context_length_bp": 201,
+      "declared_event_alleles_status": "CHECKED_SUPPLIED_FIELDS_ONLY",
+      "declared_event_alt": "G",
+      "declared_event_ref": "T",
+      "declared_reference_contract": {
+        "source_assembly": "UU_Cfam_GSD_1.0",
+        "source_reference": "OMIA:1946:source",
+        "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+        "target_end1": 114529289,
+        "target_reference": "OMIA:1946:target",
+        "target_start1": 114529289,
+        "target_strand": "+"
+      },
+      "engineering_status": "review_required",
+      "event_alt": "G",
+      "event_ref": "T",
+      "findings": [
+        {
+          "field_path": "reviewed_hgvs",
+          "message": "Original and reviewed HGVS differ; correction is explicit and requires review.",
+          "rule_id": "BEV015",
+          "severity": "review"
+        },
+        {
+          "field_path": "source_hgvs",
+          "message": "Original HGVS is retained with its problem; a separate candidate correction requires review: Missing versioned accession/coordinate prefix, whitespace, or malformed HGVS.",
+          "rule_id": "BEV015",
+          "severity": "review"
+        }
+      ],
+      "hgvs_normalization": "NOT_PERFORMED",
+      "id": "OMIA:1946",
+      "original_hgvs_status": "MALFORMED_REJECTED",
+      "probe_ready": false,
+      "reportable": false,
+      "source_hgvs": "NC_049222.1:114529289T>G",
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "source_reference_status": "VERIFIED_WITHIN_PINNED_SLICE",
+      "source_target_context_status": "VERIFIED_ORIENTED_COMPLETE_SLICE",
+      "target_reference_binding": "PINNED_PRODUCER_RECEIPT_ASSERTION",
+      "whole_reference_specificity": "NOT_PERFORMED"
+    }
+  ],
+  "format_version": "canine-panel-report-1",
+  "hgvs_normalization_performed": false,
+  "implementation_sha256": {
+    "canine.py": "098e4ee6263931802e24b59dca9bf979c0e565336c1ba3654783153a1366e7ba",
+    "grounding.py": "ebfe096fe6d40aa7a991eac0461252e015364ef352e50719912addc08f92e915"
+  },
+  "input_sha256": "c555ead3b5453c55c9fdd4535530448b9b0cfa761ab01657b83374e96874368f",
+  "overall_status": "review_required",
+  "package_base_version": "0.8.0",
+  "probe_ready": false,
+  "reference_findings": [],
+  "reference_snapshot_hashes": [
+    "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055",
+    "0e58831a9e1d9ce85747cf12607bad6c31aa7786530594fce8ca6617e999c7d1",
+    "4dfb52c1f4c37c7ae80df031a62b2f098182dbcb296187bcb0259ef64e9ed6fc",
+    "55b312889765c8aa51ca808350a2025c812389c2cb47806c35e3a443f1ec6642",
+    "5e2c060ccd16e0dede87731419b9aaac31acff0a3663efaf06ddb885c59a2937",
+    "a51e2011915709807c93d1416be123d51486a72f064412d4c8e53c96a2c8358b",
+    "b8b4911b008b4e9e9bbddb0346db58803a8e19264be67c5642badc3ffff98707"
+  ],
+  "reportable": false,
+  "scope": "Pinned source/target reference consistency only; not evidence admission",
+  "validator": "canine-panel-1",
+  "whole_reference_specificity_performed": false
+}

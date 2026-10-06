@@ -316,7 +316,7 @@ class GeneGrounder:
 # Variants (HGVS on RefSeq sequences, NCBI assembly reports)
 
 HGVS = re.compile(r"^(?P<ac>(?P<kind>N[CGMRPTW]|X[MRP])_\d+)(?:\.(?P<version>\d+))?:(?P<type>[cgmnpr])\.(?P<rest>\S+)$")
-BUILD = re.compile(r"^(GRCh3[78]|GRCm3[89]|hg19|hg38)$")
+BUILD = re.compile(r"^(GRCh3[78]|GRCm3[89]|hg19|hg38|CanFam\d+(?:\.\d+)?|UU_Cfam_GSD_1\.0|Dog10K_Boxer_Tasha)$")
 ALIASES = {"hg19": "GRCh37", "hg38": "GRCh38"}
 
 
@@ -333,7 +333,9 @@ class Assemblies:
         for data in reports:
             text = data.decode("utf-8")
             match = re.search(r"^# Assembly name:\s*(\S+)", text, re.M)
-            build = (match.group(1) if match else "").split(".")[0]
+            # Human patch suffixes are aliases of their major build. A decimal
+            # in CanFam3.1 (or UU_Cfam_GSD_1.0) is part of the assembly identity.
+            build = re.sub(r"\.p\d+$", "", match.group(1) if match else "")
             for line in text.splitlines():
                 cells = line.split("\t")
                 if line.startswith("#") or len(cells) < 9 or cells[6] == "na":
@@ -352,7 +354,8 @@ class VariantGrounder:
         self.name = f"variants:{assemblies.version}"
 
     def check(self, record: dict[str, Any]) -> list[Finding]:
-        builds = {ALIASES.get(t, t) for t in record["statement"]["scope"] if BUILD.match(t)}
+        registered = {build for build, _, _ in self.assemblies.sequences.values()}
+        builds = {ALIASES.get(t, t) for t in record["statement"]["scope"] if BUILD.fullmatch(t) or t in registered}
         cited: list[tuple[str, str]] = []
         for path, entity in _entities(record):
             if entity["entity_type"] in self.types:

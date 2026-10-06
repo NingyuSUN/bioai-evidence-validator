@@ -175,6 +175,11 @@ flowchart LR
 
 ## Quickstart
 
+The `canine-panel-validation` specialization branch also provides an offline
+canine variant/reference consistency command. See
+[the contract and limits](docs/CANINE_PANEL_VALIDATION.md). Its engineering
+report does not make evidence-admission or assay-performance decisions.
+
 ```bash
 pip install bioai-evidence-validator
 bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim   # exit 2: review required

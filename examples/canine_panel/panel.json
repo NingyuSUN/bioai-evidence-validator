@@ -1,0 +1,192 @@
+{
+  "events": [
+    {
+      "event_alt": "A",
+      "event_ref": "G",
+      "gene": "AGRN",
+      "id": "OMIA:1921",
+      "source_assembly": "Dog10K_Boxer_Tasha",
+      "source_hgvs": "NC_006587.4:g.56346611G>A",
+      "source_reference": "OMIA:1921:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 56745125,
+      "target_reference": "OMIA:1921:target",
+      "target_start1": 56745125,
+      "target_strand": "+"
+    },
+    {
+      "event_alt": "",
+      "event_ref": "T",
+      "gene": "ABCB1",
+      "held_reasons": [
+        "Catalogue type delins disagrees with the single-base deletion supported by genomic HGVS and primary evidence."
+      ],
+      "id": "OMIA:1937",
+      "source_assembly": "UU_Cfam_GSD_1.0",
+      "source_hgvs": "NC_049235.1:g.13684256del",
+      "source_reference": "OMIA:1937:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 13684256,
+      "target_reference": "OMIA:1937:target",
+      "target_start1": 13684256,
+      "target_strand": "+"
+    },
+    {
+      "event_alt": "",
+      "event_ref": "GGGCGGCGGGCGCG",
+      "gene": "GJC2",
+      "id": "OMIA:1942",
+      "source_assembly": "UU_Cfam_GSD_1.0",
+      "source_hgvs": "NC_049235.1:g.490062_490075del",
+      "source_reference": "OMIA:1942:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 490075,
+      "target_reference": "OMIA:1942:target",
+      "target_start1": 490062,
+      "target_strand": "+"
+    },
+    {
+      "event_alt": "G",
+      "event_ref": "A",
+      "gene": "ALDH5A1",
+      "id": "OMIA:1944",
+      "source_assembly": "UU_Cfam_GSD_1.0",
+      "source_hgvs": "NC_049256.1:g.23980049A>G",
+      "source_reference": "OMIA:1944:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 23980049,
+      "target_reference": "OMIA:1944:target",
+      "target_start1": 23980049,
+      "target_strand": "+"
+    },
+    {
+      "event_alt": "A",
+      "event_ref": "G",
+      "gene": "CASR",
+      "id": "OMIA:1945",
+      "source_assembly": "UU_Cfam_GSD_1.0",
+      "source_hgvs": "NC_049254.1:g.26065244G>A",
+      "source_reference": "OMIA:1945:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 26065244,
+      "target_reference": "OMIA:1945:target",
+      "target_start1": 26065244,
+      "target_strand": "+"
+    },
+    {
+      "event_alt": "G",
+      "event_ref": "T",
+      "gene": "DLL3",
+      "id": "OMIA:1946",
+      "reviewed_hgvs": "NC_049222.1:g.114529289T>G",
+      "source_assembly": "UU_Cfam_GSD_1.0",
+      "source_hgvs": "NC_049222.1:114529289T>G",
+      "source_reference": "OMIA:1946:source",
+      "target_assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "target_end1": 114529289,
+      "target_reference": "OMIA:1946:target",
+      "target_start1": 114529289,
+      "target_strand": "+"
+    }
+  ],
+  "format_version": "canine-panel-1",
+  "references": [
+    {
+      "assembly": "Dog10K_Boxer_Tasha",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1921:source",
+      "sequence_id": "NC_006587.4",
+      "snapshot_sha256": "55b312889765c8aa51ca808350a2025c812389c2cb47806c35e3a443f1ec6642"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1921:target",
+      "query_key": "OMIA:1921:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr5",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    },
+    {
+      "assembly": "UU_Cfam_GSD_1.0",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1937:source",
+      "sequence_id": "NC_049235.1",
+      "snapshot_sha256": "b8b4911b008b4e9e9bbddb0346db58803a8e19264be67c5642badc3ffff98707"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1937:target",
+      "query_key": "OMIA:1937:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr14",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    },
+    {
+      "assembly": "UU_Cfam_GSD_1.0",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1942:source",
+      "sequence_id": "NC_049235.1",
+      "snapshot_sha256": "5e2c060ccd16e0dede87731419b9aaac31acff0a3663efaf06ddb885c59a2937"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1942:target",
+      "query_key": "OMIA:1942:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr14",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    },
+    {
+      "assembly": "UU_Cfam_GSD_1.0",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1944:source",
+      "sequence_id": "NC_049256.1",
+      "snapshot_sha256": "4dfb52c1f4c37c7ae80df031a62b2f098182dbcb296187bcb0259ef64e9ed6fc"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1944:target",
+      "query_key": "OMIA:1944:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr35",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    },
+    {
+      "assembly": "UU_Cfam_GSD_1.0",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1945:source",
+      "sequence_id": "NC_049254.1",
+      "snapshot_sha256": "a51e2011915709807c93d1416be123d51486a72f064412d4c8e53c96a2c8358b"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1945:target",
+      "query_key": "OMIA:1945:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr33",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    },
+    {
+      "assembly": "UU_Cfam_GSD_1.0",
+      "format": "ncbi_efetch_json",
+      "id": "OMIA:1946:source",
+      "sequence_id": "NC_049222.1",
+      "snapshot_sha256": "0e58831a9e1d9ce85747cf12607bad6c31aa7786530594fce8ca6617e999c7d1"
+    },
+    {
+      "assembly": "ROSY_CUSTOM_SHA256:8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "format": "reference_receipt_json",
+      "id": "OMIA:1946:target",
+      "query_key": "OMIA:1946:source_context_target",
+      "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+      "sequence_id": "chr1",
+      "snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055"
+    }
+  ],
+  "taxon": "NCBITaxon:9615"
+}

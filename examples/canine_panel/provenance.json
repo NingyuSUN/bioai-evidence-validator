@@ -1,0 +1,131 @@
+{
+  "derived_artifacts_license": "Repository Apache-2.0 for authored scripts, metadata and receipts; source sequences retain NCBI molecular data conditions.",
+  "ncbi_molecular_data_policy": "https://www.ncbi.nlm.nih.gov/home/about/policies/#data",
+  "ncbi_policy_summary": "NCBI places no restrictions on molecular database data use or distribution, but submitters may claim intellectual property rights; NCBI does not transfer unrestricted third-party rights.",
+  "panel_commit": "f6ffbe9909ec2a350fc320579f2a7019ddf7b3d6",
+  "producer_receipt_original_path": "runtime/reference_sequences.json",
+  "producer_receipt_snapshot_sha256": "09cbf9e9a1425e09d5cf434e845dc1fd75b65913b81c148a7a319721c1c8e055",
+  "recovery_input_sha256": "b3f64504e7fd201577aecc3d8a5d9ba4016cd15d17bc34c941d8db0dbb8a17b2",
+  "recovery_manifest_sha256": "6ef1e4f9ef8298383b980ab12d3152beece5bb7d409de69da718111fa50d50ba",
+  "reference_sha256": "8d0992f21ad606c50f197d1e755ee0005e7b1b999f928c42324d6e7f6192719d",
+  "references": [
+    {
+      "event_id": "OMIA:1921",
+      "gene": "AGRN",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "ROSY target mapping and reference matching pending parent implementation",
+        "Functional validation was not performed; penetrance and age effects not established for commercial reporting"
+      ],
+      "original_panel_path": "evidence/new_small/sources/AGRN_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:38.894473+00:00",
+      "source_snapshot_sha256": "55b312889765c8aa51ca808350a2025c812389c2cb47806c35e3a443f1ec6642",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_006587.4&rettype=fasta&retmode=text&seq_start=56346511&seq_stop=56346711&strand=1"
+    },
+    {
+      "event_id": "OMIA:1937",
+      "gene": "ABCB1",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "OMIA Variant Type says delins but genomic and primary evidence say single-base deletion; retain source claim and separate reviewed type",
+        "Primary transcript ENSCAFT00805043709.1 differs from OMIA NM; preserve exact transcript IDs and equivalence proof",
+        "No transporter-function experiment or genotyped drug-toxicity case cohort reported",
+        "ROSY target matching and production assay validation pending"
+      ],
+      "original_panel_path": "evidence/new_small/sources/ABCB1_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:39.956953+00:00",
+      "source_snapshot_sha256": "b8b4911b008b4e9e9bbddb0346db58803a8e19264be67c5642badc3ffff98707",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049235.1&rettype=fasta&retmode=text&seq_start=13684156&seq_stop=13684356&strand=1"
+    },
+    {
+      "event_id": "OMIA:1942",
+      "gene": "GJC2",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "High-GC repetitive sequence requires allele-dropout and local specificity assessment",
+        "Published/OMIA protein XP_038412362.1; current exact XM_038556433.1 record references XP_038412361.1; preserve both accession claims, not auto-reassign transcript-protein pair",
+        "ROSY target allele equivalence and production assay validation pending"
+      ],
+      "original_panel_path": "evidence/new_small/sources/GJC2_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:40.994089+00:00",
+      "source_snapshot_sha256": "5e2c060ccd16e0dede87731419b9aaac31acff0a3663efaf06ddb885c59a2937",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049235.1&rettype=fasta&retmode=text&seq_start=489962&seq_stop=490175&strand=1"
+    },
+    {
+      "event_id": "OMIA:1944",
+      "gene": "ALDH5A1",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "Paper Figure 3 labels K279R using AlphaFold P51649; OMIA exact canine accession yields K255R. Protein-numbering reconciliation to the structural model remains not verified",
+        "Functional enzyme deficit not shown; targeted urine metabolites did not demonstrate SSADH deficiency",
+        "ROSY target sequence and panel assay validation pending"
+      ],
+      "original_panel_path": "evidence/new_small/sources/ALDH5A1_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:41.706511+00:00",
+      "source_snapshot_sha256": "4dfb52c1f4c37c7ae80df031a62b2f098182dbcb296187bcb0259ef64e9ed6fc",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049256.1&rettype=fasta&retmode=text&seq_start=23979949&seq_stop=23980149&strand=1"
+    },
+    {
+      "event_id": "OMIA:1945",
+      "gene": "CASR",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "OMIA Breed Border Collie overstates original purebred evidence; preserve source breed claim and record cross separately",
+        "No segregation, functional confirmation or independent cases",
+        "Heterozygous report rule unresolved",
+        "CASR primer supplementary xlsx not downloaded/read; main text method is full-exon Sanger",
+        "ROSY target allele and production assay validation pending"
+      ],
+      "original_panel_path": "evidence/new_small/sources/CASR_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:42.433474+00:00",
+      "source_snapshot_sha256": "a51e2011915709807c93d1416be123d51486a72f064412d4c8e53c96a2c8358b",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049254.1&rettype=fasta&retmode=text&seq_start=26065144&seq_stop=26065344&strand=1"
+    },
+    {
+      "event_id": "OMIA:1946",
+      "gene": "DLL3",
+      "historical_pending_note_caution": "Some extraction-time target matching notes precede the target receipt; retain history without using those notes as current status.",
+      "historical_source_review_gaps_at_extraction": [
+        "Splicing consequence predicted only; RNA/splice-functional validation not performed",
+        "Short-tail phenotype of heterozygote unresolved",
+        "Exact current target reference matching and production assay validation pending"
+      ],
+      "original_panel_path": "evidence/new_small/sources/DLL3_source_reference.json",
+      "remaining_assay_and_interpretation_gaps": [
+        "Whole-reference mismatch screen not yet complete",
+        "Final oligo and capture/PCR performance not tested",
+        "Clinical interpretation and variant/sample validation not performed this round"
+      ],
+      "source_retrieved_utc": "2026-10-06T01:59:43.272221+00:00",
+      "source_snapshot_sha256": "0e58831a9e1d9ce85747cf12607bad6c31aa7786530594fce8ca6617e999c7d1",
+      "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_049222.1&rettype=fasta&retmode=text&seq_start=114529189&seq_stop=114529389&strand=1"
+    }
+  ],
+  "source_kind": "Six real source-derived engineering cases; no independent clinical truth labels",
+  "target_assembly_label": "Custom reference identity by exact SHA; this label does not assert unmodified NCBI assembly identity"
+}

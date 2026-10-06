@@ -16,7 +16,9 @@ assert version("bioai-evidence-validator") == bioevidence_validator.__version__ 
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()
-assert not list(package.rglob("*canine*"))
+# This specialization is opt-in on the canine-panel-validation branch. Generic
+# schema, profiles, engine admission and historical examples remain unchanged.
+assert (package / "canine.py").exists()
 
 
 def run(*args, expected=0):
@@ -80,3 +82,14 @@ with tempfile.TemporaryDirectory() as directory:
     for expected in (root / "examples/clinvar_germline/results").iterdir():
         assert expected.read_bytes() == (output / expected.name).read_bytes(), expected.name
 print("Installed wheel: ClinVar case replays its committed results byte-for-byte.")
+
+with tempfile.TemporaryDirectory() as directory:
+    output = Path(directory) / "canine"
+    result = subprocess.run([sys.executable, str(root / "examples/canine_panel/run.py"), "--output", str(output)],
+                            capture_output=True, text=True, encoding="utf-8", cwd=root.parent)
+    assert result.returncode == 0, result.stderr
+    for expected in (root / "examples/canine_panel/results").iterdir():
+        assert expected.read_bytes() == (output / expected.name).read_bytes(), expected.name
+    run("canine-panel", root / "examples/canine_panel/panel.json", "--snapshot-dir",
+        root / "examples/canine_panel/sources", expected=2)
+print("Installed wheel: six real canine reference cases and nine authored fault controls replay; no assay admission.")
