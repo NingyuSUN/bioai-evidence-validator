@@ -601,6 +601,6 @@
       "schema_only": 16
     }
   },
-  "validator_version": "0.7.0",
+  "validator_version": "0.8.0",
   "variants": 5026
 }

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.8.0 — AI validation: grounding, generic grounders, the feedback loop and benchmarks
+
+Bioevidence now checks AI output against pinned sources and reference releases, feeds fixable
+errors back to the model, and is measured with six models on literature and single-cell tasks.
+
 - Add the Cell Ontology definition check (`definitions`): the presence and absence marker axioms of a
   claimed term, own and inherited, mapped to genes and compared with the subject's measurements; a
   contradiction sends the record to review (BEV026). `Ontology` now reads logical-definition relations
