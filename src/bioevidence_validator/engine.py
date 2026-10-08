@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -74,10 +75,18 @@ def load_profile(data: bytes) -> dict[str, Any]:
         raise ValueError("Profile uses must be a nonempty mapping")
     flags = {"require_human_acceptance", "allow_llm_only", "allow_string_match_only"}
     for name, use in profile["uses"].items():
-        if not nonblank(name) or not isinstance(use, dict) or set(use) != flags | {"required_evidence_types"}:
+        if (not nonblank(name) or not isinstance(use, dict)
+                or set(use) - {"verified_evidence_types", "require_independent_review"}
+                != flags | {"required_evidence_types"}):
             raise ValueError(f"Invalid or incomplete use configuration: {name!r}")
+        if type(use.get("require_independent_review", False)) is not bool:
+            raise ValueError(f"Use {name!r}: require_independent_review must be true or false")
         if any(type(use[key]) is not bool for key in flags) or not _string_list(use["required_evidence_types"]):
             raise ValueError(f"Use {name!r} requires boolean flags and distinct evidence types")
+        verified = use.get("verified_evidence_types", [])
+        if not isinstance(verified, list) or (verified and not _string_list(verified)) \
+                or set(verified) - set(use["required_evidence_types"]):
+            raise ValueError(f"Use {name!r}: verified_evidence_types must be distinct required evidence types")
     return profile
 
 
@@ -137,8 +146,12 @@ def _integrity_findings(record: dict, profile: dict) -> list[Finding]:
     return findings
 
 
-def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
-    """Fixed evidence checks plus declarative use contracts; no domain dispatch."""
+def evaluate_profile(record: dict, profile: dict, verified: set[str] | None = None) -> list[Finding]:
+    """Fixed evidence checks plus declarative use contracts; no domain dispatch.
+
+    `verified` holds the evidence items a grounder confirmed against their source. A required type the
+    profile lists under `verified_evidence_types` counts only through such items (BEV020 otherwise).
+    """
     findings = []
     requested = record["requested_uses"]
     statement = record["statement"]
@@ -177,6 +190,11 @@ def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
         missing = set(contract["required_evidence_types"]) - types
         if missing:
             add("BEV007", "error", "Missing supporting evidence types: " + ", ".join(sorted(missing)), "$.evidence_items", [use])
+        for kind in contract.get("verified_evidence_types", []):
+            if kind in types and not any(item_id in (verified or set()) for item_id, item in supporting.items()
+                                         if item["evidence_type"] == kind):
+                add("BEV020", "review", f"Required evidence type {kind!r} is not verified against its source.",
+                    "$.evidence_items", [use])
         # Each required evidence type must independently satisfy the quality gate.
         # An unrelated manually curated note cannot strengthen a required LLM result.
         groups = [(kind, [item for item in supporting.values() if item["evidence_type"] == kind])
@@ -193,6 +211,8 @@ def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
             if len(methods) > 1 and methods <= {"llm_extraction", "normalized_string_match"}:
                 if not (contract["allow_llm_only"] and contract["allow_string_match_only"]):
                     add("BEV013", "review", context + " mixes only LLM extraction and string matching.", "$.evidence_items", [use])
+        if contract.get("require_independent_review"):
+            findings.extend(_independent_review(record, decisions, use))
         human = {d["decision"] for d in decisions if d["reviewer"]["agent_type"] == "human" and use in d["applies_to_uses"]}
         if contract["require_human_acceptance"] and "accept" not in human:
             add("BEV010", "error", "This use requires explicit human acceptance.", "$.adjudications", [use])
@@ -201,6 +221,23 @@ def evaluate_profile(record: dict, profile: dict) -> list[Finding]:
         if "defer" in human:
             add("BEV012", "review", "A human decision is deferred for this use.", "$.adjudications", [use])
     return findings
+
+
+def _independent_review(record: dict, decisions: list[dict], use: str) -> list[Finding]:
+    """BEV021: a use that asks for independent review needs an accepting non-human reviewer that created none
+    of the evidence. Such a reviewer can only send a record to a human (by rejecting, deferring or being
+    absent); it never admits one on its own authority, and it never rejects one."""
+    authors = {item["created_by"]["id"] for item in record["evidence_items"] if item.get("created_by")}
+    if record["statement"].get("created_by"):
+        authors.add(record["statement"]["created_by"]["id"])
+    reviews = [d for d in decisions if d["reviewer"]["agent_type"] != "human" and use in d["applies_to_uses"]
+               and d["reviewer"]["id"] not in authors]
+    verdicts = {d["decision"] for d in reviews}
+    if "accept" in verdicts and verdicts <= {"accept"}:
+        return []
+    message = ("An independent reviewer did not accept this use." if reviews
+               else "This use needs an accepting review by a non-human reviewer that created none of the evidence.")
+    return [Finding("BEV021", "review", message, "$.adjudications", [use])]
 
 
 def decide_uses(requested_uses: list[str], findings: list[Finding]) -> list[dict[str, Any]]:
@@ -217,9 +254,12 @@ class RecordValidator:
     """Snapshot a profile and compile schemas once for a consistent batch.
 
     A trusted custom LinkML schema may add constraints; baseline checks always run.
-    Source bytes and reviewer identities are supplied assertions, not authenticated here.
+    Source bytes and reviewer identities are supplied assertions, not authenticated here, unless
+    grounders (see `grounding`) recompute them from pinned source snapshots.
     """
-    def __init__(self, *, profile: str | Path = "general", schema_path: Path | None = None):
+    def __init__(self, *, profile: str | Path = "general", schema_path: Path | None = None,
+                 grounders: Sequence[Any] = ()):
+        self.grounders = list(grounders)
         profile_bytes = profile_path(profile).read_bytes()
         self._profile = load_profile(profile_bytes)
         self.profile_sha256 = sha256_bytes(profile_bytes)
@@ -245,11 +285,17 @@ class RecordValidator:
         if not findings:
             findings.extend(_integrity_findings(record, self._profile))
         if not findings:
-            findings.extend(evaluate_profile(record, self._profile))
+            verified: set[str] = set()
+            for grounder in self.grounders:
+                if hasattr(grounder, "verified_items"):
+                    verified |= set(grounder.verified_items(record))
+            findings.extend(evaluate_profile(record, self._profile, verified))
+            for grounder in self.grounders:  # only structurally sound records are compared with their source
+                findings.extend(grounder.check(record))
         decisions = decide_uses(uses, findings)
         overall = ("rejected" if not decisions or any(f.severity == "error" for f in findings) else
                    "review_required" if any(x["admission_status"] == "review_required" for x in decisions) else "admitted")
-        return {
+        report = {
             "validator": "bioai-evidence-validator", "validator_version": __version__,
             "profile_id": self._profile["id"], "profile_version": self._profile["version"],
             "profile_sha256": self.profile_sha256,
@@ -259,7 +305,11 @@ class RecordValidator:
             "schema_valid": not any(f.rule_id == "SCHEMA" for f in findings),
             "overall_status": overall, "findings": [asdict(f) for f in findings], "use_decisions": decisions,
         }
+        if self.grounders:  # reports without grounding keep their exact previous shape
+            report["grounding"] = [grounder.name for grounder in self.grounders]
+        return report
 
 
-def validate_record(record: Any, *, profile: str | Path = "general", schema_path: Path | None = None) -> dict[str, Any]:
-    return RecordValidator(profile=profile, schema_path=schema_path).validate(record)
+def validate_record(record: Any, *, profile: str | Path = "general", schema_path: Path | None = None,
+                    grounders: Sequence[Any] = ()) -> dict[str, Any]:
+    return RecordValidator(profile=profile, schema_path=schema_path, grounders=grounders).validate(record)

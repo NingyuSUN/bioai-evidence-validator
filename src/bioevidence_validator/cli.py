@@ -9,9 +9,13 @@ from pathlib import Path
 
 import yaml
 
+from . import audit as audit_module
 from . import review as review_module
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
+from .grounding import SnapshotStore, SourceBytesGrounder
+from .identifiers import Assemblies, GeneGrounder, Genes, Ontology, OntologyGrounder, VariantGrounder
+from .literature import CATALOG, LiteratureGrounder, ground_record, http_fetch
 
 
 def parser() -> argparse.ArgumentParser:
@@ -22,6 +26,26 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--output", type=Path)
     validate.add_argument("--schema", type=Path, default=default_schema_path())
     validate.add_argument("--profile", default="general", help="Built-in profile name or YAML file path")
+    validate.add_argument("--snapshot-dir", type=Path,
+                          help="Directory of source snapshots named by SHA-256; recompute source hashes from them, "
+                               "and check cited publications if it holds a literature.json from `ground`")
+    validate.add_argument("--ontology", type=Path, action="append", default=[],
+                          help="A pinned OBO release; check the ontology terms the record cites (repeatable)")
+    validate.add_argument("--term-root", action="append", default=[], metavar="KIND=CURIE",
+                          help="Terms for this entity type or locator key must descend from CURIE, e.g. "
+                               "cell_type=CL:0000000 (repeatable)")
+    validate.add_argument("--genes", type=Path, help="A pinned HGNC complete set (TSV); check human gene symbols")
+    validate.add_argument("--assembly-report", type=Path, action="append", default=[],
+                          help="A pinned NCBI assembly report; check HGVS variants and genome builds (repeatable)")
+    ground = commands.add_parser("ground", help="Resolve cited publications and pin their metadata and open-access "
+                                                "full text (uses the network)")
+    ground.add_argument("input", type=Path)
+    ground.add_argument("--snapshot-dir", type=Path, required=True)
+    ground.add_argument("--output", type=Path, required=True, help="The record with source hashes pinned")
+    ground.add_argument("--email", help="Contact address for the resolvers' User-Agent (polite use)")
+    ground.add_argument("--refresh", action="store_true", help="Resolve again even if already in the catalog")
+    ground.add_argument("--resolver", choices=["europepmc", "ncbi"], default="europepmc",
+                        help="Europe PMC (with Crossref for DOIs) or NCBI E-utilities")
     build = commands.add_parser("build", help="Expand a compact YAML/JSON draft into a full record")
     build.add_argument("draft", type=Path)
     build.add_argument("--output", type=Path)
@@ -62,6 +86,29 @@ def parser() -> argparse.ArgumentParser:
     frozen.add_argument("--frozen-at", required=True, help="ISO 8601 time of the freeze")
     frozen.add_argument("--min-reviewers", type=int, default=2)
     frozen.add_argument("--output", type=Path, required=True)
+    sample = steps.add_parser("audit-sample", help="Seeded random sample of auto-admitted records for an expert audit")
+    sample.add_argument("--predictions", type=Path, required=True)
+    sample.add_argument("--method", required=True, help="The method whose routes are audited")
+    sample.add_argument("--use", required=True, help="The requested use whose admissions are audited")
+    size = sample.add_mutually_exclusive_group(required=True)
+    size.add_argument("--size", type=int, help="Admitted records to audit")
+    size.add_argument("--target", type=float,
+                      help="Audit enough admitted records to bound their error rate below this if none is wrong")
+    sample.add_argument("--confidence", type=float, default=0.95)
+    sample.add_argument("--controls", type=int, default=0,
+                        help="Records from the other routes to mix in, so auditors cannot tell the routes apart")
+    sample.add_argument("--seed", type=int, required=True)
+    sample.add_argument("--profile-id", required=True)
+    sample.add_argument("--split", default="test", choices=sorted(review_module.SPLITS))
+    sample.add_argument("--output-dir", type=Path, required=True,
+                        help="Writes audit_sheet.csv for the auditors and audit_manifest.json, which stays with you")
+    audited = steps.add_parser("audit-score", help="Error rate of each route, with an exact upper bound")
+    audited.add_argument("--manifest", type=Path, required=True)
+    audited.add_argument("--annotations", type=Path, required=True)
+    audited.add_argument("--adjudications", type=Path)
+    audited.add_argument("--min-reviewers", type=int, default=1)
+    audited.add_argument("--confidence", type=float, default=0.95)
+    audited.add_argument("--output", type=Path)
     return result
 
 
@@ -137,6 +184,18 @@ def _run(args) -> int:
             print(json.dumps(result, indent=2))
         return 0
 
+    if args.command == "ground":
+        if args.output.resolve() == args.input.resolve():
+            raise ValueError("Output must not overwrite the input record")
+        record = json.loads(args.input.read_text(encoding="utf-8"),
+                            object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
+        _check_depth(record)
+        grounded, catalog = ground_record(record, args.snapshot_dir, http_fetch(args.email), refresh=args.refresh,
+                                          resolver=args.resolver)
+        _write_json(args.output, grounded)
+        print(f"{len(catalog['works'])} publication(s) in {args.snapshot_dir / CATALOG}")
+        return 0
+
     selected_profile = profile_path(args.profile)
     protected = [args.input, args.schema, selected_profile, default_schema_path()]
     if args.output and args.output.resolve() in {p.resolve() for p in protected}:
@@ -144,7 +203,25 @@ def _run(args) -> int:
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     _check_depth(record)
-    report = validate_record(record, schema_path=args.schema, profile=args.profile)
+    grounders: list = []
+    if args.snapshot_dir:
+        grounders.append(SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir)))
+        if (args.snapshot_dir / CATALOG).exists():
+            grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
+    if args.ontology:
+        roots: dict[str, list[str]] = {}
+        for rule in args.term_root:
+            kind, _, curie = rule.partition("=")
+            if not kind or not curie:
+                raise ValueError(f"--term-root must be KIND=CURIE, not {rule!r}")
+            roots.setdefault(kind, []).append(curie)
+        grounders.append(OntologyGrounder([Ontology.from_obo(path.read_bytes()) for path in args.ontology], roots,
+                                          locator_keys=list(roots)))
+    if args.genes:
+        grounders.append(GeneGrounder(Genes.from_hgnc(args.genes.read_bytes(), args.genes.name)))
+    if args.assembly_report:
+        grounders.append(VariantGrounder(Assemblies.from_reports(path.read_bytes() for path in args.assembly_report)))
+    report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)
@@ -157,8 +234,31 @@ def _run(args) -> int:
     return 0
 
 
+def _audit_sample(args) -> int:
+    rv, au = review_module, audit_module
+    size = args.size if args.size is not None else au.sample_size(args.target, args.confidence)
+    sheet_path, manifest_path = args.output_dir / "audit_sheet.csv", args.output_dir / "audit_manifest.json"
+    if sheet_path.exists() or manifest_path.exists():
+        raise ValueError(f"{args.output_dir} already holds an audit; refusing to overwrite it")
+    sheet, manifest = au.audit_sample(rv.load_predictions(args.predictions), method=args.method, use=args.use,
+                                      size=size, seed=args.seed, profile_id=args.profile_id, controls=args.controls,
+                                      split=args.split, confidence=args.confidence,
+                                      predictions_sha256=rv.sha256_file(args.predictions))
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    rv.write_csv(sheet_path, sheet, rv.ANNOTATION_COLUMNS + rv.OPTIONAL_ANNOTATION_COLUMNS)
+    _write_json(manifest_path, manifest)
+    picked = manifest["sample"]
+    print(f"{len(sheet)} records to audit ({picked['admitted']} auto-admitted, {picked['controls']} controls) in "
+          f"{sheet_path}. If none of the auto-admitted is wrong, their error rate is below "
+          f"{100 * manifest['if_no_errors_admitted_error_below']:.2f}% at {100 * args.confidence:g}% "
+          f"confidence. Keep {manifest_path.name} from the auditors.")
+    return 0
+
+
 def _review(args) -> int:
     rv = review_module
+    if args.step == "audit-sample":
+        return _audit_sample(args)
     annotations = rv.load_annotations(args.annotations)
     if args.step == "check":
         adjudications = rv.load_adjudications(args.adjudications, annotations) if args.adjudications else []
@@ -179,8 +279,15 @@ def _review(args) -> int:
         rv.write_csv(args.output, rows, rv.ADJUDICATION_COLUMNS)
         print(f"{len(rows)} disagreement(s) to adjudicate; {len(incomplete)} unit(s) with too few reviews")
         return 0
-    adjudications = rv.load_adjudications(args.adjudications, annotations)
+    adjudications = rv.load_adjudications(args.adjudications, annotations) if args.adjudications else []
     final = rv.resolve(annotations, adjudications, min_reviewers=args.min_reviewers)
+    if args.step == "audit-score":
+        manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+        report = audit_module.audit_score(manifest, final, annotations, confidence=args.confidence)
+        if args.output:
+            _write_json(args.output, report)
+        print(audit_module.render_audit(report), end="")
+        return 0
     if args.step == "score":
         report = rv.score(final, rv.load_predictions(args.predictions), split=args.split)
         if args.output:

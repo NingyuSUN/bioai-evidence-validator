@@ -23,6 +23,22 @@ jobs:
       - name: Type-check
         run: uv run --frozen mypy
 
+  reproduce:
+    # Every committed benchmark table, summary and figure, regenerated offline and compared with the repository.
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install locked tooling
+        run: python -m pip install uv==0.12.17
+      - name: Install locked project
+        run: uv sync --frozen --extra dev
+      - name: Reproduce every result and figure
+        run: uv run --frozen --with matplotlib==3.11.2 python tools/reproduce.py
+
   verify:
     timeout-minutes: 15
     strategy:
@@ -34,6 +50,8 @@ jobs:
             python: '3.12'
           - os: ubuntu-latest
             python: '3.13'
+          - os: ubuntu-latest
+            python: '3.14'
           - os: windows-latest
             python: '3.13'
     runs-on: ${{ matrix.os }}
@@ -70,7 +88,7 @@ jobs:
         id: drafts
         uses: ./
         with:
-          files: examples/drafts/*.yaml
+          files: examples/drafts/*claim.yaml
           profile: literature-claim
           format: draft
           fail-on: rejected

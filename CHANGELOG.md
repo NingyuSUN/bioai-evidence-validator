@@ -2,9 +2,134 @@
 
 ## Unreleased
 
-- Add `evaluation/clinvar_review/model_reviewers.py`: runs Claude Code, Codex and Antigravity (Gemini)
-  over the blinded review packet, one isolated session per case with tools disabled or detected,
-  and exports their labels as protocol annotations and predictions to compare with expert labels.
+- Add the real extraction experiment (#21, `examples/civic_extraction`, `evaluation/llm_benchmark/extraction_loop.py`).
+  Six models extract clinical evidence claims on their own from 50 openly licensed papers that CIViC curated (10
+  pilot, 40 test; protocol frozen before the test split). Each claim, written in the fields of `draft-schema`,
+  goes through build, rules, grounding (the pinned paper, HGNC, the Disease Ontology), feedback, and an independent
+  model review. Test split: 198 of 714 first versions had a wrong identifier, name or quote (3% for Claude Opus
+  5.5, 48% for Claude Haiku 4.5); with feedback 663 claims were admitted instead of 489, none with such an error.
+  A seeded 60-claim sample with a labelling kit for the error taxonomy awaits experts.
+- Ontology hints offer names containing all the label's words before similar spellings, and gene findings name
+  the identifier of the symbol cited, so feedback points at the right term (both found in the extraction pilot).
+- The model harness stops a model whose account is out of quota instead of recording failed episodes, and can
+  run Claude through either Claude Code install (`--claude-host`).
+- Add audit sampling (`audit`; `bioevidence review audit-sample` and `audit-score`, #24). A seeded random
+  sample of auto-admitted records, sized from a target (`--target 0.01` audits 299 records: no error found
+  bounds the rate below 1% at 95%), with blind controls from the other routes and a manifest kept from the
+  auditors. Scoring reports each route's share of records, error rate with Wilson and exact one-sided
+  (Clopper–Pearson) bounds, and share of expert time from `minutes_spent`.
+- Add the routing evidence (`evaluation/llm_benchmark/risk_signals.py`): whether each signal that sends a
+  record to a person predicts a wrong answer. BEV004, the only one on by default, is shown on every split
+  (82% vs 33% wrong on the single-cell held-out split); the opt-in signals BEV022, BEV025 and BEV026 are not.
+- Add an audit dry run on the single-cell held-out results with the authors' labels as a stand-in auditor:
+  14 errors in 59 sampled auto-admitted records, below 34.6% at 95%; the census rate, 19.6%, lies inside.
+  `tools/reproduce.py` now runs 20 steps.
+- Add the validation dossier (`docs/VALIDATION_DOSSIER.md`), structured after the seven steps of FDA's
+  draft AI credibility framework: question of interest, context of use, model risk, credibility plan,
+  execution, results with deviations, and adequacy. Identifier and citation integrity of admitted records
+  is established (0 of 721); semantic correctness is not, pending an expert audit.
+- Add `tools/reproduce.py`: one command regenerates every committed benchmark table, summary and figure
+  offline (18 steps, about three minutes) and compares each with the repository; CI runs it on every
+  change. It caught the ClinVar and VBO figures still captioned v0.7.0 after the release, now fixed.
+- Add the funnel figure (`docs/assets/ai_validation_funnel.svg`): single-cell held-out answers, stage
+  by stage, from the first check through feedback to what was admitted and how it compares with the
+  authors' terms. Cell-type summaries now record these stages.
+## 0.8.0 — AI validation: grounding, generic grounders, the feedback loop and benchmarks
+
+Bioevidence now checks AI output against pinned sources and reference releases, feeds fixable
+errors back to the model, and is measured with six models on literature and single-cell tasks.
+
+- Add the Cell Ontology definition check (`definitions`): the presence and absence marker axioms of a
+  claimed term, own and inherited, mapped to genes and compared with the subject's measurements; a
+  contradiction sends the record to review (BEV026). `Ontology` now reads logical-definition relations
+  and gene names of protein terms. The single-cell case adds per-cluster definition panels and an
+  external split of six datasets from other studies (81 clusters). Run there with thresholds frozen on
+  the first six datasets (protocol 3), the check did not transfer. It flagged wrong annotations no better
+  than chance (47% against 42%), because several protein definitions (mast cell CCR3, neutrophil
+  CEACAM8, NK cells lacking CD3 epsilon) do not hold for transcripts. Fed back in the loop, its findings
+  turned 15 correct answers into wrong ones. Identifier errors (70 of 479 answers) were still all caught.
+  The check is marked experimental; its findings still go back to the proposer in the feedback loop.
+- Add the single-cell cell-type annotation case (`examples/singlecell_celltype`): marker tables derived
+  from six CELLxGENE datasets annotated by their authors, with the Cell Ontology, HGNC and ASCT+B pinned.
+  Benchmark scenario 3 runs six models on it, alone and in the feedback loop. In the pilot, 35 of 138 first
+  answers gave a Cell Ontology ID that belongs to another term; none was admitted. Wrong or invalid
+  annotations fell from 43% of answers to 18% of those admitted behind the gate, at the cost of half
+  the annotations going to a person. The ASCT+B cross-check proved to be noise as a conflict source.
+  Protocol 2 (contradicting markers only for mixed clusters, no ASCT+B), frozen before the 46 held-out
+  clusters were run: identifier errors in 62 of 276 answers, none admitted; in the feedback loop,
+  answers compatible with the authors' term rose from 176 to 205, wrong or invalid fell from 36% of
+  answers to 20% of those admitted, and 8% of annotations went to a person.
+- Add generic grounders that check what a record cites against pinned reference releases, with
+  messages that say what to fix: `OntologyGrounder` (ontology terms: existence, obsoletion, label,
+  kind), `GeneGrounder` (HGNC symbols, previous symbols and aliases), `VariantGrounder` (HGVS form,
+  RefSeq accession, genome build, position), `TableGrounder` (rows and values of a pinned table) and
+  `ReferenceGrounder` (a curated reference resource that contradicts the claim or its evidence).
+  New codes BEV023 (obsolete or superseded identifier), BEV024 (malformed or wrong kind) and BEV025
+  (reference conflict, review only). `bioevidence validate` gains `--ontology`, `--term-root`,
+  `--genes` and `--assembly-report`.
+- Add `feedback`, the validate–feedback–revise loop around any proposer: fixable findings go back as
+  reasons, conflicts and policy decisions go to a person unchanged, and verified evidence is carried
+  through revisions.
+- Benchmark scenario 2 (`agent_loop.py`): an agent searches PubMed, reads papers and submits a
+  decision with citations; bioevidence checks each submission and returns its reasons, and the agent
+  may revise. Five of six models cited only what they had read; Claude Haiku 4.5 misquoted in 8 of
+  16 first submissions, the gate stopped all eight, and after feedback 4 were admitted. No answer
+  with an invalid citation was admitted (0/73); 4 of 108 episodes went to a human.
+- Benchmark scenario 2b: each citation carries its stance toward the claim and the agent may decide
+  "conflicting". Stances become evidence lines, so disagreeing evidence sends a record to an expert
+  (BEV004) whatever the agent decided; verified citations stay in the record through revisions.
+  Wrong decisions admitted without review fell from 15 to 10 of 108, and 10 records went to an
+  expert as conflicting, 8 of them on the five contested claims. The rest need the counter-evidence
+  to be found: on FGFR3 G697C all six agents missed it.
+
+- Benchmark scenario 1: the literature tasks asked as a user would ask a chatbot, without rules, source
+  or tools. With only PMID and title, 32 of 49 model answers held an invented quote; with the claim
+  only, 38 of 50 cited at least one invalid paper or quote (28 of 66 citations were real PMIDs of
+  unrelated papers). Bioevidence admitted only the three answers whose citations all verified.
+- Literature grounding verifies a quote against the pinned PubMed abstract when a paper has no open
+  full text; `bioevidence ground` pins the abstract, and a record's source hash names it. The literature hallucination metric now counts
+  invented quotes only; answers without a quote are reported separately.
+
+- Add semantic checks (#31). A use may require independent review: an accepting non-human
+  reviewer that created none of the evidence, whose absence, deferral or rejection sends the use
+  to review (BEV021). `semantic.CueChecker` flags negated, hedged or non-human quotes (BEV022).
+  In the benchmark pilot, a reviewer from another vendor exposed direction flips on clear text
+  (59–63 of 63) but caught 1 of 5 natural misreadings, which sat on mixed evidence; cues flagged
+  22 of 63 correct answers.
+- Add an LLM benchmark (`evaluation/llm_benchmark`): six models (frontier and fast tiers of Claude, GPT
+  and Gemini) answer ClinVar and literature tasks with and without the source, and each answer is
+  scored alone and after bioevidence validation and grounding. Pilot sets only: with the source,
+  models quoted faithfully (165/165 literature quotes); without it they almost always abstained, and
+  grounding stopped the one reworded quote. The remaining errors were semantic (5/72 literature
+  answers the wrong way round on 2 tasks, with verbatim quotes), which text grounding cannot catch.
+- Add literature grounding (#20). `bioevidence ground` (network) resolves cited PMIDs, PMCIDs and
+  DOIs with Europe PMC, Crossref or NCBI E-utilities and pins the resolver response and any
+  open-access JATS full text; `LiteratureGrounder` (offline) checks identity, retraction, title
+  and every quote against those bytes. New codes BEV019 (retracted source) and BEV020 (evidence a
+  profile requires to be verified is not); profiles may list `verified_evidence_types`.
+  Snapshot stores read gzip-compressed snapshots.
+- Add the CIViC literature case (`examples/civic_literature`): open-access CIViC papers (CC BY or
+  CC0) and retracted papers pinned from PMC, with the issue's AI-specific negative controls
+  measured on real text.
+- Add the AI validation roadmap (`docs/AI_VALIDATION_ROADMAP.md`, tracked in #26).
+- Add an error taxonomy of 20 failure modes (`evaluation/error_taxonomy.yaml`, rendered to
+  `docs/ERROR_TAXONOMY.md`): each with its expected catching layer and a status checked
+  against the committed benchmark results.
+- The ClinVar case commits `results/faults.jsonl`, its per-case controlled-fault and
+  trust-boundary outcomes.
+- Add source grounding (#19): optional grounders recompute from pinned source snapshots what a
+  record only asserts, with new rule codes BEV014–BEV018. `SnapshotStore` and the generic
+  `SourceBytesGrounder` live in `bioevidence_validator.grounding`; `bioevidence validate
+  --snapshot-dir` recomputes source hashes from local files. Reports without grounders are
+  unchanged.
+- The VBO and ClinVar cases add domain grounders and a fourth method, full validator plus
+  grounding. New trust-boundary controls: a real but wrong VBO target, an unpinned VBO source,
+  and ClinVar records that omit dissent. Trust-boundary false admissions fall from 48/48 to
+  0/48 (VBO) and 32/32 to 0/32 (ClinVar), with no change to any real-source decision.
+- Error taxonomy statuses are now judged with grounding: no failure mode is left exposed.
+- Add Python 3.14 to the supported package classifiers and Linux CI test matrix.
+- Add admitted and rejected `dataset-label` draft examples, covered by draft and
+  installed-wheel checks.
 
 ## 0.7.0 — Expert review, quality checks, community and documentation site
 

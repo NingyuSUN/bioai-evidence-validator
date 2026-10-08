@@ -113,7 +113,12 @@ def test_full_case_replays_committed_results(tmp_path):
     faults, boundary = summary["faults"]["controlled_fault"], summary["faults"]["trust_boundary"]
     assert faults["full"]["false_admissions"] == 0 and faults["full"]["n"] == 160
     assert faults["aggregate_quality"]["false_admissions"] == 64
-    assert boundary["full"]["false_admissions"] == 16  # measured trust limit, reported rather than hidden
+    assert faults["grounded"]["false_admissions"] == 0
+    # The engine alone admits every trust-boundary case; grounding against the pinned sample admits none.
+    assert boundary["full"]["false_admissions"] == boundary["full"]["n"] == 32
+    assert boundary["grounded"]["false_admissions"] == 0
+    assert summary["grounding"] == {"grounders": ["source-bytes", "clinvar-snapshot"], "real_source_variants": 5026,
+                                    "real_source_decisions_changed": 0}
     single = summary["population_stability"]["single_submitter"]
     assert single["with_dissenting_submission"]["rate"] > 4 * single["without_dissenting_submission"]["rate"]
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))

@@ -1,0 +1,491 @@
+{
+  "analysis": "risk signals against wrong first answers",
+  "first_answers": {
+    "agent-stance-pilot": 80,
+    "celltype-external": 479,
+    "celltype-pilot": 138,
+    "celltype-test": 276,
+    "semantic-pilot": 68
+  },
+  "signals": {
+    "BEV004": {
+      "evidence": [
+        {
+          "flagged": 62,
+          "flagged_wrong": 39,
+          "flagged_wrong_rate": 0.629,
+          "flagged_wrong_wilson_95": [
+            0.5046,
+            0.7384
+          ],
+          "kind": "pilot",
+          "results": "celltype-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              1.57,
+              3.65
+            ],
+            "ratio": 2.39
+          },
+          "unflagged": 76,
+          "unflagged_wrong": 20,
+          "unflagged_wrong_rate": 0.2632,
+          "unflagged_wrong_wilson_95": [
+            0.1773,
+            0.3718
+          ],
+          "what": "Single-cell annotation, pilot (protocol 1, with ASCT+B)"
+        },
+        {
+          "flagged": 17,
+          "flagged_wrong": 14,
+          "flagged_wrong_rate": 0.8235,
+          "flagged_wrong_wilson_95": [
+            0.5897,
+            0.9381
+          ],
+          "kind": "held-out",
+          "results": "celltype-test",
+          "risk_ratio": {
+            "ci_95": [
+              1.87,
+              3.28
+            ],
+            "ratio": 2.48
+          },
+          "unflagged": 259,
+          "unflagged_wrong": 86,
+          "unflagged_wrong_rate": 0.332,
+          "unflagged_wrong_wilson_95": [
+            0.2775,
+            0.3915
+          ],
+          "what": "Single-cell annotation, held-out clusters (protocol 2)"
+        },
+        {
+          "flagged": 54,
+          "flagged_wrong": 38,
+          "flagged_wrong_rate": 0.7037,
+          "flagged_wrong_wilson_95": [
+            0.5717,
+            0.8086
+          ],
+          "kind": "external",
+          "results": "celltype-external",
+          "risk_ratio": {
+            "ci_95": [
+              1.49,
+              2.27
+            ],
+            "ratio": 1.83
+          },
+          "unflagged": 425,
+          "unflagged_wrong": 163,
+          "unflagged_wrong_rate": 0.3835,
+          "unflagged_wrong_wilson_95": [
+            0.3385,
+            0.4306
+          ],
+          "what": "Single-cell annotation, external studies (protocol 3, with definitions)"
+        },
+        {
+          "flagged": 11,
+          "flagged_wrong": 10,
+          "flagged_wrong_rate": 0.9091,
+          "flagged_wrong_wilson_95": [
+            0.6226,
+            0.9838
+          ],
+          "kind": "pilot",
+          "results": "agent-stance-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              3.21,
+              10.12
+            ],
+            "ratio": 5.7
+          },
+          "unflagged": 69,
+          "unflagged_wrong": 11,
+          "unflagged_wrong_rate": 0.1594,
+          "unflagged_wrong_wilson_95": [
+            0.0914,
+            0.2633
+          ],
+          "what": "Literature claims, agent with stances (scenario 2b)"
+        }
+      ],
+      "role": "risk",
+      "routing": "on: engine rule",
+      "signal": "Contradicting evidence line (the answer's own evidence disagrees with it)",
+      "verdict": "shown"
+    },
+    "BEV016": {
+      "evidence": [
+        {
+          "flagged": 4,
+          "flagged_wrong": 3,
+          "flagged_wrong_rate": 0.75,
+          "flagged_wrong_wilson_95": [
+            0.3006,
+            0.9544
+          ],
+          "kind": "pilot",
+          "results": "celltype-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              0.98,
+              3.27
+            ],
+            "ratio": 1.79
+          },
+          "unflagged": 134,
+          "unflagged_wrong": 56,
+          "unflagged_wrong_rate": 0.4179,
+          "unflagged_wrong_wilson_95": [
+            0.3378,
+            0.5026
+          ],
+          "what": "Single-cell annotation, pilot (protocol 1, with ASCT+B)"
+        },
+        {
+          "flagged": 3,
+          "flagged_wrong": 2,
+          "flagged_wrong_rate": 0.6667,
+          "flagged_wrong_wilson_95": [
+            0.2077,
+            0.9385
+          ],
+          "kind": "held-out",
+          "results": "celltype-test",
+          "risk_ratio": {
+            "ci_95": [
+              0.82,
+              4.2
+            ],
+            "ratio": 1.86
+          },
+          "unflagged": 273,
+          "unflagged_wrong": 98,
+          "unflagged_wrong_rate": 0.359,
+          "unflagged_wrong_wilson_95": [
+            0.3044,
+            0.4175
+          ],
+          "what": "Single-cell annotation, held-out clusters (protocol 2)"
+        }
+      ],
+      "role": "fixable",
+      "routing": "fed back to the model",
+      "signal": "A cited identifier or marker does not exist in the source",
+      "verdict": "not shown"
+    },
+    "BEV017": {
+      "evidence": [
+        {
+          "flagged": 35,
+          "flagged_wrong": 26,
+          "flagged_wrong_rate": 0.7429,
+          "flagged_wrong_wilson_95": [
+            0.5793,
+            0.8584
+          ],
+          "kind": "pilot",
+          "results": "celltype-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              1.65,
+              3.26
+            ],
+            "ratio": 2.32
+          },
+          "unflagged": 103,
+          "unflagged_wrong": 33,
+          "unflagged_wrong_rate": 0.3204,
+          "unflagged_wrong_wilson_95": [
+            0.2381,
+            0.4156
+          ],
+          "what": "Single-cell annotation, pilot (protocol 1, with ASCT+B)"
+        },
+        {
+          "flagged": 59,
+          "flagged_wrong": 48,
+          "flagged_wrong_rate": 0.8136,
+          "flagged_wrong_wilson_95": [
+            0.6962,
+            0.8926
+          ],
+          "kind": "held-out",
+          "results": "celltype-test",
+          "risk_ratio": {
+            "ci_95": [
+              2.6,
+              4.43
+            ],
+            "ratio": 3.4
+          },
+          "unflagged": 217,
+          "unflagged_wrong": 52,
+          "unflagged_wrong_rate": 0.2396,
+          "unflagged_wrong_wilson_95": [
+            0.1877,
+            0.3006
+          ],
+          "what": "Single-cell annotation, held-out clusters (protocol 2)"
+        },
+        {
+          "flagged": 69,
+          "flagged_wrong": 49,
+          "flagged_wrong_rate": 0.7101,
+          "flagged_wrong_wilson_95": [
+            0.5943,
+            0.8038
+          ],
+          "kind": "external",
+          "results": "celltype-external",
+          "risk_ratio": {
+            "ci_95": [
+              1.57,
+              2.33
+            ],
+            "ratio": 1.92
+          },
+          "unflagged": 410,
+          "unflagged_wrong": 152,
+          "unflagged_wrong_rate": 0.3707,
+          "unflagged_wrong_wilson_95": [
+            0.3254,
+            0.4185
+          ],
+          "what": "Single-cell annotation, external studies (protocol 3, with definitions)"
+        },
+        {
+          "flagged": 10,
+          "flagged_wrong": 4,
+          "flagged_wrong_rate": 0.4,
+          "flagged_wrong_wilson_95": [
+            0.1682,
+            0.6873
+          ],
+          "kind": "pilot",
+          "results": "agent-stance-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              0.69,
+              3.91
+            ],
+            "ratio": 1.65
+          },
+          "unflagged": 70,
+          "unflagged_wrong": 17,
+          "unflagged_wrong_rate": 0.2429,
+          "unflagged_wrong_wilson_95": [
+            0.1575,
+            0.355
+          ],
+          "what": "Literature claims, agent with stances (scenario 2b)"
+        }
+      ],
+      "role": "fixable",
+      "routing": "fed back to the model",
+      "signal": "The record disagrees with the source (e.g. a label that is not the term's name)",
+      "verdict": "shown"
+    },
+    "BEV022": {
+      "evidence": [
+        {
+          "flagged": 24,
+          "flagged_wrong": 1,
+          "flagged_wrong_rate": 0.0417,
+          "flagged_wrong_wilson_95": [
+            0.0074,
+            0.2024
+          ],
+          "kind": "pilot",
+          "results": "semantic-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              0.05,
+              3.87
+            ],
+            "ratio": 0.46
+          },
+          "unflagged": 44,
+          "unflagged_wrong": 4,
+          "unflagged_wrong_rate": 0.0909,
+          "unflagged_wrong_wilson_95": [
+            0.0359,
+            0.2116
+          ],
+          "what": "Literature claims, answers with the paper (semantic cues)"
+        }
+      ],
+      "role": "risk",
+      "routing": "opt-in: `semantic` cues",
+      "signal": "Semantic cue: negated, hedged or non-human quote",
+      "verdict": "not shown"
+    },
+    "BEV023": {
+      "evidence": [
+        {
+          "flagged": 2,
+          "flagged_wrong": 2,
+          "flagged_wrong_rate": 1.0,
+          "flagged_wrong_wilson_95": [
+            0.3424,
+            1.0
+          ],
+          "kind": "pilot",
+          "results": "celltype-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              1.15,
+              3.42
+            ],
+            "ratio": 1.99
+          },
+          "unflagged": 136,
+          "unflagged_wrong": 57,
+          "unflagged_wrong_rate": 0.4191,
+          "unflagged_wrong_wilson_95": [
+            0.3395,
+            0.5031
+          ],
+          "what": "Single-cell annotation, pilot (protocol 1, with ASCT+B)"
+        },
+        {
+          "flagged": 1,
+          "flagged_wrong": 1,
+          "flagged_wrong_rate": 1.0,
+          "flagged_wrong_wilson_95": [
+            0.2065,
+            1.0
+          ],
+          "kind": "held-out",
+          "results": "celltype-test",
+          "risk_ratio": {
+            "ci_95": [
+              0.92,
+              4.7
+            ],
+            "ratio": 2.08
+          },
+          "unflagged": 275,
+          "unflagged_wrong": 99,
+          "unflagged_wrong_rate": 0.36,
+          "unflagged_wrong_wilson_95": [
+            0.3056,
+            0.4183
+          ],
+          "what": "Single-cell annotation, held-out clusters (protocol 2)"
+        },
+        {
+          "flagged": 1,
+          "flagged_wrong": 1,
+          "flagged_wrong_rate": 1.0,
+          "flagged_wrong_wilson_95": [
+            0.2065,
+            1.0
+          ],
+          "kind": "external",
+          "results": "celltype-external",
+          "risk_ratio": {
+            "ci_95": [
+              0.8,
+              4.02
+            ],
+            "ratio": 1.79
+          },
+          "unflagged": 478,
+          "unflagged_wrong": 200,
+          "unflagged_wrong_rate": 0.4184,
+          "unflagged_wrong_wilson_95": [
+            0.375,
+            0.4631
+          ],
+          "what": "Single-cell annotation, external studies (protocol 3, with definitions)"
+        }
+      ],
+      "role": "fixable",
+      "routing": "fed back to the model",
+      "signal": "An obsolete identifier or a previous gene symbol",
+      "verdict": "indicative"
+    },
+    "BEV025": {
+      "evidence": [
+        {
+          "flagged": 23,
+          "flagged_wrong": 13,
+          "flagged_wrong_rate": 0.5652,
+          "flagged_wrong_wilson_95": [
+            0.3681,
+            0.7437
+          ],
+          "kind": "pilot",
+          "results": "celltype-pilot",
+          "risk_ratio": {
+            "ci_95": [
+              0.93,
+              2.16
+            ],
+            "ratio": 1.41
+          },
+          "unflagged": 115,
+          "unflagged_wrong": 46,
+          "unflagged_wrong_rate": 0.4,
+          "unflagged_wrong_wilson_95": [
+            0.3151,
+            0.4914
+          ],
+          "what": "Single-cell annotation, pilot (protocol 1, with ASCT+B)"
+        }
+      ],
+      "role": "risk",
+      "routing": "opt-in: `ReferenceGrounder`; dropped from the cell-type validator after the pilot",
+      "signal": "A pinned reference resource contradicts the claim (ASCT+B)",
+      "verdict": "not shown"
+    },
+    "BEV026": {
+      "evidence": [
+        {
+          "flagged": 88,
+          "flagged_wrong": 41,
+          "flagged_wrong_rate": 0.4659,
+          "flagged_wrong_wilson_95": [
+            0.3653,
+            0.5694
+          ],
+          "kind": "external",
+          "results": "celltype-external",
+          "risk_ratio": {
+            "ci_95": [
+              0.88,
+              1.47
+            ],
+            "ratio": 1.14
+          },
+          "unflagged": 391,
+          "unflagged_wrong": 160,
+          "unflagged_wrong_rate": 0.4092,
+          "unflagged_wrong_wilson_95": [
+            0.3616,
+            0.4586
+          ],
+          "what": "Single-cell annotation, external studies (protocol 3, with definitions)"
+        }
+      ],
+      "role": "risk",
+      "routing": "opt-in, experimental: `DefinitionGrounder`; fed back to the model",
+      "signal": "Measurements contradict the ontology's definition",
+      "verdict": "not shown"
+    }
+  },
+  "wrong_first_answers": {
+    "agent-stance-pilot": 21,
+    "celltype-external": 201,
+    "celltype-pilot": 59,
+    "celltype-test": 100,
+    "semantic-pilot": 5
+  }
+}

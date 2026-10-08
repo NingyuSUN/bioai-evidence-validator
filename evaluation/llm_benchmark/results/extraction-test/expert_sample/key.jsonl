@@ -1,0 +1,60 @@
+{"claim": 0, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["quote_not_in_paper"], "sample_id": "s001", "task_id": "x-525855cf03"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s002", "task_id": "x-1e8ef5bb90"}
+{"claim": 2, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s003", "task_id": "x-4079a5f9fe"}
+{"claim": 2, "group": "admitted, matches CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s004", "task_id": "x-4079a5f9fe"}
+{"claim": 10, "group": "stopped by the chain", "model": "gpt-astra", "problems": ["disease_label_mismatch"], "sample_id": "s005", "task_id": "x-56a43e6391"}
+{"claim": 4, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["disease_label_mismatch"], "sample_id": "s006", "task_id": "x-56a43e6391"}
+{"claim": 3, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s007", "task_id": "x-3d689864e2"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s008", "task_id": "x-56a43e6391"}
+{"claim": 0, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s009", "task_id": "x-22580c202f"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s010", "task_id": "x-56c33cd00c"}
+{"claim": 3, "group": "admitted, matches CIViC", "model": "claude-opus", "problems": [], "sample_id": "s011", "task_id": "x-1e8ef5bb90"}
+{"claim": 3, "group": "stopped by the chain", "model": "gpt-astra", "problems": ["disease_label_mismatch"], "sample_id": "s012", "task_id": "x-56a43e6391"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "gpt-astra", "problems": [], "sample_id": "s013", "task_id": "x-1a92af421d"}
+{"claim": 2, "group": "admitted, matches CIViC", "model": "gpt-astra", "problems": [], "sample_id": "s014", "task_id": "x-4b741c63bf"}
+{"claim": 5, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s015", "task_id": "x-56a43e6391"}
+{"claim": 20, "group": "admitted, matches CIViC", "model": "claude-opus", "problems": [], "sample_id": "s016", "task_id": "x-2bdf9915fd"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s017", "task_id": "x-48ca1b0c4c"}
+{"claim": 3, "group": "admitted, matches CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s018", "task_id": "x-330ddb749c"}
+{"claim": 0, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["gene_label_mismatch"], "sample_id": "s019", "task_id": "x-1c79330743"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "claude-opus", "problems": [], "sample_id": "s020", "task_id": "x-21b9165182"}
+{"claim": 7, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s021", "task_id": "x-56a43e6391"}
+{"claim": 9, "group": "admitted, beyond CIViC", "model": "gpt-astra", "problems": [], "sample_id": "s022", "task_id": "x-48ca1b0c4c"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s023", "task_id": "x-3fe3f93b9d"}
+{"claim": 2, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s024", "task_id": "x-48ca1b0c4c"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s025", "task_id": "x-1a92af421d"}
+{"claim": 3, "group": "admitted, beyond CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s026", "task_id": "x-48ca1b0c4c"}
+{"claim": 0, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["disease_label_mismatch"], "sample_id": "s027", "task_id": "x-3f5cbbf77b"}
+{"claim": 1, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["disease_label_mismatch", "quote_not_in_paper"], "sample_id": "s028", "task_id": "x-33a07e0e59"}
+{"claim": 2, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["gene_label_mismatch"], "sample_id": "s029", "task_id": "x-525855cf03"}
+{"claim": 0, "group": "stopped by the chain", "model": "gemini-flash", "problems": ["disease_label_mismatch"], "sample_id": "s030", "task_id": "x-22fb4b06c0"}
+{"claim": 14, "group": "stopped by the chain", "model": "gpt-astra", "problems": ["disease_label_mismatch"], "sample_id": "s031", "task_id": "x-56a43e6391"}
+{"claim": 2, "group": "admitted, matches CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s032", "task_id": "x-255063c20d"}
+{"claim": 18, "group": "stopped by the chain", "model": "gpt-astra", "problems": [], "sample_id": "s033", "task_id": "x-56a43e6391"}
+{"claim": 9, "group": "admitted, matches CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s034", "task_id": "x-2bdf9915fd"}
+{"claim": 9, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["disease_label_mismatch"], "sample_id": "s035", "task_id": "x-2bdf9915fd"}
+{"claim": 4, "group": "admitted, beyond CIViC", "model": "claude-opus", "problems": [], "sample_id": "s036", "task_id": "x-1ea9fa1922"}
+{"claim": 6, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["quote_not_in_paper"], "sample_id": "s037", "task_id": "x-56a43e6391"}
+{"claim": 7, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["quote_not_in_paper"], "sample_id": "s038", "task_id": "x-3fe3f93b9d"}
+{"claim": 0, "group": "admitted, matches CIViC", "model": "claude-opus", "problems": [], "sample_id": "s039", "task_id": "x-33a07e0e59"}
+{"claim": 1, "group": "admitted, beyond CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s040", "task_id": "x-1a92af421d"}
+{"claim": 4, "group": "admitted, beyond CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s041", "task_id": "x-48ca1b0c4c"}
+{"claim": 1, "group": "admitted, beyond CIViC", "model": "claude-opus", "problems": [], "sample_id": "s042", "task_id": "x-48018bfb28"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "claude-opus", "problems": [], "sample_id": "s043", "task_id": "x-5aa2014eeb"}
+{"claim": 3, "group": "admitted, beyond CIViC", "model": "claude-opus", "problems": [], "sample_id": "s044", "task_id": "x-525855cf03"}
+{"claim": 11, "group": "admitted, beyond CIViC", "model": "gpt-astra", "problems": [], "sample_id": "s045", "task_id": "x-1a92af421d"}
+{"claim": 8, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s046", "task_id": "x-2bdf9915fd"}
+{"claim": 0, "group": "admitted, beyond CIViC", "model": "claude-opus", "problems": [], "sample_id": "s047", "task_id": "x-48ca1b0c4c"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s048", "task_id": "x-56a43e6391"}
+{"claim": 1, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["gene_label_mismatch"], "sample_id": "s049", "task_id": "x-255063c20d"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "gemini-flash", "problems": [], "sample_id": "s050", "task_id": "x-4079a5f9fe"}
+{"claim": 4, "group": "admitted, beyond CIViC", "model": "gpt-astra", "problems": [], "sample_id": "s051", "task_id": "x-36c81fd585"}
+{"claim": 0, "group": "admitted, beyond CIViC", "model": "gemini-pro", "problems": [], "sample_id": "s052", "task_id": "x-3f5cbbf77b"}
+{"claim": 13, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["disease_label_mismatch"], "sample_id": "s053", "task_id": "x-2bdf9915fd"}
+{"claim": 4, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["unknown_gene_id"], "sample_id": "s054", "task_id": "x-1a92af421d"}
+{"claim": 5, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["unknown_disease_id"], "sample_id": "s055", "task_id": "x-56a43e6391"}
+{"claim": 2, "group": "admitted, matches CIViC", "model": "claude-haiku", "problems": [], "sample_id": "s056", "task_id": "x-255063c20d"}
+{"claim": 2, "group": "stopped by the chain", "model": "gpt-luna", "problems": ["disease_label_mismatch"], "sample_id": "s057", "task_id": "x-4b741c63bf"}
+{"claim": 1, "group": "admitted, matches CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s058", "task_id": "x-1d7babae80"}
+{"claim": 1, "group": "stopped by the chain", "model": "claude-haiku", "problems": ["gene_label_mismatch", "disease_label_mismatch"], "sample_id": "s059", "task_id": "x-22580c202f"}
+{"claim": 0, "group": "admitted, matches CIViC", "model": "gpt-luna", "problems": [], "sample_id": "s060", "task_id": "x-255063c20d"}

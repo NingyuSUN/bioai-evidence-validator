@@ -49,7 +49,10 @@ def test_full_example_replays_identically_and_exposes_boundaries(tmp_path):
     assert real['schema_only']['false_admissions']==24
     assert faults['aggregate_quality']['false_admissions']==64
     assert faults['full']['false_admissions']==0 and faults['full']['n']==160
-    assert boundary['full']['false_admissions']==16  # Explicitly measured trust limit, not omitted from results.
+    assert real['grounded']==real['full']  # grounding adds no false blocks on real names
+    assert faults['grounded']['false_admissions']==0 and faults['grounded']['status_counts']==faults['full']['status_counts']
+    # The engine alone admits every trust-boundary case; grounding against the pinned source admits none.
+    assert boundary['full']['false_admissions']==boundary['full']['n']==48 and boundary['grounded']['false_admissions']==0
     manifest=json.loads((outputs[0]/'manifest.json').read_text())
     for name,expected in manifest.items():assert pipeline.digest((outputs[0]/name).read_bytes())==expected
     before=(outputs[0]/'manifest.json').read_bytes()

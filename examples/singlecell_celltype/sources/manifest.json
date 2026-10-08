@@ -1,0 +1,311 @@
+{
+  "asctb": {
+    "assertions": 1027,
+    "organs": [
+      "kidney",
+      "liver",
+      "lung",
+      "pancreas",
+      "skin"
+    ],
+    "release": "ccf-releases v2.0",
+    "sha256": "351dbaacdd372af704594f4a36d889c324f807c12fd2cbc307aeba9cffcb3302"
+  },
+  "cell_ontology": {
+    "sha256": "7e19b4aef8e7fe7720b0c4474c6a5b8713c904ea9ab7b7d5d96f2cb28b8fc51f",
+    "version": "releases/2026-06-08"
+  },
+  "datasets": [
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 8444,
+      "clusters": 12,
+      "collection_doi": "10.1038/s41467-018-06318-7",
+      "collection_name": "Single cell RNA sequencing of human liver reveals distinct intrahepatic macrophage populations",
+      "dataset_id": "a43aa46b-bd16-47fe-bc3e-19a052624e79",
+      "dataset_version_id": "9681a962-f2d0-4d53-8127-7ac87f2bd799",
+      "group": "development",
+      "h5ad_sha256": "9d9c24983830f1948033c4fcf0c139e735e35e05db50e3778f64c7f8b3db7bee",
+      "markers_sha256": "fe2ff2cb67d700473d6285d4b052a1d892278cfc5377937a37152123c8c6b98d",
+      "name": "liver",
+      "panel_sha256": "4edd4b4d17ed3bdb5e59aae56733e0d2c155169a4ffc9a4a5e77c64c65192820",
+      "tissue": {
+        "label": "caudate lobe of liver",
+        "ontology_term_id": "UBERON:0001117",
+        "tissue_type": "tissue"
+      },
+      "title": "Liver",
+      "url": "https://datasets.cellxgene.cziscience.com/9681a962-f2d0-4d53-8127-7ac87f2bd799.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 6044,
+      "clusters": 18,
+      "collection_doi": "10.1073/pnas.2103240118",
+      "collection_name": "Single-cell analyses of renal cell cancers reveal insights into tumor microenvironment, cell of origin, and therapy response",
+      "dataset_id": "f801b7a9-80a6-4d09-9161-71474deb58ae",
+      "dataset_version_id": "5f0b9675-aed8-4870-8ad8-7a3f38037486",
+      "group": "development",
+      "h5ad_sha256": "3215543bd2dc490db5ef247d082632aaa12392cac536e6cad41dd7f991b33f49",
+      "markers_sha256": "a8bc60d1f3d0c6496eba01eb18f3f2ec0226f329ff4fdc52033e41486fc3a58b",
+      "name": "kidney",
+      "panel_sha256": "b4e35c41cb49cb37e2a7dceeb4d61d443972b9c07eea0c2108bf4cdf5a4026db",
+      "tissue": {
+        "label": "kidney",
+        "ontology_term_id": "UBERON:0002113",
+        "tissue_type": "tissue"
+      },
+      "title": "normal - Single-cell analyses of renal cell cancers reveal insights into tumor microenvironment, cell of origin, and therapy response",
+      "url": "https://datasets.cellxgene.cziscience.com/5f0b9675-aed8-4870-8ad8-7a3f38037486.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 5200,
+      "clusters": 10,
+      "collection_doi": "10.1016/j.cell.2021.04.028",
+      "collection_name": "Charting human development using a multi-endodermal organ atlas and organoid models",
+      "dataset_id": "ee195b7d-184d-4dfa-9b1c-51a7e601ac11",
+      "dataset_version_id": "1f896487-282d-4303-a948-3cbdd1b721b0",
+      "group": "development",
+      "h5ad_sha256": "c42a9fcf76fbc2905d8fe1fc24d29e88677298dea722fa1d7c2a268f0ad41b89",
+      "markers_sha256": "a468f9b74afc3d0b358e28c1b514c558558d49f69d688fe1758ac3348d6c6e56",
+      "name": "duodenum",
+      "panel_sha256": "aa2a0366a1d3fa6f27d05ada922287277680229eb68b82f5e8f980bb7588f078",
+      "tissue": {
+        "label": "duodenum",
+        "ontology_term_id": "UBERON:0002114",
+        "tissue_type": "tissue"
+      },
+      "title": "Adult duodenum",
+      "url": "https://datasets.cellxgene.cziscience.com/1f896487-282d-4303-a948-3cbdd1b721b0.h5ad"
+    },
+    {
+      "assay": [
+        "CEL-seq2"
+      ],
+      "cell_count": 2126,
+      "clusters": 7,
+      "collection_doi": "10.1016/j.cels.2016.09.002",
+      "collection_name": "Muraro Pancreas",
+      "dataset_id": "b07e5164-baf6-43d2-bdba-5a249d0da879",
+      "dataset_version_id": "ac56150b-add4-4336-9059-6d3d3ce17f3b",
+      "group": "development",
+      "h5ad_sha256": "183673651cfa8c473a26641d42011d43be44eb2fea44e6e6ab8e2b0065d07483",
+      "markers_sha256": "c627f49dc8fd53ee164a2fab9a818d857d695937291aa809f194b4006b1a4c7d",
+      "name": "pancreas",
+      "panel_sha256": "04149afa4ad2c3d69b62c2ae573f8ac7ae921e5cd07a6ee52b4052414ef0eb80",
+      "tissue": {
+        "label": "pancreas",
+        "ontology_term_id": "UBERON:0001264",
+        "tissue_type": "tissue"
+      },
+      "title": "A Single-Cell Transcriptome Atlas of the Human Pancreas",
+      "url": "https://datasets.cellxgene.cziscience.com/ac56150b-add4-4336-9059-6d3d3ce17f3b.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 15457,
+      "clusters": 10,
+      "collection_doi": "10.1038/s42003-020-0922-4",
+      "collection_name": "Single-cell transcriptomes of the human skin reveal age-related loss of fibroblast priming",
+      "dataset_id": "124744b8-4681-474a-9894-683896122708",
+      "dataset_version_id": "1a6bbe2b-4eed-477a-97c9-f7a74d4874d7",
+      "group": "development",
+      "h5ad_sha256": "0968cb3ccad509198e0aa37541c3f2301abcbfe81eefeec781abac80c15bc8ad",
+      "markers_sha256": "1dacf640d2c4d41b43f2b7e7d3b7a1fc13fe72ac383760d336886501afacfa1b",
+      "name": "skin",
+      "panel_sha256": "27b93845077ff60795eaaed588b0fb18a9dc08fd1b300ae0b7e2435c1cd1e020",
+      "tissue": {
+        "label": "zone of skin",
+        "ontology_term_id": "UBERON:0000014",
+        "tissue_type": "tissue"
+      },
+      "title": "Single-cell transcriptomes of the human skin reveal age-related loss of fibroblast priming",
+      "url": "https://datasets.cellxgene.cziscience.com/1a6bbe2b-4eed-477a-97c9-f7a74d4874d7.h5ad"
+    },
+    {
+      "assay": [
+        "10x 5' v1"
+      ],
+      "cell_count": 4778,
+      "clusters": 13,
+      "collection_doi": "10.1016/j.cell.2022.11.005",
+      "collection_name": "A human fetal lung cell atlas uncovers proximal-distal gradients of differentiation and key regulators of epithelial fates",
+      "dataset_id": "62315937-e268-4fa5-a032-8f7d776f3a3f",
+      "dataset_version_id": "03a99fe4-e8ce-47c6-b912-d088271cc319",
+      "group": "development",
+      "h5ad_sha256": "889617850ca9ba1ab7cec31d57bf11d6eec11b563fc07182e4f4b03695f838a3",
+      "markers_sha256": "0973035c1880e60359ca8af87b55d8fa125ff19bf059144cfc00ee98b3f2bbd3",
+      "name": "lung_t_nk_ilc",
+      "panel_sha256": "47581619b67b2cbd7cd9534044529a0d47f8bc40ae49bae9c584801db4dd0e72",
+      "tissue": {
+        "label": "lung",
+        "ontology_term_id": "UBERON:0002048",
+        "tissue_type": "tissue"
+      },
+      "title": "T, NK and ILC",
+      "url": "https://datasets.cellxgene.cziscience.com/03a99fe4-e8ce-47c6-b912-d088271cc319.h5ad"
+    },
+    {
+      "assay": [
+        "BD Rhapsody Targeted mRNA"
+      ],
+      "cell_count": 15502,
+      "clusters": 27,
+      "collection_doi": "10.1038/s41590-021-01059-0",
+      "collection_name": "Single-cell proteo-genomic reference maps of the hematopoietic system enable the purification and massive profiling of precisely defined cell states",
+      "dataset_id": "d3566d6a-a455-4a15-980f-45eb29114cab",
+      "dataset_version_id": "89982e3f-db80-4f08-8a15-acd80f106658",
+      "group": "external",
+      "h5ad_sha256": "d8778165d66e036416dbb3490443fac58971f9c5c832608999235d2faf4d8675",
+      "markers_sha256": "fefc4d5efecffd34bc1e5834e139db7ee008f1e403400505d14dc8ae575b3531",
+      "name": "blood_bone_marrow",
+      "panel_sha256": "a26148a4559f60fbcd65a70b2083cacc46cbb704627e37aeb8124dda248349d4",
+      "tissue": {
+        "label": "blood",
+        "ontology_term_id": "UBERON:0000178",
+        "tissue_type": "tissue"
+      },
+      "title": "blood and bone marrow from a healthy young donor",
+      "url": "https://datasets.cellxgene.cziscience.com/89982e3f-db80-4f08-8a15-acd80f106658.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2",
+        "10x 5' v1"
+      ],
+      "cell_count": 8753,
+      "clusters": 10,
+      "collection_doi": "10.1126/sciimmunol.abe6291",
+      "collection_name": "Single-cell analysis of human B cell maturation predicts how antibody class switching shapes selection dynamics",
+      "dataset_id": "f54647ec-0c03-4775-8dac-5a477c10a3f5",
+      "dataset_version_id": "033d8138-e31b-4e1d-9faf-539c65779a44",
+      "group": "external",
+      "h5ad_sha256": "ca644159b119bf9092e284c90df74d0420450ced4ce1a0eb9774398bb19763c1",
+      "markers_sha256": "667841e432e47092938264f7024acbaa3c36ffaee96f919fc813a653f814d2b2",
+      "name": "tonsil_t",
+      "panel_sha256": "fd4ed72d81c49ce8ea21b92a41f8b713ec44648dfd540ed61c9a8ba3116dd77e",
+      "tissue": {
+        "label": "tonsil",
+        "ontology_term_id": "UBERON:0002372",
+        "tissue_type": "tissue"
+      },
+      "title": "Human tonsil T cells scRNA",
+      "url": "https://datasets.cellxgene.cziscience.com/033d8138-e31b-4e1d-9faf-539c65779a44.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v2"
+      ],
+      "cell_count": 7803,
+      "clusters": 11,
+      "collection_doi": "10.1126/science.aat5031",
+      "collection_name": "Spatiotemporal immune zonation of the human kidney",
+      "dataset_id": "20d87640-4be8-487f-93d4-dce38378d00f",
+      "dataset_version_id": "281f6735-10c8-492e-be93-ccdc5b3d0170",
+      "group": "external",
+      "h5ad_sha256": "8dfd797cd2b668d4b2319284aa3c22a7d0ccbae4f11ec5fb32e541feeb0639fb",
+      "markers_sha256": "a84a86873fe12ce27f3c4215431c8cc3257bcfbe82829ba73dc0949ffcfbe89a",
+      "name": "kidney_immune",
+      "panel_sha256": "80c81979b9e39c50fc4545a810e88dd2b433a0c50171518ec9282aa40b7e6a79",
+      "tissue": {
+        "label": "cortex of kidney",
+        "ontology_term_id": "UBERON:0001225",
+        "tissue_type": "tissue"
+      },
+      "title": "Mature kidney dataset: immune",
+      "url": "https://datasets.cellxgene.cziscience.com/281f6735-10c8-492e-be93-ccdc5b3d0170.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v3"
+      ],
+      "cell_count": 8653,
+      "clusters": 13,
+      "collection_doi": "10.1073/pnas.2404775121",
+      "collection_name": "Cellular heterogeneity and dynamics of the human uterus in healthy premenopausal women",
+      "dataset_id": "7a419302-772d-4534-bffe-763c95b8c63d",
+      "dataset_version_id": "1ff5b228-befb-4160-a4e3-d672eeae9d8b",
+      "group": "external",
+      "h5ad_sha256": "a60d7963da9ed256114e9f3cba980d4a2527be7328a139f79fb7ee252f6f4bd5",
+      "markers_sha256": "fd69b9fe25b83db0d10a734a3636f2993d36bfcbefe3fced2ac170e0406dd93a",
+      "name": "endometrium_immune",
+      "panel_sha256": "22569977ce45b676cc24c16e90ef1ac0b33b8ce4da4c3c982ca5777cdb0e7fd3",
+      "tissue": {
+        "label": "endometrium",
+        "ontology_term_id": "UBERON:0001295",
+        "tissue_type": "tissue"
+      },
+      "title": "Immune cells from five healthy donors",
+      "url": "https://datasets.cellxgene.cziscience.com/1ff5b228-befb-4160-a4e3-d672eeae9d8b.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v3"
+      ],
+      "cell_count": 2094,
+      "clusters": 9,
+      "collection_doi": "10.1016/j.isci.2024.111628",
+      "collection_name": "Exploring the Utility of snRNA-seq in Profiling Human Bladder Tissue: A Comprehensive Comparison with scRNA-seq",
+      "dataset_id": "601c7454-17ff-432c-8e0d-902bfddb8013",
+      "dataset_version_id": "24f3b529-a9d2-4396-8173-2f8198d8a8d4",
+      "group": "external",
+      "h5ad_sha256": "dbb22a4116d1a5297e1d134d62a3155c6d998d5fee33449e31f172ec89a3033d",
+      "markers_sha256": "afca338b79b8fffe869dddf85032ef60f71d9e7eb59f70fed900f915139ab023",
+      "name": "bladder_immune",
+      "panel_sha256": "c47c21f94dd924f0bb4bffd2bf6f03f0a366dee60a88398a234bb304f681e147",
+      "tissue": {
+        "label": "dome of urinary bladder",
+        "ontology_term_id": "UBERON:8600049",
+        "tissue_type": "tissue"
+      },
+      "title": "Adult bladder immune subset",
+      "url": "https://datasets.cellxgene.cziscience.com/24f3b529-a9d2-4396-8173-2f8198d8a8d4.h5ad"
+    },
+    {
+      "assay": [
+        "10x 3' v3"
+      ],
+      "cell_count": 2199,
+      "clusters": 11,
+      "collection_doi": "10.1016/j.cell.2020.12.016",
+      "collection_name": "Spatiotemporal analysis of human intestinal development at single-cell resolution",
+      "dataset_id": "4269074c-f2c1-4d88-b2c3-0946f59d5449",
+      "dataset_version_id": "bbf977be-6c4f-4e38-bff6-045962afb641",
+      "group": "external",
+      "h5ad_sha256": "2a93a5ed182b1260da0405199b6fb7a3ec9bf3e836c831032d63a5b046a4060f",
+      "markers_sha256": "e67f10f82e2ad33b5d8a35038c6e04ced40647dedaeb58737a6a9832f111f59d",
+      "name": "fetal_intestine",
+      "panel_sha256": "b64a7d6344ebe60625f50f51677f11c712e5257bf183c7e37f67e36e7730f84b",
+      "tissue": {
+        "label": "colon",
+        "ontology_term_id": "UBERON:0001155",
+        "tissue_type": "tissue"
+      },
+      "title": "Spatiotemporal analysis of human intestinal development at single-cell resolution: Immune",
+      "url": "https://datasets.cellxgene.cziscience.com/bbf977be-6c4f-4e38-bff6-045962afb641.h5ad"
+    }
+  ],
+  "hgnc": {
+    "file": "hgnc_complete_set.txt",
+    "retrieved": "2026-09-30",
+    "sha256": "91d0ad20c34f26fb12c8cce3f80a65a6fc694f3a508040b19f6bfa29ae0d889e"
+  },
+  "key": "bioai-singlecell-celltype-v1",
+  "parameters": {
+    "definition_panel_genes": 144,
+    "min_cells": 30,
+    "min_pct": 0.25,
+    "pilot_per_dataset": 4,
+    "prompt_genes": 20,
+    "top_genes": 50
+  }
+}

@@ -12,7 +12,7 @@ from bioevidence_validator.engine import default_schema_path, profile_path, vali
 root = Path(__file__).resolve().parents[1]
 package = Path(bioevidence_validator.__file__).resolve().parent
 assert root / "src" not in package.parents
-assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.7.0"
+assert version("bioai-evidence-validator") == bioevidence_validator.__version__ == "0.8.0"
 assert default_schema_path().is_file()
 assert all(profile_path(name).is_file() for name in ("general", "literature-claim", "dataset-label"))
 assert not (package / "canine_panel_adapter.py").exists()
@@ -44,10 +44,15 @@ with tempfile.TemporaryDirectory() as directory:
     run("generate-schema", "--output", output)
     assert "BioEvidenceRecord" in json.loads(output.read_text(encoding="utf-8"))["$defs"]
 with tempfile.TemporaryDirectory() as directory:
-    for draft, expected in [("llm_claim.yaml", 2), ("reviewed_claim.yaml", 0)]:
+    for draft, profile, expected in [
+        ("llm_claim.yaml", "literature-claim", 2),
+        ("reviewed_claim.yaml", "literature-claim", 0),
+        ("dataset_label_reference.yaml", "dataset-label", 0),
+        ("dataset_label_training_unreviewed.yaml", "dataset-label", 1),
+    ]:
         output = Path(directory) / (draft + ".json")
         run("build", root / "examples/drafts" / draft, "--output", output)
-        run("validate", output, "--profile", "literature-claim", expected=expected)
+        run("validate", output, "--profile", profile, expected=expected)
     schema = json.loads(run("draft-schema", "--profile", "literature-claim").stdout)
     assert schema["properties"]["profile"] == {"const": "literature-claim"}
 record = json.loads((root / "examples/general/curated_assertion.json").read_text(encoding="utf-8"))
@@ -63,8 +68,9 @@ with tempfile.TemporaryDirectory() as directory:
     assert result.returncode == 0, result.stderr
     summary = json.loads(result.stdout)
     assert summary["cohorts"]["controlled_fault"]["full"]["false_admissions"] == 0
-    assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 16
-print("Installed wheel: real-source VBO case, required-type quality fix and explicit trust boundary verified.")
+    assert summary["cohorts"]["trust_boundary"]["full"]["false_admissions"] == 48
+    assert summary["cohorts"]["trust_boundary"]["grounded"]["false_admissions"] == 0
+print("Installed wheel: real-source VBO case, required-type quality fix and source-grounded trust boundary verified.")
 
 with tempfile.TemporaryDirectory() as directory:
     output = Path(directory) / "clinvar"

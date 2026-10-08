@@ -1,0 +1,1417 @@
+{
+  "actions": {
+    "error": 4,
+    "read": 163,
+    "search": 317,
+    "submit": 117
+  },
+  "benchmark": "llm-literature-agent-v1",
+  "episodes": 108,
+  "episodes_sha256": "885b155a598cf8f6a3a718ba7623afa252da0fbe630d44d52182782da4b3873a",
+  "median_seconds": 106.5,
+  "pooled": {
+    "agent": {
+      "answered": {
+        "events": 77,
+        "n": 108,
+        "rate": 0.713,
+        "wilson_95": [
+          0.6215,
+          0.7898
+        ]
+      },
+      "conflicting": {
+        "events": 0,
+        "n": 108,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0343
+        ]
+      },
+      "correct_decision": {
+        "events": 62,
+        "n": 108,
+        "rate": 0.5741,
+        "wilson_95": [
+          0.4799,
+          0.6632
+        ]
+      },
+      "invalid_citation": {
+        "events": 8,
+        "n": 77,
+        "rate": 0.1039,
+        "wilson_95": [
+          0.0536,
+          0.1918
+        ]
+      },
+      "only_verified_citations": {
+        "events": 69,
+        "n": 77,
+        "rate": 0.8961,
+        "wilson_95": [
+          0.8082,
+          0.9464
+        ]
+      },
+      "routed_to_human": {
+        "events": 0,
+        "n": 108,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0343
+        ]
+      },
+      "tasks": 108,
+      "wrong_direction": {
+        "events": 15,
+        "n": 108,
+        "rate": 0.1389,
+        "wilson_95": [
+          0.086,
+          0.2166
+        ]
+      }
+    },
+    "gate": {
+      "answered": {
+        "events": 69,
+        "n": 108,
+        "rate": 0.6389,
+        "wilson_95": [
+          0.545,
+          0.7233
+        ]
+      },
+      "conflicting": {
+        "events": 0,
+        "n": 108,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0343
+        ]
+      },
+      "correct_decision": {
+        "events": 55,
+        "n": 108,
+        "rate": 0.5093,
+        "wilson_95": [
+          0.4163,
+          0.6016
+        ]
+      },
+      "invalid_citation": {
+        "events": 0,
+        "n": 69,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0527
+        ]
+      },
+      "only_verified_citations": {
+        "events": 69,
+        "n": 69,
+        "rate": 1.0,
+        "wilson_95": [
+          0.9473,
+          1.0
+        ]
+      },
+      "routed_to_human": {
+        "events": 8,
+        "n": 108,
+        "rate": 0.0741,
+        "wilson_95": [
+          0.038,
+          0.1394
+        ]
+      },
+      "tasks": 108,
+      "wrong_direction": {
+        "events": 14,
+        "n": 108,
+        "rate": 0.1296,
+        "wilson_95": [
+          0.0788,
+          0.2059
+        ]
+      }
+    },
+    "loop": {
+      "answered": {
+        "events": 73,
+        "n": 108,
+        "rate": 0.6759,
+        "wilson_95": [
+          0.5829,
+          0.7568
+        ]
+      },
+      "conflicting": {
+        "events": 0,
+        "n": 108,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0343
+        ]
+      },
+      "correct_decision": {
+        "events": 58,
+        "n": 108,
+        "rate": 0.537,
+        "wilson_95": [
+          0.4433,
+          0.6282
+        ]
+      },
+      "invalid_citation": {
+        "events": 0,
+        "n": 73,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.05
+        ]
+      },
+      "only_verified_citations": {
+        "events": 73,
+        "n": 73,
+        "rate": 1.0,
+        "wilson_95": [
+          0.95,
+          1.0
+        ]
+      },
+      "routed_to_human": {
+        "events": 4,
+        "n": 108,
+        "rate": 0.037,
+        "wilson_95": [
+          0.0145,
+          0.0914
+        ]
+      },
+      "tasks": 108,
+      "wrong_direction": {
+        "events": 15,
+        "n": 108,
+        "rate": 0.1389,
+        "wilson_95": [
+          0.086,
+          0.2166
+        ]
+      }
+    }
+  },
+  "rescued_by_feedback": 4,
+  "results": {
+    "claude-haiku": {
+      "agent": {
+        "answered": {
+          "events": 16,
+          "n": 18,
+          "rate": 0.8889,
+          "wilson_95": [
+            0.672,
+            0.969
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 12,
+          "n": 18,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.4375,
+            0.8372
+          ]
+        },
+        "invalid_citation": {
+          "events": 8,
+          "n": 16,
+          "rate": 0.5,
+          "wilson_95": [
+            0.28,
+            0.72
+          ]
+        },
+        "only_verified_citations": {
+          "events": 8,
+          "n": 16,
+          "rate": 0.5,
+          "wilson_95": [
+            0.28,
+            0.72
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 4,
+          "n": 18,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.09,
+            0.4521
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 5,
+          "n": 18,
+          "rate": 0.2778,
+          "wilson_95": [
+            0.125,
+            0.5087
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "only_verified_citations": {
+          "events": 8,
+          "n": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 12,
+          "n": 18,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.4375,
+            0.8372
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "only_verified_citations": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 4,
+          "n": 18,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.09,
+            0.4521
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 4,
+          "n": 18,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.09,
+            0.4521
+          ]
+        }
+      }
+    },
+    "claude-opus": {
+      "agent": {
+        "answered": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 13,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2281
+          ]
+        },
+        "only_verified_citations": {
+          "events": 13,
+          "n": 13,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7719,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 13,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2281
+          ]
+        },
+        "only_verified_citations": {
+          "events": 13,
+          "n": 13,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7719,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 13,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2281
+          ]
+        },
+        "only_verified_citations": {
+          "events": 13,
+          "n": 13,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7719,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      }
+    },
+    "gemini-flash": {
+      "agent": {
+        "answered": {
+          "events": 12,
+          "n": 18,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.4375,
+            0.8372
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 9,
+          "n": 18,
+          "rate": 0.5,
+          "wilson_95": [
+            0.2903,
+            0.7097
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "only_verified_citations": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 12,
+          "n": 18,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.4375,
+            0.8372
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 9,
+          "n": 18,
+          "rate": 0.5,
+          "wilson_95": [
+            0.2903,
+            0.7097
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "only_verified_citations": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 12,
+          "n": 18,
+          "rate": 0.6667,
+          "wilson_95": [
+            0.4375,
+            0.8372
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 9,
+          "n": 18,
+          "rate": 0.5,
+          "wilson_95": [
+            0.2903,
+            0.7097
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 12,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2425
+          ]
+        },
+        "only_verified_citations": {
+          "events": 12,
+          "n": 12,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7575,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 3,
+          "n": 18,
+          "rate": 0.1667,
+          "wilson_95": [
+            0.0584,
+            0.3922
+          ]
+        }
+      }
+    },
+    "gemini-pro": {
+      "agent": {
+        "answered": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "only_verified_citations": {
+          "events": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "only_verified_citations": {
+          "events": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 8,
+          "n": 18,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.2456,
+            0.6628
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "only_verified_citations": {
+          "events": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      }
+    },
+    "gpt-astra": {
+      "agent": {
+        "answered": {
+          "events": 15,
+          "n": 18,
+          "rate": 0.8333,
+          "wilson_95": [
+            0.6078,
+            0.9416
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 15,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2039
+          ]
+        },
+        "only_verified_citations": {
+          "events": 15,
+          "n": 15,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7961,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 15,
+          "n": 18,
+          "rate": 0.8333,
+          "wilson_95": [
+            0.6078,
+            0.9416
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 15,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2039
+          ]
+        },
+        "only_verified_citations": {
+          "events": 15,
+          "n": 15,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7961,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 15,
+          "n": 18,
+          "rate": 0.8333,
+          "wilson_95": [
+            0.6078,
+            0.9416
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 13,
+          "n": 18,
+          "rate": 0.7222,
+          "wilson_95": [
+            0.4913,
+            0.875
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 15,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2039
+          ]
+        },
+        "only_verified_citations": {
+          "events": 15,
+          "n": 15,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7961,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 2,
+          "n": 18,
+          "rate": 0.1111,
+          "wilson_95": [
+            0.031,
+            0.328
+          ]
+        }
+      }
+    },
+    "gpt-luna": {
+      "agent": {
+        "answered": {
+          "events": 11,
+          "n": 18,
+          "rate": 0.6111,
+          "wilson_95": [
+            0.3862,
+            0.7969
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "only_verified_citations": {
+          "events": 11,
+          "n": 11,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7412,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 1,
+          "n": 18,
+          "rate": 0.0556,
+          "wilson_95": [
+            0.0099,
+            0.2576
+          ]
+        }
+      },
+      "gate": {
+        "answered": {
+          "events": 11,
+          "n": 18,
+          "rate": 0.6111,
+          "wilson_95": [
+            0.3862,
+            0.7969
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "only_verified_citations": {
+          "events": 11,
+          "n": 11,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7412,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 1,
+          "n": 18,
+          "rate": 0.0556,
+          "wilson_95": [
+            0.0099,
+            0.2576
+          ]
+        }
+      },
+      "loop": {
+        "answered": {
+          "events": 11,
+          "n": 18,
+          "rate": 0.6111,
+          "wilson_95": [
+            0.3862,
+            0.7969
+          ]
+        },
+        "conflicting": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "correct_decision": {
+          "events": 10,
+          "n": 18,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.3372,
+            0.7544
+          ]
+        },
+        "invalid_citation": {
+          "events": 0,
+          "n": 11,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2588
+          ]
+        },
+        "only_verified_citations": {
+          "events": 11,
+          "n": 11,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7412,
+            1.0
+          ]
+        },
+        "routed_to_human": {
+          "events": 0,
+          "n": 18,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1759
+          ]
+        },
+        "tasks": 18,
+        "wrong_direction": {
+          "events": 1,
+          "n": 18,
+          "rate": 0.0556,
+          "wilson_95": [
+            0.0099,
+            0.2576
+          ]
+        }
+      }
+    }
+  },
+  "revised": 6,
+  "split": "pilot"
+}

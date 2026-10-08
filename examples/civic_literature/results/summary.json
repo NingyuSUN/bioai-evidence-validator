@@ -1,0 +1,126 @@
+{
+  "benchmark": "civic-literature-controls-v1",
+  "controls": {
+    "altered_quote": {
+      "admitted": 0,
+      "detected": 120,
+      "expected_code": "BEV017",
+      "n": 120,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 120,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.969,
+        1.0
+      ]
+    },
+    "base": {
+      "false_blocks": 0,
+      "n": 120,
+      "status_counts": {
+        "admitted": 120,
+        "rejected": 0,
+        "review_required": 0
+      },
+      "wilson_95": [
+        0.0,
+        0.031
+      ]
+    },
+    "fabricated_identifier": {
+      "admitted": 0,
+      "detected": 120,
+      "expected_code": "BEV016",
+      "n": 120,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 120,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.969,
+        1.0
+      ]
+    },
+    "negation_flip": {
+      "admitted": 0,
+      "detected": 82,
+      "expected_code": "BEV017",
+      "n": 82,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 82,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.9552,
+        1.0
+      ]
+    },
+    "real_identifier_wrong_paper": {
+      "admitted": 0,
+      "detected": 120,
+      "expected_code": "BEV017",
+      "n": 120,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 120,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.969,
+        1.0
+      ]
+    },
+    "retracted_source": {
+      "admitted": 0,
+      "detected": 20,
+      "expected_code": "BEV019",
+      "n": 20,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 20,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.8389,
+        1.0
+      ]
+    },
+    "species_swap": {
+      "admitted": 0,
+      "detected": 27,
+      "expected_code": "BEV017",
+      "n": 27,
+      "rate": 1.0,
+      "status_counts": {
+        "admitted": 0,
+        "rejected": 27,
+        "review_required": 0
+      },
+      "unverifiable_only": 0,
+      "wilson_95": [
+        0.8754,
+        1.0
+      ]
+    }
+  },
+  "papers": 120,
+  "retracted_papers": 20,
+  "skipped": {
+    "negation_flip": 38,
+    "species_swap": 93
+  }
+}

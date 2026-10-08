@@ -32,6 +32,8 @@ zero reviewed cases. An editor changing its status does not complete human revie
 | `bioevidence review adjudication-sheet annotations.csv --output adjudications.csv` | Blank rows for every disagreement; never overwrites an existing file |
 | `bioevidence review score --annotations … --adjudications … --predictions …` | Resolves final labels and scores predictions on the test split; rejects missing or hash-mismatched rows |
 | `bioevidence review freeze --manifest … --annotations … --adjudications …` | Refuses unresolved cases; records counts, reference type and file hashes |
+| `bioevidence review audit-sample --predictions … --method … --use … --target 0.01 --seed … --profile-id … --output-dir …` | A seeded random sample of auto-admitted records as a blank annotation sheet, sized so that no error found bounds their error rate below the target; `--controls` mixes in records from the other routes. The manifest of routes stays with you |
+| `bioevidence review audit-score --manifest … --annotations …` | Per route: share of records, audited error rate with Wilson and exact one-sided bounds, and share of expert time from `minutes_spent` |
 
 A worked, domain-specific kit is in [`../clinvar_review/`](../clinvar_review/README.md).
 The VBO replay command still evaluates only its source-derived reference set and controlled faults.

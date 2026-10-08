@@ -45,6 +45,10 @@ nav:
   - Benchmarks:
       - ClinVar germline classifications: benchmarks/clinvar.md
       - VBO canine name mapping: benchmarks/vbo-canine.md
+      - CIViC literature grounding: benchmarks/civic-literature.md
+      - "LLM benchmark: models alone vs. with bioevidence": benchmarks/llm-benchmark.md
+      - Single-cell cell-type annotation: benchmarks/singlecell.md
+      - "AI extraction from openly licensed papers": benchmarks/civic-extraction.md
       - Building a gold standard: GOLD_STANDARD.md
       - Review tooling and templates: review-tooling.md
       - ClinVar expert-review kit: benchmarks/clinvar-review.md
@@ -52,6 +56,9 @@ nav:
   - Reference:
       - Engineering contract: ENGINEERING.md
       - Standards alignment: STANDARDS.md
+      - Validation dossier: VALIDATION_DOSSIER.md
+      - AI validation roadmap: AI_VALIDATION_ROADMAP.md
+      - Error taxonomy: ERROR_TAXONOMY.md
   - Design:
       - Case study: CASE_STUDY.md
       - "ADR-001: canine breed first": ADR-001-canine-breed-first.md

@@ -22,6 +22,8 @@ REPO = ROOT.parents[1]
 
 # Colors validated with the dataviz palette checks on the #fafbfc surface (all pairs:
 # CVD dE 10.6, normal-vision dE 16.6). Gray is a neutral baseline, labeled on every bar.
+# The grounded bar uses the ink color: far darker than every other bar, so it stays distinct
+# under any color-vision deficiency, and every bar is labeled anyway.
 SURFACE, GRID = "#fafbfc", "#e1e7eb"
 INK, TEXT, MUTED = "#152d3d", "#405464", "#687b89"
 BASELINE, BLUE, VALIDATOR = "#9aa8b7", "#2a78d6", "#199e70"
@@ -29,7 +31,7 @@ BASELINE, BLUE, VALIDATOR = "#9aa8b7", "#2a78d6", "#199e70"
 TIERS = [("single_submitter", "1★ single submitter"), ("multiple_submitters", "2★ multiple submitters"),
          ("expert_panel", "3★ expert panel"), ("no_criteria", "0★ no assertion criteria")]
 METHODS = [("schema_only", "Schema only", BASELINE), ("aggregate_quality", "Aggregate quality", BLUE),
-           ("full", "Full validator", VALIDATOR)]
+           ("full", "Full validator", VALIDATOR), ("grounded", "Full + grounding", INK)]
 
 
 def style(ax, xmax: float, ticks: list[float], fmt) -> None:
@@ -99,7 +101,7 @@ def render(summary: dict, output: Path) -> None:
     fault_panel(fig.add_subplot(grid[1]), faults["controlled_fault"], "Controlled faults",
                 "False admissions · 16 seeds × 10 faults", True)
     fault_panel(fig.add_subplot(grid[2]), faults["trust_boundary"], "Trust boundary",
-                "False admissions · fabricated expert reviews", False)
+                "False admissions · 32 forged records", False)
 
     reproduction = summary["policy_reproduction"]
     agreement = " · ".join(f"{100 * reproduction[use]['agreement'] / reproduction[use]['n']:.1f}% {use.split('_')[0]}"
@@ -113,7 +115,7 @@ def render(summary: dict, output: Path) -> None:
         "Reclassified or conflicting = 2026-09 aggregate classification is conflicting, or includes VUS, likely benign or benign. "
         "False admission = admitted despite a rejected or review-required expected status. Lower is better.",
         "Stability is not correctness: an observational association, not for clinical use. "
-        "Trust-boundary failures show why ingestion must be source-grounded.",
+        "Trust-boundary cases pass the rules alone; grounding against the pinned sample catches them.",
     ]
     for i, note in enumerate(notes):
         fig.text(0.02, 0.11 - 0.04 * i, note, fontsize=8.5, color=TEXT)

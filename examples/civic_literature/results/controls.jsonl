@@ -1,0 +1,609 @@
+{"control": "base", "detected": false, "pmid": "27049722", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27049722", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27049722", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27049722", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22046346", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22046346", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22046346", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22046346", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27028764", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27028764", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27028764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27028764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27028764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "27028764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "31372595", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "31372595", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "31372595", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "31372595", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "31372595", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "33536079", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "33536079", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "33536079", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "33536079", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24588908", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24588908", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24588908", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24588908", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26894380", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26894380", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26894380", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26894380", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26894380", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28453554", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28453554", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28453554", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28453554", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28453554", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "28453554", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25900183", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25900183", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25900183", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25900183", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "25900183", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24088390", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24088390", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24088390", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24088390", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22403669", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22403669", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22403669", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22403669", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "22403669", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27302369", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27302369", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27302369", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27302369", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27302369", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27032107", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27032107", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27032107", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27032107", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "27032107", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "19775480", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "19775480", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "19775480", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "19775480", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "19775480", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "19775480", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24927325", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24927325", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24927325", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24927325", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27197561", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27197561", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27197561", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27197561", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27197561", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24735930", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24735930", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24735930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24735930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24735930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22194965", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22194965", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22194965", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22194965", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27562493", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27562493", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27562493", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27562493", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27562493", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "27562493", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24594804", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24594804", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24594804", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24594804", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "34247201", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "34247201", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "34247201", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "34247201", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "34247201", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32502294", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32502294", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32502294", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32502294", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "32502294", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26918451", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26918451", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26918451", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26918451", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26918451", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "30876455", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "30876455", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "30876455", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "30876455", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29657128", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29657128", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29657128", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29657128", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29657128", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27489863", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27489863", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27489863", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27489863", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "27489863", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26872370", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26872370", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26872370", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26872370", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26872370", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26146478", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26146478", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26146478", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26146478", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26146478", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27900359", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27900359", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27900359", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27900359", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27900359", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24088382", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24088382", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24088382", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24088382", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24088382", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27172793", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27172793", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27172793", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27172793", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27172793", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "21365007", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "21365007", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "21365007", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "21365007", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "21365007", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "21365007", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27894077", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27894077", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27894077", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27894077", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "27894077", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25524464", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25524464", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25524464", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25524464", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "25524464", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26893365", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26893365", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26893365", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26893365", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27086918", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27086918", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27086918", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27086918", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27086918", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27418251", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27418251", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27418251", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27418251", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29755131", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29755131", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29755131", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29755131", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29755131", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27489350", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27489350", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27489350", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27489350", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23104868", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23104868", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23104868", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23104868", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "23104868", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26821351", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26821351", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26821351", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26821351", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26821351", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24550739", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24550739", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24550739", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24550739", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24550739", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "24550739", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "21494621", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "21494621", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "21494621", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "21494621", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "21494621", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26674132", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26674132", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26674132", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26674132", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26674132", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24586741", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24586741", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24586741", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24586741", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "24586741", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26989027", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26989027", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26989027", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26989027", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26989027", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "26989027", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25883647", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25883647", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25883647", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25883647", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "25883647", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22081665", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22081665", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22081665", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22081665", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "22081665", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24758907", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24758907", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24758907", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24758907", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24758907", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26304929", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26304929", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26304929", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26304929", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "26304929", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32822286", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32822286", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32822286", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32822286", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "32822286", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "32822286", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26621817", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26621817", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26621817", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26621817", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26621817", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "18371219", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "18371219", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "18371219", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "18371219", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "18371219", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "18371219", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24039832", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24039832", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24039832", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24039832", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "31010895", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "31010895", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "31010895", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "31010895", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "31010895", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "31010895", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "15696205", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "15696205", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "15696205", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "15696205", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "15696205", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "15696205", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26267899", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26267899", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26267899", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26267899", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26267899", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24782778", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24782778", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24782778", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24782778", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28516360", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28516360", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28516360", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28516360", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28516360", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26528855", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26528855", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26528855", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26528855", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26528855", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25082261", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25082261", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25082261", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25082261", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26516930", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26516930", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26516930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26516930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26516930", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26709701", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26709701", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26709701", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26709701", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26544513", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26544513", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26544513", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26544513", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26544513", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "26544513", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22901364", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22901364", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22901364", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22901364", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "22901364", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "22901364", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29858576", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29858576", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29858576", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29858576", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29858576", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24740294", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24740294", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24740294", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24740294", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24236021", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24236021", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24236021", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24236021", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24236021", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29478821", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29478821", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29478821", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29478821", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29478821", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "31768625", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "31768625", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "31768625", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "31768625", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "31768625", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25216528", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25216528", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25216528", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25216528", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "25216528", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29156677", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29156677", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29156677", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29156677", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29156677", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "29156677", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27819322", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27819322", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27819322", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27819322", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27819322", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32668764", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32668764", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32668764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32668764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "32668764", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32852708", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32852708", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32852708", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32852708", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "32852708", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24367492", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24367492", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24367492", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24367492", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24367492", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "30865549", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "30865549", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "30865549", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "30865549", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "30865549", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25766326", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25766326", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25766326", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25766326", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "25766326", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26399631", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26399631", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26399631", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26399631", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26399631", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24571676", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24571676", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24571676", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24571676", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24571676", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22292935", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22292935", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22292935", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22292935", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23031422", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23031422", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23031422", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23031422", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26989536", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26989536", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26989536", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26989536", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26989536", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23374602", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23374602", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23374602", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23374602", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "23374602", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "23374602", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26634247", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26634247", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26634247", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26634247", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26894859", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26894859", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26894859", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26894859", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26894859", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25658984", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25658984", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25658984", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25658984", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "25658984", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23029227", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23029227", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23029227", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23029227", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "23029227", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "30718506", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "30718506", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "30718506", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "30718506", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "20141835", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "20141835", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "20141835", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "20141835", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "20141835", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27167191", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27167191", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27167191", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27167191", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27167191", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23497317", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23497317", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23497317", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23497317", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "23497317", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "21666749", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "21666749", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "21666749", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "21666749", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "21666749", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "23181703", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "23181703", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "23181703", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "23181703", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28094316", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28094316", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28094316", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28094316", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28094316", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24708484", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24708484", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24708484", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24708484", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "24708484", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32087612", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32087612", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32087612", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32087612", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "32087612", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26943774", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26943774", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26943774", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26943774", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26943774", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "29515777", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "29515777", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "29515777", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "29515777", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "29515777", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26674738", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26674738", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26674738", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26674738", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26674738", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27485109", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27485109", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27485109", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27485109", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27612423", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27612423", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27612423", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27612423", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "27612423", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22808142", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22808142", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22808142", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22808142", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27998968", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27998968", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27998968", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27998968", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28103578", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28103578", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28103578", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28103578", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28103578", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25587029", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25587029", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25587029", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25587029", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "25692060", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "25692060", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "25692060", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "25692060", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24788118", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24788118", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24788118", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24788118", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24788118", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "24788118", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "22479427", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "22479427", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "22479427", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "22479427", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "22479427", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26956051", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26956051", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26956051", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26956051", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26956051", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "26956051", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26758680", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26758680", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26758680", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26758680", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26758680", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24586605", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24586605", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24586605", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24586605", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24586605", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "24586605", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "26992226", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "26992226", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "26992226", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "26992226", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "26992226", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28077790", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28077790", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28077790", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28077790", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28077790", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "32022484", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "32022484", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "32022484", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "32022484", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "34272467", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "34272467", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "34272467", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "34272467", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "34272467", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "27589690", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "27589690", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "27589690", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "27589690", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "24098545", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "24098545", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "24098545", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "24098545", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "24098545", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28978004", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28978004", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28978004", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28978004", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "species_swap", "detected": true, "pmid": "28978004", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "base", "detected": false, "pmid": "28330462", "reason_codes": [], "status": "admitted", "unverifiable_only": false}
+{"control": "fabricated_identifier", "detected": true, "pmid": "28330462", "reason_codes": ["BEV016", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "real_identifier_wrong_paper", "detected": true, "pmid": "28330462", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "altered_quote", "detected": true, "pmid": "28330462", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "negation_flip", "detected": true, "pmid": "28330462", "reason_codes": ["BEV017", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "22912826", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "33572621", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "33552986", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "29158857", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "23272116", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "22443468", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "25025684", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "23565736", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "32432717", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "34306047", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "27769055", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "26378044", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "31151422", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "22703554", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "22066019", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "30001707", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "30998743", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "16609730", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "34457028", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}
+{"control": "retracted_source", "detected": true, "pmid": "32441301", "reason_codes": ["BEV019", "BEV020"], "status": "rejected", "unverifiable_only": false}

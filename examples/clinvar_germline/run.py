@@ -1,6 +1,7 @@
 """Run the frozen ClinVar case: policy reproduction, three-year stability, controlled faults and trust boundary."""
 import argparse
 import csv
+import gzip
 import json
 from collections import Counter
 from pathlib import Path
@@ -10,6 +11,7 @@ from pipeline import (
     ROOT,
     STARS,
     USES,
+    ClinVarGrounder,
     ClinVarSample,
     aggregate_quality_ablation,
     digest,
@@ -22,8 +24,13 @@ from pipeline import (
 
 from bioevidence_validator import __version__
 from bioevidence_validator.engine import RecordValidator
+from bioevidence_validator.grounding import SnapshotStore, SourceBytesGrounder
 
 SEEDS = 16
+# Faults the engine cannot see from the record alone, and the outcome grounding should give each.
+TRUST_BOUNDARY = {"fabricated_expert_review": "rejected", "omitted_dissent": "review_required"}
+STRICTNESS = {"admitted": 0, "review_required": 1, "rejected": 2}
+METHODS = ["schema_only", "aggregate_quality", "full", "grounded"]
 
 
 def run(output: Path) -> dict:
@@ -31,6 +38,10 @@ def run(output: Path) -> dict:
         raise ValueError("Use a new output directory to preserve previous evidence")
     source = ClinVarSample()
     context = RecordValidator(profile=ROOT / "profile.yaml")
+    # Grounded: the same validator plus checks recomputed from the pinned sample bytes.
+    sha = source.manifest["projection_sha256"]
+    store = SnapshotStore({sha: lambda: gzip.decompress((ROOT / source.manifest["projection_file"]).read_bytes())})
+    grounded = RecordValidator(profile=ROOT / "profile.yaml", grounders=[SourceBytesGrounder(store), ClinVarGrounder(source)])
     decisions, divergences, fault_rows = [], [], []
 
     # A. Policy reproduction and B. stability share one validation per sampled variant.
@@ -39,6 +50,9 @@ def run(output: Path) -> dict:
         report = context.validate(record)
         status = {d["use"]: d["admission_status"] for d in report["use_decisions"]}
         codes = {d["use"]: d["reason_codes"] for d in report["use_decisions"]}
+        checked = grounded.validate(record)
+        if checked["findings"] != report["findings"]:
+            raise AssertionError((case["variation_id"], "grounding changed a real-source decision", checked["findings"]))
         decisions.append({"case": case, "record": record, "status": status})
         for use in USES:
             expected = ncbi_expected(case["stratum"], use)
@@ -72,9 +86,15 @@ def run(output: Path) -> dict:
                "schema_only": "admitted" if report["schema_valid"] else "rejected",
                "aggregate_quality": aggregate_quality_ablation(record, report), "full": report["overall_status"],
                "reason_codes": sorted({f["rule_id"] for f in report["findings"]})}
+        checked = grounded.validate(record)
+        row.update(grounded=checked["overall_status"], grounded_reason_codes=sorted({f["rule_id"] for f in checked["findings"]}))
         if code and code not in row["reason_codes"]:
             raise AssertionError((case_id, code, row))
         if cohort != "trust_boundary" and row["full"] != expected:
+            raise AssertionError((case_id, expected, row))
+        if cohort == "controlled_fault" and STRICTNESS[row["grounded"]] < STRICTNESS[row["full"]]:
+            raise AssertionError((case_id, "grounding loosened a decision", row))
+        if cohort == "trust_boundary" and row["grounded"] != expected:
             raise AssertionError((case_id, expected, row))
         fault_rows.append(row)
 
@@ -83,13 +103,18 @@ def run(output: Path) -> dict:
     for d in admitted_all[::step][:SEEDS]:
         for kind, (expected, code) in FAULTS.items():
             evaluate(perturb(d["record"], kind), f"{d['case']['variation_id']}:{kind}", "controlled_fault", kind, expected, code)
-    uncurated = [d for d in decisions if d["case"]["stratum"] == "no_criteria"][:SEEDS]
-    for d in uncurated:
-        evaluate(perturb(d["record"], "fabricated_expert_review"), f"{d['case']['variation_id']}:fabricated_expert_review",
-                 "trust_boundary", "fabricated_expert_review", "rejected")
-    faults = {cohort: {method: metrics([r for r in fault_rows if r["cohort"] == cohort], method)
-                       for method in ["schema_only", "aggregate_quality", "full"]}
+    seeds = {"fabricated_expert_review": [d for d in decisions if d["case"]["stratum"] == "no_criteria"][:SEEDS],
+             "omitted_dissent": [d for d in decisions if d["case"]["stratum"] in ("expert_panel", "practice_guideline")
+                                 and any(line["direction"] == "contradicts"
+                                         for line in d["record"]["statement"]["evidence_lines"])][:SEEDS]}
+    for kind, expected in TRUST_BOUNDARY.items():
+        for d in seeds[kind]:
+            evaluate(perturb(d["record"], kind), f"{d['case']['variation_id']}:{kind}", "trust_boundary", kind, expected)
+    faults = {cohort: {method: metrics([r for r in fault_rows if r["cohort"] == cohort], method) for method in METHODS}
               for cohort in ["controlled_fault", "trust_boundary"]}
+    boundary = {kind: {"n": sum(r["category"] == kind for r in fault_rows), "expected_status": expected,
+                       **{method: sum(r["category"] == kind and r[method] == "admitted" for r in fault_rows)
+                          for method in METHODS}} for kind, expected in TRUST_BOUNDARY.items()}
 
     # Whole-population context computed by prepare_source.py from the pinned upstream files.
     population_raw = (ROOT / source.manifest["population_file"]).read_bytes()
@@ -107,6 +132,9 @@ def run(output: Path) -> dict:
         "strata": dict(sorted(Counter(d["case"]["stratum"] for d in decisions).items())),
         "policy_reproduction": reproduction, "stability_by_use": stability_by_use,
         "stability_by_stratum": stability_by_stratum, "population_stability": population, "faults": faults,
+        "trust_boundary_admitted": boundary,
+        "grounding": {"grounders": [grounder.name for grounder in grounded.grounders],
+                      "real_source_variants": len(decisions), "real_source_decisions_changed": 0},
         "label_origin": ("Policy reproduction compares with NCBI's own 2023-09 aggregate review status; stability uses "
                          "NCBI's 2026-09 aggregate classification; faults are authored specifications. "
                          "No independent human annotation."),
@@ -165,11 +193,18 @@ def render(summary: dict) -> str:
         lines.append(f"| {name} | " + " | ".join(pct(groups[g]) for g in
                      ["all", "with_dissenting_submission", "without_dissenting_submission"]) + " |")
     lines += ["", "## C/D. Controlled faults and trust boundary (false admissions)", "",
-              "| Cohort | Schema-only | Aggregate-quality ablation | Full |", "|---|---:|---:|---:|"]
+              "| Cohort | Schema-only | Aggregate-quality ablation | Full | Full + grounding |", "|---|---:|---:|---:|---:|"]
     for cohort, methods in summary["faults"].items():
         cells = [f"{m['false_admissions']}/{m['expected_non_admitted']}" for m in methods.values()]
         lines.append(f"| {cohort} | " + " | ".join(cells) + " |")
-    lines += ["", summary["limitation"], ""]
+    lines += ["", "| Trust-boundary control | Expected | Schema-only | Aggregate-quality ablation | Full | Full + grounding |",
+              "|---|---|---:|---:|---:|---:|"]
+    for kind, b in summary["trust_boundary_admitted"].items():
+        lines.append(f"| {kind} | {b['expected_status']} | " + " | ".join(f"{b[m]}/{b['n']}" for m in METHODS) + " |")
+    grounding = summary["grounding"]
+    lines += ["", f"Grounding ({', '.join(grounding['grounders'])}) recomputes each record's evidence from the pinned "
+              f"sample; it changed {grounding['real_source_decisions_changed']} of {grounding['real_source_variants']:,} "
+              "real-source decisions.", "", summary["limitation"], ""]
     return "\n".join(lines)
 
 

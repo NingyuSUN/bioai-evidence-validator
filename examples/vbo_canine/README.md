@@ -29,7 +29,7 @@ flowchart TD
     D --> E["Per-use and per-required-evidence-type checks"]
     E --> F["Decisions + unresolved-name review queue"]
     D --> G["Separate controlled faults and trust-boundary cases"]
-    G --> H["Schema baseline / aggregate ablation / full validator"]
+    G --> H["Schema baseline / aggregate ablation / full validator / + source grounding"]
     F --> H
     B --> I["New cases + independent human review"]
     I --> J["Adjudication + frozen gold-standard labels"]
@@ -83,7 +83,7 @@ interval is justified. No model is fitted or tuned on these cases.
 |---|---|---|
 | Real source: 72 | 24 canonical, 24 unique synonym, 24 ambiguous names | Frozen-source candidate preservation and admission contract |
 | Controlled faults: 160 | Every third admitted reference case: 16 seeds × 10 specified mutations | Detection of deliberately injected contract violations |
-| Trust boundary: 16 | Nonexistent target ID substituted after trusted ingestion | Whether the generic engine re-verifies source assertions (it does not) |
+| Trust boundary: 48 | The same 16 seeds × 3 consistent forgeries: a non-existent target, a real but wrong target with a matching term assertion, and hashes naming bytes other than the pinned projection | What only the source can show: the rules alone admit these, grounding should not |
 
 Controlled faults include required LLM/string/mixed evidence with an auxiliary manual
 note, weak uniqueness evidence, neutralized uniqueness evidence, hash/scope mismatch,
@@ -91,30 +91,36 @@ dangling references, explicit contradiction, and withdrawn statements. These ext
 methods and faults are **simulated interventions**; no LLM extraction experiment was run.
 Mutations of a seed are correlated and must not be counted as independent real-world errors.
 
-Three methods are compared: schema-only; an ablation restoring the old aggregate
-extraction-method check while holding other checks fixed; and the full per-required-type
-validator. The ablation is not a separate trained model. False admission means accepting
+Four methods are compared: schema-only; an ablation restoring the old aggregate
+extraction-method check while holding other checks fixed; the full per-required-type
+validator; and the full validator with [source grounding](../../docs/ENGINEERING.md#source-grounding),
+where `VboGrounder` and `SourceBytesGrounder` recompute the target's existence and name match,
+the term assertion, the candidate resolution and the source hash from the pinned projection.
+The ablation is not a separate trained model. False admission means accepting
 a case whose reference status is rejected or review-required. False block includes either
 non-admitted status on an admitted reference. Review rate is reported separately.
 Undefined rates with zero denominators are `null`/N/A, not zero.
 
-## Observed results (0.4.1)
+## Observed results
 
-| Cohort | Schema-only false admissions | Aggregate-quality false admissions | Full false admissions |
-|---|---:|---:|---:|
-| Real source | 24/24 | 0/24 | 0/24 |
-| Controlled faults | 160/160 | 64/160 | 0/160 |
-| Trust boundary | 16/16 | 16/16 | 16/16 |
+| Cohort | Schema-only false admissions | Aggregate-quality false admissions | Full false admissions | Full + grounding false admissions |
+|---|---:|---:|---:|---:|
+| Real source | 24/24 | 0/24 | 0/24 | 0/24 |
+| Controlled faults | 160/160 | 64/160 | 0/160 | 0/160 |
+| Trust boundary | 48/48 | 48/48 | 48/48 | 0/48 |
 
-On the 48 admitted real-source cases, all methods have 0/48 false blocks. Full validation
-routes 80/160 controlled cases to review and rejects 80/160. The 24 real ambiguities are
+On the 48 admitted real-source cases, all methods have 0/48 false blocks, and grounding
+changes no real-source decision. Full validation routes 80/160 controlled cases to review
+and rejects 80/160; grounding keeps those outcomes. The 24 real ambiguities are
 rejected for automatic admission and exported for manual resolution. Results and hashes
 are available in [the checked-in summary](results/summary.md).
 
 The 64 corrected false admissions demonstrate this quality-gate regression on constructed
-cases. They do not estimate the frequency of that error in production. The 16 unchanged
-source-falsification failures show why the validator must sit behind trustworthy ingestion;
-changing evidence metadata can still deceive the generic engine.
+cases. They do not estimate the frequency of that error in production. Without grounding,
+all 48 trust-boundary forgeries are admitted: metadata changed consistently still deceives
+the rules. Grounding rejects the 32 forged targets (BEV016, BEV017) and sends the 16
+unpinned sources to review (BEV015). It checks records against the pinned source, not the
+source itself.
 
 ## Rebuild from original bytes
 
