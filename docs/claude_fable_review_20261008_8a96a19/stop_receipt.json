@@ -1,0 +1,12 @@
+{
+  "reason": "Provider safety classifier stopped reviewer response; preserve refusal and stop this owned invocation without retry/rewording/fallback.",
+  "owned_windows_powershell_pid": 1464,
+  "argv": [
+    "/mnt/c/Windows/System32/taskkill.exe",
+    "/PID",
+    "1464",
+    "/T",
+    "/F"
+  ],
+  "exit_code": 0
+}

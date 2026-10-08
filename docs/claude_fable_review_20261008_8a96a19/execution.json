@@ -1,0 +1,23 @@
+{
+  "state": "FAILED",
+  "requested_model": "claude-fable-5-1",
+  "requested_effort": "max",
+  "cli_version": "2.1.285",
+  "transport": "PowerShell direct native CLI pipeline",
+  "started_utc": "2026-10-08T01:46:22.130328+00:00",
+  "execution_policy_changed": false,
+  "process_only_environment_fix": "PATHEXT restored so PowerShell recognizes .exe instead of treating it as a document",
+  "prior_bootstrap_failure": "-File blocked by Windows execution policy before CLI launch; no model request occurred in that attempt",
+  "argv": [
+    "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+    "-NoLogo",
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$ErrorActionPreference = 'Stop'\n$env:PATHEXT = '.COM;.EXE;.BAT;.CMD'\n$OutputEncoding = New-Object System.Text.UTF8Encoding($false)\n$env:CLAUDE_CODE_DISABLE_TERMINAL_TITLE = '1'\n$env:ANTHROPIC_DEFAULT_HAIKU_MODEL = 'claude-fable-5-1'\n$env:ANTHROPIC_SMALL_FAST_MODEL = 'claude-fable-5-1'\n$env:CLAUDE_CODE_SUBAGENT_MODEL = 'claude-fable-5-1'\n$env:CLAUDE_CODE_SUBAGENT_MODEL_FORCE = '1'\nSet-Location -LiteralPath 'C:\\Users\\n.sun\\Desktop\\canine\\worktrees\\bioevidence-canine-validation\\docs\\claude_fable_review_20261008_8a96a19'\n[System.IO.File]::WriteAllText('C:\\Users\\n.sun\\Desktop\\canine\\worktrees\\bioevidence-canine-validation\\docs\\claude_fable_review_20261008_8a96a19\\windows_powershell_pid.txt', [string]$PID)\nGet-Content -LiteralPath 'C:\\Users\\n.sun\\Desktop\\canine\\worktrees\\bioevidence-canine-validation\\docs\\claude_fable_review_20261008_8a96a19\\prompt.txt' -Raw -Encoding UTF8 | & 'C:\\Users\\n.sun\\.local\\bin\\claude.exe' -p --model claude-fable-5-1 --effort max --restricted --safe-mode --strict-mcp-config --tools '\"\"' --disable-slash-commands --permission-mode plan --permission-prompts none --no-session-persistence --prompt-suggestions false --output-format stream-json --verbose 2> 'C:\\Users\\n.sun\\Desktop\\canine\\worktrees\\bioevidence-canine-validation\\docs\\claude_fable_review_20261008_8a96a19\\stderr.txt' | Out-File -LiteralPath 'C:\\Users\\n.sun\\Desktop\\canine\\worktrees\\bioevidence-canine-validation\\docs\\claude_fable_review_20261008_8a96a19\\raw.jsonl' -Encoding UTF8\nexit $LASTEXITCODE\n"
+  ],
+  "supervisor_child_pid": 88736,
+  "exit_code": 1,
+  "finished_utc": "2026-10-08T01:59:01.910246+00:00",
+  "elapsed_seconds": 759.768244035
+}

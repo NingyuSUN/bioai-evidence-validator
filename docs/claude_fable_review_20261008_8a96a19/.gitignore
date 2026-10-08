@@ -1,0 +1,2 @@
+# Full local provider trace includes private reasoning; retain locally, omit from commits.
+/raw.jsonl

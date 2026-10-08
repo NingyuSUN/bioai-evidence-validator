@@ -1,0 +1,56 @@
+{
+  "target_commit": "8a96a19d4e84e7f2f403572d52e4a30cbfcace69",
+  "baseline_commit": "9f785303bd225150a5e79bab4fae9440d14a4e72",
+  "requested_model": "claude-fable-5-1",
+  "requested_effort": "max",
+  "transport": "Windows Claude Code via PowerShell direct native CLI pipeline",
+  "cli_version": "2.1.285",
+  "prompt_sha256": "e4af4d39de2c9e16d16867eba96d94e7cbdfa51deac76253c29e831d1eba7859",
+  "prompt_bytes": 135272,
+  "files": {
+    "src/bioevidence_validator/canine_preflight.py": {
+      "sha256": "1562fedccd1601793a6f8cd4a4242011f3f6a35ce72bde7d7529a5b54e6ffdec",
+      "bytes": 17259
+    },
+    "src/bioevidence_validator/canine.py": {
+      "sha256": "098e4ee6263931802e24b59dca9bf979c0e565336c1ba3654783153a1366e7ba",
+      "bytes": 23513
+    },
+    "src/bioevidence_validator/grounding.py": {
+      "sha256": "ebfe096fe6d40aa7a991eac0461252e015364ef352e50719912addc08f92e915",
+      "bytes": 5087
+    },
+    "src/bioevidence_validator/cli.py": {
+      "sha256": "7eb0698348627aeea36f8dad95ef9668518d55d510ac27b30f400415e90ae54c",
+      "bytes": 15969
+    },
+    "tests/test_canine_preflight.py": {
+      "sha256": "5e67ea1306e117025cda8718f688a8039c06c8609d2aabce126a7ca537571894",
+      "bytes": 14487
+    },
+    "tests/test_canine.py": {
+      "sha256": "220215c7e1ffa1de6e37fe3b0005c31950ff49390047f83e0f7ba4f1940009b5",
+      "bytes": 18647
+    },
+    "docs/CANINE_PREFLIGHT.md": {
+      "sha256": "8532fe22cd49a3543326f2220626619468ce94ce2f8f9ad71f4526c0fa909859",
+      "bytes": 6684
+    },
+    "examples/canine_preflight/panel.json": {
+      "sha256": "42a0751c9504700e740c238422b412cbabc5601d9962ad5914500a4a6df05098",
+      "bytes": 9034
+    },
+    "tools/check_distribution.py": {
+      "sha256": "2f84d79da7fdc6114ea2321059ae82bc046e9a15be2a9d39d856ab2f34398f49",
+      "bytes": 6926
+    },
+    "pyproject.toml": {
+      "sha256": "351b22cae5500c91e79afb09de1ab771d41ae55f144d071434ba6480649c4f8f",
+      "bytes": 2520
+    }
+  },
+  "tools_enabled": false,
+  "source_snapshots_are_version_records_not_frozen_locus_contracts": true,
+  "planned_transport_before_bootstrap_failure": "Windows Claude Code via PowerShell ProcessStartInfo",
+  "actual_execution_receipt": "execution.json"
+}

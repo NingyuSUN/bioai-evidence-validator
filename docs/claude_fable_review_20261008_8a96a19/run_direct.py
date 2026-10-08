@@ -1,0 +1,41 @@
+"""Invoke the authorized Windows CLI directly from PowerShell; no policy changes."""
+import datetime
+import json
+import subprocess
+import time
+from pathlib import Path
+
+RUN=Path(__file__).resolve().parent
+if (RUN/'execution.json').exists():
+    raise SystemExit('This review run already has execution evidence; create a new packet rather than overwrite it.')
+WIN=r'C:\Users\n.sun\Desktop\canine\worktrees\bioevidence-canine-validation\docs\claude_fable_review_20261008_8a96a19'
+PS='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+command=r'''$ErrorActionPreference = 'Stop'
+$env:PATHEXT = '.COM;.EXE;.BAT;.CMD'
+$OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+$env:CLAUDE_CODE_DISABLE_TERMINAL_TITLE = '1'
+$env:ANTHROPIC_DEFAULT_HAIKU_MODEL = 'claude-fable-5-1'
+$env:ANTHROPIC_SMALL_FAST_MODEL = 'claude-fable-5-1'
+$env:CLAUDE_CODE_SUBAGENT_MODEL = 'claude-fable-5-1'
+$env:CLAUDE_CODE_SUBAGENT_MODEL_FORCE = '1'
+Set-Location -LiteralPath '__RUN__'
+[System.IO.File]::WriteAllText('__RUN__\windows_powershell_pid.txt', [string]$PID)
+Get-Content -LiteralPath '__RUN__\prompt.txt' -Raw -Encoding UTF8 | & 'C:\Users\n.sun\.local\bin\claude.exe' -p --model claude-fable-5-1 --effort max --restricted --safe-mode --strict-mcp-config --tools '""' --disable-slash-commands --permission-mode plan --permission-prompts none --no-session-persistence --prompt-suggestions false --output-format stream-json --verbose 2> '__RUN__\stderr.txt' | Out-File -LiteralPath '__RUN__\raw.jsonl' -Encoding UTF8
+exit $LASTEXITCODE
+'''.replace('__RUN__',WIN)
+now=lambda:datetime.datetime.now(datetime.UTC).isoformat()
+status={'state':'RUNNING','requested_model':'claude-fable-5-1','requested_effort':'max','cli_version':'2.1.285','transport':'PowerShell direct native CLI pipeline','started_utc':now(),'execution_policy_changed':False,'process_only_environment_fix':'PATHEXT restored so PowerShell recognizes .exe instead of treating it as a document','prior_bootstrap_failure':'-File blocked by Windows execution policy before CLI launch; no model request occurred in that attempt','argv':[PS,'-NoLogo','-NoProfile','-NonInteractive','-Command',command]}
+def save(): (RUN/'execution.json').write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n')
+save();started=time.monotonic()
+with (RUN/'powershell_stdout.txt').open('wb')as stdout,(RUN/'powershell_stderr.txt').open('wb')as stderr:
+ p=subprocess.Popen(status['argv'],cwd=RUN,stdout=stdout,stderr=stderr)
+ status['supervisor_child_pid']=p.pid;save()
+ try:
+  status['exit_code']=p.wait(timeout=1800)
+  status['state']='CLI_FINISHED_PENDING_MODEL_CHECK'if p.returncode==0 else'FAILED'
+ except subprocess.TimeoutExpired:
+  status['state']='TIMEOUT_REQUIRES_CHILD_PROCESS_INSPECTION';p.terminate();p.wait();status['exit_code']=p.returncode
+status['finished_utc']=now();status['elapsed_seconds']=time.monotonic()-started;save()
+print(json.dumps({k:v for k,v in status.items()if k!='argv'},ensure_ascii=False))
+raise SystemExit(status['exit_code'])

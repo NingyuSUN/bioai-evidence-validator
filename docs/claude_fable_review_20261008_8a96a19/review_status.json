@@ -1,0 +1,40 @@
+{
+  "status": "PROVIDER_SAFETY_BLOCK_NO_FINAL_REVIEW",
+  "reviewed_commit_requested": "8a96a19d4e84e7f2f403572d52e4a30cbfcace69",
+  "requested_model": "claude-fable-5-1",
+  "actual_assistant_models": [
+    "claude-fable-5-1"
+  ],
+  "initialization_model": "claude-fable-5-1",
+  "actual_model_match": true,
+  "model_identity_basis": "runtime init.model and assistant.message.model",
+  "cli_version": "2.1.285",
+  "tools_at_initialization": [],
+  "emitted_tool_uses": 0,
+  "cli_invocations_with_model_request": 1,
+  "cli_automatic_continuation_notice_observed": true,
+  "manual_retries_after_provider_block": 0,
+  "fallback_model_used": false,
+  "final_result_available": false,
+  "review_verdict": "NOT_AVAILABLE",
+  "finding_count": null,
+  "provider_block_feedback": [
+    "Your response above was stopped by a safety classifier 窶・this is not a tool or API error. The rest of it was withheld, and tool calls in it that had not finished did not run. Do not produce that content again, even reworded."
+  ],
+  "specific_trigger_reason": "NOT_DISCLOSED_BY_PROVIDER",
+  "stopped_by_codex_after_observing_block": true,
+  "execution_exit_code": 1,
+  "elapsed_seconds": 759.768244035,
+  "code_changed_in_response_to_review": false,
+  "prior_722_tests_are_engineering_evidence_not_external_review": true,
+  "provider_review_passed": false,
+  "assay_validated": false,
+  "source_code_sha256": {
+    "src/bioevidence_validator/canine_preflight.py": "1562fedccd1601793a6f8cd4a4242011f3f6a35ce72bde7d7529a5b54e6ffdec",
+    "src/bioevidence_validator/cli.py": "7eb0698348627aeea36f8dad95ef9668518d55d510ac27b30f400415e90ae54c"
+  },
+  "raw_stream_sha256": "08e7ed4c4f0dd6e3aab40b29c62dc697211858f2e5e929994fd9673db95e82aa",
+  "committed_metadata_stream": "raw.audit.jsonl",
+  "committed_metadata_stream_sha256": "79295bbb0452c6377192a6c7e549976986c9093d9e9cf8264d2b8e0b0176e078",
+  "original_stream_retained_locally_gitignored": true
+}

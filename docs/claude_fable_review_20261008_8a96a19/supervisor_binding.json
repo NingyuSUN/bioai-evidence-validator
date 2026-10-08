@@ -1,0 +1,5 @@
+{
+  "executed_script": "run_direct.executed.txt",
+  "sha256": "51f6d27d16dfb1559464129ca4aa9d2ed2d86592c71362f9ceb0bde0b315bd6a",
+  "reason": "Preserve exact executed supervisor bytes before import-style normalization of the rerunnable Python file."
+}

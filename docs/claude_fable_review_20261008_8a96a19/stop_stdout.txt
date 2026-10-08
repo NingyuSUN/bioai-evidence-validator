@@ -1,0 +1,3 @@
+SUCCESS: The process with PID 1620 (child process of PID 1464) has been terminated.
+SUCCESS: The process with PID 23924 (child process of PID 1464) has been terminated.
+SUCCESS: The process with PID 1464 (child process of PID 4652) has been terminated.
