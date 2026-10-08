@@ -177,8 +177,13 @@ def test_gene_grounder_entities_and_species():
     assert codes(record, GENES) == []
     record["statement"]["subject"]["label"] = "CD19"
     assert codes(record, GENES) == ["BEV017"]
+    assert "CD19 is HGNC:1633." in messages(record, GENES)  # the feedback names the right identifier
     record["statement"]["subject"] = {"id": "HGNC:0", "label": "X", "entity_type": "gene"}
     assert codes(record, GENES) == ["BEV016"]
+    record["statement"]["subject"]["label"] = "HER2"
+    assert "HER2 is a previous symbol or alias of ERBB2 (HGNC:3430)." in messages(record, GENES)
+    record["statement"]["subject"]["label"] = "cd8a"
+    assert "The approved symbol is CD8A (HGNC:1706)." in messages(record, GENES)
     record["statement"]["subject"] = {"id": "gene:her2", "label": "HER2", "entity_type": "gene"}
     assert codes(record, GENES) == ["BEV023"]
     assert codes(with_gene("Cd8a", scope=["NCBITaxon:10090"]), GENES) == ["BEV015"]

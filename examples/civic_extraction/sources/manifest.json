@@ -1,0 +1,249 @@
+{
+  "civic": {
+    "url": "https://civicdb.org/downloads/nightly/nightly-ClinicalEvidenceSummaries.tsv",
+    "sha256": "4bfc8896180347fd18ba5e05dbf26a20ef407ec2364587ba3e35ba6c80a31ed1",
+    "bytes": 4157689,
+    "retrieved_at": "2026-10-06T07:48:31+00:00",
+    "license": "CC0 1.0",
+    "rows_used": 106,
+    "projection_sha256": "3460a806a062a0155364ef26dac58d21d4125dc1248855513a24bfbb6693892c"
+  },
+  "resolver": "NCBI E-utilities (esummary, esearch, efetch db=pmc)",
+  "retrieved_at": "2026-10-06T07:48:31+00:00",
+  "selection": {
+    "key": "bioai-civic-extraction-v1",
+    "pilot": 10,
+    "test": 40,
+    "max_words": 12000,
+    "licence_filter": "(\"cc by license\"[filter] OR \"cc0 license\"[filter])",
+    "licences_kept": [
+      "cc by",
+      "cc0"
+    ],
+    "excluded": "papers pinned by examples/civic_literature (the literature benchmark's corpus)",
+    "papers_in_pmc": 1175,
+    "papers_openly_licensed": 316,
+    "candidates_not_pinned_before": 196,
+    "skipped": {
+      "not open or retracted": 20,
+      "too long": 0
+    }
+  },
+  "corpus": {
+    "15737014": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "20942962": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "21576762": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "22034911": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "23800680": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "24422672": {
+      "split": "test",
+      "license": "cc0"
+    },
+    "24894453": {
+      "split": "test",
+      "license": "cc0"
+    },
+    "24986479": {
+      "split": "pilot",
+      "license": "cc0"
+    },
+    "25153719": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25435907": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25504439": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25727400": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25730903": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25788273": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25798586": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "25970771": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "26311741": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26508446": {
+      "split": "test",
+      "license": "cc0"
+    },
+    "26582647": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26673008": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26678033": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26689995": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "26701727": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26716414": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "26751376": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26786851": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "26881434": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27058230": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27092876": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27154293": {
+      "split": "test",
+      "license": "cc0"
+    },
+    "27176795": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27304188": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27414035": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "27626698": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "27735949": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "28103611": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "28388566": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "28404889": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "28672024": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "28947956": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "28972961": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "29789510": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "31160589": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "31208370": {
+      "split": "pilot",
+      "license": "cc0"
+    },
+    "31453370": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "31921638": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "32523649": {
+      "split": "pilot",
+      "license": "cc by"
+    },
+    "32782782": {
+      "split": "pilot",
+      "license": "cc0"
+    },
+    "32940689": {
+      "split": "test",
+      "license": "cc by"
+    },
+    "33579347": {
+      "split": "test",
+      "license": "cc0"
+    }
+  },
+  "retracted": {},
+  "disease_ontology": {
+    "url": "http://purl.obolibrary.org/obo/doid.obo",
+    "sha256": "51e717b6b9f5d391f2793f9e16faf9c8629a661ab8f21c3a024458129f182ad2",
+    "version": "releases/2026-09-30/doid.obo",
+    "retrieved_at": "2026-10-06T07:48:31+00:00",
+    "license": "CC0 1.0"
+  },
+  "hgnc": {
+    "file": "hgnc_complete_set.txt",
+    "retrieved": "2026-09-30",
+    "sha256": "91d0ad20c34f26fb12c8cce3f80a65a6fc694f3a508040b19f6bfa29ae0d889e",
+    "snapshot_dir": "examples/singlecell_celltype/sources/snapshots"
+  },
+  "downloaded_bytes": 24697075
+}
