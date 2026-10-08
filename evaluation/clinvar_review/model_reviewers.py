@@ -2,7 +2,7 @@
 
     python3 evaluation/clinvar_review/model_reviewers.py run \
         --packet artifacts/clinvar-review/reviewer_packet --output artifacts/clinvar-review/models \
-        --backends claude codex gemini --limit 3
+        --reviewers claude-opus gpt-astra gemini-pro --limit 3
 
     uv run --frozen python evaluation/clinvar_review/model_reviewers.py export \
         --output artifacts/clinvar-review/models --key artifacts/clinvar-review/maintainer/key.json
@@ -28,12 +28,15 @@ import csv
 import datetime as dt
 import glob
 import hashlib
+import itertools
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -107,7 +110,7 @@ def claude_command(model: str, schema_path: Path, prompt: str, timeout: int) -> 
 def claude_parse(stdout: str, workdir: Path) -> tuple[dict, list[str], dict]:
     data = json.loads(stdout)
     if data.get("is_error") or "structured_output" not in data:
-        raise ValueError(f"Claude returned no structured output: {data.get('subtype')}")
+        raise ValueError(f"Claude returned no structured output: {data.get('subtype')}: {str(data.get('result'))[:200]}")
     server = data.get("usage", {}).get("server_tool_use", {})
     tools = [name for name, count in server.items() if count] + [d.get("tool_name", "?") for d in data.get("permission_denials", [])]
     usage = data.get("usage", {})
@@ -179,6 +182,18 @@ BACKENDS: dict[str, dict[str, Any]] = {
     "codex": {"model": "gpt-6-astra", "cli": "codex", "command": codex_command, "parse": codex_parse},
     "gemini": {"model": "gemini-3.1-pro-high", "cli": "agy", "command": gemini_command, "parse": gemini_parse},
 }
+# The six models of the LLM benchmark: each vendor's frontier and fast model. The key names the output folder.
+REVIEWERS: dict[str, tuple[str, str]] = {
+    "claude-opus": ("claude", "claude-opus-5-5"), "gpt-astra": ("codex", "gpt-6-astra"),
+    "gemini-pro": ("gemini", "gemini-3.1-pro-high"), "claude-haiku": ("claude", "claude-haiku-4-5-20251001"),
+    "gpt-luna": ("codex", "gpt-5.6-luna"), "gemini-flash": ("gemini", "gemini-3.8-flash-medium"),
+}
+# A CLI whose account is out of quota answers at once with this; such a case is left for a later run.
+LIMIT = re.compile(r"hit your (?:session |usage |weekly )?limit|usage limit|rate[- ]limit|quota|RESOURCE_EXHAUSTED", re.I)
+
+
+class QuotaExceeded(RuntimeError):
+    """The reviewer's account is out of quota: stop it, record nothing, resume later."""
 
 
 def validate_answer(answer: Any) -> dict[str, str]:
@@ -221,6 +236,10 @@ def review_case(backend: str, model: str, case: dict[str, str], rubric: str, tim
                 record.update(labels=validate_answer(answer), tools_used=tools, usage=usage)
             except (ValueError, KeyError, OSError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
                 record["error"] = f"{type(exc).__name__}: {exc}"
+                # Claude says so in its answer, Antigravity on stderr ("Individual quota reached", HTTP 429)
+                said = record["error"] + " " + record.get("stderr_tail", "")
+                if LIMIT.search(said):
+                    raise QuotaExceeded(f"{model}: {LIMIT.search(said).group(0)}: {record['error']}") from None
         record["seconds"] = round(time.monotonic() - started, 1)
         attempts.append(record)
         if record["error"] is None and not record["tools_used"]:
@@ -278,70 +297,97 @@ def run(args: argparse.Namespace) -> int:
         cases = cases[:args.limit]
     args.output.mkdir(parents=True, exist_ok=True)
     manifest_path = args.output / "manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"backends": {}}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    manifest.setdefault("reviewers", {})
     manifest.update({"packet_labels_sha256": sha256_text((args.packet / "labels.csv").read_text(encoding="utf-8")),
                      "rubric_sha256": sha256_text(rubric), "prompt_template_sha256": sha256_text(PROMPT),
                      "schema_sha256": sha256_text(json.dumps(SCHEMA, sort_keys=True)),
                      "note": "Model labels are not independent human annotations."})
-    jobs = []
-    for backend in args.backends:
-        model = getattr(args, f"{backend}_model") or BACKENDS[backend]["model"]
-        folder = args.output / backend
+    queues = []
+    for reviewer in args.reviewers:
+        backend, model = REVIEWERS[reviewer]
+        folder = args.output / reviewer
         (folder / "raw").mkdir(parents=True, exist_ok=True)
-        manifest["backends"][backend] = {"model": model, "cli": BACKENDS[backend]["cli"],
-                                         "cli_version": cli_version(BACKENDS[backend]["cli"])}
+        mine = []
         for case in cases:
             raw = folder / "raw" / f"{case['case_code']}.json"
             if raw.exists() and json.loads(raw.read_text(encoding="utf-8")).get("ok"):
                 continue  # resume: this case already has a valid answer
-            jobs.append((backend, model, case, raw))
+            mine.append((reviewer, backend, model, case, raw))
+        if mine or reviewer not in manifest["reviewers"]:  # the install that runs a reviewer is the one recorded
+            cli = BACKENDS[backend]["cli"]
+            try:
+                path = find_executable(cli)
+            except FileNotFoundError:
+                path = "not found"
+            manifest["reviewers"][reviewer] = {"model": model, "cli": cli, "cli_version": cli_version(cli),
+                                               "cli_path": path}
+        queues.append(mine)
+    # Interleaved, so that every reviewer has work in flight instead of one reviewer's slots holding up the pool.
+    jobs = [job for group in itertools.zip_longest(*queues) for job in group if job is not None]
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    print(f"{len(jobs)} call(s) to make across {len(args.backends)} backend(s); "
-          f"{len(cases) * len(args.backends) - len(jobs)} already done", flush=True)
+    print(f"{len(jobs)} call(s) to make across {len(args.reviewers)} reviewer(s); "
+          f"{len(cases) * len(args.reviewers) - len(jobs)} already done", flush=True)
+    claude = threading.Semaphore(1)  # every Claude model draws on one Claude quota
+    slots = {r: claude if REVIEWERS[r][0] == "claude" else threading.Semaphore(args.workers) for r in args.reviewers}
+    stopped: set[str] = set()
 
     def work(job):
-        backend, model, case, raw = job
-        result = review_case(backend, model, case, rubric, args.timeout)
+        reviewer, backend, model, case, raw = job
+        with slots[reviewer]:
+            if reviewer in stopped:
+                return None
+            try:
+                result = review_case(backend, model, case, rubric, args.timeout)
+            except QuotaExceeded as exc:
+                stopped.add(reviewer)
+                print(f"stopping {reviewer}, out of quota: {exc}", flush=True)
+                return None
+        result["reviewer"] = reviewer
         raw.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return result
 
     failures = 0
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers * len(args.backends)) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers * len(args.reviewers)) as pool:
         for n, result in enumerate(pool.map(work, jobs), start=1):
+            if result is None:
+                continue
             failures += not result["ok"]
             status = "ok" if result["ok"] else "FAILED " + str(result["attempts"][-1]["error"])[:120]
             tools = f" tools={result['tools_used']}" if result["tools_used"] else ""
-            print(f"[{n}/{len(jobs)}] {result['backend']} {result['code']}: {status}{tools}", flush=True)
+            print(f"[{n}/{len(jobs)}] {result['reviewer']} {result['code']}: {status}{tools}", flush=True)
 
     all_cases, _ = read_packet(args.packet)
-    for backend in args.backends:
-        folder = args.output / backend
+    for reviewer in args.reviewers:
+        folder = args.output / reviewer
         results = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in (folder / "raw").glob("*.json")}
         write_labels(folder, all_cases, results)
-    summarize(args.output, args.backends)
-    return 1 if failures else 0
+    summarize(args.output, sorted(p.parent.name for p in args.output.glob("*/raw")))  # every reviewer run so far
+    if stopped:
+        print(f"not finished, out of quota: {', '.join(sorted(stopped))}; run again later to resume", flush=True)
+    return 1 if failures or stopped else 0
 
 
-def summarize(output: Path, backends: list[str]) -> None:
+def summarize(output: Path, reviewers: list[str]) -> None:
     rows = []
-    for backend in backends:
-        for path in sorted((output / backend / "raw").glob("*.json")):
+    for reviewer in reviewers:
+        for path in sorted((output / reviewer / "raw").glob("*.json")):
             r = json.loads(path.read_text(encoding="utf-8"))
             last = r["attempts"][-1]
-            rows.append({"backend": backend, "model": r["model"], "code": r["code"], "ok": r["ok"],
+            rows.append({"reviewer": reviewer, "model": r["model"], "code": r["code"], "ok": r["ok"],
                          "attempts": len(r["attempts"]), "seconds": sum(a["seconds"] for a in r["attempts"]),
                          "tools_used": ";".join(r["tools_used"]),
                          "input_tokens": (last.get("usage") or {}).get("input_tokens"),
                          "output_tokens": (last.get("usage") or {}).get("output_tokens"), "error": last["error"] or ""})
     with (output / "runs.csv").open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]) if rows else ["backend"], lineterminator="\n")
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]) if rows else ["reviewer"], lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-    for backend in backends:
-        mine = [r for r in rows if r["backend"] == backend]
+    for reviewer in reviewers:
+        mine = [r for r in rows if r["reviewer"] == reviewer]
         if mine:
             done = [r for r in mine if r["ok"]]
-            print(f"{backend}: {len(done)}/{len(mine)} answered, {sum(bool(r['tools_used']) for r in mine)} with tool use, "
+            print(f"{reviewer}: {len(done)}/{len(mine)} answered, {sum(bool(r['tools_used']) for r in mine)} with tool use, "
                   f"median {sorted(r['seconds'] for r in mine)[len(mine) // 2]:.0f} s per case")
 
 
@@ -353,8 +399,8 @@ def export(args: argparse.Namespace) -> int:
     key = json.loads(args.key.read_text(encoding="utf-8"))
     manifest = json.loads((args.output / "manifest.json").read_text(encoding="utf-8"))
     annotations, predictions = [], []
-    for backend, info in manifest["backends"].items():
-        labels = import_sheets.read_labels(args.output / backend / "labels.csv")
+    for reviewer, info in manifest["reviewers"].items():
+        labels = import_sheets.read_labels(args.output / reviewer / "labels.csv")
         reviewer = f"model:{info['model']}"
         rows, _ = import_sheets.convert(labels, key, reviewer_id=reviewer,
                                         qualification=f"LLM {info['model']} via {info['cli_version']}; "
@@ -376,7 +422,7 @@ def export(args: argparse.Namespace) -> int:
         writer.writeheader()
         writer.writerows(predictions)
     print(f"Wrote {len(annotations)} annotation rows and {len(predictions)} predictions for "
-          f"{len(manifest['backends'])} model(s) to {args.output}")
+          f"{len(manifest['reviewers'])} model(s) to {args.output}")
     return 0
 
 
@@ -386,13 +432,11 @@ def main(argv: list[str] | None = None) -> int:
     go = steps.add_parser("run", help="Ask the models; reads only the reviewer packet")
     go.add_argument("--packet", type=Path, required=True)
     go.add_argument("--output", type=Path, required=True)
-    go.add_argument("--backends", nargs="+", choices=list(BACKENDS), default=list(BACKENDS))
-    for name, spec in BACKENDS.items():
-        go.add_argument(f"--{name}-model", help=f"default {spec['model']}")
+    go.add_argument("--reviewers", nargs="+", choices=list(REVIEWERS), default=list(REVIEWERS))
     go.add_argument("--set", choices=["calibration", "test", "all"], default="all")
     go.add_argument("--codes", help="Comma-separated case codes")
     go.add_argument("--limit", type=int)
-    go.add_argument("--workers", type=int, default=2, help="Concurrent calls per backend")
+    go.add_argument("--workers", type=int, default=2, help="Concurrent calls per reviewer; Claude models share one")
     go.add_argument("--timeout", type=int, default=600, help="Seconds per call")
     out = steps.add_parser("export", help="Maintainer: write annotations and predictions using the key")
     out.add_argument("--output", type=Path, required=True)

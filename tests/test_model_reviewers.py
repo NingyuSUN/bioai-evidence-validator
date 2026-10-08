@@ -130,17 +130,53 @@ def test_run_resumes_and_export_writes_protocol_files(tmp_path, monkeypatch):
     monkeypatch.setattr(mr, "cli_version", lambda name: f"{name} 1.0")
     out = tmp_path / "models"
     args = ["run", "--packet", str(kit / "reviewer_packet"), "--output", str(out), "--set", "calibration",
-            "--backends", "claude", "gemini"]
+            "--reviewers", "claude-opus", "gemini-flash"]
     assert mr.main(args) == 0 and len(calls) == 8
     assert mr.main(args) == 0 and len(calls) == 8  # resumed: nothing asked twice
-    with (out / "claude" / "labels.csv").open(encoding="utf-8") as handle:
+    with (out / "claude-opus" / "labels.csv").open(encoding="utf-8") as handle:
         filled = [r for r in csv.DictReader(handle) if r["statement_label"]]
     assert len(filled) == 4 and filled[0]["sources_consulted"] == "model knowledge only; no tools"
 
     assert mr.main(["export", "--output", str(out), "--key", str(kit / "maintainer" / "key.json"),
                     "--annotated-at", "2026-09-28"]) == 0
     annotations = review.load_annotations(out / "model_annotations.csv")
-    assert {a["reviewer_id"] for a in annotations} == {"model:claude-opus-5-5", "model:gemini-3.1-pro-high"}
+    assert {a["reviewer_id"] for a in annotations} == {"model:claude-opus-5-5", "model:gemini-3.8-flash-medium"}
     assert len(annotations) == 2 * 4 * 3 and all(a["split"] == "development" for a in annotations)
     predictions = review.load_predictions(out / "model_predictions.csv")
     assert {p["subset"] for p in predictions} <= {"divergent", "control"} and len(predictions) == 24
+
+
+def test_reviewers_are_the_six_benchmark_models():
+    assert set(mr.REVIEWERS) == {"claude-opus", "claude-haiku", "gpt-astra", "gpt-luna", "gemini-pro", "gemini-flash"}
+    assert all(backend in mr.BACKENDS for backend, _ in mr.REVIEWERS.values())
+
+
+def test_a_spent_quota_stops_the_reviewer_and_records_nothing(tmp_path, monkeypatch):
+    kit = tmp_path / "kit"
+    prepare.prepare(kit, salt="test-salt", calibration=3)
+    limit = json.dumps({"is_error": True, "subtype": "success", "result": "You've hit your session limit · resets 6pm"})
+    with pytest.raises(mr.QuotaExceeded):
+        mr.review_case("claude", "c", CASE, "R", 60, runner=lambda *a: done(limit))
+
+    def fake_review(backend, model, case, rubric, timeout):
+        if backend == "claude":
+            raise mr.QuotaExceeded("out")
+        return {"code": case["case_code"], "backend": backend, "model": model, "prompt_sha256": "x", "ok": True,
+                "labels": dict(ANSWER), "tools_used": [], "attempts": [{"seconds": 1.0, "error": None, "usage": {}}],
+                "finished_at": "2026-10-08T00:00:00+00:00"}
+
+    monkeypatch.setattr(mr, "review_case", fake_review)
+    monkeypatch.setattr(mr, "cli_version", lambda name: f"{name} 1.0")
+    out = tmp_path / "models"
+    assert mr.main(["run", "--packet", str(kit / "reviewer_packet"), "--output", str(out), "--set", "calibration",
+                    "--reviewers", "claude-opus", "claude-haiku", "gpt-luna"]) == 1
+    assert not list((out / "claude-opus" / "raw").glob("*.json")) and not list((out / "claude-haiku" / "raw").glob("*.json"))
+    assert len(list((out / "gpt-luna" / "raw").glob("*.json"))) == 3
+
+
+def test_a_quota_reported_on_stderr_also_stops_the_reviewer():
+    stderr = ('Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 37m. '
+              'AGY_ERROR: {"status":"RESOURCE_EXHAUSTED","error_code":429}')
+    with pytest.raises(mr.QuotaExceeded, match="quota"):
+        mr.review_case("gemini", "g", CASE, "R", 60,
+                       runner=lambda *a: SimpleNamespace(stdout="", stderr=stderr, returncode=3))

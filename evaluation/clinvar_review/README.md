@@ -113,48 +113,102 @@ Then commit `annotations.csv`, `adjudications.csv`, `agreement.json`, `score.jso
 `manifest.json` and the key into `evaluation/clinvar_review/results/`, and update the ClinVar
 case README, which currently states that no independent expert annotation exists.
 
-## Model reviewers (optional)
+## Model reviewers (#22)
 
-The same packet can be given to LLMs, to measure which parts of expert review they could take
-over. `model_reviewers.py` drives three command-line agents: Claude Code (`claude`), Codex
-(`codex`) and Antigravity (`agy`, for Gemini). Each model gets exactly what a human reviewer
-gets: the rubric and one case under its code. It answers through a JSON schema.
+The same packet goes to the six models of the LLM benchmark, to measure which parts of expert review they could
+take over. `model_reviewers.py` drives three command-line agents: Claude Code (`claude`), Codex (`codex`) and
+Antigravity (`agy`, for Gemini). Each vendor contributes a frontier model and a fast one:
+- Claude Opus 5.5 and Claude Haiku 4.5;
+- GPT-6-Astra and GPT-5.6-Luna;
+- Gemini 3.1 Pro and Gemini 3.8 Flash.
+
+Each model gets exactly what a human reviewer gets, the rubric and one case under its code, and answers through a
+JSON schema.
 
 ```bash
-# Where the CLIs are installed (e.g. WSL); reads only reviewer_packet/, never the key
+# Where the CLIs are installed; reads only reviewer_packet/, never the key
 python3 evaluation/clinvar_review/model_reviewers.py run \
   --packet artifacts/clinvar-review/reviewer_packet --output artifacts/clinvar-review/models \
-  --set calibration                     # start small; --limit N, --codes, --backends
+  --set calibration                     # start small; --limit N, --codes, --reviewers
 
-# Maintainer, with the key: protocol annotations + predictions for scoring
+# Maintainer, with the key: protocol annotations and predictions, then the analysis
 uv run --frozen python evaluation/clinvar_review/model_reviewers.py export \
   --output artifacts/clinvar-review/models --key artifacts/clinvar-review/maintainer/key.json
-uv run --frozen bioevidence review agreement artifacts/clinvar-review/models/model_annotations.csv
+uv run --frozen python evaluation/clinvar_review/analyze_models.py \
+  --models artifacts/clinvar-review/models --output artifacts/clinvar-review/models/analysis
 ```
 
-- **Isolation.** One case per call. Every call is a fresh, non-interactive session in an empty
-  temporary directory, so the model cannot read the key or other cases.
+- **Isolation.** One case per call. Every call is a fresh, non-interactive session in an empty temporary
+  directory, so the model cannot read the key or other cases.
 - **No lookups.**
   - Claude Code runs with every tool disabled.
   - Codex runs without browser tools or your user config and MCP servers, in a read-only sandbox.
   - Antigravity cannot switch off web search. Its tool calls are detected from the event stream.
-  - A case answered after a tool call is retried once. If a tool is used again, the case is kept
-    but marked `later_information_seen = yes`.
-- **Record.** `manifest.json` records model IDs, CLI versions and hashes of the rubric, prompt
-  and schema. `raw/` keeps every answer. `runs.csv` lists time, tokens and tool use per call.
-  Re-running resumes, so cases already answered are skipped.
-- **Cost, from a pilot run.** Per case: Claude Opus 5.5 took about 10 s and 7k input tokens;
-  GPT-6-Astra about 23 s and 24k; Gemini 3.1 Pro about 15 s and 7k. With the default two
-  concurrent calls per model, all 190 cases take roughly 40 minutes.
-- **Comparison.**
-  - `model_predictions.csv` can be passed to `bioevidence review score` in place of, or merged
-    with, `maintainer/predictions.csv`. Each model is then scored against the expert labels,
-    per subset.
-  - Agreement among the models alone shows how much they overlap. It is not a measure of
-    correctness.
+  - A case answered after a tool call is retried once. If a tool is used again, the case is kept but marked
+    `later_information_seen = yes`.
+- **Quota.** A CLI whose account is out of quota stops that reviewer; nothing is recorded for its remaining cases,
+  and the next run resumes them. The Claude models share one call slot. Several installs can write to one output
+  folder (for example Claude on Windows and Codex and Antigravity in WSL); `manifest.json` records the CLI version
+  and path that answered for each model.
+- **Record.** `manifest.json` records model IDs, CLI versions and hashes of the rubric, prompt and schema. `raw/`
+  keeps every answer. `runs.csv` lists time, tokens and tool use per call. Re-running resumes.
 
-Model labels are **not independent human annotations**. Keep them in their own files, never in
-`annotations.csv`, and never use them to resolve an expert disagreement.
+### What is published, and when
+
+Model labels could steer a human reviewer, so they follow the same rule as the key: **per-case model labels stay
+private until all expert reviews are in.** So does anything that compares models with the key, the validator or
+NCBI's review status. Until then `analyze_models.py --public` writes only:
+- how each model ran: answers, tool use, later information seen, time;
+- how much the models agree with each other, per use (Krippendorff's alpha, bootstrap interval);
+- the decision rule below;
+- the SHA-256 of the withheld per-case files.
+
+The published summary is in [`results/models`](results/models/summary.md).
+
+### Results so far
+
+All six models reviewed all 190 cases.
+- **Clean runs.** No model used a tool or said it recognised later information.
+- **Two runs.** The calibration round (20 cases) ran on 2026-09-28; the rest ran on 2026-10-08. GPT-6-Astra's
+  Codex CLI was updated in between, from 0.153.4 to 0.160.0.
+- **Two accounts' quotas.** Claude ran on the Windows install's account. Antigravity's account ran out of quota
+  partway through, and its 35 unanswered cases were rerun after the reset.
+
+On the 170 test cases, before any expert label:
+
+| Label | All six agree | Krippendorff's alpha (95% CI) |
+|---|---:|---|
+| Research summary | 91.8% | 0.12 (0.03–0.21) |
+| Clinical reference | 55.3% | 0.53 (0.43–0.62) |
+| Expert reference | 38.2% | 0.49 (0.43–0.55) |
+| Statement correct? | 86.5% | 0.47 (0.24–0.62) |
+
+- **High raw agreement means little where nearly every case gets one label.** For research summaries the six
+  models agree on 92% of cases, but alpha is close to chance.
+- **For the uses that depend on the evidence, the models often split.** All six agree on about half the cases or
+  fewer.
+
+So their consensus cannot stand in for an expert's decision. Whether any of them is *right* is what the expert
+labels will show (#23).
+
+### Analysis against the expert labels
+
+Once the expert labels are resolved, `analyze_models.py --annotations … --adjudications … --predictions
+maintainer/predictions.csv` adds, on the test split:
+- **Scores** for each model, the models' majority (at least four of six), the validator and NCBI's review status,
+  per use and per subset (divergent, control).
+- **Error correlation.** For each pair of models: their misses, the misses they share, P(B misses | A misses), and
+  Cohen's kappa of the miss indicators. Shared misses make a second model's opinion worth little.
+- **Does agreement mean correctness?** How often the six models are wrong when they all agree, and when they split.
+- **Decision statement, by a rule fixed before any expert label exists.** Per use:
+  - **Models alone**, if the models' majority wrongly admits cases that experts would not admit at a rate whose
+    exact one-sided 95% upper bound is below 5%, and wrongly blocks fewer than 20% of the cases experts would
+    admit, on the divergent and the control subset each.
+  - **Deterministic rules**, if the validator meets the same two conditions.
+  - **Experts** otherwise.
+
+Model labels are **not independent human annotations**. Keep them in their own files, never in `annotations.csv`,
+and never use them to resolve an expert disagreement.
 
 ## Interpreting the result
 

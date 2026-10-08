@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Add model reviewers for the blinded ClinVar review packet (#17, #22). `model_reviewers.py` gives the six benchmark
+  models exactly what experts get, one isolated session per case, with tools disabled or detected, stops a model
+  whose account is out of quota, and lets Claude run on a different install than Codex and Antigravity. All six
+  reviewed all 190 cases with no tool use. `analyze_models.py` reports inter-model agreement now (alpha 0.49–0.53
+  for the clinical and expert uses: the models often split), and, once the expert labels exist, scores per subset,
+  error correlation, whether unanimous models are right, and a decision rule fixed before any label. Per-case model
+  labels stay private until the expert review is complete; the published summary holds only what cannot unblind a
+  reviewer.
 - Add the real extraction experiment (#21, `examples/civic_extraction`, `evaluation/llm_benchmark/extraction_loop.py`).
   Six models extract clinical evidence claims on their own from 50 openly licensed papers that CIViC curated (10
   pilot, 40 test; protocol frozen before the test split). Each claim, written in the fields of `draft-schema`,

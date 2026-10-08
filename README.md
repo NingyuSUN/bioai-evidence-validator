@@ -290,6 +290,8 @@ context of use, model risk, credibility evidence, adequacy): the
 
 Tracked in the [AI validation roadmap](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/AI_VALIDATION_ROADMAP.md) (#26):
 - expert review of the benchmark cases (#23), including the 60-claim sample from the extraction experiment (#21);
+- scoring the six models' reviews of the 190 ClinVar cases against those expert labels. The models have reviewed
+  them, and they often disagree with each other (#22);
 - an expert audit of admitted records with `bioevidence review audit-sample` and `audit-score`, which bound
   the error rate of what still gets through. The tool and a dry run are done (#24); the audit needs experts.
 - the [validation dossier](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/VALIDATION_DOSSIER.md),
