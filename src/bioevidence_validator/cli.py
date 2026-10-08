@@ -12,6 +12,7 @@ import yaml
 from . import review as review_module
 from .canine import validate_canine_panel
 from .canine_capture import validate_canine_capture
+from .canine_preflight import validate_canine_preflight
 from .draft import build_record, draft_json_schema, load_draft
 from .engine import default_schema_path, generate_json_schema, list_profiles, profile_path, validate_record
 from .grounding import SnapshotStore, SourceBytesGrounder
@@ -61,6 +62,10 @@ def parser() -> argparse.ArgumentParser:
     canine.add_argument("input", type=Path)
     canine.add_argument("--snapshot-dir", type=Path, required=True)
     canine.add_argument("--output", type=Path)
+    preflight = commands.add_parser("canine-preflight", help="Check full catalogue coverage, supported mutant alleles and prior report applicability offline")
+    preflight.add_argument("input", type=Path)
+    preflight.add_argument("--snapshot-dir", type=Path, required=True)
+    preflight.add_argument("--output", type=Path)
     capture = commands.add_parser("canine-capture", help="Replay source-bound canine NGS requirements and reference contexts offline; retains assay holds")
     capture.add_argument("input", type=Path)
     capture.add_argument("--snapshot-dir", type=Path, required=True)
@@ -142,14 +147,15 @@ def _write_json(path: Path, value: dict) -> None:
 
 
 def _run(args) -> int:
-    if args.command in {"canine-panel", "canine-capture"}:
+    if args.command in {"canine-panel", "canine-capture", "canine-preflight"}:
         if args.output and (args.output.resolve() == args.input.resolve()
                             or args.output.resolve().is_relative_to(args.snapshot_dir.resolve())):
             raise ValueError("Output must not overwrite an input or reference snapshot")
         document = json.loads(args.input.read_text(encoding="utf-8"),
                               object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
         _check_depth(document)
-        validator = validate_canine_panel if args.command == "canine-panel" else validate_canine_capture
+        validator = {"canine-panel": validate_canine_panel, "canine-capture": validate_canine_capture,
+                     "canine-preflight": validate_canine_preflight}[args.command]
         report = validator(document, SnapshotStore.from_directory(args.snapshot_dir))
         if args.output:
             _write_json(args.output, report)

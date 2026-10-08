@@ -175,6 +175,11 @@ flowchart LR
 
 ## Quickstart
 
+The specialization branch now adds `canine-preflight` for complete event accounting,
+whole supported-allele reconstruction and prior-report applicability. See
+[the preflight contract](docs/CANINE_PREFLIGHT.md). Missing checks remain explicit;
+this preparatory interface has not yet been wired into the full current canine draft.
+
 The `canine-panel-validation` specialization branch also provides an offline
 canine variant/reference consistency command. See
 [the contract and limits](docs/CANINE_PANEL_VALIDATION.md). Its engineering

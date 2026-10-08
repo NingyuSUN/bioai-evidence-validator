@@ -101,3 +101,15 @@ assert report["source_route_count"] == 154
 assert report["requirements_consistency_counts"]["verified"] == 154
 assert not any(report[k] for k in ["assay_validated", "probe_ready", "orderable", "reportable"])
 print("Installed wheel: 154 canine NGS routes and pinned contexts replay; assay holds retained.")
+
+with tempfile.TemporaryDirectory() as directory:
+    output = Path(directory) / 'preflight.json'
+    run('canine-preflight', root / 'examples/canine_preflight/panel.json', '--snapshot-dir',
+        root / 'examples/canine_panel/sources', '--output', output, expected=2)
+    report = json.loads(output.read_text(encoding='utf-8'))
+    assert report['catalogue_event_count'] == 6
+    assert report['check_counts']['allele_reconstruction']['verified'] == 6
+    assert report['check_counts']['target_equivalence']['not_assessed'] == 6
+    assert report['current_checks_recomputed'] and not report['prior_results_used_to_skip_checks']
+    assert not report['assay_validated'] and not report['orderable']
+print('Installed wheel: canine preflight reconstructs source mutants and retains missing target checks.')

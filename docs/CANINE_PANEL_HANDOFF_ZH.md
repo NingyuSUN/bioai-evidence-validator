@@ -69,3 +69,47 @@ RNA/体细胞不能提升为生殖系、共享 FGF4 读段不能确定插入位�
 154条回放收据保存在 `canine_capture_checks_20261006/`；之前的564项结果保留为历史。
 94份压缩快照是开发资料，无独立临床金标准或实验样本；科学准入、探针订购和
 可报告标志均为false。通用能力的抽象尚未实施，也未推送或发布。
+
+## 最新：接入前的分支完善（2026-10-08）
+
+VERIFIED：新增 `canine-preflight` 命令，输入契约与适用范围见
+[CANINE_PREFLIGHT.md](CANINE_PREFLIGHT.md)。本轮只修改bioevidence专用分支，
+没有接入或改写canine当前629事件的主稿、参考文件或位点政策。
+
+新增能力：
+
+- 用明确的事件目录约束分母；遗漏事件、缺少检查逐条显示，重复和越界ID拒绝。
+- 对支持的简单变异及非重叠复合变异重建整段源侧突变序列，保留两侧和中间未变序列；
+  可核对完整突变快照及目标参考上的单个VCF编辑。复合相位仍未验证。
+- 核对旧报告对当前事件输入和实现的适用性。当前轻量检查仍实际重算，旧状态不直接继承。
+- 捕获特异性、剂量、相位及样本实验表现仍明确 `not_assessed`；候选位点不冻结。
+
+VERIFIED：已用测试先复现CLI缺少入口、浮点坐标导致崩溃、旧复合重建提示过时三个问题，
+再完成实现/修正。浮点坐标现在返回输入错误；原始诊断保存在旧诊断字段，当前结果只消除
+已经由实际重建解决的限制，不消除来源冲突或相位缺口。同一Codex团队进行了只读代码复核，
+不是外部模型审查或独立生物学验收。
+
+验证命令（分支根目录，Python 3.12环境）：
+
+```bash
+.venv/bin/python -m pytest --cov --cov-report=term -p no:cacheprovider
+.venv/bin/python -m ruff check .
+.venv/bin/python -m mypy
+/home/ningyu/.local/bin/uv build --offline --out-dir /tmp/canine-preflight-dist
+.venv/bin/python -m bioevidence_validator.cli canine-preflight \
+  examples/canine_preflight/panel.json --snapshot-dir examples/canine_panel/sources \
+  --output /tmp/canine-preflight-example.json
+```
+
+最后一条预期exit 2：示例6条源侧重建通过，但未提供目标VCF编辑，不能提升目标等价状态。
+完整最终结果、实现哈希与安装包验证方式保存在 `canine_preflight_checks_20261008/validation.json`。
+
+已确认的环境问题：直接离线创建隔离环境时，缓存不包含全部依赖，解析失败。
+处理方式是将构建的wheel无依赖安装到临时环境，只从现有已用环境提供依赖路径；
+验证脚本会确认被测包来自安装目录而非源码。这证明本次wheel与已有依赖环境能配合工作，
+不等于全新联网安装或跨平台CI已完成。
+
+PROPOSED 下一步：canine侧适配器导出当前完整事件目录、按检测路线声明必要检查，
+绑定可用源序列和目标等位。缺坐标的61条保留缺证据状态；多个候选等位/重复状态需明确
+身份与各自覆盖，不能用一个代表性等位宣称整个来源事件全部通过。已有专项计算结果的
+导入和实际收据重验仍需后续实现，不能将生产者的布尔标志直接当作本工具验证结果。

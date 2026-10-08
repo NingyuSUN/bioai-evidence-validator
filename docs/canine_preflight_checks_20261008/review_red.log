@@ -1,0 +1,178 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_ test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[pos1] __
+
+field = 'pos1'
+
+    @pytest.mark.parametrize('field', ['pos1', 'target_start1', 'target_end1'])
+    def test_integral_float_coordinates_are_invalid_input_not_runtime_crashes(field):
+        doc, raw = packet()
+        if field == 'pos1':
+            doc['allele_requests'] = [{'event_id':'authored:1','target_variant':{'chrom':'chr14','pos1':202.0,'ref':'C','alt':'T'}}]
+        else:
+            doc['panel']['events'][0][field] = 202.0
+>       with pytest.raises(ValueError): run(doc, raw)
+                                        ^^^^^^^^^^^^^
+
+tests/test_canine_preflight.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_canine_preflight.py:37: in run
+    return validate_canine_preflight(doc, SnapshotStore({k: lambda v=v: v for k, v in raw.items()}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine_preflight.py:254: in validate_canine_preflight
+    row['checks']['target_equivalence'] = _target(event, request, base,
+src/bioevidence_validator/canine_preflight.py:130: in _target
+    actual = target.interval(variant['pos1'], variant['pos1']+len(variant['ref'])-1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SequenceSlice(sequence_id='chr14', assembly='ROSY_custom', start1=200, sequence='AACCGGTTAACCGGTT', binding='PINNED_PRODUCER_RECEIPT_ASSERTION')
+start = 202.0, end = 202.0
+
+    def interval(self, start: int, end: int) -> str:
+        if not self.start1 <= start <= end <= self.end1:
+            raise VariantProblem("BEV015", "The pinned slice does not cover both event endpoints.")
+>       result = self.sequence[start-self.start1:end-self.start1+1]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: slice indices must be integers or None or have an __index__ method
+
+src/bioevidence_validator/canine.py:171: TypeError
+_ test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[target_start1] _
+
+field = 'target_start1'
+
+    @pytest.mark.parametrize('field', ['pos1', 'target_start1', 'target_end1'])
+    def test_integral_float_coordinates_are_invalid_input_not_runtime_crashes(field):
+        doc, raw = packet()
+        if field == 'pos1':
+            doc['allele_requests'] = [{'event_id':'authored:1','target_variant':{'chrom':'chr14','pos1':202.0,'ref':'C','alt':'T'}}]
+        else:
+            doc['panel']['events'][0][field] = 202.0
+>       with pytest.raises(ValueError): run(doc, raw)
+                                        ^^^^^^^^^^^^^
+
+tests/test_canine_preflight.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_canine_preflight.py:37: in run
+    return validate_canine_preflight(doc, SnapshotStore({k: lambda v=v: v for k, v in raw.items()}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine_preflight.py:198: in validate_canine_preflight
+    legacy = validate_canine_panel(panel, store) if 'panel' in document else None
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:367: in validate_canine_panel
+    events = [_event(event, references, failures) for event in document["events"]]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:330: in _event
+    target.interval(ta, tb)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SequenceSlice(sequence_id='chr14', assembly='ROSY_custom', start1=200, sequence='AACCGGTTAACCGGTT', binding='PINNED_PRODUCER_RECEIPT_ASSERTION')
+start = 202.0, end = 202
+
+    def interval(self, start: int, end: int) -> str:
+        if not self.start1 <= start <= end <= self.end1:
+            raise VariantProblem("BEV015", "The pinned slice does not cover both event endpoints.")
+>       result = self.sequence[start-self.start1:end-self.start1+1]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: slice indices must be integers or None or have an __index__ method
+
+src/bioevidence_validator/canine.py:171: TypeError
+_ test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[target_end1] _
+
+field = 'target_end1'
+
+    @pytest.mark.parametrize('field', ['pos1', 'target_start1', 'target_end1'])
+    def test_integral_float_coordinates_are_invalid_input_not_runtime_crashes(field):
+        doc, raw = packet()
+        if field == 'pos1':
+            doc['allele_requests'] = [{'event_id':'authored:1','target_variant':{'chrom':'chr14','pos1':202.0,'ref':'C','alt':'T'}}]
+        else:
+            doc['panel']['events'][0][field] = 202.0
+>       with pytest.raises(ValueError): run(doc, raw)
+                                        ^^^^^^^^^^^^^
+
+tests/test_canine_preflight.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_canine_preflight.py:37: in run
+    return validate_canine_preflight(doc, SnapshotStore({k: lambda v=v: v for k, v in raw.items()}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine_preflight.py:198: in validate_canine_preflight
+    legacy = validate_canine_panel(panel, store) if 'panel' in document else None
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:367: in validate_canine_panel
+    events = [_event(event, references, failures) for event in document["events"]]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:330: in _event
+    target.interval(ta, tb)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SequenceSlice(sequence_id='chr14', assembly='ROSY_custom', start1=200, sequence='AACCGGTTAACCGGTT', binding='PINNED_PRODUCER_RECEIPT_ASSERTION')
+start = 202, end = 202.0
+
+    def interval(self, start: int, end: int) -> str:
+        if not self.start1 <= start <= end <= self.end1:
+            raise VariantProblem("BEV015", "The pinned slice does not cover both event endpoints.")
+>       result = self.sequence[start-self.start1:end-self.start1+1]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: slice indices must be integers or None or have an __index__ method
+
+src/bioevidence_validator/canine.py:171: TypeError
+_________________ test_cli_integral_float_returns_input_error __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ningyu/pytest-3/test_cli_integral_float_return0')
+
+    def test_cli_integral_float_returns_input_error(tmp_path):
+        doc, raw = packet(); doc['panel']['events'][0]['target_start1'] = 202.0
+        source = tmp_path/'input.json'; source.write_text(json.dumps(doc))
+        snapshots = tmp_path/'sources'; snapshots.mkdir()
+        for key, value in raw.items(): (snapshots/key).write_bytes(value)
+>       assert main(['canine-preflight',str(source),'--snapshot-dir',str(snapshots)]) == 3
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_canine_preflight.py:207: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/bioevidence_validator/cli.py:289: in main
+    return _run(args)
+           ^^^^^^^^^^
+src/bioevidence_validator/cli.py:159: in _run
+    report = validator(document, SnapshotStore.from_directory(args.snapshot_dir))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine_preflight.py:198: in validate_canine_preflight
+    legacy = validate_canine_panel(panel, store) if 'panel' in document else None
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:367: in validate_canine_panel
+    events = [_event(event, references, failures) for event in document["events"]]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/bioevidence_validator/canine.py:330: in _event
+    target.interval(ta, tb)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SequenceSlice(sequence_id='chr14', assembly='ROSY_custom', start1=200, sequence='AACCGGTTAACCGGTT', binding='PINNED_PRODUCER_RECEIPT_ASSERTION')
+start = 202.0, end = 202
+
+    def interval(self, start: int, end: int) -> str:
+        if not self.start1 <= start <= end <= self.end1:
+            raise VariantProblem("BEV015", "The pinned slice does not cover both event endpoints.")
+>       result = self.sequence[start-self.start1:end-self.start1+1]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: slice indices must be integers or None or have an __index__ method
+
+src/bioevidence_validator/canine.py:171: TypeError
+_____ test_compound_success_does_not_repeat_obsolete_unchecked_diagnostic ______
+
+    def test_compound_success_does_not_repeat_obsolete_unchecked_diagnostic():
+        doc,raw=packet('[102C>T;104_105del]',205)
+        doc['panel']['events'][0].update(event_ref='CCGG',event_alt='TC')
+        row=run(doc,raw)['events'][0]
+        assert row['checks']['allele_reconstruction']['status']=='verified'
+>       assert not any(f['field_path']=='event_ref/event_alt' for f in row['findings'])
+E       assert not True
+E        +  where True = any(<generator object test_compound_success_does_not_repeat_obsolete_unchecked_diagnostic.<locals>.<genexpr> at 0x74065e81a4d0>)
+
+tests/test_canine_preflight.py:268: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_canine_preflight.py::test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[pos1]
+FAILED tests/test_canine_preflight.py::test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[target_start1]
+FAILED tests/test_canine_preflight.py::test_integral_float_coordinates_are_invalid_input_not_runtime_crashes[target_end1]
+FAILED tests/test_canine_preflight.py::test_cli_integral_float_returns_input_error
+FAILED tests/test_canine_preflight.py::test_compound_success_does_not_repeat_obsolete_unchecked_diagnostic

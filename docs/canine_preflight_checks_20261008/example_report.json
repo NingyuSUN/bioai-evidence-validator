@@ -1,0 +1,426 @@
+{
+  "format_version": "canine-preflight-report-1",
+  "overall_status": "review_required",
+  "input_sha256": "19aa8f4287ff24e1bc45693f7bd26fda772cb32c6c11cba1e30d6fd809f0fdf2",
+  "implementation_sha256": {
+    "canine_preflight.py": "1562fedccd1601793a6f8cd4a4242011f3f6a35ce72bde7d7529a5b54e6ffdec",
+    "canine.py": "098e4ee6263931802e24b59dca9bf979c0e565336c1ba3654783153a1366e7ba",
+    "grounding.py": "ebfe096fe6d40aa7a991eac0461252e015364ef352e50719912addc08f92e915"
+  },
+  "catalogue_event_count": 6,
+  "panel_event_count": 6,
+  "events": [
+    {
+      "id": "OMIA:1921",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "e7f34e8bc70a6ca2c22799b29385ee2965fe46fc1510cd66b1a8de8609df773b",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [],
+      "legacy_reference_status": "verified",
+      "reconstructed_source_mutant": "GCCCGTGGGCCCAGTGGTTTGCTCCTCTACAATGGGCAGAAAACAGACGGCAAGGGGGACTTTGTGTCACTGGCGTTGCATGACCGCTTCTTGGAATTCCACTATGACCTGGGCAAGGGAGCAGCGGTCATCAGGTGCGCCCTCGTGGCTGGGCATGGGGGTGAGGCTGGGGACACTCTGGGGTGGCCGGCTGGCAGGGCC",
+      "source_mutant_sha256": "30759ca659fecbb2761338843f345998c3588b2b2e4cd51645eca3873b719017",
+      "source_mutant_length_bp": 201,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    },
+    {
+      "id": "OMIA:1937",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "777eef2f1982de0c3dbf4611939422770a18f81bcdfa83c02cfbecf9a0050508",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Held source issue retained: Catalogue type delins disagrees with the single-base deletion supported by genomic HGVS and primary evidence.",
+          "field_path": "held_reasons"
+        }
+      ],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Held source issue retained: Catalogue type delins disagrees with the single-base deletion supported by genomic HGVS and primary evidence.",
+          "field_path": "held_reasons"
+        }
+      ],
+      "legacy_reference_status": "review_required",
+      "reconstructed_source_mutant": "AAACAAAAGACTCAAACCTTTCAAGTTCTTTCTTTTGTCCTCCAAAGGCAATCACAGTTCTGATTGCTGCTAAGACTTCTTCAGCTACTGCTCCAGCTTTGCATAGGCCAAGAGTTCTTTATCAGTAAATGAAGATAGTATCTGTTTAAAAATTCAATTTCAGATCATTTAATATTCTTTAATGAAGGCAAAGCTGTATC",
+      "source_mutant_sha256": "29f86a180b21ab497458c338cf2c1af63658fe5d37fd9901751b84a3fb3065dc",
+      "source_mutant_length_bp": 200,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    },
+    {
+      "id": "OMIA:1942",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "0548bca9324898655e20da6865b497690a5d51217eb7da19e766f2b0cbd2bb29",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [],
+      "legacy_reference_status": "verified",
+      "reconstructed_source_mutant": "GGCCGCGCGCACCACCAGGCTGTAGTCGGGCGGGCAGGCCAGGCCGGCGGGCGGCGGGCAGGGCGGCGGGCGGGGCGCGGGCCCCGGGGCGGCGGGCGCGCACGGCGTCCTGCGCGCTGCCCAGGCCCAGGTGCGCCATCTCGCACAGGTTGAGCAGCAGGCAGAGGCAGCTGACCACGTACATGACCAGCAGGAACACG",
+      "source_mutant_sha256": "e0c6d60ce74d9f5d588cb63b8033c0d050d47ec3923dcf0ea53bbb5231da5be4",
+      "source_mutant_length_bp": 200,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    },
+    {
+      "id": "OMIA:1944",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "6e8f0feb8fd9637c22fef42b140fb28c42b650bef7af44edc8d84176b1a91b1f",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [],
+      "legacy_reference_status": "verified",
+      "reconstructed_source_mutant": "CAGGCTGGGATTCCTCCAGGTGTGTACAATGTTATTCCCTGCTCTAGGAAGAAGGCCAAGGAAGTCGGGGAAGCACTTTGTACTGATCCTCTAGTGTCCAGAATTTCCTTTACTGGCTCAACAGCTACTGGAAAGGTACGTGACTTAATTCCCAAAGGAAATAGTTGTCATTCTGGTGTTTTCTCTGAATAGAGTACGAAA",
+      "source_mutant_sha256": "9f598a0baf439d261dee3843103deb71e335249fd56a32c119a204cc9785425c",
+      "source_mutant_length_bp": 201,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    },
+    {
+      "id": "OMIA:1945",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "0c47ab5097b670e67c38f5f55b1edbbf5e0d09dea0b6b9131284b23788ce3620",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [],
+      "legacy_reference_status": "verified",
+      "reconstructed_source_mutant": "ACTCACCCTCTTTGCTGTGCTGGGCATTTTCCTGACAGCTTTCGTGCTGGGGGTCTTCATCAAGTTCCGTAACACACCCATCGTCAAGGCCACCAACCGAAAGCTCTCGTACCTCCTCCTCTTCTCCTTGCTGTGCTGCTTCTCCAGCTCCCTGTTCTTCATTGGCGAGCCCCAGGACTGGACCTGCCGCCTGCGCCAGCC",
+      "source_mutant_sha256": "858ba8b0a07ac9bab41a168b123a3bad54fa4be9bb6fb083185d3e6f569e7a65",
+      "source_mutant_length_bp": 201,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    },
+    {
+      "id": "OMIA:1946",
+      "required_checks": [
+        "source_reference",
+        "allele_reconstruction",
+        "target_equivalence"
+      ],
+      "event_fingerprint": "4d046e9c3c60cf49f3849cd0c73452e2e88908997264f5147c587483ff9ff796",
+      "checks": {
+        "source_reference": {
+          "status": "verified",
+          "reason": "VERIFIED_WITHIN_PINNED_SLICE"
+        },
+        "allele_reconstruction": {
+          "status": "verified",
+          "reason": "All supported edits applied to the full source slice; physical phase remains unverified."
+        },
+        "target_equivalence": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "capture_specificity": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "dosage": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "phase": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        },
+        "assay_performance": {
+          "status": "not_assessed",
+          "reason": "No executable evidence supplied or check not implemented by this entry."
+        }
+      },
+      "findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original and reviewed HGVS differ; correction is explicit and requires review.",
+          "field_path": "reviewed_hgvs"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original HGVS is retained with its problem; a separate candidate correction requires review: Missing versioned accession/coordinate prefix, whitespace, or malformed HGVS.",
+          "field_path": "source_hgvs"
+        }
+      ],
+      "assay_validated": false,
+      "orderable": false,
+      "reportable": false,
+      "legacy_reference_findings": [
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original and reviewed HGVS differ; correction is explicit and requires review.",
+          "field_path": "reviewed_hgvs"
+        },
+        {
+          "rule_id": "BEV015",
+          "severity": "review",
+          "message": "Original HGVS is retained with its problem; a separate candidate correction requires review: Missing versioned accession/coordinate prefix, whitespace, or malformed HGVS.",
+          "field_path": "source_hgvs"
+        }
+      ],
+      "legacy_reference_status": "review_required",
+      "reconstructed_source_mutant": "GGATGGTGCAGAGGGGCCCAGTCCAGCCCTCCAGGCATCGACATTCATTGGGCTGCTCACAGAAGCCGTGGTCTGGACTGCAGCCCGCTCGACATGCCGCGATGGGGGAAGGAGAGGCAGAGGGAAGAGTAATAGTGATGAGGGCAGCTCAGGAGGACAGGAATCAGAGAAGTTTCTGAGCACTTTGTGCACTGCTTTGTT",
+      "source_mutant_sha256": "7680c91926cefcbc57ff7759c1976e913d29123ea5c680088574a0f361f73854",
+      "source_mutant_length_bp": 201,
+      "source_reference_binding": "ACCESSION_INTERVAL_HEADER_AND_SNAPSHOT",
+      "overall_status": "review_required",
+      "prior_receipt_applicability": "not_supplied"
+    }
+  ],
+  "event_status_counts": {
+    "verified": 0,
+    "review_required": 6,
+    "rejected": 0
+  },
+  "check_counts": {
+    "source_reference": {
+      "verified": 6,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 0
+    },
+    "allele_reconstruction": {
+      "verified": 6,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 0
+    },
+    "target_equivalence": {
+      "verified": 0,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 6
+    },
+    "capture_specificity": {
+      "verified": 0,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 6
+    },
+    "dosage": {
+      "verified": 0,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 6
+    },
+    "phase": {
+      "verified": 0,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 6
+    },
+    "assay_performance": {
+      "verified": 0,
+      "review_required": 0,
+      "rejected": 0,
+      "not_assessed": 6
+    }
+  },
+  "findings": [],
+  "current_checks_recomputed": true,
+  "prior_results_used_to_skip_checks": false,
+  "scope": "Declared catalogue accounting, supported whole-allele replay and prior-input applicability only.",
+  "limitations": [
+    "Catalogue completeness depends on the supplied event universe.",
+    "Pinned producer receipts do not authenticate producers or the whole genome.",
+    "Prior applicability is not prior result authenticity or validation acceptance.",
+    "Capture specificity, dosage, physical phase and assay performance are not assessed.",
+    "No HGVS/VCF normalization or independent clinical truth is established."
+  ],
+  "locus_contracts_frozen": false,
+  "admission_assessed": false,
+  "assay_validated": false,
+  "probe_ready": false,
+  "orderable": false,
+  "reportable": false
+}
