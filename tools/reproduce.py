@@ -100,6 +100,10 @@ STEPS = [
            ["score", "--results", "{out}"], ["episodes.jsonl", "reviews.jsonl"],
            ["summary.json", "summary.md", "expert_sample/key.jsonl", "expert_sample/labels.csv",
             "expert_sample/packet.md"]),
+    replay("extraction-test", "Scenario 4: claims extracted from openly licensed papers, test split", "extraction_loop.py",
+           ["score", "--results", "{out}"], ["episodes.jsonl", "reviews.jsonl"],
+           ["summary.json", "summary.md", "expert_sample/key.jsonl", "expert_sample/labels.csv",
+            "expert_sample/packet.md"]),
     Step("risk-signals", "Which routing signals predict a wrong answer, from the committed runs",
          [py(BENCH / "risk_signals.py", "--output", "{out}")],
          outputs={RESULTS / "risk-signals" / n: n for n in ("summary.json", "summary.md")}),
@@ -111,9 +115,11 @@ STEPS = [
     Step("figures", "Figures in docs/assets, from the committed summaries",
          [py(REPO / "examples" / "clinvar_germline" / "plot.py", "--output", "{out}/clinvar_germline_benchmark.svg"),
           py(REPO / "examples" / "vbo_canine" / "plot.py", "--output", "{out}/vbo_canine_benchmark.svg"),
-          py(BENCH / "plot.py", "--output", "{out}/ai_validation_results.svg", "--funnel", "{out}/ai_validation_funnel.svg")],
+          py(BENCH / "plot.py", "--output", "{out}/ai_validation_results.svg", "--funnel", "{out}/ai_validation_funnel.svg",
+             "--extraction", "{out}/ai_extraction_funnel.svg")],
          outputs={ASSETS / n: n for n in ("clinvar_germline_benchmark.svg", "vbo_canine_benchmark.svg",
-                                          "ai_validation_results.svg", "ai_validation_funnel.svg")}, figures=True),
+                                          "ai_validation_results.svg", "ai_validation_funnel.svg",
+                                          "ai_extraction_funnel.svg")}, figures=True),
 ]
 
 

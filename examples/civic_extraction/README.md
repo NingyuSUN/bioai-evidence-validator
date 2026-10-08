@@ -62,8 +62,12 @@ The profile's three uses follow the stages:
 
 ## Protocol
 
-Fixed before the test split is run. The pilot may change prompts and code; the test split is then run once with the
-committed protocol, and any later change is a new, separately reported version.
+Frozen at commit `c74af1f` before the test split was run. The pilot could change prompts and code; the test split
+was then run once with the committed protocol, and any later change is a new, separately reported version.
+
+The Claude test episodes ran on two Claude Code installs, each with its own account. The first 15 ran on the WSL
+install, until its session limit stopped them; the quota guard then left the remaining 65 unrun. Those ran on the
+Windows install. The model versions are the same, and each episode records its install (`claude_host`).
 
 - **Models:** Claude Opus 5.5, GPT-6-Astra, Gemini 3.1 Pro, Claude Haiku 4.5, GPT-5.6-Luna and Gemini 3.8 Flash,
   through their CLIs, with tools disabled.
@@ -80,6 +84,64 @@ committed protocol, and any later change is a new, separately reported version.
     exhaustive, and these claims are what the expert sample is for.
 - **Expert labels:** a seeded random sample of claims is labelled with the [error taxonomy](../../docs/ERROR_TAXONOMY.md).
   The sample includes claims stopped at each stage and admitted claims beyond CIViC.
+
+## Results
+
+The test split was run once with the protocol frozen at commit `c74af1f`: 40 papers, six models, 240 episodes
+([results](../../evaluation/llm_benchmark/results/extraction-test/summary.md)). One extraction failed: Gemini 3.8
+Flash returned no structured output twice for one paper, and the failure is counted.
+
+![Funnel for claims extracted from 40 papers by six models](../../docs/assets/ai_extraction_funnel.svg)
+
+| Model | Claims | First version: wrong identifier, name or quote | Admitted, no feedback | Admitted, with feedback | Admitted with such an error | CIViC items found (of 87), with feedback |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Opus 5.5 | 143 | 4 (3%) | 129 | 133 | 0 | 64 |
+| GPT-6-Astra | 133 | 23 (17%) | 97 | 111 | 0 | 55 |
+| Gemini 3.1 Pro | 106 | 31 (29%) | 74 | 100 | 0 | 59 |
+| Claude Haiku 4.5 | 133 | 64 (48%) | 68 | 124 | 0 | 75 |
+| GPT-5.6-Luna | 166 | 62 (37%) | 103 | 163 | 0 | 73 |
+| Gemini 3.8 Flash | 33 | 14 (42%) | 18 | 32 | 0 | 30 |
+| **All six** | **714** | **198 (28%, 95% CI 25–31%)** | **489** | **663** | **0 [0, 0.6%]** | **77** |
+
+- **A quarter of first versions have an error that a lookup catches.** Most are Disease Ontology names:
+  - 113 names that are not the name of the cited DOID;
+  - 18 DOIDs that are unknown or obsolete;
+  - 65 HGNC identifiers or symbols that do not match;
+  - 13 quotes that are not in the paper.
+
+  No such claim was admitted.
+- **Feedback recovers most of them.** Admitted claims rise from 489 to 663, still with no identifier or quote
+  error. Claude Haiku 4.5 gains the most: 68 → 124 claims, and 44 → 75 CIViC items found.
+- **Models differ by an order of magnitude; the result after bioevidence does not.** Claude Opus 5.5 got 3% of
+  first versions wrong, Claude Haiku 4.5 48%. Every model's admitted claims have none of these errors.
+- **Bioevidence does not add recall.** All six models together already find 77 of CIViC's 87 items. What changes
+  is that every admitted claim can be traced to a verbatim sentence at its paragraph, with valid identifiers.
+- **Routed or withdrawn.**
+  - 26 claims went to a person: their own quotes argued both for and against them.
+  - 25 claims were withdrawn by their models.
+  - 14 claims cited only evidence against themselves; the paper reported no effect, and all 14 were withdrawn.
+- **205 admitted claims (31%) have no CIViC counterpart.** CIViC curates a selection, and many of these claims
+  describe preclinical results. They are not called wrong; the expert sample is for them.
+
+- **The independent review accepted 628 of the 663 admitted claims** and sent 35 to a person. The reviewer, a
+  fast model of another vendor, sees the claim and its quotes in their paragraphs, not the extractor's reasoning.
+  437 of the accepted claims match a CIViC item of their paper.
+- **By the reviewer's reading, 300 accepted claims (48%) rest only on cell-line or animal evidence**, and 32 on
+  hedged statements.
+  - CIViC curates preclinical evidence too, so these are not errors.
+  - A knowledge base for clinical questions would need a profile that requires patient evidence; the reviewer's
+    reading could route these claims.
+  - Models differ here as well. Gemini 3.8 Flash extracted mostly patient-level results (25 of its 31
+    accepted claims); Claude Opus 5.5 extracted mostly preclinical ones (78 of 127).
+
+**Expert sample.** [`results/extraction-test/expert_sample`](../../evaluation/llm_benchmark/results/extraction-test/expert_sample)
+holds 60 claims drawn with a fixed seed, 20 from each group: stopped by the chain, admitted with no CIViC
+counterpart, and admitted matching CIViC. It contains:
+- a packet that shows each claim's quotes in their paragraphs, without the model or the stage;
+- a labelling sheet that uses the error taxonomy codes;
+- a key, which stays with the maintainer.
+
+No expert has labelled it yet.
 
 ## What the pilot changed
 

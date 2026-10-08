@@ -2,8 +2,9 @@
 
     uv run --with matplotlib python evaluation/llm_benchmark/plot.py
 
-Reads results/*/summary.json and writes docs/assets/ai_validation_results.svg and ai_validation_funnel.svg. Output
-is deterministic for a given matplotlib version (fixed SVG ids, no timestamp); reproduce.py pins it.
+Reads results/*/summary.json and writes docs/assets/ai_validation_results.svg, ai_validation_funnel.svg and
+ai_extraction_funnel.svg. Output is deterministic for a given matplotlib version (fixed SVG ids, no timestamp);
+reproduce.py pins it.
 """
 from __future__ import annotations
 
@@ -172,8 +173,8 @@ def extraction_figure(summary: dict, output: Path) -> None:
     beyond = p["accepted_beyond_civic"]["events"]
     rows = [
         ("1  First version of each claim", [(first.get("passed", 0), GOOD), (errors, BAD), (conflicts, PERSON)],
-         f"{first.get('passed', 0)} pass · {errors} have a wrong identifier, name or quote and go back with the "
-         f"reason · {conflicts} cite evidence against themselves"),
+         f"{first.get('passed', 0)} pass · {errors} go back with the reason (wrong identifier, name or quote; or only "
+         f"evidence against) · {conflicts} mixed, to a person"),
         ("2  After feedback (up to three versions)", [(final.get("admitted", 0), GOOD), (stopped, BAD),
                                                       (final.get("to a person", 0), PERSON)],
          f"{final.get('admitted', 0)} admitted, none with an identifier or quote error · {stopped} withdrawn or still "
@@ -225,6 +226,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=REPO / "docs" / "assets" / "ai_validation_results.svg")
     parser.add_argument("--funnel", type=Path, default=REPO / "docs" / "assets" / "ai_validation_funnel.svg")
+    parser.add_argument("--extraction", type=Path, default=REPO / "docs" / "assets" / "ai_extraction_funnel.svg")
     args = parser.parse_args(argv)
     plt.rcParams.update({"svg.hashsalt": "bioevidence", "font.family": "DejaVu Sans"})
     fig, (top, bottom) = plt.subplots(2, 1, figsize=(9.6, 6.6), gridspec_kw={"hspace": 1.05})
@@ -235,7 +237,8 @@ def main(argv: list[str] | None = None) -> int:
     fig.savefig(args.output, format="svg", facecolor=SURFACE, metadata={"Date": None})
     plt.close(fig)
     funnel_figure(args.funnel)
-    print(f"wrote {args.output} and {args.funnel}")
+    extraction_figure(load("extraction-test"), args.extraction)
+    print(f"wrote {args.output}, {args.funnel} and {args.extraction}")
     return 0
 
 

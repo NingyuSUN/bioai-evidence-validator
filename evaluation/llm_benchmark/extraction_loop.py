@@ -407,6 +407,8 @@ def run(output: Path, split: str, models: list[str], workers: int, limit: int | 
                 return None
             try:
                 result = episode(key, task, case)
+                if run_models.MODELS[key]["cli"] == "claude":
+                    result["claude_host"] = agent_loop.claude_host  # which account's Claude Code install answered
             except QuotaExceeded as exc:
                 stopped.add(key)
                 print(f"stopping {key}, out of quota: {exc}", flush=True)
@@ -488,7 +490,8 @@ def review(output: Path, workers: int, models: list[str] | None = None) -> int:
                     return row["model"], row["task_id"], None
             readings[str(n)] = {"reviewer": key, "reading": reading, **meta}
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps({"model": row["model"], "task_id": row["task_id"], "reviews": readings},
+        hosted = {"claude_host": agent_loop.claude_host} if run_models.MODELS[key]["cli"] == "claude" else {}
+        target.write_text(json.dumps({"model": row["model"], "task_id": row["task_id"], "reviews": readings, **hosted},
                                      indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return row["model"], row["task_id"], len(readings)
 
@@ -765,6 +768,9 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--workers", type=int, default=2)
     r.add_argument("--limit", type=int)
     v = steps.add_parser("review")
+    for step in (r, v):
+        step.add_argument("--claude-host", choices=agent_loop.CLAUDE_HOSTS, default="wsl",
+                          help="The Claude Code install (and so the account) that answers Claude calls")
     v.add_argument("--output", type=Path, required=True)
     v.add_argument("--workers", type=int, default=2)
     v.add_argument("--models", nargs="+", choices=list(run_models.MODELS), help="Extractors whose claims to review")
@@ -774,6 +780,7 @@ def main(argv: list[str] | None = None) -> int:
     s = steps.add_parser("score")
     s.add_argument("--results", type=Path, required=True)
     args = parser.parse_args(argv)
+    agent_loop.claude_host = getattr(args, "claude_host", "wsl")
     if args.step == "review":
         return review(args.output, args.workers, args.models)
     if args.step == "collect":

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add the real extraction experiment (#21, `examples/civic_extraction`, `evaluation/llm_benchmark/extraction_loop.py`).
+  Six models extract clinical evidence claims on their own from 50 openly licensed papers that CIViC curated (10
+  pilot, 40 test; protocol frozen before the test split). Each claim, written in the fields of `draft-schema`,
+  goes through build, rules, grounding (the pinned paper, HGNC, the Disease Ontology), feedback, and an independent
+  model review. Test split: 198 of 714 first versions had a wrong identifier, name or quote (3% for Claude Opus
+  5.5, 48% for Claude Haiku 4.5); with feedback 663 claims were admitted instead of 489, none with such an error.
+  A seeded 60-claim sample with a labelling kit for the error taxonomy awaits experts.
+- Ontology hints offer names containing all the label's words before similar spellings, and gene findings name
+  the identifier of the symbol cited, so feedback points at the right term (both found in the extraction pilot).
+- The model harness stops a model whose account is out of quota instead of recording failed episodes, and can
+  run Claude through either Claude Code install (`--claude-host`).
 - Add audit sampling (`audit`; `bioevidence review audit-sample` and `audit-score`, #24). A seeded random
   sample of auto-admitted records, sized from a target (`--target 0.01` audits 299 records: no error found
   bounds the rate below 1% at 95%), with blind controls from the other routes and a manifest kept from the

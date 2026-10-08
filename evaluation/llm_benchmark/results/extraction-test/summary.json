@@ -1,0 +1,957 @@
+{
+  "benchmark": "civic-extraction-v1",
+  "calls": 327,
+  "codes": {
+    "BEV004": 46,
+    "BEV006": 14,
+    "BEV007": 14,
+    "BEV016": 20,
+    "BEV017": 181,
+    "BEV020": 11,
+    "BEV023": 5
+  },
+  "episodes": 240,
+  "episodes_sha256": "2d9ccc5fe3e1c1fbd765c3d9f26acffb300522058f925d66c2749d9c4ec66030",
+  "failed_calls": 1,
+  "pooled": {
+    "accepted_beyond_civic": {
+      "events": 191,
+      "n": 628,
+      "rate": 0.3041,
+      "wilson_95": [
+        0.2694,
+        0.3412
+      ]
+    },
+    "accepted_evidence": {
+      "evidence from non_human": 300,
+      "evidence from patients": 325,
+      "evidence from unclear": 3,
+      "finding": 596,
+      "hedged": 32
+    },
+    "admitted_after_feedback": {
+      "events": 663,
+      "n": 714,
+      "rate": 0.9286,
+      "wilson_95": [
+        0.9073,
+        0.9453
+      ]
+    },
+    "admitted_beyond_civic": {
+      "events": 205,
+      "n": 663,
+      "rate": 0.3092,
+      "wilson_95": [
+        0.2752,
+        0.3454
+      ]
+    },
+    "admitted_first_version": {
+      "events": 489,
+      "n": 714,
+      "rate": 0.6849,
+      "wilson_95": [
+        0.6499,
+        0.7179
+      ]
+    },
+    "admitted_with_identifier_or_quote_error": {
+      "events": 0,
+      "n": 663,
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.0058
+      ]
+    },
+    "civic_items": 87,
+    "claims": 714,
+    "episodes": 240,
+    "failed_extractions": 1,
+    "final": {
+      "admitted": 663,
+      "to a person": 26,
+      "withdrawn": 25
+    },
+    "first_error_kinds": {
+      "disease_label_mismatch": 113,
+      "gene_label_mismatch": 58,
+      "obsolete_disease_id": 5,
+      "quote_not_in_paper": 13,
+      "unknown_disease_id": 13,
+      "unknown_gene_id": 7
+    },
+    "first_stage": {
+      "conflict, to a person": 20,
+      "identifier": 179,
+      "passed": 489,
+      "quote": 12,
+      "rules": 14
+    },
+    "first_with_identifier_or_quote_error": {
+      "events": 198,
+      "n": 714,
+      "rate": 0.2773,
+      "wilson_95": [
+        0.2457,
+        0.3113
+      ]
+    },
+    "model_review": {
+      "accepted": 628,
+      "deferred": 35
+    },
+    "papers": 40,
+    "recall_admitted": {
+      "events": 77,
+      "n": 87,
+      "rate": 0.8851,
+      "wilson_95": [
+        0.8012,
+        0.9364
+      ]
+    },
+    "recall_admitted_same_kind": {
+      "events": 77,
+      "n": 87,
+      "rate": 0.8851,
+      "wilson_95": [
+        0.8012,
+        0.9364
+      ]
+    },
+    "recall_after_model_review": {
+      "events": 77,
+      "n": 87,
+      "rate": 0.8851,
+      "wilson_95": [
+        0.8012,
+        0.9364
+      ]
+    },
+    "recall_first_answers": {
+      "events": 77,
+      "n": 87,
+      "rate": 0.8851,
+      "wilson_95": [
+        0.8012,
+        0.9364
+      ]
+    },
+    "recall_gate": {
+      "events": 67,
+      "n": 87,
+      "rate": 0.7701,
+      "wilson_95": [
+        0.6714,
+        0.846
+      ]
+    }
+  },
+  "results": {
+    "claude-haiku": {
+      "accepted_beyond_civic": {
+        "events": 33,
+        "n": 115,
+        "rate": 0.287,
+        "wilson_95": [
+          0.2122,
+          0.3755
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 61,
+        "evidence from patients": 54,
+        "finding": 109,
+        "hedged": 6
+      },
+      "admitted_after_feedback": {
+        "events": 124,
+        "n": 133,
+        "rate": 0.9323,
+        "wilson_95": [
+          0.8764,
+          0.964
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 37,
+        "n": 124,
+        "rate": 0.2984,
+        "wilson_95": [
+          0.2249,
+          0.384
+        ]
+      },
+      "admitted_first_version": {
+        "events": 68,
+        "n": 133,
+        "rate": 0.5113,
+        "wilson_95": [
+          0.4272,
+          0.5947
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.03
+        ]
+      },
+      "civic_items": 87,
+      "claims": 133,
+      "episodes": 40,
+      "failed_extractions": 0,
+      "final": {
+        "admitted": 124,
+        "to a person": 2,
+        "withdrawn": 7
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 24,
+        "gene_label_mismatch": 38,
+        "obsolete_disease_id": 1,
+        "quote_not_in_paper": 9,
+        "unknown_disease_id": 1,
+        "unknown_gene_id": 2
+      },
+      "first_stage": {
+        "conflict, to a person": 1,
+        "identifier": 56,
+        "passed": 68,
+        "quote": 8
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 64,
+        "n": 133,
+        "rate": 0.4812,
+        "wilson_95": [
+          0.398,
+          0.5654
+        ]
+      },
+      "model_review": {
+        "accepted": 115,
+        "deferred": 9
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 75,
+        "n": 87,
+        "rate": 0.8621,
+        "wilson_95": [
+          0.7742,
+          0.9193
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 75,
+        "n": 87,
+        "rate": 0.8621,
+        "wilson_95": [
+          0.7742,
+          0.9193
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 75,
+        "n": 87,
+        "rate": 0.8621,
+        "wilson_95": [
+          0.7742,
+          0.9193
+        ]
+      },
+      "recall_first_answers": {
+        "events": 67,
+        "n": 87,
+        "rate": 0.7701,
+        "wilson_95": [
+          0.6714,
+          0.846
+        ]
+      },
+      "recall_gate": {
+        "events": 44,
+        "n": 87,
+        "rate": 0.5057,
+        "wilson_95": [
+          0.4027,
+          0.6083
+        ]
+      }
+    },
+    "claude-opus": {
+      "accepted_beyond_civic": {
+        "events": 33,
+        "n": 127,
+        "rate": 0.2598,
+        "wilson_95": [
+          0.1914,
+          0.3424
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 78,
+        "evidence from patients": 49,
+        "finding": 119,
+        "hedged": 8
+      },
+      "admitted_after_feedback": {
+        "events": 133,
+        "n": 143,
+        "rate": 0.9301,
+        "wilson_95": [
+          0.8761,
+          0.9616
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 37,
+        "n": 133,
+        "rate": 0.2782,
+        "wilson_95": [
+          0.2091,
+          0.3598
+        ]
+      },
+      "admitted_first_version": {
+        "events": 129,
+        "n": 143,
+        "rate": 0.9021,
+        "wilson_95": [
+          0.8424,
+          0.9408
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 133,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0281
+        ]
+      },
+      "civic_items": 87,
+      "claims": 143,
+      "episodes": 40,
+      "failed_extractions": 0,
+      "final": {
+        "admitted": 133,
+        "to a person": 9,
+        "withdrawn": 1
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 2,
+        "gene_label_mismatch": 1,
+        "quote_not_in_paper": 1
+      },
+      "first_stage": {
+        "conflict, to a person": 9,
+        "identifier": 3,
+        "passed": 129,
+        "quote": 1,
+        "rules": 1
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 4,
+        "n": 143,
+        "rate": 0.028,
+        "wilson_95": [
+          0.0109,
+          0.0697
+        ]
+      },
+      "model_review": {
+        "accepted": 127,
+        "deferred": 6
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 64,
+        "n": 87,
+        "rate": 0.7356,
+        "wilson_95": [
+          0.6344,
+          0.8169
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 62,
+        "n": 87,
+        "rate": 0.7126,
+        "wilson_95": [
+          0.6102,
+          0.7971
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 63,
+        "n": 87,
+        "rate": 0.7241,
+        "wilson_95": [
+          0.6223,
+          0.8071
+        ]
+      },
+      "recall_first_answers": {
+        "events": 65,
+        "n": 87,
+        "rate": 0.7471,
+        "wilson_95": [
+          0.6467,
+          0.8267
+        ]
+      },
+      "recall_gate": {
+        "events": 63,
+        "n": 87,
+        "rate": 0.7241,
+        "wilson_95": [
+          0.6223,
+          0.8071
+        ]
+      }
+    },
+    "gemini-flash": {
+      "accepted_beyond_civic": {
+        "events": 8,
+        "n": 31,
+        "rate": 0.2581,
+        "wilson_95": [
+          0.137,
+          0.4325
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 6,
+        "evidence from patients": 25,
+        "finding": 31
+      },
+      "admitted_after_feedback": {
+        "events": 32,
+        "n": 33,
+        "rate": 0.9697,
+        "wilson_95": [
+          0.8468,
+          0.9946
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 9,
+        "n": 32,
+        "rate": 0.2812,
+        "wilson_95": [
+          0.1556,
+          0.4537
+        ]
+      },
+      "admitted_first_version": {
+        "events": 18,
+        "n": 33,
+        "rate": 0.5455,
+        "wilson_95": [
+          0.3799,
+          0.7016
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 32,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.1072
+        ]
+      },
+      "civic_items": 87,
+      "claims": 33,
+      "episodes": 40,
+      "failed_extractions": 1,
+      "final": {
+        "admitted": 32,
+        "to a person": 1
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 8,
+        "gene_label_mismatch": 1,
+        "quote_not_in_paper": 1,
+        "unknown_disease_id": 1,
+        "unknown_gene_id": 3
+      },
+      "first_stage": {
+        "conflict, to a person": 1,
+        "identifier": 13,
+        "passed": 18,
+        "quote": 1
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 14,
+        "n": 33,
+        "rate": 0.4242,
+        "wilson_95": [
+          0.2724,
+          0.5919
+        ]
+      },
+      "model_review": {
+        "accepted": 31,
+        "deferred": 1
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 30,
+        "n": 87,
+        "rate": 0.3448,
+        "wilson_95": [
+          0.2534,
+          0.4494
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 19,
+        "n": 87,
+        "rate": 0.2184,
+        "wilson_95": [
+          0.1445,
+          0.3161
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 30,
+        "n": 87,
+        "rate": 0.3448,
+        "wilson_95": [
+          0.2534,
+          0.4494
+        ]
+      },
+      "recall_first_answers": {
+        "events": 24,
+        "n": 87,
+        "rate": 0.2759,
+        "wilson_95": [
+          0.1929,
+          0.3777
+        ]
+      },
+      "recall_gate": {
+        "events": 12,
+        "n": 87,
+        "rate": 0.1379,
+        "wilson_95": [
+          0.0807,
+          0.2258
+        ]
+      }
+    },
+    "gemini-pro": {
+      "accepted_beyond_civic": {
+        "events": 31,
+        "n": 98,
+        "rate": 0.3163,
+        "wilson_95": [
+          0.2327,
+          0.4138
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 39,
+        "evidence from patients": 56,
+        "evidence from unclear": 3,
+        "finding": 91,
+        "hedged": 7
+      },
+      "admitted_after_feedback": {
+        "events": 100,
+        "n": 106,
+        "rate": 0.9434,
+        "wilson_95": [
+          0.882,
+          0.9738
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 31,
+        "n": 100,
+        "rate": 0.31,
+        "wilson_95": [
+          0.2278,
+          0.4063
+        ]
+      },
+      "admitted_first_version": {
+        "events": 74,
+        "n": 106,
+        "rate": 0.6981,
+        "wilson_95": [
+          0.6051,
+          0.7773
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.037
+        ]
+      },
+      "civic_items": 87,
+      "claims": 106,
+      "episodes": 40,
+      "failed_extractions": 0,
+      "final": {
+        "admitted": 100,
+        "to a person": 2,
+        "withdrawn": 4
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 19,
+        "gene_label_mismatch": 6,
+        "obsolete_disease_id": 2,
+        "unknown_disease_id": 3,
+        "unknown_gene_id": 1
+      },
+      "first_stage": {
+        "identifier": 31,
+        "passed": 74,
+        "rules": 1
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 31,
+        "n": 106,
+        "rate": 0.2925,
+        "wilson_95": [
+          0.2143,
+          0.3851
+        ]
+      },
+      "model_review": {
+        "accepted": 98,
+        "deferred": 2
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 59,
+        "n": 87,
+        "rate": 0.6782,
+        "wilson_95": [
+          0.5743,
+          0.767
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 59,
+        "n": 87,
+        "rate": 0.6782,
+        "wilson_95": [
+          0.5743,
+          0.767
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 59,
+        "n": 87,
+        "rate": 0.6782,
+        "wilson_95": [
+          0.5743,
+          0.767
+        ]
+      },
+      "recall_first_answers": {
+        "events": 56,
+        "n": 87,
+        "rate": 0.6437,
+        "wilson_95": [
+          0.5389,
+          0.7363
+        ]
+      },
+      "recall_gate": {
+        "events": 42,
+        "n": 87,
+        "rate": 0.4828,
+        "wilson_95": [
+          0.3807,
+          0.5862
+        ]
+      }
+    },
+    "gpt-astra": {
+      "accepted_beyond_civic": {
+        "events": 48,
+        "n": 105,
+        "rate": 0.4571,
+        "wilson_95": [
+          0.3651,
+          0.5523
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 30,
+        "evidence from patients": 75,
+        "finding": 100,
+        "hedged": 5
+      },
+      "admitted_after_feedback": {
+        "events": 111,
+        "n": 133,
+        "rate": 0.8346,
+        "wilson_95": [
+          0.7622,
+          0.8882
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 50,
+        "n": 111,
+        "rate": 0.4505,
+        "wilson_95": [
+          0.3611,
+          0.5431
+        ]
+      },
+      "admitted_first_version": {
+        "events": 97,
+        "n": 133,
+        "rate": 0.7293,
+        "wilson_95": [
+          0.6482,
+          0.7976
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 111,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0335
+        ]
+      },
+      "civic_items": 87,
+      "claims": 133,
+      "episodes": 40,
+      "failed_extractions": 0,
+      "final": {
+        "admitted": 111,
+        "to a person": 10,
+        "withdrawn": 12
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 19,
+        "gene_label_mismatch": 1,
+        "obsolete_disease_id": 2,
+        "unknown_disease_id": 1
+      },
+      "first_stage": {
+        "conflict, to a person": 8,
+        "identifier": 16,
+        "passed": 97,
+        "rules": 12
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 23,
+        "n": 133,
+        "rate": 0.1729,
+        "wilson_95": [
+          0.1181,
+          0.2461
+        ]
+      },
+      "model_review": {
+        "accepted": 105,
+        "deferred": 6
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 55,
+        "n": 87,
+        "rate": 0.6322,
+        "wilson_95": [
+          0.5273,
+          0.7259
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 53,
+        "n": 87,
+        "rate": 0.6092,
+        "wilson_95": [
+          0.5041,
+          0.705
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 55,
+        "n": 87,
+        "rate": 0.6322,
+        "wilson_95": [
+          0.5273,
+          0.7259
+        ]
+      },
+      "recall_first_answers": {
+        "events": 57,
+        "n": 87,
+        "rate": 0.6552,
+        "wilson_95": [
+          0.5506,
+          0.7466
+        ]
+      },
+      "recall_gate": {
+        "events": 46,
+        "n": 87,
+        "rate": 0.5287,
+        "wilson_95": [
+          0.4249,
+          0.6302
+        ]
+      }
+    },
+    "gpt-luna": {
+      "accepted_beyond_civic": {
+        "events": 38,
+        "n": 152,
+        "rate": 0.25,
+        "wilson_95": [
+          0.1879,
+          0.3244
+        ]
+      },
+      "accepted_evidence": {
+        "evidence from non_human": 86,
+        "evidence from patients": 66,
+        "finding": 146,
+        "hedged": 6
+      },
+      "admitted_after_feedback": {
+        "events": 163,
+        "n": 166,
+        "rate": 0.9819,
+        "wilson_95": [
+          0.9482,
+          0.9938
+        ]
+      },
+      "admitted_beyond_civic": {
+        "events": 41,
+        "n": 163,
+        "rate": 0.2515,
+        "wilson_95": [
+          0.1912,
+          0.3233
+        ]
+      },
+      "admitted_first_version": {
+        "events": 103,
+        "n": 166,
+        "rate": 0.6205,
+        "wilson_95": [
+          0.5447,
+          0.6908
+        ]
+      },
+      "admitted_with_identifier_or_quote_error": {
+        "events": 0,
+        "n": 163,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.023
+        ]
+      },
+      "civic_items": 87,
+      "claims": 166,
+      "episodes": 40,
+      "failed_extractions": 0,
+      "final": {
+        "admitted": 163,
+        "to a person": 2,
+        "withdrawn": 1
+      },
+      "first_error_kinds": {
+        "disease_label_mismatch": 41,
+        "gene_label_mismatch": 11,
+        "quote_not_in_paper": 2,
+        "unknown_disease_id": 7,
+        "unknown_gene_id": 1
+      },
+      "first_stage": {
+        "conflict, to a person": 1,
+        "identifier": 60,
+        "passed": 103,
+        "quote": 2
+      },
+      "first_with_identifier_or_quote_error": {
+        "events": 62,
+        "n": 166,
+        "rate": 0.3735,
+        "wilson_95": [
+          0.3035,
+          0.4492
+        ]
+      },
+      "model_review": {
+        "accepted": 152,
+        "deferred": 11
+      },
+      "papers": 40,
+      "recall_admitted": {
+        "events": 73,
+        "n": 87,
+        "rate": 0.8391,
+        "wilson_95": [
+          0.7478,
+          0.9017
+        ]
+      },
+      "recall_admitted_same_kind": {
+        "events": 73,
+        "n": 87,
+        "rate": 0.8391,
+        "wilson_95": [
+          0.7478,
+          0.9017
+        ]
+      },
+      "recall_after_model_review": {
+        "events": 73,
+        "n": 87,
+        "rate": 0.8391,
+        "wilson_95": [
+          0.7478,
+          0.9017
+        ]
+      },
+      "recall_first_answers": {
+        "events": 56,
+        "n": 87,
+        "rate": 0.6437,
+        "wilson_95": [
+          0.5389,
+          0.7363
+        ]
+      },
+      "recall_gate": {
+        "events": 51,
+        "n": 87,
+        "rate": 0.5862,
+        "wilson_95": [
+          0.4812,
+          0.6839
+        ]
+      }
+    }
+  },
+  "split": "test"
+}
