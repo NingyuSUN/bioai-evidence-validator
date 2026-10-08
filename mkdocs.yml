@@ -48,6 +48,7 @@ nav:
       - CIViC literature grounding: benchmarks/civic-literature.md
       - "LLM benchmark: models alone vs. with bioevidence": benchmarks/llm-benchmark.md
       - Single-cell cell-type annotation: benchmarks/singlecell.md
+      - "AI extraction from openly licensed papers": benchmarks/civic-extraction.md
       - Building a gold standard: GOLD_STANDARD.md
       - Review tooling and templates: review-tooling.md
       - ClinVar expert-review kit: benchmarks/clinvar-review.md

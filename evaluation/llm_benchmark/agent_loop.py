@@ -94,6 +94,12 @@ def wsl_path(path: Path) -> str:
     return f"/mnt/{text[0].lower()}{text[2:]}" if re.match(r"^[A-Za-z]:/", text) else text
 
 
+# Which Claude Code install answers Claude calls: "wsl" (the default; the Windows CLI's login can expire mid-run) or
+# "windows", the native install with its own account, used when the WSL account's quota is spent.
+CLAUDE_HOSTS = ("wsl", "windows")
+claude_host = "wsl"
+
+
 def call_model(key: str, prompt: str, timeout: int = 600, schema: dict | None = None) -> tuple[dict, list[str]]:
     """One fresh CLI call answering `schema` (default STEP_SCHEMA), through the WSL installs of Claude Code, Codex and Antigravity."""
     spec = run_models.MODELS[key]
@@ -102,7 +108,12 @@ def call_model(key: str, prompt: str, timeout: int = 600, schema: dict | None = 
         (work / "schema.json").write_text(json.dumps(schema or STEP_SCHEMA), encoding="utf-8")
         (work / "prompt.txt").write_text(prompt, encoding="utf-8")
         schema_file, folder = wsl_path(work / "schema.json"), wsl_path(work)
-        if spec["cli"] == "claude":  # the WSL install; the Windows CLI's login can expire mid-run
+        if spec["cli"] == "claude" and claude_host == "windows":
+            argv, stdin = run_models.claude_command(spec["model"], schema or STEP_SCHEMA, work / "schema.json", prompt,
+                                                    timeout)
+            answer, tools, _ = run_models.claude_parse(run_models.execute(argv, stdin, work, timeout + 60).stdout, work)
+            return answer, tools
+        if spec["cli"] == "claude":  # the WSL install
             command = ("PATH=$(ls -d ~/.nvm/versions/node/*/bin | tail -1):$PATH claude -p --model "
                        f"{spec['model']} --tools '' --strict-mcp-config --no-session-persistence --output-format json "
                        f"--json-schema \"$(cat {schema_file})\" < prompt.txt")

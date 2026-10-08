@@ -29,6 +29,7 @@ Try it without installing anything:
 | Experiment | The model alone | With bioevidence |
 |---|---|---|
 | **[Single-cell cell-type annotation](benchmarks/singlecell.md)**: 6 models × 46 held-out clusters, protocol frozen before the run | 62 of 276 answers (22%) carry a Cell Ontology ID that does not match its label | No such answer admitted. In the feedback loop, answers compatible with the authors' term rise from **176 to 205**, wrong or invalid fall from 36% of answers to 20% of those admitted, and 8% go to a person |
+| **[Claim extraction from full papers](benchmarks/civic-extraction.md)**: 6 models × 40 openly licensed papers, no claim given in advance, protocol frozen before the run | 198 of 714 extracted claims (28%) carry a wrong identifier, name or quote: from 3% for Claude Opus 5.5 to 48% for Claude Haiku 4.5 | None admitted. With feedback, **663** claims are admitted instead of 489, covering 77 of the 87 items CIViC curated from these papers |
 | **[Literature claims without a source](benchmarks/llm-benchmark.md)**: 6 models × 18 CIViC claims | 38 of 50 answers cite an invalid paper or quote; 28 of 66 citations are real PMIDs of unrelated papers | 3 answers admitted, all with verified citations and the right decision |
 | **[Literature agent with PubMed tools](benchmarks/llm-benchmark.md)**: 108 episodes | 8 of 77 first answers misquote their papers | 0 of 73 admitted answers carry an invalid citation; feedback rescues answers a plain gate would lose |
 | **[ClinVar germline classifications](benchmarks/clinvar.md)**: 5,026 variants, 2023 → 2026 | Schema-only checks admit 160 of 160 injected faults | 0 of 160 admitted; variants held back for a dissenting submission were 4–5× more likely to be reclassified three years later |
@@ -95,6 +96,10 @@ Across all 276 held-out annotations, stage by stage:
 
 ![Funnel for the single-cell held-out clusters: of 276 first answers, 198 pass every check, 63 have a wrong identifier or marker and are sent back, 15 contradict themselves and go to a person; after feedback 255 are admitted and 21 go to a person; of the admitted, 205 agree with the authors' term and 50 disagree; the expert audit of admitted records is not yet run](assets/ai_validation_funnel.svg)
 
+The same chain on claims that six models extracted on their own from 40 full papers ([case](benchmarks/civic-extraction.md)):
+
+![Funnel for claims extracted from 40 papers by six models: of 714 first versions, 489 pass every check, 205 go back with the reason and 20 go to a person; after feedback 663 are admitted, none with an identifier or quote error; an independent model review accepts 628 and sends 35 to a person, and 437 of the accepted match a CIViC item; expert review is not yet run](assets/ai_extraction_funnel.svg)
+
 **Failure handling**, each in the code and exercised in the runs:
 
 | Failure | Detected by | Handling |
@@ -108,6 +113,7 @@ Across all 276 held-out annotations, stage by stage:
 | The model's own evidence contradicts its answer | BEV004 | Sent to a person; not fed back, so the model is never asked to hide it. Flagged answers were wrong 82% of the time vs 33% ([routing evidence](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/risk-signals/summary.md)) |
 | A revision drops evidence that was verified | `feedback.carry` | The verified evidence is carried into the revision |
 | Still not admitted after the last round | `feedback.revise` | Sent to a person |
+| A model's account runs out of quota | The CLI's reply ("You've hit your session limit") | That model is stopped and its episodes are left for a later run, never recorded as failures; all Claude models share one call slot |
 | Admitted but wrong | A seeded random audit (`bioevidence review audit-sample`, `audit-score`) | Each route's error rate with an exact upper bound; a [dry run](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/celltype-audit/summary.md) shows the held-out route misses a 5% target |
 | A long batch is interrupted | One file per episode | A rerun skips finished episodes |
 

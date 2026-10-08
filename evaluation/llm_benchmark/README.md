@@ -398,6 +398,40 @@ Two lessons:
   markers shown to be reliable at the mRNA level, for example against CITE-seq data that measures both.
   That needs its own validation on data not used to choose the markers.
 
+## Scenario 4: claims extracted from full papers (#21)
+
+Until now the extraction stage was simulated. Here each model reads a whole paper and extracts every clinical
+evidence claim it reports, with no claim given in advance. Every claim then goes through the whole chain
+([case](../../examples/civic_extraction/README.md), [extraction_loop.py](extraction_loop.py)).
+- **Papers:** 50 openly licensed papers that CIViC curated and that no earlier benchmark used: 10 for the pilot
+  and 40 for the test split.
+- **Claim:** a gene, a CIViC-style evidence type and a Disease Ontology term, with verbatim quotes at their
+  paragraphs, written in the fields of `bioevidence draft-schema`.
+- **Chain:** build, rules, grounding against the pinned paper, HGNC and the Disease Ontology, feedback for fixable
+  findings, and an independent review by another vendor's model.
+
+Test split, protocol frozen at `c74af1f`, six models, 40 papers ([results](results/extraction-test/summary.md)):
+
+| Configuration | Claims admitted | With a wrong identifier, name or quote | CIViC items found (of 87) |
+|---|---:|---:|---:|
+| Model alone (first versions) | 714 extracted | 198 (28%) | 77 |
+| Model + bioevidence gate | 489 | 0 | 67 |
+| Model + bioevidence feedback loop | 663 | 0 | 77 |
+
+![Funnel for claims extracted from 40 papers by six models](../../docs/assets/ai_extraction_funnel.svg)
+
+What this shows:
+- **Identifier errors are common and model-dependent.** First-version error rates range from 3% (Claude Opus
+  5.5) to 48% (Claude Haiku 4.5). Most errors are Disease Ontology names that do not belong to the cited ID.
+- **A gate alone would lose a quarter of the claims the loop admits.** Each reason names the right term or
+  gene, as the [pilot](results/extraction-pilot/summary.md) showed it must. With feedback, 663 claims are
+  admitted instead of 489, none with an error. They cover all the CIViC items the models found.
+- **The independent review accepts most admitted claims, and shows what they rest on.** It accepted 628 of 663.
+  By its reading, 300 of those rest only on cell-line or animal evidence: not wrong, since CIViC curates
+  preclinical evidence too, but a clinical use would need a profile that asks for patient evidence.
+- **Semantic correctness is not measured here.** 205 admitted claims have no CIViC counterpart. CIViC is
+  selective, so these are not called wrong; they are what the expert sample is for.
+
 ## Semantic checks (#31)
 
 Grounding cannot tell whether a verbatim quote supports the claim, so two semantic layers were

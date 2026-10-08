@@ -46,7 +46,7 @@ source → structured extraction → provenance → deterministic validation
 | Stage | Question it answers | In the repository today | Gap | Issue |
 |---|---|---|---|---|
 | Source | Which exact bytes is the evidence taken from? | Frozen, hash-pinned snapshots with rebuild scripts (VBO, ClinVar, 140 open-access papers for CIViC) | Papers without open full text can only be sent to review | — |
-| Structured extraction | Did the AI turn the source into the right claim? | Draft format and per-profile JSON Schema for LLM output | **Never run with real models on real text**; extraction methods in the benchmarks are simulated | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
+| Structured extraction | Did the AI turn the source into the right claim? | Draft format and per-profile JSON Schema for LLM output | Run with six models on 40 held-out openly licensed papers: no admitted claim with a wrong identifier, name or quote; semantic correctness awaits expert labels | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) |
 | Provenance | Can each item be traced to its source and method? | Source artifacts, locators, methods; PROV/ECO/VA-Spec mapping; locators and review tiers recomputed from pinned snapshots | Methods are self-declared | Signed attestations (future) |
 | Deterministic validation | Is the evidence sufficient for this use, by fixed rules? | Engine, profiles, per-type quality gates, audit reports | — | — |
 | Model/agent evaluation | What can model review replace, and where does it fail? | Blinded model-review runner (#17), pilot on 20 cases | No reference labels yet; error correlation unmeasured | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) |
@@ -80,7 +80,7 @@ source → structured extraction → provenance → deterministic validation
 | Now | [#23](https://github.com/NingyuSUN/bioai-evidence-validator/issues/23) | Expert review of the ClinVar packet (runs in parallel; experts' time) | — |
 | Done | [#20](https://github.com/NingyuSUN/bioai-evidence-validator/issues/20) | Source grounding, phase 2: verify cited literature and quotes | #19 |
 | Now | [#31](https://github.com/NingyuSUN/bioai-evidence-validator/issues/31) | Semantic support check: does a verbatim quote support the claim's direction? | #20 |
-| Next | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources | #18, #20 |
+| Done | [#21](https://github.com/NingyuSUN/bioai-evidence-validator/issues/21) | Real AI extraction experiment on openly licensed sources (expert labels of the sample need #23) | #18, #20 |
 | Next | [#22](https://github.com/NingyuSUN/bioai-evidence-validator/issues/22) | Model and agent evaluation against expert labels | #17, #23 |
 | Done | [#24](https://github.com/NingyuSUN/bioai-evidence-validator/issues/24) | Calibrated triage and audit of auto-admitted records (tooling, routing evidence and a dry run; the expert audit needs #23) | #23 |
 | Done | [#25](https://github.com/NingyuSUN/bioai-evidence-validator/issues/25) | Reproducible benchmark, funnel figure and validation dossier | all |

@@ -169,12 +169,18 @@ class Ontology:
         return self._labels.get(_label_key(label), [])
 
     def hint(self, label: str | None) -> str:
-        """A suggestion for a label: the term it names, else the closest names."""
+        """A suggestion for a label: the term it names, else names that contain all its words (shortest first),
+        else the closest spellings. Word containment comes first: a release without a term named "glioma" should
+        suggest "low grade glioma", not the similarly spelled "lipoma"."""
         if not label:
             return ""
         exact = self.by_label(label)
         if exact:
             return f" {label!r} is the name of {self.describe(exact[0])}."
+        words = set(_label_key(label).split())
+        wider = sorted((n for n in self._names if words and words <= set(n.split())), key=lambda n: (len(n), n))[:3]
+        if wider:
+            return " Names containing it: " + "; ".join(self.describe(self._names[n]) for n in wider) + "."
         close = difflib.get_close_matches(_label_key(label), list(self._names), n=3, cutoff=0.75)
         return (" Closest names: " + "; ".join(self.describe(self._names[c]) for c in close) + ".") if close else ""
 
@@ -275,6 +281,21 @@ class Genes:
         close = difflib.get_close_matches(symbol, list(self.approved), n=3, cutoff=0.8)
         return "BEV016", f"{symbol} is not an HGNC gene symbol." + (f" Closest: {', '.join(close)}." if close else "")
 
+    def hint(self, label: str) -> str:
+        """The identifier a label points to, for a record whose HGNC id and symbol disagree. Without it, a model told
+        only that HGNC:12815 is XPA guesses the neighbouring numbers (seen in the extraction pilot)."""
+        symbol = label.strip()
+        if symbol in self.approved:
+            return f" {symbol} is {self.approved[symbol]}."
+        current = sorted(set(self.renamed.get(symbol, [])))
+        if current:
+            return (f" {symbol} is a previous symbol or alias of "
+                    + " / ".join(f"{s} ({self.approved[s]})" for s in current) + ".")
+        if symbol.casefold() in self.folded:
+            approved = self.folded[symbol.casefold()]
+            return f" The approved symbol is {approved} ({self.approved[approved]})."
+        return ""
+
 
 class GeneGrounder:
     """Human gene symbols and HGNC identifiers cited by a record are current and consistent."""
@@ -304,10 +325,12 @@ class GeneGrounder:
         if entity["id"].startswith("HGNC:"):
             row = self.genes.by_id.get(entity["id"])
             if row is None:
-                return [finding(record, "BEV016", f"{entity['id']} is not in the pinned HGNC set.", path + ".id")]
+                return [finding(record, "BEV016", f"{entity['id']} is not in the pinned HGNC set."
+                                                  + self.genes.hint(entity["label"]), path + ".id")]
             if entity["label"] != row["symbol"]:
                 return [finding(record, "BEV017", f"The label {entity['label']!r} is not the symbol of {entity['id']} "
-                                                  f"({row['symbol']}).", path + ".label")]
+                                                  f"({row['symbol']})." + self.genes.hint(entity["label"]),
+                                path + ".label")]
             return []
         problem = self.genes.problem(entity["label"])
         return [finding(record, problem[0], problem[1], path + ".label")] if problem else []

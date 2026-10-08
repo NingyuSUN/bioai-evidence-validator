@@ -13,7 +13,7 @@ State: release 0.8.0, October 2026.
 
 | Claim | Evidence | Status for the context of use |
 |---|---|---|
-| Admitted records carry no invalid identifier or citation | 0 of 721 admitted AI answers across four experiments (upper bound 0.5%); models alone produced such errors in 10–76% of answers | **Established** |
+| Admitted records carry no invalid identifier or citation | 0 of 1,384 admitted AI outputs across five experiments (upper bound 0.3%); models alone produced such errors in 10–76% of answers | **Established** |
 | The feedback loop corrects fixable errors without hiding evidence | Single-cell held-out: 57 of 63 answers with identifier or marker errors corrected and admitted; verified evidence cannot be withdrawn | **Established** |
 | Admitted records are semantically correct | 19.6% [15.2, 24.9] of admitted single-cell annotations disagree with the authors' term. Part of this is label noise. The audit tool is ready and was checked in a dry run; no expert audit yet | **Not established** |
 | Default routing rests on signals that predict errors | BEV004 answers were wrong 82% vs 33% (held-out) and 70% vs 38% (external); the opt-in signals (semantic cues, ASCT+B, definitions) showed no such effect and stay off | **Established** for BEV004 |
@@ -84,14 +84,14 @@ consequence**, the impact of a wrong decision.
 
 | Element | What was planned and done |
 |---|---|
-| Sources | Pinned by SHA-256, with licences and attribution: <ul><li>12 CELLxGENE datasets (CC BY 4.0)</li><li>the Cell Ontology 2026-06-08 (CC BY 4.0)</li><li>HGNC 2026-09-30 (CC0)</li><li>HuBMAP ASCT+B (CC BY 4.0)</li><li>CIViC evidence (CC0)</li><li>PMC open-access full texts (CC BY / CC0)</li><li>a ClinVar 2023-09 sample, followed to 2026-09</li></ul> |
+| Sources | Pinned by SHA-256, with licences and attribution: <ul><li>12 CELLxGENE datasets (CC BY 4.0)</li><li>the Cell Ontology 2026-06-08 (CC BY 4.0)</li><li>HGNC 2026-09-30 (CC0)</li><li>HuBMAP ASCT+B (CC BY 4.0)</li><li>CIViC evidence (CC0)</li><li>PMC open-access full texts (CC BY / CC0): 120 for the literature case, 50 more for extraction</li><li>the Disease Ontology 2026-09-30 (CC0)</li><li>a ClinVar 2023-09 sample, followed to 2026-09</li></ul> |
 | Reference standards | <ul><li>Single-cell: each study's own author annotations, compared through the ontology (exact, coarser, finer or wrong)</li><li>Literature: the direction CIViC records for the claim</li><li>ClinVar: NCBI's review status, and what happened to each classification three years later</li></ul>No independent expert labels yet (#23) |
-| Splits | <ul><li>Single-cell: a pilot (24 clusters) for design; a held-out test (46 clusters, same datasets); an external split (81 clusters from six other studies)</li><li>Literature: pilot only (18 claims); its held-out set (92 claims) is built but not run</li></ul> |
-| Protocol freezes | Each protocol was committed before the split it was run on: <ul><li>protocol 2 at `d134d1e`, before the held-out test</li><li>protocol 3 at `c86d5d4`, before the external split</li></ul>Protocol 1 was fixed before the pilot and committed with its results |
+| Splits | <ul><li>Single-cell: a pilot (24 clusters) for design; a held-out test (46 clusters, same datasets); an external split (81 clusters from six other studies)</li><li>Literature: pilot only (18 claims); its held-out set (92 claims) is built but not run</li><li>Extraction: a pilot (10 papers) and a test split (40 papers), none used by an earlier benchmark</li></ul> |
+| Protocol freezes | Each protocol was committed before the split it was run on: <ul><li>protocol 2 at `d134d1e`, before the held-out test</li><li>protocol 3 at `c86d5d4`, before the external split</li><li>the extraction protocol at `c74af1f`, before its test split</li></ul>Protocol 1 was fixed before the pilot and committed with its results |
 | Metrics | Defined in the scoring code before the runs: <ul><li>identifier or citation errors in the model's answers, and in what is admitted</li><li>agreement with the reference</li><li>wrong answers admitted</li><li>records sent to a person</li></ul>Each is reported per model and pooled |
 | Negative controls | <ul><li>ClinVar: 160 controlled faults and 32 trust-boundary forgeries</li><li>VBO: 160 faults and 48 forgeries</li><li>CIViC: retracted papers, PMIDs that do not exist, misattributed quotes</li></ul> |
 | Acceptance criteria | **Not set numerically in advance.** This is a gap; section 7 proposes criteria for the next evaluation |
-| Reproducibility | `tools/reproduce.py` regenerates all 18 result sets and figures. CI runs it on every change |
+| Reproducibility | `tools/reproduce.py` regenerates every result set and figure (22 steps). CI runs it on every change |
 
 ## 5. Execution
 
@@ -102,6 +102,8 @@ consequence**, the impact of a wrong decision.
 | Single-cell pilot | 6 models × 24 clusters | 144 episodes | protocol 1 |
 | Single-cell held-out | 6 models × 46 clusters | 276 episodes | protocol 2 (`d134d1e`) |
 | Single-cell external | 6 models × 81 clusters, six new studies | 486 episodes | protocol 3 (`c86d5d4`) |
+| Extraction pilot | 6 models × 10 papers, claims extracted without a given claim | 60 episodes, 167 claims | first harness |
+| Extraction test | 6 models × 40 papers | 240 episodes, 714 claims | frozen at `c74af1f` |
 | ClinVar, VBO, CIViC cases | Deterministic replays from pinned sources | 5,026 + 72 + controls | engine and grounders |
 
 ## 6. Results
@@ -114,7 +116,8 @@ consequence**, the impact of a wrong decision.
 | Single-cell external | 70/479, 14.6% [11.7, 18.1] | 0/390 [0, 1.0] |
 | Literature, claim only, no source | 38/50, 76.0% [62.6, 85.7] | 0/3 [0, 56.1] |
 | Literature agent with PubMed | 8/77, 10.4% [5.4, 19.2] | 0/73 [0, 5.0] |
-| Pooled | | **0/721 [0, 0.5]** |
+| Extraction from full papers (test split) | 198/714, 27.7% [24.6, 31.1] | 0/663 [0, 0.6] |
+| Pooled | | **0/1,384 [0, 0.3]** |
 
 In single-cell annotation, the typical error is an ID that belongs to another term. For example, "pancreatic
 delta cell" was given the ID of a brown preadipocyte. Error rates differ by model: on the held-out split,
@@ -175,13 +178,19 @@ Fed back in the loop, its findings turned 15 correct answers into wrong ones. Co
   prompt gained "answer from what you know" before the pilot.
 - **One run was resumed.** The external run hit a time limit at 321 of 486 episodes and was resumed. Episodes are
   independent, and none was repeated.
+- **The extraction test ran Claude on two accounts.** Its WSL Claude Code install hit its session limit after 15
+  of 80 Claude episodes; the quota guard left the rest unrun, and they ran on the Windows install. The model
+  versions are the same, and each episode records its install. One Gemini 3.8 Flash extraction failed twice and
+  is counted as failed.
+- **The extraction pilot ran with the first harness.** It led to four changes before the freeze, listed in the
+  [extraction case](benchmarks/civic-extraction.md).
 - **Two planned evaluations have not been done.** The literature held-out set was built but not run, and no expert
   review or audit of admitted records has been done (#23). The audit tooling is in place (#24).
 
 ## 7. Adequacy for the context of use
 
-- **Identifier and citation integrity: adequate.** No invalid identifier or citation was admitted in 721 admitted
-  AI answers, for every model. The check is deterministic and independent of the model that proposes, so the
+- **Identifier and citation integrity: adequate.** No invalid identifier or citation was admitted in 1,384
+  admitted AI outputs, for every model. The check is deterministic and independent of the model that proposes, so the
   result transfers to new models as long as the pinned references cover the records.
 - **Semantic correctness: not established.** About one admitted single-cell annotation in five disagrees with the
   authors' term. Part of that is label noise, but how much cannot be known without experts. Until an audit

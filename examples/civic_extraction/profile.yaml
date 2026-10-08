@@ -1,0 +1,44 @@
+id: civic-extraction
+version: 0.1.0
+description: Clinical evidence claims about cancer genes, extracted by a model from the full text of an openly
+  licensed paper. A quote counts only when a grounder has verified it at its paragraph of the pinned full text.
+  Each use adds a stage of review; a model-extracted claim reaches the knowledge base only with a person's
+  acceptance.
+predicates:
+- predicts_sensitivity_in
+- predicts_resistance_in
+- poor_outcome_in
+- better_outcome_in
+- diagnostic_of
+- predisposes_to
+subject_types:
+- gene
+object_types:
+- disease
+uses:
+  research_summary:
+    required_evidence_types:
+    - publication_result
+    verified_evidence_types:
+    - publication_result
+    require_human_acceptance: false
+    allow_llm_only: true
+    allow_string_match_only: false
+  curation_queue:
+    required_evidence_types:
+    - publication_result
+    verified_evidence_types:
+    - publication_result
+    require_human_acceptance: false
+    require_independent_review: true
+    allow_llm_only: true
+    allow_string_match_only: false
+  knowledge_base:
+    required_evidence_types:
+    - publication_result
+    verified_evidence_types:
+    - publication_result
+    require_human_acceptance: true
+    require_independent_review: true
+    allow_llm_only: true
+    allow_string_match_only: false
