@@ -1,0 +1,127 @@
+{
+  "decision_rule": {
+    "confidence": 0.95,
+    "false_admission_upper_bound_below": 0.05,
+    "false_block_rate_below": 0.2,
+    "majority": "at least 4 of the models"
+  },
+  "files_sha256": {
+    "model_annotations.csv": "32810a074f2fb8903907181b8d4e74dd409b8279a556aa47305297fc442d4d0b",
+    "model_predictions.csv": "e21e1ee740fe4ed9123bff9f8aafbf46763afe622b5c766722061aba669b20c2"
+  },
+  "inter_model_agreement": {
+    "admission": {
+      "clinical_reference": {
+        "alpha_95_bootstrap": [
+          0.4326,
+          0.6209
+        ],
+        "krippendorff_alpha": 0.5333,
+        "percent_agreement": 0.5529,
+        "units": 170,
+        "units_with_2plus_reviews": 170
+      },
+      "expert_reference": {
+        "alpha_95_bootstrap": [
+          0.4302,
+          0.5453
+        ],
+        "krippendorff_alpha": 0.4908,
+        "percent_agreement": 0.3824,
+        "units": 170,
+        "units_with_2plus_reviews": 170
+      },
+      "research_summary": {
+        "alpha_95_bootstrap": [
+          0.0281,
+          0.2131
+        ],
+        "krippendorff_alpha": 0.1237,
+        "percent_agreement": 0.9176,
+        "units": 170,
+        "units_with_2plus_reviews": 170
+      }
+    },
+    "reviewers": [
+      "model:claude-haiku-4-5-20251001",
+      "model:claude-opus-5-5",
+      "model:gemini-3.1-pro-high",
+      "model:gemini-3.8-flash-medium",
+      "model:gpt-5.6-luna",
+      "model:gpt-6-astra"
+    ],
+    "split": "test",
+    "statement": {
+      "alpha_95_bootstrap": [
+        0.2435,
+        0.6246
+      ],
+      "krippendorff_alpha": 0.4656,
+      "percent_agreement": 0.8647,
+      "units": 170,
+      "units_with_2plus_reviews": 170
+    }
+  },
+  "runs": {
+    "claude-haiku": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "2.1.285 (Claude Code)",
+      "later_information_seen": 0,
+      "median_seconds": 25.0,
+      "model": "claude-haiku-4-5-20251001",
+      "retried": 0,
+      "with_tool_use": 0
+    },
+    "claude-opus": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "2.1.285 (Claude Code)",
+      "later_information_seen": 0,
+      "median_seconds": 9.9,
+      "model": "claude-opus-5-5",
+      "retried": 0,
+      "with_tool_use": 0
+    },
+    "gemini-flash": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "1.3.1",
+      "later_information_seen": 0,
+      "median_seconds": 26.3,
+      "model": "gemini-3.8-flash-medium",
+      "retried": 1,
+      "with_tool_use": 0
+    },
+    "gemini-pro": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "1.3.1",
+      "later_information_seen": 0,
+      "median_seconds": 21.5,
+      "model": "gemini-3.1-pro-high",
+      "retried": 0,
+      "with_tool_use": 0
+    },
+    "gpt-astra": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "codex-cli 0.160.0",
+      "later_information_seen": 0,
+      "median_seconds": 35.2,
+      "model": "gpt-6-astra",
+      "retried": 0,
+      "with_tool_use": 0
+    },
+    "gpt-luna": {
+      "answered": 190,
+      "calls": 190,
+      "cli_version": "codex-cli 0.160.0",
+      "later_information_seen": 0,
+      "median_seconds": 32.6,
+      "model": "gpt-5.6-luna",
+      "retried": 0,
+      "with_tool_use": 0
+    }
+  }
+}
