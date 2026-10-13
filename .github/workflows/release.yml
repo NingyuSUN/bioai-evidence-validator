@@ -29,7 +29,9 @@ jobs:
       - name: Build distributable
         run: uv build
       - name: Verify installed wheel and CLI outside editable source
-        run: uv run --isolated --no-project --with ./dist/*.whl python tools/check_distribution.py
+        run: |
+          uv export --frozen --no-dev --no-emit-project --no-hashes --output-file artifacts/wheel-requirements.txt
+          uv run --isolated --no-project --with ./dist/*.whl --with-requirements artifacts/wheel-requirements.txt python tools/check_distribution.py
       - uses: actions/upload-artifact@v4
         with:
           name: dist

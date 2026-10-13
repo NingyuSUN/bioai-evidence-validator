@@ -315,9 +315,15 @@ hashes identify files but do not prove that review took place. All exit 3 on inv
 uv sync --frozen --extra dev
 uv run --frozen pytest
 uv build
-uv run --isolated --no-project --with ./dist/*.whl python tools/check_distribution.py
+uv export --frozen --no-dev --no-emit-project --no-hashes --output-file artifacts/wheel-requirements.txt
+uv run --isolated --no-project --with ./dist/*.whl --with-requirements artifacts/wheel-requirements.txt python tools/check_distribution.py
 uv run --frozen --with matplotlib==3.11.2 python tools/reproduce.py   # every benchmark result and figure
 ```
+
+The wheel check uses runtime dependencies exported from `uv.lock`, excluding the editable project.
+This keeps the installed package isolated while matching the schema compiler used for the committed
+benchmark hashes. Resolving fresh dependencies can select a newer LinkML compiler and change the
+schema hash even when the case decisions are unchanged; that is not the frozen replay environment.
 
 `tools/reproduce.py` regenerates every committed benchmark table, summary and figure offline from what is
 committed, and compares each with the repository: text with line endings normalised, everything else byte for
