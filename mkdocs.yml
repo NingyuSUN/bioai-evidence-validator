@@ -65,5 +65,6 @@ nav:
       - "ADR-002: domain-neutral main": ADR-002-domain-neutral-main.md
       - "Migrating to 0.4": MIGRATION-0.4.md
   - Project:
+      - Project evidence: PROJECT_EVIDENCE.md
       - Contributing: contributing.md
       - Changelog: changelog.md

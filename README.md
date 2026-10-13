@@ -10,6 +10,10 @@
 **A validation layer for AI-assisted biological curation: let models do the routine work, and send
 experts only the records that need them.**
 
+**Review the project:** [methods, measured results, personal contribution and reproducibility](docs/PROJECT_EVIDENCE.md).
+This independently completed project compares model-only output, a validation gate and a feedback loop,
+including a failed external test. Independent human evaluation remains open.
+
 LLMs and agents now extract claims from papers, cite the literature and annotate single-cell clusters.
 Their output looks right, and it often is not. Some typical errors:
 - a Cell Ontology ID that names a different cell type;
