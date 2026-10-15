@@ -4,9 +4,11 @@
 The central question is which errors can be checked against a source, which can be repaired through
 feedback, and which still require a biologist's judgment.
 
-**Personal contribution.** Ningyu Sun completed this project independently: research framing, software
-implementation, benchmark design and execution, analysis, figures and documentation. The concrete
-artifacts below make the methods and results inspectable; they do not constitute an external endorsement.
+**Contributions.** Ningyu Sun designed and built the project: research framing, software
+implementation, benchmark design and execution, analysis, figures and documentation.
+[PandaHUN777](https://github.com/PandaHUN777) contributed Python 3.14 CI support and documentation
+updates. The concrete artifacts below make the methods and results inspectable; they do not constitute
+an external endorsement.
 
 ## Method and scope
 
