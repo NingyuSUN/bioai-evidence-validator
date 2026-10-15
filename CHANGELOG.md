@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add the first expert-review round (`evaluation/expert_round`, #23): one blinded workbook for the three reviews
+  that wait on experts (40 ClinVar classifications, the 60-claim extraction sample, a fresh 69-cluster single-cell
+  audit sample), with every answer a dropdown and instructions in English and Chinese, and an importer that
+  writes each part back into its review's own format, refusing half-answered rows and repeat imports.
 - Add model reviewers for the blinded ClinVar review packet (#17, #22). `model_reviewers.py` gives the six benchmark
   models exactly what experts get, one isolated session per case, with tools disabled or detected, stops a model
   whose account is out of quota, and lets Claude run on a different install than Codex and Antigravity. All six
