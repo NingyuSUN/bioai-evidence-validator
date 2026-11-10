@@ -1,4 +1,8 @@
-# Independent evidence library integration
+# EvidPort evidence library integration
+
+[EvidPort](https://github.com/NingyuSUN/evidport) is the independent evidence layer.
+Its existing distribution name `local-evidence-database`, Python module
+`evidence_database`, and `evidence-db` command remain compatible.
 
 The optional `--evidence-library` grounder reads an existing independent
 `local-evidence-database` store. It does not download, ingest, convert, or approve
@@ -12,7 +16,7 @@ Install both reviewed checkouts into the same environment, or install their buil
 wheels. The independent library is not assumed to exist on PyPI:
 
 ```sh
-python -m pip install -e /path/to/evidence-database
+python -m pip install -e /path/to/evidport
 python -m pip install -e /path/to/bioai-evidence-validator
 bioevidence validate record.json --profile literature-claim \
   --evidence-library /path/to/project/store --output validation.json

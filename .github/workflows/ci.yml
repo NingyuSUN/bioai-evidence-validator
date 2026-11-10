@@ -1,12 +1,12 @@
 name: Repository checks
 on:
   push:
-    branches: [main]
+    branches: [main, codex/evidence-library-integration-public]
   pull_request:
 permissions:
   contents: read
 env:
-  EVIDENCE_LIBRARY_COMMIT: d7c93cf8fb6c2dd1d44ea931908caec8fb3817f8
+  EVIDENCE_LIBRARY_COMMIT: ed5dd1826becca992a7e9f0bf5474f90b9c1df4d
 jobs:
   lint:
     timeout-minutes: 10
@@ -72,7 +72,7 @@ jobs:
       - name: Check out the pinned independent evidence library
         uses: actions/checkout@v4
         with:
-          repository: NingyuSUN/evidence-database
+          repository: NingyuSUN/evidport
           ref: ${{ env.EVIDENCE_LIBRARY_COMMIT }}
           path: artifacts/evidence-library-ci
           persist-credentials: false

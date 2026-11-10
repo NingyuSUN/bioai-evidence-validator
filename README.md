@@ -317,9 +317,9 @@ Author: Ningyu Sun ([@NingyuSUN](https://github.com/NingyuSUN)) ·
 [Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
 [Apache-2.0](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
 
-## Independent evidence library
+## EvidPort evidence library
 
 Use the optional `--evidence-library` integration to check exact original-file,
-version, quotation, and human-review bindings from a local evidence store.
+version, quotation, and human-review bindings from a local [EvidPort](https://github.com/NingyuSUN/evidport) store.
 See [the integration guide](docs/EVIDENCE_LIBRARY.md). Reviewed extraction
 does not establish scientific support for a claim.

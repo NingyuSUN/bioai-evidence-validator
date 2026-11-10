@@ -1,5 +1,25 @@
 # BioAI Evidence Validator — project index
 
+## Publication round — 2026-11-10 (UTC)
+
+The owner authorized publishing the independent evidence layer as
+[EvidPort](https://github.com/NingyuSUN/evidport), followed by this integration
+branch and CI monitoring/fixes. This round starts from local candidate
+`331e91264c0edcf69179479162b062bc15e86cf6`. Publication naming and CI checkout
+addresses are updated; the optional `--evidence-library` contract remains unchanged.
+The workflow now also runs on pushes to `codex/evidence-library-integration-public`
+so the requested branch checks do not depend on opening or merging a pull request.
+
+The exact companion revision `ed5dd1826becca992a7e9f0bf5474f90b9c1df4d` was
+verified on the EvidPort remote main before this branch's publication and is pinned
+in `.github/workflows/ci.yml`. Its first remote run is
+[EvidPort checks](https://github.com/NingyuSUN/evidport/actions/runs/42782858570).
+Remote CI completion is not yet verified at this record; inspect
+[Actions](https://github.com/NingyuSUN/bioai-evidence-validator/actions)
+for the actual head. This is a branch publication, not a main-branch merge.
+No new scientific input, raw paper, local database, or review approval is included.
+Earlier completed checks and their limitations are preserved below.
+
 Updated: 2026-11-10T07:47:06.073273+00:00 (UTC). Validation evidence was finalized on 2026-11-10.
 
 ## Current objective and code provenance
