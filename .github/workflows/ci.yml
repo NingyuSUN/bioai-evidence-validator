@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 env:
-  EVIDENCE_LIBRARY_COMMIT: ed5dd1826becca992a7e9f0bf5474f90b9c1df4d
+  EVIDENCE_LIBRARY_COMMIT: a6f26ff29c966109e707cce180794731a7af9e8a
 jobs:
   lint:
     timeout-minutes: 10
@@ -86,7 +86,7 @@ jobs:
       - name: Require the optional integration dependencies
         run: uv run --frozen --no-sync python -c "import evidence_database.store, evidence_database.acquisition, evidence_database.packets, pymupdf"
       - name: Run tests with coverage (minimum in pyproject.toml)
-        run: uv run --frozen --no-sync pytest --cov --cov-report=term
+        run: uv run --frozen --no-sync pytest --cov --cov-report=term -W error::ResourceWarning -W error::pytest.PytestUnraisableExceptionWarning -W error::pytest.PytestUnhandledThreadExceptionWarning
       - name: Coverage summary
         if: always()
         shell: bash

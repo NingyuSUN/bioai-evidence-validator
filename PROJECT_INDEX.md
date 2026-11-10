@@ -1,5 +1,31 @@
 # BioAI Evidence Validator — project index
 
+## CI warning follow-up — 2026-11-10 (UTC)
+
+The first published integration `f6bf5d21eb7936b471d3dff1b0f0d12bb8e9ead6`
+passed [all nine jobs](https://github.com/NingyuSUN/bioai-evidence-validator/actions/runs/42783160589):
+five environments each passed 557 tests, with no skips and 97.69% coverage;
+22 frozen result/figure groups reproduced identically. This is engineering
+reproducibility, not independent scientific validation.
+
+Inspection of the passing logs revealed two concrete issues: unclosed acquisition
+connections in EvidPort, and a Windows subprocess output-decoding exception in a
+frozen-result test. The follow-up pins the resource-cleanup revision of EvidPort,
+explicitly requests UTF-8 from that subprocess, and checks its complete output
+against the existing frozen summary even under an inherited non-UTF-8 setting.
+Frozen inputs, metrics and output files are unchanged.
+
+The affected Windows Python 3.12 test module passed all 11 tests locally with
+unhandled-thread warnings treated as errors. Source and candidate test bytes match.
+The fixed EvidPort revision `a6f26ff29c966109e707cce180794731a7af9e8a` is already
+published and pinned in this workflow. Its stricter matrix is tracked by
+[EvidPort checks](https://github.com/NingyuSUN/evidport/actions/runs/42786324296).
+
+ResourceWarning and unhandled thread/destructor warnings now fail CI instead of
+leaving a passing test with lost output or leaked resources. Inspect
+[the branch runs](https://github.com/NingyuSUN/bioai-evidence-validator/actions?query=branch%3Acodex%2Fevidence-library-integration-public)
+for the current revision. This remains an integration branch, not a main merge.
+
 ## Publication round — 2026-11-10 (UTC)
 
 The owner authorized publishing the independent evidence layer as
