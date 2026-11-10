@@ -1,5 +1,6 @@
 """Literature grounding with synthetic papers and recorded resolver responses; never touches the network."""
 import copy
+import io
 import json
 import urllib.error
 from pathlib import Path
@@ -363,3 +364,53 @@ def test_quotes_are_verified_against_the_abstract_without_open_full_text(tmp_pat
     altered = grounded(claim(uri="pmid:2002", quote=quote.replace("eight", "nine"), locator=""), tmp_path,
                        Fetcher(responses))
     assert check(altered, tmp_path) == (["BEV017"], set())
+
+
+@pytest.mark.parametrize("status", [403, 404, 429])
+@pytest.mark.parametrize("stage", ["crossref", "fulltext", "abstract"])
+def test_consumed_http_errors_close_responses_without_changing_fallback(tmp_path, stage, status):
+    responses = dict(RESPONSES)
+    if stage == "crossref":
+        key = "doi:10.9999/nowhere"
+        failed_url = literature.CROSSREF + "10.9999/nowhere"
+        expected_calls = [literature._search_url(key), failed_url]
+    elif stage == "fulltext":
+        key = "pmid:1001"
+        failed_url = f"{EPMC}/PMC1001/fullTextXML"
+        abstract_url = literature._eutils("efetch", db="pubmed", id="1001", retmode="xml")
+        responses[abstract_url] = PUBMED_2002.replace(b"2002", b"1001")
+        expected_calls = [literature._search_url(key), failed_url, abstract_url]
+    else:
+        key = "pmid:1004"
+        failed_url = literature._eutils("efetch", db="pubmed", id="1004", retmode="xml")
+        expected_calls = [literature._search_url(key), failed_url]
+    body = io.BytesIO(b"synthetic HTTP error body")
+    error = urllib.error.HTTPError(failed_url, status, "synthetic response error", {}, body)
+    calls = []
+
+    def fetch(url):
+        calls.append(url)
+        if url == failed_url:
+            raise error
+        return responses[url]
+
+    try:
+        entry = literature.resolve(key, tmp_path, fetch, "2026-11-10T00:00:00+00:00")
+        assert error.closed and body.closed
+        with pytest.raises(ValueError, match="closed"):
+            body.read()
+        assert error.code == status and calls == expected_calls
+        assert entry["fulltext_sha256"] is None
+        if stage == "crossref":
+            assert entry["resolver"] == "crossref"
+            assert (tmp_path / f"{entry['metadata_sha256']}.json").read_bytes() == b'{"message": null}'
+            assert "abstract_sha256" not in entry
+            assert entry["urls"] == expected_calls
+        elif stage == "fulltext":
+            assert (tmp_path / f"{entry['abstract_sha256']}.xml").read_bytes() == responses[abstract_url]
+            assert entry["urls"] == [expected_calls[0], abstract_url]
+        else:
+            assert entry["resolver"] == "europepmc" and "abstract_sha256" not in entry
+            assert entry["urls"] == [expected_calls[0]]
+    finally:
+        error.close()

@@ -1,5 +1,28 @@
 # BioAI Evidence Validator — project index
 
+## Strict resource-check fixes — 2026-11-10 (UTC)
+
+The stricter [run for 35c6e2f](https://github.com/NingyuSUN/bioai-evidence-validator/actions/runs/42786495582)
+correctly failed on pre-existing resource warnings: Python 3.14 reported 544 passing
+and 13 failing tests, and fail-fast cancelled the other four verification jobs.
+Those 13 failures include parameterized repetitions; they are not 13 changed
+scientific results. The reproduction job still matched all 22 frozen output groups.
+
+This follow-up closes CSV files, loaded workbooks and consumed HTTPError responses,
+and limits the temporary semantic profile directory to validator initialization.
+Read values, error/fallback classification, scientific inputs and scoring logic are
+preserved. Nine real HTTP-response tests and three normal/error temporary-directory
+tests were added. The respective strict local scopes passed 64 literature tests,
+31 CSV/workbook tests and five semantic tests, with original frozen outputs unchanged.
+Source and public candidate bytes for the changed files match.
+
+The three warning classes remain errors. Verification jobs no longer cancel each
+other, so all supported environments produce diagnostics. EvidPort stays pinned
+to `a6f26ff29c966109e707cce180794731a7af9e8a`, whose two remote environments passed
+265 tests with no test warnings. Full verification of this new validator revision
+is recorded by [Actions](https://github.com/NingyuSUN/bioai-evidence-validator/actions?query=branch%3Acodex%2Fevidence-library-integration-public).
+The source/candidate preparation records and prior failed logs remain archived.
+
 ## CI warning follow-up — 2026-11-10 (UTC)
 
 The first published integration `f6bf5d21eb7936b471d3dff1b0f0d12bb8e9ead6`

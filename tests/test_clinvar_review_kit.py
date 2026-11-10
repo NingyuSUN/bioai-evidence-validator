@@ -3,6 +3,7 @@ import csv
 import importlib.util
 import json
 import re
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -52,8 +53,8 @@ def test_reviewer_packet_is_blinded(kit):
     for name in ("labels.csv", "evidence.csv"):
         with (packet / name).open(encoding="utf-8") as handle:
             cells += [v for r in csv.reader(handle) for v in r]
-    book = load_workbook(packet / "review_workbook.xlsx", read_only=True)
-    cells += [str(v) for sheet in book for r in sheet.iter_rows(values_only=True) for v in r if v is not None]
+    with closing(load_workbook(packet / "review_workbook.xlsx", read_only=True)) as book:
+        cells += [str(v) for sheet in book for r in sheet.iter_rows(values_only=True) for v in r if v is not None]
     text = "\n".join(cells)
     ids = {c["variation_id"] for c in key["cases"].values()}
     assert not ids & set(cells), "a VariationID appears as a cell value"
@@ -64,21 +65,21 @@ def test_reviewer_packet_is_blinded(kit):
 
 
 def fill(path, key, flip_every=0):
-    book = load_workbook(path)
-    sheet = book["Labels"]
-    header = [c.value for c in sheet[1]]
-    col = {name: header.index(name) + 1 for name in header}
-    for n, cells in enumerate(sheet.iter_rows(min_row=2), start=1):
-        case = key["cases"][cells[0].value]
-        sheet.cell(cells[0].row, col["statement_label"], "correct")
-        for use in importer.USES:
-            label = case["validator"][use]
-            if flip_every and n % flip_every == 0 and use == "research_summary":
-                label = "admitted" if label != "admitted" else "review_required"
-            sheet.cell(cells[0].row, col[use], label)
-            sheet.cell(cells[0].row, col[f"{use}_rationale"], "synthetic reviewer")
-        sheet.cell(cells[0].row, col["sources_consulted"], "ACMG/AMP 2015; gene background")
-    book.save(path)
+    with closing(load_workbook(path)) as book:
+        sheet = book["Labels"]
+        header = [c.value for c in sheet[1]]
+        col = {name: header.index(name) + 1 for name in header}
+        for n, cells in enumerate(sheet.iter_rows(min_row=2), start=1):
+            case = key["cases"][cells[0].value]
+            sheet.cell(cells[0].row, col["statement_label"], "correct")
+            for use in importer.USES:
+                label = case["validator"][use]
+                if flip_every and n % flip_every == 0 and use == "research_summary":
+                    label = "admitted" if label != "admitted" else "review_required"
+                sheet.cell(cells[0].row, col[use], label)
+                sheet.cell(cells[0].row, col[f"{use}_rationale"], "synthetic reviewer")
+            sheet.cell(cells[0].row, col["sources_consulted"], "ACMG/AMP 2015; gene background")
+        book.save(path)
     return path
 
 

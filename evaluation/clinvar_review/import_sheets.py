@@ -18,6 +18,7 @@ import datetime as dt
 import json
 import re
 import sys
+from contextlib import closing
 from pathlib import Path
 
 from bioevidence_validator.review import ANNOTATION_COLUMNS, OPTIONAL_ANNOTATION_COLUMNS, load_annotations, write_csv
@@ -33,8 +34,8 @@ PACKET_ONLY = "review packet: ClinVar 2023-09 submissions"
 def read_labels(path: Path) -> list[dict[str, str]]:
     if path.suffix.lower() == ".xlsx":
         from openpyxl import load_workbook
-        sheet = load_workbook(path, read_only=True, data_only=True)["Labels"]
-        rows = list(sheet.iter_rows(values_only=True))
+        with closing(load_workbook(path, read_only=True, data_only=True)) as book:
+            rows = list(book["Labels"].iter_rows(values_only=True))
         header = [str(h) for h in rows[0]]
         return [{h: "" if v is None else str(v).strip() for h, v in zip(header, row, strict=False)} for row in rows[1:]]
     with path.open(encoding="utf-8-sig", newline="") as handle:

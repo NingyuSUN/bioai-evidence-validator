@@ -157,17 +157,18 @@ class Pipeline:
         profile = yaml.safe_load((score_literature.CASE / "profile.yaml").read_text(encoding="utf-8"))
         for use in profile["uses"].values():
             use["require_independent_review"] = True
-        self.folder = tempfile.TemporaryDirectory()
-        path = Path(self.folder.name) / "reviewed.yaml"
-        path.write_text(yaml.safe_dump(profile), encoding="utf-8")
-        grounders = [SourceBytesGrounder(self.base.corpus.store), self.base.corpus.grounder()]
-        cues = CueChecker(negative_predicates=NEGATIVE)
-        self.validators = {
-            (False, False): self.base.validator,
-            (False, True): RecordValidator(profile=score_literature.CASE / "profile.yaml", grounders=[*grounders, cues]),
-            (True, False): RecordValidator(profile=path, grounders=grounders),
-            (True, True): RecordValidator(profile=path, grounders=[*grounders, cues]),
-        }
+        # RecordValidator loads the profile eagerly; retain its file only during construction.
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "reviewed.yaml"
+            path.write_text(yaml.safe_dump(profile), encoding="utf-8")
+            grounders = [SourceBytesGrounder(self.base.corpus.store), self.base.corpus.grounder()]
+            cues = CueChecker(negative_predicates=NEGATIVE)
+            self.validators = {
+                (False, False): self.base.validator,
+                (False, True): RecordValidator(profile=score_literature.CASE / "profile.yaml", grounders=[*grounders, cues]),
+                (True, False): RecordValidator(profile=path, grounders=grounders),
+                (True, True): RecordValidator(profile=path, grounders=[*grounders, cues]),
+            }
 
     def decide(self, task: dict, answer: dict, readings: dict[str, dict | None], cues: bool):
         """`readings`: reviewer -> its reading (None if it gave none); empty for no independent review."""
