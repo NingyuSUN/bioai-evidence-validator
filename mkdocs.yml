@@ -41,6 +41,8 @@ nav:
   - Guide:
       - Drafts: DRAFTS.md
       - Profiles: PROFILES.md
+      - EvidPort evidence library: EVIDENCE_LIBRARY.md
+      - Local MCP validation: EVIDENCE_MCP.md
       - Community profiles: community-profiles.md
   - Benchmarks:
       - ClinVar germline classifications: benchmarks/clinvar.md

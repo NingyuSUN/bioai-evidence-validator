@@ -28,6 +28,7 @@ import datetime as dt
 import hashlib
 import json
 import re
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -103,11 +104,12 @@ claude_host = "wsl"
 def call_model(key: str, prompt: str, timeout: int = 600, schema: dict | None = None) -> tuple[dict, list[str]]:
     """One fresh CLI call answering `schema` (default STEP_SCHEMA), through the WSL installs of Claude Code, Codex and Antigravity."""
     spec = run_models.MODELS[key]
-    with tempfile.TemporaryDirectory(prefix="agent-", dir=Path("C:/t/agent-work")) as directory:
+    with tempfile.TemporaryDirectory(prefix="bioevidence-agent-") as directory:
         work = Path(directory)
         (work / "schema.json").write_text(json.dumps(schema or STEP_SCHEMA), encoding="utf-8")
         (work / "prompt.txt").write_text(prompt, encoding="utf-8")
-        schema_file, folder = wsl_path(work / "schema.json"), wsl_path(work)
+        schema_file = shlex.quote(wsl_path(work / "schema.json"))
+        folder, model = shlex.quote(wsl_path(work)), shlex.quote(spec["model"])
         if spec["cli"] == "claude" and claude_host == "windows":
             argv, stdin = run_models.claude_command(spec["model"], schema or STEP_SCHEMA, work / "schema.json", prompt,
                                                     timeout)
@@ -115,19 +117,19 @@ def call_model(key: str, prompt: str, timeout: int = 600, schema: dict | None = 
             return answer, tools
         if spec["cli"] == "claude":  # the WSL install
             command = ("PATH=$(ls -d ~/.nvm/versions/node/*/bin | tail -1):$PATH claude -p --model "
-                       f"{spec['model']} --tools '' --strict-mcp-config --no-session-persistence --output-format json "
-                       f"--json-schema \"$(cat {schema_file})\" < prompt.txt")
+                       f"{model} --tools '' --strict-mcp-config --no-session-persistence --output-format json "
+                       '--json-schema "$(cat schema.json)" < prompt.txt')
             parse = run_models.claude_parse
         elif spec["cli"] == "codex":
-            disable = " ".join(f"--disable {f}" for f in run_models.CODEX_DISABLED)
-            command = (f"codex exec -m {spec['model']} --ignore-user-config {disable} --sandbox read-only "
+            disable = " ".join(f"--disable {shlex.quote(f)}" for f in run_models.CODEX_DISABLED)
+            command = (f"codex exec -m {model} --ignore-user-config {disable} --sandbox read-only "
                        f"--skip-git-repo-check --ephemeral --json --output-schema {schema_file} -o last.json - < prompt.txt")
             parse = run_models.codex_parse
         else:
-            command = (f"agy --model {spec['model']} --output-format stream-json --json-schema {schema_file} --sandbox "
+            command = (f"agy --model {model} --output-format stream-json --json-schema {schema_file} --sandbox "
                        f"--print-timeout {timeout}s --print \"$(cat prompt.txt)\"")
             parse = run_models.gemini_parse
-        done = subprocess.run(["wsl.exe", "-e", "bash", "-lc", f"export PATH=$HOME/.local/bin:$PATH; cd {folder} && {command}"],
+        done = subprocess.run(["wsl.exe", "-e", "bash", "-lc", f'export PATH="$HOME/.local/bin:$PATH"; cd {folder} && {command}'],
                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout + 60)
         answer, tools, _ = parse(done.stdout, work)
         return answer, tools
@@ -351,7 +353,6 @@ def run(output: Path, models: list[str], workers: int, limit: int | None) -> int
     tasks = [json.loads(line) for line in (literature_suite.TASKS / "pilot.jsonl").read_text(encoding="utf-8").splitlines()]
     tasks = tasks[:limit] if limit else tasks
     library = Library(output / "cache")
-    Path("C:/t/agent-work").mkdir(parents=True, exist_ok=True)
     jobs = []
     for n in range(len(tasks)):
         for key in models:

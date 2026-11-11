@@ -12,14 +12,16 @@ independent `--evidence-library` option.
 
 ## Install and validate
 
-Install both reviewed checkouts into the same environment, or install their built
-wheels. The independent library is not assumed to exist on PyPI:
+From this Validator checkout, install both reviewed packages into the activated
+environment, or install their built wheels. The independent library is not assumed
+to exist on PyPI. Use the configured store folder when validating; `evidence` below
+is a project-relative example:
 
 ```sh
-python -m pip install -e /path/to/evidport
-python -m pip install -e /path/to/bioai-evidence-validator
+python -m pip install -e .
+python -m pip install 'local-evidence-database[pdf] @ git+https://github.com/NingyuSUN/evidport.git@65c8626185eaa3c3e9e7b60db4c17b43a545d394'
 bioevidence validate record.json --profile literature-claim \
-  --evidence-library /path/to/project/store --output validation.json
+  --evidence-library evidence --output validation.json
 ```
 
 Use the independent library's PDF extra when working with PDF review packets.

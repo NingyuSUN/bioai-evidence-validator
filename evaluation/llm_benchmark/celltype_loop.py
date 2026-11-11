@@ -1,7 +1,7 @@
 """Single-cell cell-type annotation by six models, alone and in bioevidence's feedback loop.
 
-    uv run --frozen python evaluation/llm_benchmark/celltype_loop.py run --split pilot --output C:/t/celltype-pilot
-    uv run --frozen python evaluation/llm_benchmark/celltype_loop.py collect --output C:/t/celltype-pilot \
+    uv run --frozen python evaluation/llm_benchmark/celltype_loop.py run --split pilot --output artifacts/celltype-pilot
+    uv run --frozen python evaluation/llm_benchmark/celltype_loop.py collect --output artifacts/celltype-pilot \
         --results evaluation/llm_benchmark/results/celltype-pilot
     uv run --frozen python evaluation/llm_benchmark/celltype_loop.py score --results evaluation/llm_benchmark/results/celltype-pilot
 
@@ -240,7 +240,6 @@ def episode(key: str, task: dict, case: Case, protocol: int = 2) -> dict:
 def run(output: Path, split: str, models: list[str], workers: int, limit: int | None, protocol: int = 2) -> int:
     case = Case()
     tasks = [t for t in case.tasks.values() if t["split"] == split][:limit]
-    Path("C:/t/agent-work").mkdir(parents=True, exist_ok=True)
     jobs = [(key, task, output / "episodes" / key / f"{task['task_id']}.json") for task in tasks for key in models]
     jobs = [job for job in jobs if not job[2].exists()]
     print(f"{len(jobs)} episode(s) to run", flush=True)

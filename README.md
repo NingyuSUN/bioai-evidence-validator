@@ -323,3 +323,17 @@ Use the optional `--evidence-library` integration to check exact original-file,
 version, quotation, and human-review bindings from a local [EvidPort](https://github.com/NingyuSUN/evidport) store.
 See [the integration guide](docs/EVIDENCE_LIBRARY.md). Reviewed extraction
 does not establish scientific support for a claim.
+
+The optional MCP consumer retrieves a quotation over local stdio and independently
+checks it against the same library. DOI waiting lists, free acquisition and manual
+PDF imports remain EvidPort operations. No full text means no quotation to validate;
+a matching quotation without original-page review stays review-required.
+
+```sh
+python -m pip install -e '.[mcp]'
+python -m bioevidence_validator.evidence_mcp --server-config local-mcp.json --evidence-library evidence --record record.json --profile literature-claim --output validation-report.json
+```
+
+Install the pinned EvidPort server and create the project configuration as described
+in [Local MCP validation](docs/EVIDENCE_MCP.md). The guide uses portable project-relative
+examples and keeps actual machine configuration out of Git.

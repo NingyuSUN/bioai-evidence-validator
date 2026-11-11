@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- Preserve virtual-environment Python launchers for local MCP subprocesses on Linux, including PATH and configuration-relative commands.
+
+- Explicitly exclude local execution materials from distribution packages and check archive contents in CI.
+- Add a public-tree CI check for private documents, local evidence artifacts and
+  personal workstation paths, while retaining strict MkDocs checks for generated
+  documentation links.
+
+- Use the operating system's temporary directory for benchmark CLI calls and
+  preserve spaces and shell characters in WSL paths and model arguments. Temporary
+  prompts and schemas are removed after success or failure; frozen benchmark
+  inputs and results are unchanged.
+
+- Add the optional EvidPort MCP consumer (`python -m bioevidence_validator.evidence_mcp`).
+  Exact source, version, page/region, quotation and review state are independently checked
+  against the local library. Malformed responses, forged approvals and source mismatches
+  cannot bypass the existing review gate. DOI acquisition and manual PDF intake remain
+  in EvidPort; actual configuration and source documents stay outside the public repo.
+
 - Add model reviewers for the blinded ClinVar review packet (#17, #22). `model_reviewers.py` gives the six benchmark
   models exactly what experts get, one isolated session per case, with tools disabled or detected, stops a model
   whose account is out of quota, and lets Claude run on a different install than Codex and Antigravity. All six
