@@ -8,8 +8,12 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
+import subprocess
 import sys
+import venv
 from contextlib import asynccontextmanager
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -289,6 +293,49 @@ def test_configuration_rejects_remote_transport_and_unscoped_environment(tmp_pat
     path.write_text(json.dumps({"command": sys.executable, "args": [], **extra}), encoding="utf8")
     with pytest.raises(ValueError):
         bridge.load_server_config(path)
+
+
+@pytest.fixture(scope="module")
+def isolated_interpreter(tmp_path_factory):
+    root = tmp_path_factory.mktemp("isolated interpreter") / "environment"
+    venv.EnvBuilder(with_pip=False, symlinks=os.name != "nt").create(root)
+    executable = root / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    if os.name != "nt":
+        assert executable.is_symlink()
+    setup = subprocess.run([str(executable), "-c", "import sysconfig; print(sysconfig.get_path('purelib'))"],
+                           check=True, capture_output=True, text=True, encoding="utf-8", timeout=30)
+    site_packages = Path(setup.stdout.strip())
+    (site_packages / "evidport_interpreter_probe.py").write_text("TOKEN = 'environment-only'\n", encoding="utf-8")
+    return root, executable
+
+
+@pytest.mark.parametrize("command_mode", ["absolute", "path", "config_relative"])
+def test_configuration_keeps_the_selected_interpreter_environment(isolated_interpreter, monkeypatch, tmp_path,
+                                                                command_mode):
+    root, executable = isolated_interpreter
+    monkeypatch.chdir(tmp_path)
+    args = ["-c", "import json, sys, evidport_interpreter_probe as probe; "
+                  "print(json.dumps({'prefix': sys.prefix, 'token': probe.TOKEN}))"]
+    if command_mode == "config_relative":
+        config = root.parent / "server.json"
+        config.write_text(json.dumps({"command": str(executable.relative_to(config.parent)),
+                                      "args": args, "cwd": "."}), encoding="utf-8")
+        parsed = bridge.load_server_config(config)
+        assert parsed["cwd"] == config.parent.resolve()
+    else:
+        command = str(executable)
+        if command_mode == "path":
+            monkeypatch.setenv("PATH", str(executable.parent) + os.pathsep + os.environ.get("PATH", ""))
+            command = executable.name
+        parsed = bridge._connection_config(command, args, None, None)
+    assert Path(parsed["command"]).is_absolute()
+    assert Path(parsed["command"]) == executable.absolute()
+    result = subprocess.run([parsed["command"], *parsed["args"]], cwd=parsed["cwd"],
+                            env={**os.environ, **parsed["env"]}, check=True,
+                            capture_output=True, text=True, encoding="utf-8", timeout=30)
+    observed = json.loads(result.stdout)
+    assert Path(observed["prefix"]) == root
+    assert observed["token"] == "environment-only"
 
 
 def test_configuration_uses_utf8_and_config_relative_working_directory(tmp_path):

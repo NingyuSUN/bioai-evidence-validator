@@ -74,7 +74,8 @@ def _connection_config(command: str, args: list[str], cwd: Path | None, env: dic
     if env is not None:
         if not isinstance(env, dict) or any(environment.get(key) != value for key, value in env.items()):
             raise ValueError("Only PYTHONIOENCODING=utf-8 and PYTHONUTF8=1 may be configured")
-    return {"command": str(executable.resolve()), "args": list(args), "cwd": directory, "env": environment}
+    # Resolving a virtual environment's interpreter symlink starts the base Python instead.
+    return {"command": str(executable.absolute()), "args": list(args), "cwd": directory, "env": environment}
 
 
 def load_server_config(path: Path) -> dict:
@@ -88,7 +89,7 @@ def load_server_config(path: Path) -> dict:
     if not isinstance(command, str) or not isinstance(arguments, list):
         raise ValueError("Server configuration requires a command string and args array")
     if isinstance(command, str) and not Path(command).is_absolute() and any(c in command for c in ("/", "\\")):
-        command = str((path.parent / command).resolve())
+        command = str((path.parent / command).absolute())
     cwd = config.get("cwd")
     if cwd is not None:
         if not isinstance(cwd, str) or not cwd:

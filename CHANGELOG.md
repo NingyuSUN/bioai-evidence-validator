@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Preserve virtual-environment Python launchers for local MCP subprocesses on Linux, including PATH and configuration-relative commands.
+
 - Explicitly exclude local execution materials from distribution packages and check archive contents in CI.
 - Add a public-tree CI check for private documents, local evidence artifacts and
   personal workstation paths, while retaining strict MkDocs checks for generated
