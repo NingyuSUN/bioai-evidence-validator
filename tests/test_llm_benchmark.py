@@ -1,6 +1,7 @@
 """The LLM benchmark: deterministic tasks, stdlib runner plumbing, and scoring on hand-made answers."""
 import importlib.util
 import json
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -266,7 +267,8 @@ def test_agent_views_gate_and_loop():
 
 def test_agent_steps_and_history():
     agent = load("agent_loop")
-    assert agent.wsl_path(Path("C:/t/agent-work/x")) == "/mnt/c/t/agent-work/x"
+    drive = "X"
+    assert agent.wsl_path(Path(f"{drive}:/workspace/example")) == f"/mnt/{drive.lower()}/workspace/example"
     step = dict.fromkeys(agent.FIELDS, "")
     step.update(action="search", query="BRAF V600E vemurafenib", citations=[])
     assert agent.check_step(step) is step
@@ -277,6 +279,75 @@ def test_agent_steps_and_history():
     history = [f"[{n}] read pmid:{n}\n→ " + "x" * 1000 for n in range(1, 4)]
     short = agent.compact(list(history))
     assert short[0].endswith("read again if needed)") and short[1:] == history[1:]
+
+
+@pytest.mark.parametrize("cli, host", [("claude", "wsl"), ("codex", "wsl"), ("agy", "wsl"), ("claude", "windows")])
+@pytest.mark.parametrize("failure", [False, True])
+def test_agent_calls_use_portable_temporary_paths_and_cleanup(monkeypatch, tmp_path, cli, host, failure):
+    agent = load("agent_loop")
+    parent = tmp_path / "system temp's $(literal) directory"
+    parent.mkdir()
+    monkeypatch.setattr(agent.tempfile, "tempdir", str(parent))
+    monkeypatch.setattr(agent, "claude_host", host)
+    model = "test model's $(literal) name"
+    monkeypatch.setattr(agent.run_models, "MODELS", {"test": {"cli": cli, "model": model}})
+    schema, answer = {"type": "object"}, {"ok": True}
+    calls = []
+
+    def check_work():
+        work, = parent.iterdir()
+        assert (work / "prompt.txt").read_text(encoding="utf-8") == "test prompt"
+        assert json.loads((work / "schema.json").read_text(encoding="utf-8")) == schema
+        calls.append(work)
+        return work
+
+    def complete():
+        if failure:
+            raise subprocess.TimeoutExpired("mock model", 65)
+        return Done("mock response")
+
+    def wsl_execute(argv, **kwargs):
+        work = check_work()
+        assert argv[:4] == ["wsl.exe", "-e", "bash", "-lc"]
+        setup, command = argv[4].split(" && ", 1)
+        assert shlex.split(setup)[-2:] == ["cd", agent.wsl_path(work)]
+        args = shlex.split(command)
+        model_flag = "-m" if cli == "codex" else "--model"
+        assert args[args.index(model_flag) + 1] == model
+        schema_flag = "--output-schema" if cli == "codex" else "--json-schema"
+        schema_value = args[args.index(schema_flag) + 1]
+        if cli == "claude":
+            assert shlex.split(schema_value.removeprefix("$(").removesuffix(")")) == ["cat", "schema.json"]
+        else:
+            assert schema_value == agent.wsl_path(work / "schema.json")
+        assert kwargs["timeout"] == 65
+        return complete()
+
+    def native_command(actual_model, actual_schema, schema_file, prompt, timeout):
+        assert actual_model == model and actual_schema == schema and timeout == 5
+        return ["mock", str(schema_file)], prompt
+
+    def native_execute(argv, stdin, cwd, timeout):
+        work = check_work()
+        assert argv == ["mock", str(work / "schema.json")]
+        assert cwd == work and stdin == "test prompt" and timeout == 65
+        return complete()
+
+    def parse(stdout, work):
+        assert stdout == "mock response" and work == calls[0]
+        return answer, [], {}
+
+    monkeypatch.setattr(agent.subprocess, "run", wsl_execute)
+    monkeypatch.setattr(agent.run_models, "claude_command", native_command)
+    monkeypatch.setattr(agent.run_models, "execute", native_execute)
+    for name in ("claude_parse", "codex_parse", "gemini_parse"):
+        monkeypatch.setattr(agent.run_models, name, parse)
+    if failure:
+        with pytest.raises(subprocess.TimeoutExpired):
+            agent.call_model("test", "test prompt", timeout=5, schema=schema)
+    else:
+        assert agent.call_model("test", "test prompt", timeout=5, schema=schema) == (answer, [])
+    assert len(calls) == 1 and not calls[0].exists() and not list(parent.iterdir())
 
 
 def test_stances_become_evidence_lines():

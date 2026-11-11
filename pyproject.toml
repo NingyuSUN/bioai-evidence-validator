@@ -34,6 +34,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+mcp = ["mcp==2.3.0"]
+
 dev = [
   "pytest>=8,<9",
   "pytest-cov>=7,<8",
@@ -52,6 +54,17 @@ Issues = "https://github.com/NingyuSUN/bioai-evidence-validator/issues"
 
 [project.scripts]
 bioevidence = "bioevidence_validator.cli:main"
+
+[tool.hatch.build]
+# Keep local execution materials out even when VCS ignore discovery is unavailable.
+exclude = [
+  "/artifacts", "/data", "/evidence", "/dist", "/build", "/.venv",
+  "/.pytest_cache", "/.ruff_cache", "/.mypy_cache", "**/__pycache__", "*.pyc",
+  "/htmlcov", "/site", "/_site", "/.coverage", "/project.json",
+  "/validation_report.json", "/validation-report.json",
+  ".env", ".env.*", ".mcp.json", "local-mcp.json", "settings.local.json",
+  "*.pdf", "*.db", "*.sqlite", "*.sqlite3", "*.zip",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bioevidence_validator"]

@@ -11,3 +11,12 @@ _site/
 site/
 .coverage
 htmlcov/
+
+# Machine-owned evidence and MCP configuration
+data/
+.mcp.json
+local-mcp.json
+.env
+/project.json
+/evidence/
+validation-report.json

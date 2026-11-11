@@ -1,9 +1,9 @@
 """Real AI extraction (#21): six models extract clinical evidence claims from the full text of openly licensed
 papers, and every claim goes through bioevidence's whole chain.
 
-    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py run --split pilot --output C:/t/extraction-pilot
-    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py review --output C:/t/extraction-pilot
-    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py collect --output C:/t/extraction-pilot \
+    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py run --split pilot --output artifacts/extraction-pilot
+    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py review --output artifacts/extraction-pilot
+    uv run --frozen python evaluation/llm_benchmark/extraction_loop.py collect --output artifacts/extraction-pilot \
         --results evaluation/llm_benchmark/results/extraction-pilot
     uv run --frozen python evaluation/llm_benchmark/extraction_loop.py score --results evaluation/llm_benchmark/results/extraction-pilot
 
@@ -394,7 +394,6 @@ def episode(key: str, task: dict, case: Case) -> dict:
 def run(output: Path, split: str, models: list[str], workers: int, limit: int | None) -> int:
     case = Case()
     tasks = [t for t in case.tasks.values() if t["split"] == split][:limit]
-    Path("C:/t/agent-work").mkdir(parents=True, exist_ok=True)
     jobs = [(key, task, output / "episodes" / key / f"{task['task_id']}.json") for task in tasks for key in models]
     jobs = [job for job in jobs if not job[2].exists()]
     print(f"{len(jobs)} episode(s) to run", flush=True)

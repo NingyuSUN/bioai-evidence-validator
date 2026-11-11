@@ -1,6 +1,26 @@
 # BioAI Evidence Validator — project index
 
-## Current implementation: EvidPort integration on main — 2026-11-11
+## Current release work: local EvidPort MCP consumer — 2026-11-11
+
+The optional local stdio bridge is prepared for publication from the reviewed
+public main baseline `992b0c73c8b9de7096fee3495e0a57e0ad7dcb0a`. It retrieves an exact
+citation and checks the response against the original library. Existing scoring,
+profiles, source review gates and frozen benchmark inputs remain unchanged.
+
+| Field | Scope and evidence |
+|---|---|
+| Date | 2026-11-11, Asia/Tokyo; complete local suite verified at 17:02 JST; package-boundary checks verified at 17:08 JST. Exact Git and remote CI times are available from the revision and its Actions runs. |
+| Purpose | Publish the local MCP consumer and its tests with portable instructions, while keeping source papers, databases and machine configuration outside the repository. Replace benchmark CLI calls' fixed temporary directory with the operating system's temporary directory and quote WSL arguments safely. |
+| Inputs and code | Public main baseline above; the reviewed MCP consumer, synthetic tests and SDK 2.3.0. The independent EvidPort dependency is pinned to `65c8626185eaa3c3e9e7b60db4c17b43a545d394` in CI and the installation guides. Execution occurs in this checkout; runtime inputs remain operator-selected. Existing benchmark inputs and accepted result files are unchanged; new temporary-path tests mock every model invocation. |
+| Result and checks | The public candidate passed all 42 MCP consumer cases with the locked SDK and a separately installed public EvidPort candidate, including real stdio round trips. The real-paper engineering acceptance in EvidPort covered nine distinct papers, including three manual re-imports: exact unreviewed quotations stayed review-required, while fabricated quotations and wrong source hashes were rejected. This public candidate passed all 35 offline benchmark regression cases, including eight special-character path and cleanup cases, plus 19 public-tree guard cases, the public-tree scan, Ruff, type checking (17 source files), dependency compatibility, lock consistency and the strict documentation build. The guard skips only generated Markdown links; MkDocs checks those links and private-file/path checks remain enabled. The original complete candidate suite passed 611/611 tests, with zero failures, errors, skips or test warnings and 96.20% branch-aware coverage (95% minimum). Eight later portability cases, 19 publication-tree cases and seven package cases passed separately, covering 645 distinct cases in total. Exact-revision remote CI remains a separate check. |
+| Package cleanup | An initial local source archive included 103 private execution-file members despite Git ignore rules. No affected package was uploaded. Explicit build exclusions removed them; the new archive gate rejects the original source archive and accepts both corrected archives. Git-tree and archive checks are separate CI gates. |
+| Evidence locations | [MCP guide](docs/EVIDENCE_MCP.md), [library contract](docs/EVIDENCE_LIBRARY.md), [synthetic tests](tests/test_evidence_mcp.py), [sanitized real-paper acceptance](https://github.com/NingyuSUN/evidport/blob/main/evaluation/mcp-local-20261111.json) and [Actions](https://github.com/NingyuSUN/bioai-evidence-validator/actions). Private runtime receipts are not published. Cloud delivery is not applicable. |
+| Git / synchronization | Prepared on `codex/local-mcp-public`; publication and exact-revision CI are still pending at this record. No private development history is imported or rewritten. Query this index's commit through Git rather than embedding its own future hash. |
+| Limits | Known-positive retrieval and synthetic boundary tests establish engineering behavior, not full transcription accuracy, scientific support, clinical validity or a hallucination rate. Historical metadata was reused for the real-paper check; no new live-network acquisition was tested. Human review remains separate. |
+
+The historical entries below retain the evidence for earlier public revisions.
+
+## Historical implementation: EvidPort integration on main — 2026-11-11
 
 This revision merges the reviewed public EvidPort integration into `main`, preserving
 its four commits. [PR #46](https://github.com/NingyuSUN/bioai-evidence-validator/pull/46)
