@@ -23,6 +23,7 @@ import json
 import re
 import time
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -327,7 +328,9 @@ def _metadata(key: str, resolver: str, fetch: Callable[[str], bytes]) -> tuple[s
         urls.append(url)
         try:
             return "crossref", fetch(url), urls
-        except OSError:  # includes HTTP 404 for an unknown DOI
+        except OSError as exc:  # includes HTTP 404 for an unknown DOI
+            if isinstance(exc, urllib.error.HTTPError):
+                exc.close()
             return "crossref", b'{"message": null}', urls
     return "europepmc", data, urls
 
@@ -349,8 +352,10 @@ def resolve(key: str, directory: Path, fetch: Callable[[str], bytes], now: str, 
             if jats_open(text):  # PMC returns only the front matter of articles outside the open-access subset
                 entry.update(fulltext_sha256=_save(directory, text, ".xml", compress), license=jats_license(text))
                 urls.append(url)
-        except (OSError, ET.ParseError):
-            pass  # stays unverifiable (BEV015), never silently admitted
+        except (OSError, ET.ParseError) as exc:
+            if isinstance(exc, urllib.error.HTTPError):
+                exc.close()
+            # stays unverifiable (BEV015), never silently admitted
     if not entry["fulltext_sha256"] and meta.get("found") and meta.get("pmid"):
         url = _eutils("efetch", db="pubmed", id=str(meta["pmid"]), retmode="xml")
         try:
@@ -358,8 +363,9 @@ def resolve(key: str, directory: Path, fetch: Callable[[str], bytes], now: str, 
             if pubmed_abstract(text)[1:]:  # a title alone is not something to quote
                 entry["abstract_sha256"] = _save(directory, text, ".xml", compress)
                 urls.append(url)
-        except (OSError, ET.ParseError):
-            pass
+        except (OSError, ET.ParseError) as exc:
+            if isinstance(exc, urllib.error.HTTPError):
+                exc.close()
     return entry
 
 

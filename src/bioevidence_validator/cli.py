@@ -29,6 +29,8 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("--snapshot-dir", type=Path,
                           help="Directory of source snapshots named by SHA-256; recompute source hashes from them, "
                                "and check cited publications if it holds a literature.json from `ground`")
+    validate.add_argument("--evidence-library", type=Path,
+                          help="Independent evidence library; exact original/version/quote and human original-page review")
     validate.add_argument("--ontology", type=Path, action="append", default=[],
                           help="A pinned OBO release; check the ontology terms the record cites (repeatable)")
     validate.add_argument("--term-root", action="append", default=[], metavar="KIND=CURIE",
@@ -200,14 +202,21 @@ def _run(args) -> int:
     protected = [args.input, args.schema, selected_profile, default_schema_path()]
     if args.output and args.output.resolve() in {p.resolve() for p in protected}:
         raise ValueError("Output must not overwrite an input, schema, or profile")
+    if args.evidence_library and args.output and args.output.resolve().is_relative_to(args.evidence_library.resolve()):
+        raise ValueError("Validation output must be outside the read-only evidence library")
     record = json.loads(args.input.read_text(encoding="utf-8"),
                         object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
     _check_depth(record)
     grounders: list = []
+    library_grounder = None
     if args.snapshot_dir:
         grounders.append(SourceBytesGrounder(SnapshotStore.from_directory(args.snapshot_dir)))
         if (args.snapshot_dir / CATALOG).exists():
             grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
+    if args.evidence_library:
+        from .evidence_library import EvidenceLibraryGrounder
+        library_grounder = EvidenceLibraryGrounder(args.evidence_library)
+        grounders.append(library_grounder)
     if args.ontology:
         roots: dict[str, list[str]] = {}
         for rule in args.term_root:
@@ -222,6 +231,9 @@ def _run(args) -> int:
     if args.assembly_report:
         grounders.append(VariantGrounder(Assemblies.from_reports(path.read_bytes() for path in args.assembly_report)))
     report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
+    if library_grounder is not None:
+        report["evidence_library"] = {"contract_version": 1, "checks": library_grounder.last_checks,
+                                      "scientifically_verified": False}
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:
         _write_json(args.output, report)

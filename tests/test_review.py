@@ -181,7 +181,8 @@ def test_adjudication_format_is_strict(study, change, message):
     sheet = review.adjudication_sheet(rows)[0]
     good = fill_adjudications(tmp_path / "good.csv", [dict(r) for r in sheet])
     review.load_adjudications(good, rows)
-    filled = list(csv.DictReader(good.open(encoding="utf-8")))
+    with good.open(encoding="utf-8") as handle:
+        filled = list(csv.DictReader(handle))
     bad = write(tmp_path / "bad.csv", [{**filled[0], **change}, filled[1]], review.ADJUDICATION_COLUMNS)
     with pytest.raises(ValueError, match=message):
         review.load_adjudications(bad, rows)
@@ -206,7 +207,8 @@ def test_resolution_needs_enough_reviews_and_real_cases(study):
 
 def test_prediction_format_and_split_are_checked(study):
     tmp_path, annotations, predictions = study
-    rows = list(csv.DictReader(predictions.open(encoding="utf-8")))
+    with predictions.open(encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
     columns = review.PREDICTION_COLUMNS + ["subset"]
     with pytest.raises(ValueError, match="duplicate prediction"):
         review.load_predictions(write(tmp_path / "dup.csv", [rows[0], rows[0]], columns))

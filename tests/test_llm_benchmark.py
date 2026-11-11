@@ -4,6 +4,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -168,6 +169,43 @@ def test_semantic_results_replay_byte_for_byte(tmp_path):
     semantic.score("pilot", None, tmp_path)
     for name in ("rows.jsonl", "summary.json", "summary.md"):
         assert (tmp_path / name).read_bytes() == (committed / name).read_bytes(), name
+
+
+@pytest.mark.parametrize("failure", [None, "profile_write", "validator"])
+def test_semantic_temporary_profile_is_closed_on_success_and_failure(monkeypatch, failure):
+    semantic = load("semantic_eval")
+    temporary_directory = semantic.tempfile.TemporaryDirectory
+    write_text = Path.write_text
+    directories = []
+
+    def tracked_directory(*args, **kwargs):
+        folder = temporary_directory(*args, **kwargs)
+        directories.append(Path(folder.name))
+        return folder
+
+    def checked_write(path, *args, **kwargs):
+        if failure == "profile_write" and path.name == "reviewed.yaml":
+            raise OSError("synthetic profile write failure")
+        return write_text(path, *args, **kwargs)
+
+    def validator(*, profile, grounders):
+        assert profile.is_file()
+        if failure == "validator":
+            raise ValueError("synthetic validator construction failure")
+        return SimpleNamespace(profile_text=profile.read_text(encoding="utf-8"))
+
+    monkeypatch.setattr(semantic.tempfile, "TemporaryDirectory", tracked_directory)
+    monkeypatch.setattr(Path, "write_text", checked_write)
+    monkeypatch.setattr(semantic.score_literature, "Checker", lambda: SimpleNamespace(
+        validator=object(), corpus=SimpleNamespace(store=None, grounder=lambda: None)))
+    monkeypatch.setattr(semantic, "RecordValidator", validator)
+    if failure:
+        with pytest.raises((OSError, ValueError), match="synthetic"):
+            semantic.Pipeline()
+    else:
+        checker = semantic.Pipeline()
+        assert "require_independent_review: true" in checker.validators[True, False].profile_text
+    assert len(directories) == 1 and not directories[0].exists()
 
 
 def test_claims_scenario_replays_from_committed_verification(tmp_path):

@@ -1,10 +1,12 @@
 name: Repository checks
 on:
   push:
-    branches: [main]
+    branches: [main, codex/evidence-library-integration-public]
   pull_request:
 permissions:
   contents: read
+env:
+  EVIDENCE_LIBRARY_COMMIT: a6f26ff29c966109e707cce180794731a7af9e8a
 jobs:
   lint:
     timeout-minutes: 10
@@ -42,6 +44,7 @@ jobs:
   verify:
     timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -64,12 +67,31 @@ jobs:
         run: python -m pip install uv==0.12.17
       - name: Install locked project
         run: uv sync --frozen --extra dev --python ${{ matrix.python }}
+      # Publish the evidence repository and this exact commit before this branch.
+      - name: Require an immutable evidence library commit
+        run: python -c "import os, re; assert re.fullmatch(r'[0-9a-f]{40}', os.environ['EVIDENCE_LIBRARY_COMMIT']), 'Pin the published evidence library commit before enabling this workflow'"
+      - name: Check out the pinned independent evidence library
+        uses: actions/checkout@v4
+        with:
+          repository: NingyuSUN/evidport
+          ref: ${{ env.EVIDENCE_LIBRARY_COMMIT }}
+          path: artifacts/evidence-library-ci
+          persist-credentials: false
+      - name: Install the independent library and its locked PDF test dependencies
+        shell: bash
+        run: |
+          uv export --project artifacts/evidence-library-ci --frozen --extra pdf --no-dev --no-emit-project --output-file artifacts/evidence-library-pdf-requirements.txt
+          uv pip install --no-deps --require-hashes --requirements artifacts/evidence-library-pdf-requirements.txt
+          uv pip install --no-deps ./artifacts/evidence-library-ci
+          uv pip check
+      - name: Require the optional integration dependencies
+        run: uv run --frozen --no-sync python -c "import evidence_database.store, evidence_database.acquisition, evidence_database.packets, pymupdf"
       - name: Run tests with coverage (minimum in pyproject.toml)
-        run: uv run --frozen pytest --cov --cov-report=term
+        run: uv run --frozen --no-sync pytest --cov --cov-report=term -W error::ResourceWarning -W error::pytest.PytestUnraisableExceptionWarning -W error::pytest.PytestUnhandledThreadExceptionWarning
       - name: Coverage summary
         if: always()
         shell: bash
-        run: uv run --frozen coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY" || true
+        run: uv run --frozen --no-sync coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY" || true
       - name: Build distributable
         run: uv build
       - name: Verify installed wheel and CLI outside editable source

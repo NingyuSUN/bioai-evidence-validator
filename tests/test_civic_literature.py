@@ -2,6 +2,7 @@
 import gzip
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -72,11 +73,15 @@ def test_quote_is_a_real_sentence(corpus):
     assert 12 <= len(sentence.split()) <= 60
 
 
-def test_controls_replay_the_committed_results(tmp_path):
+def test_controls_replay_the_committed_results(tmp_path, monkeypatch):
+    # Windows pipes can inherit a legacy code page even when the parent decodes UTF-8.
+    monkeypatch.setenv("PYTHONIOENCODING", "cp1252")
     output = tmp_path / "run"
     result = subprocess.run([sys.executable, str(EXAMPLE / "run.py"), "--output", str(output)],
-                            capture_output=True, text=True, encoding="utf-8", cwd=tmp_path)
+                            capture_output=True, text=True, encoding="utf-8", cwd=tmp_path,
+                            env={**os.environ, "PYTHONIOENCODING": "utf-8"})
     assert result.returncode == 0, result.stderr
+    assert result.stdout == (EXAMPLE / "results/summary.md").read_text(encoding="utf-8") + "\n"
     for expected in (EXAMPLE / "results").iterdir():
         assert expected.read_bytes() == (output / expected.name).read_bytes(), expected.name
     summary = json.loads((output / "summary.json").read_text(encoding="utf-8"))
