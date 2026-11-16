@@ -21,8 +21,7 @@ jobs:
       - name: Install locked project
         run: uv sync --frozen --extra dev
       - name: Check the public tree for private content
-        # Generated documentation links are checked by the strict MkDocs build.
-        run: python tools/check_public_tree.py --skip-markdown-links
+        run: python tools/check_public_tree.py
       - name: Lint
         run: uv run --frozen ruff check --output-format github .
       - name: Type-check

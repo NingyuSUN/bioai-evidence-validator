@@ -183,7 +183,7 @@ Fed back in the loop, its findings turned 15 correct answers into wrong ones. Co
   versions are the same, and each episode records its install. One Gemini 3.8 Flash extraction failed twice and
   is counted as failed.
 - **The extraction pilot ran with the first harness.** It led to four changes before the freeze, listed in the
-  [extraction case](benchmarks/civic-extraction.md).
+  [extraction case](../examples/civic_extraction/README.md).
 - **Two planned evaluations have not been done.** The literature held-out set was built but not run, and no expert
   review or audit of admitted records has been done (#23). The audit tooling is in place (#24).
 
@@ -217,8 +217,8 @@ Proposed acceptance criteria for the next evaluation, to be fixed before it is r
 
 ## Sources
 
-- [LLM benchmark](benchmarks/llm-benchmark.md): literature pilots, scenarios 1–2b, semantic checks, scenario 3.
-- [Single-cell case](benchmarks/singlecell.md), [ClinVar case](benchmarks/clinvar.md),
-  [VBO case](benchmarks/vbo-canine.md), [CIViC literature case](benchmarks/civic-literature.md).
+- [LLM benchmark](../evaluation/llm_benchmark/README.md): literature pilots, scenarios 1–2b, semantic checks, scenario 3.
+- [Single-cell case](../examples/singlecell_celltype/README.md), [ClinVar case](../examples/clinvar_germline/README.md),
+  [VBO case](../examples/vbo_canine/README.md), [CIViC literature case](../examples/civic_literature/README.md).
 - [Engineering contract](ENGINEERING.md): rule codes, grounders, the feedback loop, reproduction.
 - [AI validation roadmap](AI_VALIDATION_ROADMAP.md) and [error taxonomy](ERROR_TAXONOMY.md).

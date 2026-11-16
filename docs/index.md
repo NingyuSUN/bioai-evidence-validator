@@ -28,11 +28,11 @@ Try it without installing anything:
 
 | Experiment | The model alone | With bioevidence |
 |---|---|---|
-| **[Single-cell cell-type annotation](benchmarks/singlecell.md)**: 6 models × 46 held-out clusters, protocol frozen before the run | 62 of 276 answers (22%) carry a Cell Ontology ID that does not match its label | No such answer admitted. In the feedback loop, answers compatible with the authors' term rise from **176 to 205**, wrong or invalid fall from 36% of answers to 20% of those admitted, and 8% go to a person |
-| **[Claim extraction from full papers](benchmarks/civic-extraction.md)**: 6 models × 40 openly licensed papers, no claim given in advance, protocol frozen before the run | 198 of 714 extracted claims (28%) carry a wrong identifier, name or quote: from 3% for Claude Opus 5.5 to 48% for Claude Haiku 4.5 | None admitted. With feedback, **663** claims are admitted instead of 489, covering 77 of the 87 items CIViC curated from these papers |
-| **[Literature claims without a source](benchmarks/llm-benchmark.md)**: 6 models × 18 CIViC claims | 38 of 50 answers cite an invalid paper or quote; 28 of 66 citations are real PMIDs of unrelated papers | 3 answers admitted, all with verified citations and the right decision |
-| **[Literature agent with PubMed tools](benchmarks/llm-benchmark.md)**: 108 episodes | 8 of 77 first answers misquote their papers | 0 of 73 admitted answers carry an invalid citation; feedback rescues answers a plain gate would lose |
-| **[ClinVar germline classifications](benchmarks/clinvar.md)**: 5,026 variants, 2023 → 2026 | Schema-only checks admit 160 of 160 injected faults | 0 of 160 admitted; variants held back for a dissenting submission were 4–5× more likely to be reclassified three years later |
+| **[Single-cell cell-type annotation](../examples/singlecell_celltype/README.md)**: 6 models × 46 held-out clusters, protocol frozen before the run | 62 of 276 answers (22%) carry a Cell Ontology ID that does not match its label | No such answer admitted. In the feedback loop, answers compatible with the authors' term rise from **176 to 205**, wrong or invalid fall from 36% of answers to 20% of those admitted, and 8% go to a person |
+| **[Claim extraction from full papers](../examples/civic_extraction/README.md)**: 6 models × 40 openly licensed papers, no claim given in advance, protocol frozen before the run | 198 of 714 extracted claims (28%) carry a wrong identifier, name or quote: from 3% for Claude Opus 5.5 to 48% for Claude Haiku 4.5 | None admitted. With feedback, **663** claims are admitted instead of 489, covering 77 of the 87 items CIViC curated from these papers |
+| **[Literature claims without a source](../evaluation/llm_benchmark/README.md)**: 6 models × 18 CIViC claims | 38 of 50 answers cite an invalid paper or quote; 28 of 66 citations are real PMIDs of unrelated papers | 3 answers admitted, all with verified citations and the right decision |
+| **[Literature agent with PubMed tools](../evaluation/llm_benchmark/README.md)**: 108 episodes | 8 of 77 first answers misquote their papers | 0 of 73 admitted answers carry an invalid citation; feedback rescues answers a plain gate would lose |
+| **[ClinVar germline classifications](../examples/clinvar_germline/README.md)**: 5,026 variants, 2023 → 2026 | Schema-only checks admit 160 of 160 injected faults | 0 of 160 admitted; variants held back for a dissenting submission were 4–5× more likely to be reclassified three years later |
 
 What it cannot do, also measured:
 - **Semantic errors with valid identifiers and real evidence still get through.** For example, a memory T
@@ -96,7 +96,7 @@ Across all 276 held-out annotations, stage by stage:
 
 ![Funnel for the single-cell held-out clusters: of 276 first answers, 198 pass every check, 63 have a wrong identifier or marker and are sent back, 15 contradict themselves and go to a person; after feedback 255 are admitted and 21 go to a person; of the admitted, 205 agree with the authors' term and 50 disagree; the expert audit of admitted records is not yet run](assets/ai_validation_funnel.svg)
 
-The same chain on claims that six models extracted on their own from 40 full papers ([case](benchmarks/civic-extraction.md)):
+The same chain on claims that six models extracted on their own from 40 full papers ([case](../examples/civic_extraction/README.md)):
 
 ![Funnel for claims extracted from 40 papers by six models: of 714 first versions, 489 pass every check, 205 go back with the reason and 20 go to a person; after feedback 663 are admitted, none with an identifier or quote error; an independent model review accepts 628 and sends 35 to a person, and 437 of the accepted match a CIViC item; expert review is not yet run](assets/ai_extraction_funnel.svg)
 
@@ -137,16 +137,16 @@ result rest on that alone (`BEV008`). The manually curated version of the same c
 
 | I want to… | Read |
 |---|---|
-| See the AI benchmarks | [LLM benchmark](benchmarks/llm-benchmark.md), [single-cell annotation](benchmarks/singlecell.md) |
+| See the AI benchmarks | [LLM benchmark](../evaluation/llm_benchmark/README.md), [single-cell annotation](../examples/singlecell_celltype/README.md) |
 | Judge whether it is fit for a use | [Validation dossier](VALIDATION_DOSSIER.md) |
 | Write records quickly or from LLM output | [Drafts](DRAFTS.md) |
-| Encode my domain's admission policy | [Profiles](PROFILES.md), [community profiles](community-profiles.md) |
+| Encode my domain's admission policy | [Profiles](PROFILES.md), [community profiles](../community/profiles/README.md) |
 | Check records in pull requests | [GitHub Action](https://github.com/NingyuSUN/bioai-evidence-validator#quickstart) |
 | Know exactly what is checked | [Engineering contract](ENGINEERING.md) |
 | Map records to ECO, Biolink or VA-Spec | [Standards alignment](STANDARDS.md) |
 | Evaluate on my own project | [Building a gold standard](GOLD_STANDARD.md) |
 | See what is next | [AI validation roadmap](AI_VALIDATION_ROADMAP.md) |
-| Contribute | [Contributing](contributing.md) |
+| Contribute | [Contributing](../CONTRIBUTING.md) |
 
 Not for clinical use. Admission means a record meets the selected profile, not that a biological claim is
 true.
