@@ -137,7 +137,13 @@ def _compare(received: dict, expected: dict, *, label: str) -> None:
             raise _ProtocolError(f"MCP {label} disagrees with the local evidence library: {key}")
 
 
-def _compare_item(retrieved: dict, checked: dict, original: dict, local_check: dict) -> None:
+def _compare_item(retrieved: dict, checked: dict, original: dict, local_check: dict, *,
+                  accept_independent_reading: bool = False) -> bool:
+    """Compare the server's answers with the local library.
+
+    Returns True when the server admitted the quotation by independent reading and this run
+    does not accept that route: the local result (not admitted) stands and nothing is taken on trust.
+    """
     source, block = original["source"], original["block"]
     native_locator = block["locator"]
     locator = {key: native_locator[key] for key in ("page", "pages", "bbox", "unlocated") if key in native_locator}
@@ -165,8 +171,18 @@ def _compare_item(retrieved: dict, checked: dict, original: dict, local_check: d
         raise _ProtocolError("MCP retrieval omitted the structured source identity")
     _compare(nested, {key: source[key] for key in ("source_id", "sha256", "document_id", "role")}, label="source")
     _compare(checked, binding, label="quote check")
-    _compare(checked, {key: local_check[key] for key in (
-        "quote", "quote_matches", "admitted", "reason", "review_status", "review_id")}, label="quote check")
+    # A server whose project admits by independent reading does not contradict a run that requires a human
+    # review: only this exact, labelled case is set aside, and the quotation stays unadmitted here.
+    declined = (not accept_independent_reading and checked.get("admitted") is True
+                and checked.get("admission_route") == "independent_reading"
+                and checked.get("reason") == "independent_reading_agreement"
+                and local_check["admitted"] is False and local_check["reason"] == "pending_review")
+    keys = ("quote", "quote_matches", "review_status", "review_id") + (() if declined else ("admitted", "reason"))
+    _compare(checked, {key: local_check[key] for key in keys}, label="quote check")
+    if local_check.get("admission_route") == "independent_reading":
+        # The server must name the same route; an unlabelled admission is never taken as human review.
+        _compare(checked, {"admission_route": "independent_reading"}, label="quote check")
+    return declined
 
 
 class _BridgeGrounder:
@@ -181,13 +197,16 @@ class _BridgeGrounder:
 
 async def validate_via_mcp(record: Any, *, command: str, args: list[str], library_path: Path,
                            cwd: Path | None = None, env: dict | None = None, timeout: float = 60,
-                           profile: str | Path = "literature-claim", schema_path: Path | None = None) -> dict:
+                           profile: str | Path = "literature-claim", schema_path: Path | None = None,
+                           accept_independent_reading: bool = False) -> dict:
     """Read exact citations over stdio MCP, then validate against the local originals.
 
     Connections/configuration are supplied by the local operator. The remote tool
     response cannot replace local source hashing, publication identity or human review.
     Every transport/protocol disagreement blocks admission for the complete record.
     """
+    if type(accept_independent_reading) is not bool:
+        raise ValueError("accept_independent_reading must be a boolean")
     encoded = json.dumps(record, allow_nan=False).encode("utf-8")
     if len(encoded) > MAX_RECORD_BYTES:
         raise ValueError("Record exceeds the 8 MiB local bridge limit")
@@ -196,7 +215,9 @@ async def validate_via_mcp(record: Any, *, command: str, args: list[str], librar
     preflight = validator.validate(record)
     metadata: dict = {"contract_version": 1, "transport": "stdio", "status": "not_attempted",
                       "checks": [], "scientifically_verified": False,
-                      "admission_authority": "local-source-and-original-page-review"}
+                      "admission_authority": ("local-source-and-original-page-review-or-independent-reading"
+                                              if accept_independent_reading else
+                                              "local-source-and-original-page-review")}
     if any(item["severity"] == "error" for item in preflight["findings"]):
         return {**preflight, "evidence_mcp": {**metadata, "status": "invalid_record"}}
     if type(timeout) not in (int, float) or not math.isfinite(timeout) or not 0 < timeout <= 300:
@@ -207,7 +228,8 @@ async def validate_via_mcp(record: Any, *, command: str, args: list[str], librar
     if len(record["evidence_items"]) > MAX_ITEMS:
         errors.append(("BEV014", "Record exceeds the 100-item local MCP bridge limit", "$.evidence_items"))
     try:
-        local = EvidenceLibraryGrounder(Path(library_path))
+        route = {"accept_independent_reading": True} if accept_independent_reading else {}
+        local = EvidenceLibraryGrounder(Path(library_path), **route)
     except (ValueError, OSError) as exc:
         errors.append(("BEV014", "Local evidence library is unavailable: " + str(exc), "$.evidence_items"))
     if local is not None and not errors:
@@ -229,8 +251,9 @@ async def validate_via_mcp(record: Any, *, command: str, args: list[str], librar
                             checked_cache[key] = _payload(await client.call_tool(
                                 CHECK_TOOL, {"citation": citation, "quote": quote}))
                         original = local.store.get(citation)
-                        checked = local.store.check(citation, quote, require_review=True)
-                        _compare_item(retrieved_cache[citation], checked_cache[key], original, checked)
+                        checked = local.check_quote(citation, quote)
+                        declined = _compare_item(retrieved_cache[citation], checked_cache[key], original, checked,
+                                                 accept_independent_reading=accept_independent_reading)
                         metadata["checks"].append({"evidence_item_id": item["id"], "citation": citation,
                             "source_sha256": original["source"]["sha256"], "conversion_id": original["conversion_id"],
                             "locator": original["block"]["locator"], "mcp_matches_local": True,
@@ -238,7 +261,9 @@ async def validate_via_mcp(record: Any, *, command: str, args: list[str], librar
                             "conversion_issues": original.get("conversion_issues", []),
                             "conversion_status": original.get("conversion_status"),
                             "quote_matches": checked["quote_matches"], "admitted": checked["admitted"],
-                            "reason": checked["reason"], "scientifically_verified": False})
+                            "reason": checked["reason"], "admission_route": checked.get("admission_route"),
+                            **({"server_route_not_accepted": "independent_reading"} if declined else {}),
+                            "scientifically_verified": False})
                     except _ProtocolError as exc:
                         errors.append(("BEV017", str(exc), path))
                     except (ValueError, OSError, KeyError, TypeError) as exc:
@@ -256,6 +281,7 @@ async def validate_via_mcp(record: Any, *, command: str, args: list[str], librar
     report["evidence_mcp"] = metadata
     if local is not None:
         report["evidence_library"] = {"contract_version": 1, "checks": local.last_checks,
+                                      "independent_reading_accepted": bool(accept_independent_reading),
                                       "scientifically_verified": False}
     return report
 
@@ -269,6 +295,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--schema", type=Path)
     parser.add_argument("--timeout", type=float, default=60)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--accept-independent-reading", action="store_true",
+                        help="Also accept a quotation confirmed by an independent OCR reading; the server's "
+                             "project must enable the same route")
     args = parser.parse_args(argv)
     protected = [args.server_config, args.record, args.schema or default_schema_path(), profile_path(args.profile)]
     if args.output is not None:
@@ -280,7 +309,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         config = load_server_config(args.server_config)
         report = asyncio.run(validate_via_mcp(_read_json(args.record), library_path=args.evidence_library,
-            timeout=args.timeout, profile=args.profile, schema_path=args.schema, **config))
+            timeout=args.timeout, profile=args.profile, schema_path=args.schema,
+            accept_independent_reading=args.accept_independent_reading, **config))
     except (OSError, ValueError, RecursionError) as exc:
         parser.error(str(exc))
     rendered = json.dumps(report, ensure_ascii=False, indent=2) + "\n"

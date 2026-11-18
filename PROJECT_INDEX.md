@@ -1,5 +1,21 @@
 # BioAI Evidence Validator — project index
 
+## Independent-reading admission route — 2026-11-18
+
+Branch `independent-reading-route-public`, cut from public main `707099e`. Not merged; remote CI for this
+branch has not been run at the time of writing.
+
+| Field | Scope and evidence |
+|---|---|
+| Date | 2026-11-18, Asia/Tokyo. |
+| Purpose | Reduce the number of quotations that need a person while keeping transcription checks: accept, on request, a quotation that EvidPort admits because the PDF text layer and an independent OCR reading of the same page region agree. |
+| Inputs and code | Public main baseline above. `evidence_library.py`, `evidence_mcp.py` and `cli.py` gain the opt-in `--accept-independent-reading`; synthetic tests only. The independent EvidPort dependency is pinned to `f11526816f3f74929563f3422a866e4c27459ffd` in CI and the installation guides; that revision is on the EvidPort branch `independent-reading-verification` and must stay reachable (merge it with a regular merge, or move the pin). |
+| Result and checks | With the option, the validator recomputes admission from the read-only library and reports `admission_route` (`human_review` or `independent_reading`) per check; a recorded rejection or revocation still blocks. Without it, behaviour is as before, except that a quotation the MCP server admits by independent reading is `review_required` (BEV015, marked `server_route_not_accepted`) instead of a protocol disagreement. A server relabelling the route as human review, or claiming a quotation the library does not hold, is still rejected. Local test, lint and type-check results are in the commit that adds this section. |
+| Evidence locations | [Library contract](docs/EVIDENCE_LIBRARY.md), [library tests](tests/test_evidence_library.py), [MCP tests](tests/test_evidence_mcp.py); EvidPort's [machine verification notes](https://github.com/NingyuSUN/evidport/blob/independent-reading-verification/docs/MACHINE_VERIFICATION.md) describe the measurement behind the route. |
+| Limits | Agreement between two readings settles transcription only, and two readings can share an error; it says nothing about context, entailment or scientific support. The accuracy check reported by EvidPort covers 12 papers and its page comparisons were made by an AI assistant, not a human reviewer. The route is off by default. |
+
+The historical entries below retain the evidence for earlier public revisions.
+
 ## Local EvidPort MCP consumer on main — 2026-11-11
 
 This revision merges [PR #47](https://github.com/NingyuSUN/bioai-evidence-validator/pull/47),

@@ -70,11 +70,20 @@ def _pinned_metadata(literature: dict) -> list[dict]:
 
 
 class EvidenceLibraryGrounder:
-    """Exact source/version/quote grounding, with a mandatory original-page review gate."""
+    """Exact source/version/quote grounding behind a transcription gate.
+
+    The gate is a recorded human original-page review. With ``accept_independent_reading``
+    it is also passed when the library reports that the text layer and an independent OCR
+    reading of the same page region agree on the exact quotation. That route is recomputed
+    here from the read-only library, reported as such, and never presented as human review.
+    """
 
     name = "evidence-library"
 
-    def __init__(self, directory: Path):
+    def __init__(self, directory: Path, *, accept_independent_reading: bool = False):
+        if type(accept_independent_reading) is not bool:
+            raise ValueError("accept_independent_reading must be a boolean")
+        self.accept_independent_reading = accept_independent_reading
         try:
             store_type = importlib.import_module("evidence_database.store").Store
         except ImportError as exc:
@@ -86,6 +95,19 @@ class EvidenceLibraryGrounder:
             raise ValueError("The installed evidence library must support Store(..., read_only=True); "
                              "update the independent package") from exc
         self.last_checks: list[dict] = []
+
+    def check_quote(self, citation: str, quote: str) -> dict:
+        """The library's quotation check under this grounder's admission setting; fails closed."""
+        if not self.accept_independent_reading:
+            return self.store.check(citation, quote, require_review=True)
+        try:
+            checked = self.store.check(citation, quote, require_review=True, accept_independent_reading=True)
+        except TypeError as exc:
+            raise ValueError("The installed evidence library does not support independent-reading admission; "
+                             "update the independent package or omit --accept-independent-reading") from exc
+        if checked.get("admitted") and checked.get("admission_route") not in ("human_review", "independent_reading"):
+            raise ValueError("Evidence library admitted a quotation without naming its admission route")
+        return checked
 
     def _publication(self, item: dict, supplied: dict, receipts: list[dict]) -> tuple[str, str] | None:
         publications = []
@@ -173,13 +195,20 @@ class EvidenceLibraryGrounder:
                            or identifier(source.get("uri") or "") is not None)
             if publication and (problem := self._publication(original, source, receipts)):
                 return {**result, "rule": problem[0], "reason": problem[1]}
-            checked = self.store.check(citation, quote, require_review=True)
+            checked = self.check_quote(citation, quote)
             result.update(checked)
             if not checked["quote_matches"]:
                 return {**result, "rule": "BEV017", "reason": "Exact quotation is not present in the specified block."}
             if not checked["admitted"]:
+                blocking = (checked.get("machine_verification") or {}).get("blocking") or []
+                detail = checked["reason"] + (" (machine verification: " + ", ".join(blocking) + ")"
+                                              if self.accept_independent_reading and blocking else "")
                 return {**result, "rule": "BEV015", "reason": "Original-page review for this exact quote is required: "
-                        + checked["reason"]}
+                        + detail}
+            if checked.get("admission_route") == "independent_reading":
+                return {**result, "verified": True, "rule": None,
+                        "reason": "Exact source-bound quotation is confirmed by an independent OCR reading of the "
+                                  "original page region; no person reviewed it; scientific support is not checked."}
             return {**result, "verified": True, "rule": None,
                     "reason": "Exact source-bound quotation passed original-page review; scientific support is not checked."}
         except (OSError, ValueError, KeyError, TypeError, AttributeError, sqlite3.Error) as exc:

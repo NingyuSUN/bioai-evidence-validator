@@ -358,3 +358,103 @@ def test_no_flag_preserves_old_report_shape(capsys):
                      "--profile", "literature-claim"]) == 0
     report = json.loads(capsys.readouterr().out)
     assert "grounding" not in report and "evidence_library" not in report
+
+
+def machine_conversion(fixture, *, reading=None, version="independent-reading"):
+    """A located paragraph with a recorded second reading, as the library's baseline conversion stores it."""
+    pytest.importorskip("evidence_database.verification")
+    text = QUOTE + "\n" + OTHER
+    converted = fixture["store"].add_conversion(
+        fixture["source"]["source_id"], parser="synthetic_fixture", parser_version=version,
+        blocks=[{"id": "b1", "kind": "paragraph", "text": text, "locator": {"page": 1, "bbox": [30, 30, 550, 200]},
+                 "superscripts": [], "symbol_font_spans": [],
+                 "independent_reading": {"text": text if reading is None else reading,
+                                                             "engine": "synthetic", "engine_version": "0"}}])
+    return record_for(fixture["source"], converted["citations"][0]), converted["citations"][0]
+
+
+def test_independent_reading_is_off_by_default_and_named_when_enabled(fixture):
+    record, _ = machine_conversion(fixture)
+    strict = EvidenceLibraryGrounder(fixture["store"].root)
+    assert validate_record(record, profile="literature-claim", grounders=[strict])["overall_status"] == "review_required"
+    assert strict.last_checks[0]["admitted"] is False
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    report = validate_record(record, profile="literature-claim", grounders=[enabled])
+    assert report["overall_status"] == "admitted"
+    receipt = enabled.last_checks[0]
+    assert receipt["verified"] is True and receipt["admission_route"] == "independent_reading"
+    assert receipt["review_id"] is None and receipt["scientifically_verified"] is False
+    assert "no person reviewed it" in receipt["reason"]
+    assert fixture["store"].audit()["counts"]["reviews"] == 0
+    with pytest.raises(ValueError):
+        EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading="yes")
+
+
+def test_differing_reading_stays_with_a_person_and_says_why(fixture):
+    record, _ = machine_conversion(fixture, reading=(QUOTE + "\n" + OTHER).replace("1.25", "1.26"))
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    report = validate_record(record, profile="literature-claim", grounders=[enabled])
+    assert report["overall_status"] == "review_required"
+    assert {item["rule_id"] for item in report["findings"]} == {"BEV015"}
+    assert "independent_reading_differs" in enabled.last_checks[0]["reason"]
+
+
+def test_block_without_a_second_reading_is_not_machine_admitted(fixture):
+    pytest.importorskip("evidence_database.verification")
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    report = validate_record(fixture["record"], profile="literature-claim", grounders=[enabled])
+    assert report["overall_status"] == "review_required" and enabled.last_checks[0]["admitted"] is False
+
+
+def test_recorded_rejection_overrides_independent_reading(fixture):
+    record, citation = machine_conversion(fixture)
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    assert enabled.verified_items(record)
+    fixture["store"].review(citation, QUOTE, decision="reject", reviewer="SYNTHETIC TEST FIXTURE",
+                            reviewer_kind="human", note="Synthetic rejection")
+    assert enabled.verified_items(record) == set()
+    assert {item.rule_id for item in enabled.check(record)} == {"BEV015"}
+
+
+def test_human_review_still_admits_when_the_route_is_enabled(fixture):
+    pytest.importorskip("evidence_database.verification")
+    approve(fixture)
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    assert enabled.verified_items(fixture["record"])
+    assert enabled.last_checks[0]["admission_route"] == "human_review"
+
+
+def test_library_without_the_route_fails_closed(fixture, monkeypatch):
+    record, _ = machine_conversion(fixture)
+    enabled = EvidenceLibraryGrounder(fixture["store"].root, accept_independent_reading=True)
+    current = enabled.store.check
+
+    def older(citation, quote, *, require_review=True):
+        return current(citation, quote, require_review=require_review)
+
+    monkeypatch.setattr(enabled.store, "check", older)
+    assert {item.rule_id for item in enabled.check(record)} == {"BEV014"}
+    assert "does not support independent-reading admission" in enabled.last_checks[0]["reason"]
+
+    def unlabelled(citation, quote, **options):
+        return {**current(citation, quote, **options), "admission_route": None}
+
+    monkeypatch.setattr(enabled.store, "check", unlabelled)
+    assert {item.rule_id for item in enabled.check(record)} == {"BEV014"}
+
+
+def test_cli_flag_enables_the_route_and_reports_it(fixture, capsys):
+    record, citation = machine_conversion(fixture)
+    path = fixture["tmp"] / "machine-record.json"
+    path.write_text(json.dumps(record), encoding="utf-8")
+    arguments = ["validate", str(path), "--profile", "literature-claim", "--evidence-library",
+                 str(fixture["store"].root)]
+    assert cli.main(arguments) == 2
+    assert json.loads(capsys.readouterr().out)["evidence_library"]["independent_reading_accepted"] is False
+    assert cli.main(arguments + ["--accept-independent-reading"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["overall_status"] == "admitted"
+    assert report["evidence_library"]["independent_reading_accepted"] is True
+    assert report["evidence_library"]["checks"][0]["admission_route"] == "independent_reading"
+    assert cli.main(["validate", str(path), "--profile", "literature-claim", "--accept-independent-reading"]) == 3
+    assert "requires --evidence-library" in capsys.readouterr().err

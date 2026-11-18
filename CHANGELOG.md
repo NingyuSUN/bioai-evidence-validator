@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Add the opt-in `--accept-independent-reading` route to `bioevidence validate --evidence-library` and to the
+  EvidPort MCP consumer. A quotation that EvidPort admits because the PDF text layer and an independent OCR
+  reading of the same page region agree can pass without a recorded human review. The validator recomputes
+  this from the read-only library, reports `admission_route` for every check, never labels it human review,
+  and keeps a recorded rejection or revocation blocking. Without the option nothing is admitted on this route:
+  through the MCP consumer such a quotation stays `review_required` and is marked
+  `server_route_not_accepted`. The pinned EvidPort revision moves to the one that provides the route.
+
 - Preserve virtual-environment Python launchers for local MCP subprocesses on Linux, including PATH and configuration-relative commands.
 
 - Explicitly exclude local execution materials from distribution packages and check archive contents in CI.
