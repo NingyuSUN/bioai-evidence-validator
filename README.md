@@ -1,18 +1,30 @@
-# BioAI Evidence Validator
+<h1 align="center">BioAI Evidence Validator</h1>
 
-[![CI](https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/bioai-evidence-validator)](https://pypi.org/project/bioai-evidence-validator/)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/pyproject.toml)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb)
-[![Docs](https://img.shields.io/badge/docs-site-blue)](https://ningyusun.github.io/bioai-evidence-validator/)
+<p align="center">
+  <b>A validation layer for AI-assisted biological curation.</b><br>
+  Let models do the routine work, and send experts only the records that need them.
+</p>
 
-**A validation layer for AI-assisted biological curation: let models do the routine work, and send
-experts only the records that need them.**
+<p align="center">
+  <a href="https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml"><img src="https://github.com/NingyuSUN/bioai-evidence-validator/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://pypi.org/project/bioai-evidence-validator/"><img src="https://img.shields.io/pypi/v/bioai-evidence-validator" alt="PyPI"></a>
+  <a href="https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/pyproject.toml"><img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="Python 3.11+"></a>
+  <a href="https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="License: Apache-2.0"></a>
+  <a href="https://colab.research.google.com/github/NingyuSUN/bioai-evidence-validator/blob/main/examples/quickstart.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a>
+  <a href="https://ningyusun.github.io/bioai-evidence-validator/"><img src="https://img.shields.io/badge/docs-site-blue" alt="Docs"></a>
+</p>
 
-**Review the project:** [methods, measured results, contributions and reproducibility](docs/PROJECT_EVIDENCE.md).
-This project compares model-only output, a validation gate and a feedback loop,
-including a failed external test. Independent human evaluation remains open.
+<p align="center">
+  <a href="#quickstart">Quickstart</a> ·
+  <a href="#results-at-a-glance">Results</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#real-data-cases">Cases</a> ·
+  <a href="#works-with-evidport">EvidPort</a> ·
+  <a href="https://ningyusun.github.io/bioai-evidence-validator/">Docs</a> ·
+  <a href="#limits">Limits</a>
+</p>
+
+---
 
 LLMs and agents now extract claims from papers, cite the literature and annotate single-cell clusters.
 Their output looks right, and it often is not. Some typical errors:
@@ -26,6 +38,65 @@ can fix go back to it with the exact correction; findings that need judgment go 
 below is measured on real data with six models from Anthropic, OpenAI and Google.
 
 ![AI validation results: in single-cell annotation of held-out clusters, the feedback loop raises answers compatible with the authors' term from 176 to 205 of 276 while sending 21 to a person; across four experiments, models alone produced invalid identifiers or citations in 10–76% of answers, and bioevidence admitted none](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/ai_validation_results.svg)
+
+**Review the project:** [methods, measured results, contributions and reproducibility](docs/PROJECT_EVIDENCE.md).
+This project compares model-only output, a validation gate and a feedback loop,
+including a failed external test. Independent human evaluation remains open.
+
+## Quickstart
+
+```bash
+pip install bioai-evidence-validator
+bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim   # exit 2: review required
+```
+
+From version 0.8.0 the package also includes the literature, ontology, gene, variant, table and
+reference grounders, and the feedback loop. For example, to check a cell-type annotation against a pinned
+Cell Ontology release and the HGNC gene set:
+
+```bash
+bioevidence validate record.json --ontology cl.obo --term-root cell_type=CL:0000000 --genes hgnc_complete_set.txt
+```
+
+Wrap a model in the feedback loop:
+
+```python
+from pathlib import Path
+
+from bioevidence_validator.engine import RecordValidator
+from bioevidence_validator.feedback import revise
+from bioevidence_validator.identifiers import GeneGrounder, Genes, Ontology, OntologyGrounder
+
+validator = RecordValidator(profile="general", grounders=[
+    OntologyGrounder([Ontology.from_obo(Path("cl.obo").read_bytes())], roots={"cell_type": ["CL:0000000"]}),
+    GeneGrounder(Genes.from_hgnc(Path("hgnc_complete_set.txt").read_bytes())),
+])
+
+def propose(feedback: list[str]) -> dict | None:
+    """Ask your model for a record; on later rounds, include the feedback in the prompt."""
+    ...
+
+attempts = revise(propose, validator, rounds=3)
+print(attempts[-1].report["overall_status"])   # admitted, review_required or rejected
+```
+
+Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input or configuration error.
+
+To check records in a pull request, use the GitHub Action:
+
+```yaml
+- uses: NingyuSUN/bioai-evidence-validator@v0.8.0
+  with:
+    files: records/**/*.yaml
+    format: draft
+    profile: literature-claim
+    fail-on: review
+```
+
+More: [draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md) (state each fact once, build the full record) ·
+[create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
+[engineering contract and rule codes](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
+[documentation site](https://ningyusun.github.io/bioai-evidence-validator/).
 
 ## Results at a glance
 
@@ -50,6 +121,46 @@ Full protocols and numbers: [LLM benchmark](https://github.com/NingyuSUN/bioai-e
 [single-cell case](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/singlecell_celltype/README.md) ·
 [extraction case](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/civic_extraction/README.md) ·
 [ClinVar case](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/examples/clinvar_germline/README.md).
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["AI output<br/>(LLM or agent)"] --> R["Evidence record<br/>claim + sources + evidence"]
+    R --> P["Profile rules<br/>per intended use"]
+    R --> G["Grounders<br/>check against pinned sources"]
+    P --> D{"Decision<br/>per use"}
+    G --> D
+    D -->|admitted| K["Knowledge base /<br/>training set"]
+    D -->|fixable error| F["Feedback to the model<br/>with the exact correction"]
+    F --> A
+    D -->|needs judgment| H["Expert review"]
+    D --> L["Audit report<br/>findings, versions, hashes"]
+```
+
+- **Records:** a claim (subject, predicate, object, scope) with the sources it rests on and typed evidence
+  items. They are validated against a LinkML schema.
+- **Profiles:** each profile states, per use, which evidence a claim needs before it is admitted. For
+  example, LLM-extracted evidence may be enough for a research summary, while a knowledge base requires a
+  human's acceptance. Profiles are YAML, so a new domain needs no engine changes.
+- **Grounders:** they recompute what a record only asserts from pinned, content-addressed snapshots:
+
+  | Grounder | Checks |
+  |---|---|
+  | Literature | PMID/DOI resolution, retraction, title, and every quote against open full text or the abstract |
+  | Ontology | the term exists, is current, matches its label and is of the right kind (e.g. a cell type) |
+  | Genes / variants | HGNC approved symbols, previous symbols and aliases; HGVS form, RefSeq version, genome build |
+  | Tables | a cited data row exists with the values claimed (e.g. a marker gene of this cluster) |
+  | Reference resources | a curated reference contradicts the claim (review only) |
+  | Ontology definitions | measurements contradict a marker the claimed term is defined by (experimental) |
+
+- **Feedback loop:** `feedback.revise` wraps any model or agent.
+  - Fixable findings go back as precise reasons.
+  - Conflicts and policy decisions go to a person unchanged.
+  - Verified evidence cannot be withdrawn in a revision, so an agent cannot drop the evidence against
+    its own answer.
+- **Audit:** every report records the input, schema and profile hashes and versions. There are 26
+  documented rule codes, each with a fixed severity.
 
 ## End to end: LLM → tool calling → structured output → evaluation → failure handling
 
@@ -109,7 +220,12 @@ The same chain on claims that six models extracted on their own from 40 full pap
 
 ![Funnel for claims extracted from 40 papers by six models: of 714 first versions, 489 pass every check, 205 go back with the reason and 20 go to a person; after feedback 663 are admitted, none with an identifier or quote error; an independent model review accepts 628 and sends 35 to a person, and 437 of the accepted match a CIViC item; expert review is not yet run](https://raw.githubusercontent.com/NingyuSUN/bioai-evidence-validator/main/docs/assets/ai_extraction_funnel.svg)
 
-**Failure handling**, each in the code and exercised in the runs:
+### Failure handling
+
+Each of these is in the code and was exercised in the runs.
+
+<details>
+<summary><b>Twelve failure modes, how each is detected and what happens next</b></summary>
 
 | Failure | Detected by | Handling |
 |---|---|---|
@@ -126,123 +242,43 @@ The same chain on claims that six models extracted on their own from 40 full pap
 | Admitted but wrong | A seeded random audit (`bioevidence review audit-sample`, `audit-score`) | Each route's error rate with an exact upper bound; a [dry run](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/evaluation/llm_benchmark/results/celltype-audit/summary.md) shows the held-out route misses a 5% target |
 | A long batch is interrupted | One file per episode | A rerun skips finished episodes (used when a 486-episode run hit a time limit) |
 
-## How it works
+</details>
 
-```mermaid
-flowchart LR
-    A["AI output<br/>(LLM or agent)"] --> R["Evidence record<br/>claim + sources + evidence"]
-    R --> P["Profile rules<br/>per intended use"]
-    R --> G["Grounders<br/>check against pinned sources"]
-    P --> D{"Decision<br/>per use"}
-    G --> D
-    D -->|admitted| K["Knowledge base /<br/>training set"]
-    D -->|fixable error| F["Feedback to the model<br/>with the exact correction"]
-    F --> A
-    D -->|needs judgment| H["Expert review"]
-    D --> L["Audit report<br/>findings, versions, hashes"]
+## Works with EvidPort
+
+[EvidPort](https://github.com/NingyuSUN/evidport) is the companion evidence library: it keeps the
+original PDFs, pinned extraction versions, page locations and the review ledger. With
+`--evidence-library` the validator checks a quotation against that store itself: the original file
+hash, the exact version and block, the quotation, and how it was admitted.
+
+```sh
+bioevidence validate record.json --profile literature-claim --evidence-library evidence
+bioevidence validate record.json --profile literature-claim --evidence-library evidence --accept-independent-reading
 ```
 
-- **Records:** a claim (subject, predicate, object, scope) with the sources it rests on and typed evidence
-  items. They are validated against a LinkML schema.
-- **Profiles:** each profile states, per use, which evidence a claim needs before it is admitted. For
-  example, LLM-extracted evidence may be enough for a research summary, while a knowledge base requires a
-  human's acceptance. Profiles are YAML, so a new domain needs no engine changes.
-- **Grounders:** they recompute what a record only asserts from pinned, content-addressed snapshots:
+| Quotation in the library | Default | With `--accept-independent-reading` |
+|---|---|---|
+| Recorded human original-page review | admitted | admitted |
+| Text layer and an independent OCR reading of the page agree | review required | admitted, reported as `independent_reading` |
+| Matches the text but nothing else | review required | review required |
+| Not in the cited block, or a recorded rejection or revocation | not admitted | not admitted |
 
-  | Grounder | Checks |
-  |---|---|
-  | Literature | PMID/DOI resolution, retraction, title, and every quote against open full text or the abstract |
-  | Ontology | the term exists, is current, matches its label and is of the right kind (e.g. a cell type) |
-  | Genes / variants | HGNC approved symbols, previous symbols and aliases; HGVS form, RefSeq version, genome build |
-  | Tables | a cited data row exists with the values claimed (e.g. a marker gene of this cluster) |
-  | Reference resources | a curated reference contradicts the claim (review only) |
-  | Ontology definitions | measurements contradict a marker the claimed term is defined by (experimental) |
+The second route is recomputed from the read-only library and is never labelled human review. It
+settles transcription only; neither route establishes scientific support for a claim.
 
-- **Feedback loop:** `feedback.revise` wraps any model or agent.
-  - Fixable findings go back as precise reasons.
-  - Conflicts and policy decisions go to a person unchanged.
-  - Verified evidence cannot be withdrawn in a revision, so an agent cannot drop the evidence against
-    its own answer.
-- **Audit:** every report records the input, schema and profile hashes and versions. There are 26
-  documented rule codes, each with a fixed severity.
+The optional MCP consumer retrieves a quotation from a local EvidPort server over stdio and checks
+it again against the same library, so a server's claim is never taken on trust. DOI waiting lists,
+free acquisition and manual PDF imports remain EvidPort operations. No full text means no quotation
+to validate.
 
-## What this project demonstrates
-
-- **Rigorous evaluation of LLMs and agents.**
-  - Six models from three vendors, called through their CLIs with structured output, plus a tool-using
-    agent with PubMed access.
-  - Protocols are designed on pilot data and committed to git before the held-out and external splits are
-    run.
-  - Scoring is ontology-aware, with Wilson intervals.
-  - Negative results are reported, including the run where a new check made things worse.
-- **Biological data engineering.**
-  - Single-cell marker statistics computed from raw counts (CELLxGENE).
-  - The Cell Ontology, including its disjointness axioms and logical definitions, HGNC, NCBI assemblies,
-    ClinVar submissions, CIViC evidence and PMC JATS full text.
-  - All sources are pinned by SHA-256, with licences and attribution.
-- **Production-quality software.**
-  - A typed Python package on PyPI, with CLI exit codes for pipelines and a GitHub Action for CI.
-  - Test coverage around 98%, with CI on Linux and Windows for Python 3.11–3.14.
-  - A documentation site, and byte-for-byte replay of every committed benchmark table.
-- **Designing for trust, not only accuracy.**
-  - Decisions are made per intended use, with a measured trust boundary (controlled faults and forged
-    sources).
-  - Only facts are fed back to a model; anything that needs judgment goes to a person.
-
-## Quickstart
-
-```bash
-pip install bioai-evidence-validator
-bioevidence validate examples/literature_claim/llm_only.json --profile literature-claim   # exit 2: review required
+```sh
+python -m pip install -e '.[mcp]'
+python -m bioevidence_validator.evidence_mcp --server-config local-mcp.json --evidence-library evidence --record record.json --profile literature-claim --output validation-report.json
 ```
 
-From version 0.8.0 the package also includes the literature, ontology, gene, variant, table and
-reference grounders, and the feedback loop. For example, to check a cell-type annotation against a pinned
-Cell Ontology release and the HGNC gene set:
-
-```bash
-bioevidence validate record.json --ontology cl.obo --term-root cell_type=CL:0000000 --genes hgnc_complete_set.txt
-```
-
-Wrap a model in the feedback loop:
-
-```python
-from pathlib import Path
-
-from bioevidence_validator.engine import RecordValidator
-from bioevidence_validator.feedback import revise
-from bioevidence_validator.identifiers import GeneGrounder, Genes, Ontology, OntologyGrounder
-
-validator = RecordValidator(profile="general", grounders=[
-    OntologyGrounder([Ontology.from_obo(Path("cl.obo").read_bytes())], roots={"cell_type": ["CL:0000000"]}),
-    GeneGrounder(Genes.from_hgnc(Path("hgnc_complete_set.txt").read_bytes())),
-])
-
-def propose(feedback: list[str]) -> dict | None:
-    """Ask your model for a record; on later rounds, include the feedback in the prompt."""
-    ...
-
-attempts = revise(propose, validator, rounds=3)
-print(attempts[-1].report["overall_status"])   # admitted, review_required or rejected
-```
-
-Exit codes: **0** admitted, **1** rejected, **2** review required, **3** input or configuration error.
-
-To check records in a pull request, use the GitHub Action:
-
-```yaml
-- uses: NingyuSUN/bioai-evidence-validator@v0.8.0
-  with:
-    files: records/**/*.yaml
-    format: draft
-    profile: literature-claim
-    fail-on: review
-```
-
-More: [draft format](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/DRAFTS.md) (state each fact once, build the full record) ·
-[create a profile](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/PROFILES.md) ·
-[engineering contract and rule codes](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ENGINEERING.md) ·
-[documentation site](https://ningyusun.github.io/bioai-evidence-validator/).
+Guides: [evidence library integration](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/EVIDENCE_LIBRARY.md) ·
+[local MCP validation](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/EVIDENCE_MCP.md). They use portable project-relative examples and
+keep actual machine configuration out of Git.
 
 ## Real-data cases
 
@@ -274,6 +310,29 @@ also run in CI on every change:
 Model calls, agent runs and downloads are not repeated. What they produced is committed and pinned by
 SHA-256: model answers, agent episodes, the verification of cited papers, and source snapshots. `--write` updates the
 committed files and `--list` shows the steps.
+
+## What this project demonstrates
+
+- **Rigorous evaluation of LLMs and agents.**
+  - Six models from three vendors, called through their CLIs with structured output, plus a tool-using
+    agent with PubMed access.
+  - Protocols are designed on pilot data and committed to git before the held-out and external splits are
+    run.
+  - Scoring is ontology-aware, with Wilson intervals.
+  - Negative results are reported, including the run where a new check made things worse.
+- **Biological data engineering.**
+  - Single-cell marker statistics computed from raw counts (CELLxGENE).
+  - The Cell Ontology, including its disjointness axioms and logical definitions, HGNC, NCBI assemblies,
+    ClinVar submissions, CIViC evidence and PMC JATS full text.
+  - All sources are pinned by SHA-256, with licences and attribution.
+- **Production-quality software.**
+  - A typed Python package on PyPI, with CLI exit codes for pipelines and a GitHub Action for CI.
+  - Test coverage around 98%, with CI on Linux and Windows for Python 3.11–3.14.
+  - A documentation site, and byte-for-byte replay of every committed benchmark table.
+- **Designing for trust, not only accuracy.**
+  - Decisions are made per intended use, with a measured trust boundary (controlled faults and forged
+    sources).
+  - Only facts are fed back to a model; anything that needs judgment goes to a person.
 
 ## Limits
 
@@ -316,24 +375,3 @@ Author: Ningyu Sun ([@NingyuSUN](https://github.com/NingyuSUN)) ·
 [Error taxonomy](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/ERROR_TAXONOMY.md) ·
 [Design case study](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/docs/CASE_STUDY.md) ·
 [Apache-2.0](https://github.com/NingyuSUN/bioai-evidence-validator/blob/main/LICENSE)
-
-## EvidPort evidence library
-
-Use the optional `--evidence-library` integration to check exact original-file,
-version, quotation, and human-review bindings from a local [EvidPort](https://github.com/NingyuSUN/evidport) store.
-See [the integration guide](docs/EVIDENCE_LIBRARY.md). Reviewed extraction
-does not establish scientific support for a claim.
-
-The optional MCP consumer retrieves a quotation over local stdio and independently
-checks it against the same library. DOI waiting lists, free acquisition and manual
-PDF imports remain EvidPort operations. No full text means no quotation to validate;
-a matching quotation without original-page review stays review-required.
-
-```sh
-python -m pip install -e '.[mcp]'
-python -m bioevidence_validator.evidence_mcp --server-config local-mcp.json --evidence-library evidence --record record.json --profile literature-claim --output validation-report.json
-```
-
-Install the pinned EvidPort server and create the project configuration as described
-in [Local MCP validation](docs/EVIDENCE_MCP.md). The guide uses portable project-relative
-examples and keeps actual machine configuration out of Git.
