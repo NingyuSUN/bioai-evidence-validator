@@ -31,6 +31,9 @@ def parser() -> argparse.ArgumentParser:
                                "and check cited publications if it holds a literature.json from `ground`")
     validate.add_argument("--evidence-library", type=Path,
                           help="Independent evidence library; exact original/version/quote and human original-page review")
+    validate.add_argument("--accept-independent-reading", action="store_true",
+                          help="With --evidence-library: also accept an exact quotation that the text layer and an "
+                               "independent OCR reading of the original page agree on; reported as such, not as human review")
     validate.add_argument("--ontology", type=Path, action="append", default=[],
                           help="A pinned OBO release; check the ontology terms the record cites (repeatable)")
     validate.add_argument("--term-root", action="append", default=[], metavar="KIND=CURIE",
@@ -200,6 +203,8 @@ def _run(args) -> int:
 
     selected_profile = profile_path(args.profile)
     protected = [args.input, args.schema, selected_profile, default_schema_path()]
+    if args.accept_independent_reading and not args.evidence_library:
+        raise ValueError("--accept-independent-reading requires --evidence-library")
     if args.output and args.output.resolve() in {p.resolve() for p in protected}:
         raise ValueError("Output must not overwrite an input, schema, or profile")
     if args.evidence_library and args.output and args.output.resolve().is_relative_to(args.evidence_library.resolve()):
@@ -215,7 +220,9 @@ def _run(args) -> int:
             grounders.append(LiteratureGrounder.from_directory(args.snapshot_dir))
     if args.evidence_library:
         from .evidence_library import EvidenceLibraryGrounder
-        library_grounder = EvidenceLibraryGrounder(args.evidence_library)
+        # Passed only when asked for, so library adapters without the option keep working unchanged.
+        route = {"accept_independent_reading": True} if args.accept_independent_reading else {}
+        library_grounder = EvidenceLibraryGrounder(args.evidence_library, **route)
         grounders.append(library_grounder)
     if args.ontology:
         roots: dict[str, list[str]] = {}
@@ -233,6 +240,7 @@ def _run(args) -> int:
     report = validate_record(record, schema_path=args.schema, profile=args.profile, grounders=grounders)
     if library_grounder is not None:
         report["evidence_library"] = {"contract_version": 1, "checks": library_grounder.last_checks,
+                                      "independent_reading_accepted": bool(args.accept_independent_reading),
                                       "scientifically_verified": False}
     rendered = json.dumps(report, indent=2) + "\n"
     if args.output:

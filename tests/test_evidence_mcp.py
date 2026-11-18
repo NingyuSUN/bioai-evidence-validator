@@ -402,3 +402,73 @@ def test_actual_stdio_server_round_trip_preserves_quote_and_review_gates(fixture
         assert invalid["overall_status"] == "rejected" and "BEV017" in rules(invalid)
         assert store.reviews(fixture["citation"]) == []
     asyncio.run(scenario())
+
+
+def _server_accepting_reading(store):
+    """A server whose project enables independent-reading admission."""
+    def change(name, result):
+        if name == bridge.CHECK_TOOL:
+            data = result.structured_content
+            result.structured_content = {**data, **store.check(data["citation"], data["quote"], require_review=True,
+                                                               accept_independent_reading=True)}
+        return result
+    return change
+
+
+def test_independent_reading_needs_both_server_and_local_consent(fixture, monkeypatch):
+    from test_evidence_library import machine_conversion
+    record, _ = machine_conversion(fixture)
+    accepting = _server_accepting_reading(fixture["store"])
+    report, _ = run(fixture, monkeypatch, record=record, change=accepting, accept_independent_reading=True)
+    assert report["overall_status"] == "admitted" and report["evidence_mcp"]["status"] == "completed"
+    check = report["evidence_mcp"]["checks"][0]
+    assert check["admitted"] is True and check["admission_route"] == "independent_reading"
+    assert report["evidence_mcp"]["admission_authority"].endswith("or-independent-reading")
+    assert report["evidence_library"]["independent_reading_accepted"] is True
+    # Local consent without the server's: the two disagree, so nothing is admitted.
+    report, _ = run(fixture, monkeypatch, record=record, accept_independent_reading=True)
+    assert report["overall_status"] != "admitted" and report["evidence_mcp"]["status"] == "comparison_failed"
+    # The server's consent without local consent: its admission is not taken on trust. The quotation is real
+    # and merely unreviewed here, so it waits for a person instead of being reported as a disagreement.
+    report, _ = run(fixture, monkeypatch, record=record, change=accepting)
+    assert report["overall_status"] == "review_required" and rules(report) == {"BEV015"}
+    assert report["evidence_mcp"]["status"] == "completed"
+    check = report["evidence_mcp"]["checks"][0]
+    assert check["admitted"] is False and check["admission_route"] is None
+    assert check["server_route_not_accepted"] == "independent_reading"
+    assert report["evidence_mcp"]["admission_authority"] == "local-source-and-original-page-review"
+
+
+def test_server_cannot_relabel_independent_reading_as_human_review(fixture, monkeypatch):
+    from test_evidence_library import machine_conversion
+    record, _ = machine_conversion(fixture)
+    accepting = _server_accepting_reading(fixture["store"])
+
+    def relabel(name, result):
+        result = accepting(name, result)
+        if name == bridge.CHECK_TOOL:
+            result.structured_content = {**result.structured_content, "admission_route": "human_review"}
+        return result
+
+    report, _ = run(fixture, monkeypatch, record=record, change=relabel, accept_independent_reading=True)
+    assert report["overall_status"] != "admitted" and "BEV017" in rules(report)
+    # Without local consent only the labelled independent-reading admission is set aside; any other
+    # admission the local library cannot confirm is still a disagreement.
+    report, _ = run(fixture, monkeypatch, record=record, change=relabel)
+    assert report["overall_status"] == "rejected" and "BEV017" in rules(report)
+
+
+def test_unaccepted_server_route_never_hides_a_quotation_the_library_does_not_hold(fixture, monkeypatch):
+    from test_evidence_library import machine_conversion
+    record, _ = machine_conversion(fixture)
+    record["evidence_items"][0]["extracted_text"] = "Invented scientific result absent from this synthetic original."
+
+    def claim(name, result):
+        if name == bridge.CHECK_TOOL:
+            result.structured_content = {**result.structured_content, "quote_matches": True, "admitted": True,
+                                         "reason": "independent_reading_agreement",
+                                         "admission_route": "independent_reading"}
+        return result
+
+    report, _ = run(fixture, monkeypatch, record=record, change=claim)
+    assert report["overall_status"] == "rejected" and "BEV017" in rules(report)

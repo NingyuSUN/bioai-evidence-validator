@@ -19,7 +19,7 @@ is a project-relative example:
 
 ```sh
 python -m pip install -e .
-python -m pip install 'local-evidence-database[pdf] @ git+https://github.com/NingyuSUN/evidport.git@65c8626185eaa3c3e9e7b60db4c17b43a545d394'
+python -m pip install 'local-evidence-database[pdf] @ git+https://github.com/NingyuSUN/evidport.git@f11526816f3f74929563f3422a866e4c27459ffd'
 bioevidence validate record.json --profile literature-claim \
   --evidence-library evidence --output validation.json
 ```
@@ -29,6 +29,30 @@ The library must support `Store(root, read_only=True)`. A missing package, old
 package, absent store, or unusable store produces an operational error; the
 validator never silently disables this requested check. Validation output must
 be outside the library directory.
+
+## Accepting machine-verified quotations
+
+By default a quotation passes only after a recorded human original-page review. Add
+`--accept-independent-reading` to also accept a quotation that the library reports as
+confirmed by an independent OCR reading of the same page region:
+
+```sh
+bioevidence validate record.json --profile literature-claim \
+  --evidence-library /path/to/project/store --accept-independent-reading
+```
+
+The validator recomputes this from the read-only library; it does not take a server's word.
+Each check in the report carries `admission_route` (`human_review` or
+`independent_reading`), and `evidence_library.independent_reading_accepted` records that the
+option was on. A recorded rejection or revocation still blocks the quotation. A library that
+predates the route is an operational error, not a silent fallback. Through the MCP bridge
+(`--accept-independent-reading` on `bioevidence_validator.evidence_mcp`) the server's project
+must enable the same route; a disagreement between server and local library blocks admission.
+Without the option, a quotation that the server admits by independent reading is not a
+disagreement: it stays `review_required` (BEV015), and its check carries
+`server_route_not_accepted: independent_reading`. Any other admission the local library cannot
+confirm is still rejected.
+Machine verification settles transcription only and is never reported as human review.
 
 ## Record contract
 
