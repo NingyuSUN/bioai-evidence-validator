@@ -265,6 +265,18 @@ def test_old_import_without_original_identity_receipt_requires_review(fixture):
     assert {f.rule_id for f in grounder.check(record_for(source, cv["citations"][0]))} == {"BEV015"}
 
 
+@pytest.mark.parametrize("version, known", [(2, True), (3, True), (1, False), (4, False), (None, False)])
+def test_only_known_identity_rule_versions_confirm_a_publication(fixture, version, known):
+    store = library.Store(fixture["tmp"] / f"rule-{version}")
+    metadata = copy.deepcopy(fixture["metadata"])
+    metadata["identity_check"]["identity_rule_version"] = version
+    source = store.ingest(fixture["pdf"], "rule-version", metadata=metadata)
+    cv = conversion(store, source)
+    grounder = EvidenceLibraryGrounder(store.root)
+    assert {f.rule_id for f in grounder.check(record_for(source, cv["citations"][0]))} == {"BEV015"}
+    assert ("Publication identity lacks" in grounder.last_checks[0]["reason"]) is not known
+
+
 def test_supplement_cannot_inherit_primary_identity(fixture):
     store = fixture["store"]
     source = store.ingest(fixture["pdf"], "synthetic-supplement", role="supplement", metadata=fixture["metadata"])
