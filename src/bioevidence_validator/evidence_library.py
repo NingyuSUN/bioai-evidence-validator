@@ -17,6 +17,11 @@ from pathlib import Path
 from .grounding import finding
 from .literature import identifier, parse_metadata
 
+# Versions of the library's original-file identity rule whose "verified" this consumer accepts. Version 3
+# (2026-11-18) reads the expected DOI broken by the page layout as that DOI, not a second one, and sends
+# degree records to review. A version not listed here leaves the publication identity unconfirmed.
+IDENTITY_RULE_VERSIONS = frozenset({2, 3})
+
 
 def _title(value: str) -> str:
     plain = html.unescape(re.sub(r"<[^>]*>", "", value))
@@ -164,7 +169,7 @@ class EvidenceLibraryGrounder:
             identity = metadata.get("identity_check") or {}
             original_doi = identifier("doi:" + str(identity.get("expected_doi") or ""))
             metadata_doi = identifier("doi:" + str(literature.get("doi") or ""))
-            if (matched and identity.get("identity_rule_version") == 2
+            if (matched and identity.get("identity_rule_version") in IDENTITY_RULE_VERSIONS
                     and identity.get("status") == "verified" and identity.get("title_match") is True
                     and not identity.get("supplementary_frontmatter") and original_doi == metadata_doi):
                 confirmed = True

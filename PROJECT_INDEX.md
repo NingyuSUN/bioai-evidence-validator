@@ -1,5 +1,19 @@
 # BioAI Evidence Validator — project index
 
+## EvidPort identity rule version 3 — 2026-11-19
+
+Branch `identity-rule-v3`, cut from public main `d1c1fc8`. Not merged; remote CI for this branch has not
+been run at the time of writing.
+
+| Field | Scope and evidence |
+|---|---|
+| Date | 2026-11-19, Asia/Tokyo. |
+| Purpose | Keep confirming publication identity for papers that EvidPort checks under its corrected original-file rule. EvidPort's rule version 3 (branch `identity-rule-v3` of that repository) stops refusing a PDF whose page text repeats the paper's DOI broken by the layout, and sends degree records to identity review. This validator accepted version 2 only, so every paper checked under version 3 would have been reported with BEV015, identity not confirmed. |
+| Inputs and code | Public main baseline above. `evidence_library.py` accepts the rule versions it lists, 2 and 3, and no other; one parametrised synthetic test. The independent EvidPort dependency is pinned to `fa5ef4bc3db8b7c2ac416a41539ed56ab033b4e2` in CI and the installation guides; that revision is on the EvidPort branch `identity-rule-v3` and must stay reachable (merge it with a regular merge, or move the pin). |
+| Result and checks | A verified identity under version 2 or 3 confirms the publication as before; an unlisted version (1, 4, missing) leaves it unconfirmed. Scoring, profiles and the other identity conditions (title match, no supplement front matter, DOI equal to the pinned metadata) are unchanged. Local checks are recorded in the pull request. |
+| Evidence locations | [Library contract](docs/EVIDENCE_LIBRARY.md), [library tests](tests/test_evidence_library.py); EvidPort's project index entry "File identity rule version 3". |
+| Limits | The validator relies on EvidPort's identity check and does not repeat it. Each of EvidPort's two corrections rests on one or two real files. Merge order matters: EvidPort's branch first, with a regular merge, then this one. |
+
 ## Independent-reading admission route — 2026-11-18
 
 Branch `independent-reading-route-public`, cut from public main `707099e`. Not merged; remote CI for this

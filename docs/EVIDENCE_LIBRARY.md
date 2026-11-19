@@ -19,7 +19,7 @@ is a project-relative example:
 
 ```sh
 python -m pip install -e .
-python -m pip install 'local-evidence-database[pdf] @ git+https://github.com/NingyuSUN/evidport.git@f11526816f3f74929563f3422a866e4c27459ffd'
+python -m pip install 'local-evidence-database[pdf] @ git+https://github.com/NingyuSUN/evidport.git@fa5ef4bc3db8b7c2ac416a41539ed56ab033b4e2'
 bioevidence validate record.json --profile literature-claim \
   --evidence-library evidence --output validation.json
 ```
@@ -65,7 +65,8 @@ Machine verification settles transcription only and is never reported as human r
 - `extracted_text` contains the actual quotation from that block. The library
   checks numeric boundaries and does not treat related text elsewhere as a match.
 - Publication identity must have a source-bound acquisition receipt with the
-  version 2 original-file identity check and matching frozen provider metadata.
+  original-file identity check, under rule version 2 or 3, and matching frozen
+  provider metadata. A check made under any other rule version is not accepted.
   Older imports without these receipts remain `review_required`; filenames and
   document IDs alone are insufficient. Parent-paper DOIs do not identify
   supplementary files. Contradictory identifiers/titles and pinned retractions
