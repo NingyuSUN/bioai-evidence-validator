@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "project": "bioai-evidence-validator",
+  "round_id": "20261127-round11-validator-closeout",
+  "date": "2026-11-27T07:50:33.105088+00:00",
+  "question": "Does `bioai-evidence-validator` enforce the shared v1 4-repo golden contract vectors cleanly and quantify semantic-support gaps on transcription-clean biomedical claims?",
+  "summary": "Fast-forward merged `feat/golden-contract-vectors` (`a98b12e`) onto local `main` (698/698 pytest passed, 0 skipped; Ruff, mypy, and public-tree check passed; Stage-5 3-vendor blind panel unanimous `3/3` `accepted`), registered in PKN, and linked the `N=120` Track-B semantic-support audit pack (`MACHINE_PRE_AUDIT_BASELINE`) and `N=48` P3 ablation receipts. Human 2-expert blinded annotation of `rater_A_blind.csv`/`rater_B_blind.csv` remains open.",
+  "decisions": [
+    {
+      "title": "Vendor shared `golden_contract_vectors_v1.json` and 35 contract tests on `main`",
+      "summary": "Pin CI/docs to published EvidPort `main` (`e89d5d71...`) and verify identity rule v2/v3, quote admission/revocation, and `BEV027`/`BEV028`/`BEV029` pitfall mapping against byte-identical v1 vectors.",
+      "status": "PROPOSED",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/fixtures/golden_contract_vectors_v1.json",
+          "locator": "golden_contract_vectors_v1",
+          "sha256": "c177b91e7037f7e6562671a7a400da91f6bcd61a262cc23d90831252e0721d2a"
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_golden_contract_vectors.py",
+          "locator": "test_shared_fixture_digest",
+          "sha256": "e5e6073caa06ad293a42b12abf9d133eedc7bdf3bcabedc38a95b026079f23bc"
+        },
+        {
+          "kind": "file",
+          "path": "../evidport-semantic-ocr-audit-20261127/semantic_support_audit/machine_pre_audit_summary.json",
+          "locator": "headline_metrics",
+          "sha256": "a88befd0065aed59f253d60e784ce21f71e63a20da12da19cfdb3bf750260eaa"
+        },
+        {
+          "kind": "file",
+          "path": "../p3-ablation-20261127/p3_results.json",
+          "locator": "fixed_panel.arm3",
+          "sha256": "f20a12445654ea622a4a7b019c4292c22a9baed107588a70c1594e73c0a2bf2d"
+        },
+        {
+          "kind": "file",
+          "path": "knowledge_network/gates/20261127-round11-gate.json",
+          "locator": "gate_receipt",
+          "sha256": "e758307b6d4f475199c7214fd33567edf04acdc04b3ce4b23e8b7e893def7075"
+        }
+      ],
+      "supersedes": [],
+      "resolves": []
+    },
+    {
+      "title": "Preserve strict `MACHINE_PRE_AUDIT_BASELINE (NOT_HUMAN_EXPERT_VERIFIED)` boundary on Track-B semantic audit",
+      "summary": "Keep `rater_A_blind.csv` and `rater_B_blind.csv` (`N=120`) unrated for two human domain experts while recording the isolated dual-Astra machine pre-audit baseline separately.",
+      "status": "PROPOSED",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/fixtures/golden_contract_vectors_v1.json",
+          "locator": "golden_contract_vectors_v1",
+          "sha256": "c177b91e7037f7e6562671a7a400da91f6bcd61a262cc23d90831252e0721d2a"
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_golden_contract_vectors.py",
+          "locator": "test_shared_fixture_digest",
+          "sha256": "e5e6073caa06ad293a42b12abf9d133eedc7bdf3bcabedc38a95b026079f23bc"
+        },
+        {
+          "kind": "file",
+          "path": "../evidport-semantic-ocr-audit-20261127/semantic_support_audit/machine_pre_audit_summary.json",
+          "locator": "headline_metrics",
+          "sha256": "a88befd0065aed59f253d60e784ce21f71e63a20da12da19cfdb3bf750260eaa"
+        },
+        {
+          "kind": "file",
+          "path": "../p3-ablation-20261127/p3_results.json",
+          "locator": "fixed_panel.arm3",
+          "sha256": "f20a12445654ea622a4a7b019c4292c22a9baed107588a70c1594e73c0a2bf2d"
+        },
+        {
+          "kind": "file",
+          "path": "knowledge_network/gates/20261127-round11-gate.json",
+          "locator": "gate_receipt",
+          "sha256": "e758307b6d4f475199c7214fd33567edf04acdc04b3ce4b23e8b7e893def7075"
+        }
+      ],
+      "supersedes": [],
+      "resolves": []
+    }
+  ],
+  "results": [
+    {
+      "title": "Unanimous `3/3` Stage-5 gate & 698-test suite on `bioai-evidence-validator` (`a98b12e`)",
+      "summary": "All 698 pytest tests (including 35 golden contract tests and 19 public-tree checks) passed on Python 3.12, and Claude, Codex, and Gemini unanimously voted `accept`.",
+      "status": "PROPOSED",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/fixtures/golden_contract_vectors_v1.json",
+          "locator": "golden_contract_vectors_v1",
+          "sha256": "c177b91e7037f7e6562671a7a400da91f6bcd61a262cc23d90831252e0721d2a"
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_golden_contract_vectors.py",
+          "locator": "test_shared_fixture_digest",
+          "sha256": "e5e6073caa06ad293a42b12abf9d133eedc7bdf3bcabedc38a95b026079f23bc"
+        },
+        {
+          "kind": "file",
+          "path": "../evidport-semantic-ocr-audit-20261127/semantic_support_audit/machine_pre_audit_summary.json",
+          "locator": "headline_metrics",
+          "sha256": "a88befd0065aed59f253d60e784ce21f71e63a20da12da19cfdb3bf750260eaa"
+        },
+        {
+          "kind": "file",
+          "path": "../p3-ablation-20261127/p3_results.json",
+          "locator": "fixed_panel.arm3",
+          "sha256": "f20a12445654ea622a4a7b019c4292c22a9baed107588a70c1594e73c0a2bf2d"
+        },
+        {
+          "kind": "file",
+          "path": "knowledge_network/gates/20261127-round11-gate.json",
+          "locator": "gate_receipt",
+          "sha256": "e758307b6d4f475199c7214fd33567edf04acdc04b3ce4b23e8b7e893def7075"
+        }
+      ],
+      "supersedes": [],
+      "resolves": []
+    },
+    {
+      "title": "Track-B semantic-support machine pre-audit (`N=120`, `bioevidence review check` OK)",
+      "summary": "Dual isolated `gpt-6.2-astra` raters achieved 97.5% raw agreement (3-level kappa=0.9560, weighted kappa=0.9864, AC1=0.9651), flagging 15/44 (34.09%) unsupported-admission cases in Stratum a, 24/38 (63.16%) supported-holdbacks in Stratum b, and 38/38 (100%) seeded semantic shifts in Stratum c.",
+      "status": "PROPOSED",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/fixtures/golden_contract_vectors_v1.json",
+          "locator": "golden_contract_vectors_v1",
+          "sha256": "c177b91e7037f7e6562671a7a400da91f6bcd61a262cc23d90831252e0721d2a"
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_golden_contract_vectors.py",
+          "locator": "test_shared_fixture_digest",
+          "sha256": "e5e6073caa06ad293a42b12abf9d133eedc7bdf3bcabedc38a95b026079f23bc"
+        },
+        {
+          "kind": "file",
+          "path": "../evidport-semantic-ocr-audit-20261127/semantic_support_audit/machine_pre_audit_summary.json",
+          "locator": "headline_metrics",
+          "sha256": "a88befd0065aed59f253d60e784ce21f71e63a20da12da19cfdb3bf750260eaa"
+        },
+        {
+          "kind": "file",
+          "path": "../p3-ablation-20261127/p3_results.json",
+          "locator": "fixed_panel.arm3",
+          "sha256": "f20a12445654ea622a4a7b019c4292c22a9baed107588a70c1594e73c0a2bf2d"
+        },
+        {
+          "kind": "file",
+          "path": "knowledge_network/gates/20261127-round11-gate.json",
+          "locator": "gate_receipt",
+          "sha256": "e758307b6d4f475199c7214fd33567edf04acdc04b3ce4b23e8b7e893def7075"
+        }
+      ],
+      "supersedes": [],
+      "resolves": []
+    }
+  ],
+  "unresolved": [
+    {
+      "title": "Complete 2-expert human blinded semantic-support review (`N=120`)",
+      "summary": "Machine pre-audit (`is_human_expert_verified=false`) does not substitute for human domain adjudication",
+      "status": "OPEN",
+      "evidence": [],
+      "supersedes": [],
+      "resolves": [],
+      "action": "Have two independent domain experts complete `rater_A_blind.csv` and `rater_B_blind.csv` and adjudicate disagreements via `bioevidence review check`",
+      "acceptance": "Report human inter-rater kappa/AC1 and false-admission CI against sealed `audit_key.json` (`2ea3478e...`)."
+    }
+  ]
+}

@@ -2,12 +2,12 @@
 
 ## Golden contract vectors — 2026-11-27
 
-Branch `feat/golden-contract-vectors` exercises the validator and the installed local EvidPort against 32 synthetic
+Merged onto local `main` from `feat/golden-contract-vectors`; exercises the validator and the installed local EvidPort against 32 synthetic
 vectors covering citation syntax, publication identity, quote admission and advisory memory. The suite also checks
 the fixture's raw SHA-256, accepted identity rule versions and memory code mapping.
 [Golden fixture](tests/fixtures/golden_contract_vectors_v1.json) and [contract tests](tests/test_golden_contract_vectors.py).
 
-Local verification passed all 35 contract tests and 19 public-tree tests, Ruff, mypy and the public-tree scan.
+Local verification passed all 698 tests (including 35 contract tests and 19 public-tree tests, 0 skipped), Ruff, mypy, the public-tree scan, and the 3-vendor Stage-5 blind panel (`3/3` accept).
 The CI and installation pin is updated to EvidPort `main` (`e89d5d71741bb183323b7c0e32ddd7434e2c44c5`), which includes quote suggestions and the advisory memory ledger.
 
 ## EvidPort identity rule version 3 — 2026-11-19
