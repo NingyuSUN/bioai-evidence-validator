@@ -29,7 +29,7 @@ Python SDK **2.3.0**) and the reviewed EvidPort revision:
 
 ```sh
 python -m pip install -e '.[mcp]'
-python -m pip install 'local-evidence-database[mcp,pdf] @ git+https://github.com/NingyuSUN/evidport.git@fa5ef4bc3db8b7c2ac416a41539ed56ab033b4e2'
+python -m pip install 'local-evidence-database[mcp,pdf] @ git+https://github.com/NingyuSUN/evidport.git@e89d5d71741bb183323b7c0e32ddd7434e2c44c5'
 ```
 
 The optional extra is also locked in `uv.lock`. The server can use a separate

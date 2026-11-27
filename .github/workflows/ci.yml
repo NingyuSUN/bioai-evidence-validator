@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 env:
-  EVIDENCE_LIBRARY_COMMIT: fa5ef4bc3db8b7c2ac416a41539ed56ab033b4e2
+  EVIDENCE_LIBRARY_COMMIT: e89d5d71741bb183323b7c0e32ddd7434e2c44c5
 jobs:
   lint:
     timeout-minutes: 10

@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "contract_id": "evidport-bioevidence-ro-golden-contract-v1",
+  "description": "Shared cross-repository golden contract test vectors for EvidPort, BioAI Evidence Validator, and Research Orchestrator.",
+  "fixture_document": {
+    "document_id": "paper_golden_contract_v1",
+    "doi": "10.9999/synthetic.golden.contract.v1",
+    "pmid": "99990101",
+    "title": "Synthetic longitudinal cohort evaluation of deterministic evidence gates in biomedical curation",
+    "role": "paper",
+    "europe_pmc_record": {
+      "source": "MED",
+      "id": "99990101",
+      "doi": "10.9999/synthetic.golden.contract.v1",
+      "title": "Synthetic longitudinal cohort evaluation of deterministic evidence gates in biomedical curation",
+      "pubTypeList": {
+        "pubType": [
+          "research-article"
+        ]
+      }
+    },
+    "blocks": [
+      {
+        "id": "b1",
+        "kind": "paragraph",
+        "sentence_1": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+        "sentence_2": "Secondary expansion validation enrolled 65 cases and 100 controls under identical assay thresholds.",
+        "text": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers. Secondary expansion validation enrolled 65 cases and 100 controls under identical assay thresholds.",
+        "locator": {
+          "page": 1,
+          "bbox": [
+            30,
+            80,
+            540,
+            180
+          ]
+        }
+      },
+      {
+        "id": "b2",
+        "kind": "paragraph",
+        "text": "Observational biomarker levels correlated positively with baseline score without establishing causal mediation.",
+        "locator": {
+          "page": 1,
+          "bbox": [
+            30,
+            190,
+            540,
+            250
+          ]
+        }
+      }
+    ]
+  },
+  "citation_vectors": [
+    {
+      "id": "valid_b0",
+      "citation": "evidence:cv_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef#b0",
+      "valid": true,
+      "ro_citation_re_valid": true,
+      "library_citation_valid": true,
+      "expected_validator_malformed_rule": null,
+      "expected_ro_status_when_invalid": null
+    },
+    {
+      "id": "valid_b1",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": true,
+      "ro_citation_re_valid": true,
+      "library_citation_valid": true,
+      "expected_validator_malformed_rule": null,
+      "expected_ro_status_when_invalid": null
+    },
+    {
+      "id": "valid_b40",
+      "citation": "evidence:cv_ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff#b40",
+      "valid": true,
+      "ro_citation_re_valid": true,
+      "library_citation_valid": true,
+      "expected_validator_malformed_rule": null,
+      "expected_ro_status_when_invalid": null
+    },
+    {
+      "id": "library_custom_block_non_b_index",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#section:paragraph.1-part_2",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": true,
+      "expected_validator_malformed_rule": null,
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_uppercase_hex",
+      "citation": "evidence:cv_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_short_hex_63",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_long_hex_65",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_non_hex_char",
+      "citation": "evidence:cv_gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_wrong_record_prefix",
+      "citation": "evidence:src_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_missing_cv_prefix",
+      "citation": "evidence:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_missing_scheme",
+      "citation": "cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_missing_fragment",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_empty_block",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_double_hash",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#b1#b2",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_leading_colon_block",
+      "citation": "evidence:cv_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#:b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_path_traversal",
+      "citation": "evidence:../../secret#b1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    },
+    {
+      "id": "malformed_doi_uri",
+      "citation": "doi:10.9999/synthetic.golden.contract.v1",
+      "valid": false,
+      "ro_citation_re_valid": false,
+      "library_citation_valid": false,
+      "expected_validator_malformed_rule": "BEV015",
+      "expected_ro_status_when_invalid": "rejected"
+    }
+  ],
+  "identity_rule_vectors": [
+    {
+      "id": "identity_v2_confirmed",
+      "mode": "ingested_receipt",
+      "identity_rule_version": 2,
+      "identity_status": "verified",
+      "title_match": true,
+      "supplementary_frontmatter": false,
+      "expected_validator": {
+        "identity_confirmed": true,
+        "overall_status_when_quote_approved": "admitted",
+        "rule_ids_when_quote_approved": []
+      }
+    },
+    {
+      "id": "identity_v3_confirmed",
+      "mode": "ingested_receipt",
+      "identity_rule_version": 3,
+      "identity_status": "verified",
+      "title_match": true,
+      "supplementary_frontmatter": false,
+      "expected_validator": {
+        "identity_confirmed": true,
+        "overall_status_when_quote_approved": "admitted",
+        "rule_ids_when_quote_approved": []
+      }
+    },
+    {
+      "id": "identity_v1_unconfirmed",
+      "mode": "ingested_receipt",
+      "identity_rule_version": 1,
+      "identity_status": "verified",
+      "title_match": true,
+      "supplementary_frontmatter": false,
+      "expected_validator": {
+        "identity_confirmed": false,
+        "overall_status_when_quote_approved": "review_required",
+        "rule_ids_when_quote_approved": [
+          "BEV015"
+        ]
+      }
+    },
+    {
+      "id": "identity_v4_unconfirmed",
+      "mode": "ingested_receipt",
+      "identity_rule_version": 4,
+      "identity_status": "verified",
+      "title_match": true,
+      "supplementary_frontmatter": false,
+      "expected_validator": {
+        "identity_confirmed": false,
+        "overall_status_when_quote_approved": "review_required",
+        "rule_ids_when_quote_approved": [
+          "BEV015"
+        ]
+      }
+    },
+    {
+      "id": "degree_record_pending_hold",
+      "mode": "acquisition_attach_pdf",
+      "cjk_degree_line": "博士論文 学位論文内容の要旨",
+      "pymupdf_cjk_fontname": "japan",
+      "include_title_and_doi_on_page_1": true,
+      "role": "paper",
+      "expected_acquisition": {
+        "identity_rule_version": 3,
+        "degree_record_wording": true,
+        "identity_status": "pending",
+        "availability": "identity_review_required",
+        "reason": "degree_record_identity_requires_review",
+        "source_ingested": false
+      },
+      "expected_validator_if_ingested": {
+        "identity_confirmed": false,
+        "overall_status_when_quote_approved": "review_required",
+        "rule_ids_when_quote_approved": [
+          "BEV015"
+        ]
+      }
+    }
+  ],
+  "quote_admission_vectors": [
+    {
+      "id": "route_human_review",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+      "accept_independent_reading": false,
+      "has_matching_ocr": false,
+      "review_events": [
+        {
+          "decision": "approve",
+          "reviewer": "SYNTHETIC_CURATOR",
+          "reviewer_kind": "human",
+          "note": "Synthetic original-page verification",
+          "viewed_original": true,
+          "with_packet": true
+        }
+      ],
+      "expected_evidport": {
+        "quote_matches": true,
+        "admitted": true,
+        "admission_route": "human_review",
+        "reason": "human_reviewed_extraction",
+        "review_status": "approve",
+        "suggested_quotes_nonempty": false,
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": true,
+        "overall_status": "admitted",
+        "rule_ids": []
+      },
+      "expected_ro": {
+        "status": "admitted",
+        "admission_route": "human_review"
+      }
+    },
+    {
+      "id": "route_independent_reading",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+      "accept_independent_reading": true,
+      "has_matching_ocr": true,
+      "review_events": [],
+      "expected_evidport": {
+        "quote_matches": true,
+        "admitted": true,
+        "admission_route": "independent_reading",
+        "reason": "independent_reading_agreement",
+        "review_status": "pending",
+        "suggested_quotes_nonempty": false,
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": true,
+        "overall_status": "admitted",
+        "rule_ids": []
+      },
+      "expected_ro": {
+        "status": "admitted",
+        "admission_route": "independent_reading"
+      }
+    },
+    {
+      "id": "route_unreviewed_review_required",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+      "accept_independent_reading": false,
+      "has_matching_ocr": true,
+      "review_events": [],
+      "expected_evidport": {
+        "quote_matches": true,
+        "admitted": false,
+        "admission_route": null,
+        "reason": "pending_review",
+        "review_status": "pending",
+        "suggested_quotes_nonempty": false,
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": false,
+        "overall_status": "review_required",
+        "rule_ids": [
+          "BEV015"
+        ]
+      },
+      "expected_ro": {
+        "status": "review_required",
+        "admission_route": null
+      }
+    },
+    {
+      "id": "route_human_revocation_overrides_matching_quote",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+      "accept_independent_reading": true,
+      "has_matching_ocr": true,
+      "review_events": [
+        {
+          "decision": "approve",
+          "reviewer": "SYNTHETIC_CURATOR",
+          "reviewer_kind": "human",
+          "note": "Initial synthetic page verification",
+          "viewed_original": true,
+          "with_packet": true
+        },
+        {
+          "decision": "revoke",
+          "reviewer": "SYNTHETIC_CURATOR",
+          "reviewer_kind": "human",
+          "note": "Revoked after audit found table cohort mismatch",
+          "viewed_original": false,
+          "with_packet": false
+        }
+      ],
+      "expected_evidport": {
+        "quote_matches": true,
+        "admitted": false,
+        "admission_route": null,
+        "reason": "revoke",
+        "review_status": "revoke",
+        "suggested_quotes_nonempty": false,
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": false,
+        "overall_status": "review_required",
+        "rule_ids": [
+          "BEV015"
+        ]
+      },
+      "expected_ro": {
+        "status": "rejected",
+        "admission_route": null
+      }
+    },
+    {
+      "id": "route_ellipsis_stitched_quote_rejected_with_suggestions",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases ... with dose 1.25 mg across participating centers.",
+      "accept_independent_reading": true,
+      "has_matching_ocr": true,
+      "review_events": [],
+      "expected_evidport": {
+        "quote_matches": false,
+        "admitted": false,
+        "admission_route": null,
+        "reason": "quote_not_found",
+        "review_status": "pending",
+        "suggested_quotes_nonempty": true,
+        "expected_suggested_quotes": [
+          "Primary discovery stage enrolled 39 cases",
+          "with dose 1.25 mg across participating centers."
+        ],
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": false,
+        "overall_status": "rejected",
+        "rule_ids": [
+          "BEV017"
+        ]
+      },
+      "expected_ro": {
+        "status": "rejected",
+        "admission_route": null,
+        "suggested_quotes_nonempty": true
+      }
+    },
+    {
+      "id": "route_fabricated_number_quote_rejected_no_suggestions",
+      "block_id": "b1",
+      "quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 9.75 mg across participating centers.",
+      "accept_independent_reading": true,
+      "has_matching_ocr": true,
+      "review_events": [],
+      "expected_evidport": {
+        "quote_matches": false,
+        "admitted": false,
+        "admission_route": null,
+        "reason": "quote_not_found",
+        "review_status": "pending",
+        "suggested_quotes_nonempty": false,
+        "scientifically_verified": false
+      },
+      "expected_validator": {
+        "verified": false,
+        "overall_status": "rejected",
+        "rule_ids": [
+          "BEV017"
+        ]
+      },
+      "expected_ro": {
+        "status": "rejected",
+        "admission_route": null,
+        "suggested_quotes_nonempty": false
+      }
+    }
+  ],
+  "memory_ledger_and_pitfall_vectors": {
+    "public_note_invariants": {
+      "citable": false,
+      "authority": "advisory_note_only",
+      "scientifically_verified": false,
+      "omits_local_actor": true,
+      "alters_store_check_admission": false
+    },
+    "memory_codes": [
+      "numbers_denominators",
+      "direction_comparator",
+      "causal_strength",
+      "source_inconsistency",
+      "scope_context"
+    ],
+    "rule_to_memory_code_mapping": {
+      "BEV027": "numbers_denominators",
+      "BEV028": "direction_comparator",
+      "BEV029": "causal_strength"
+    },
+    "conflict_uncertain_override": {
+      "verdict": "uncertain",
+      "reason_keyword": "conflict",
+      "mapped_code": "source_inconsistency"
+    },
+    "import_vectors": [
+      {
+        "id": "pitfall_bev027_numbers_denominators",
+        "validator_rule": "BEV027",
+        "facet_name": "numbers_denominators",
+        "verdict": "contradicted",
+        "anchor_block": "b1",
+        "anchor_quote": "Secondary expansion validation enrolled 65 cases and 100 controls under identical assay thresholds.",
+        "sibling_blocks": [
+          "b2"
+        ],
+        "claim_fact": "Primary discovery GWAS enrolled 65 cases and 100 controls.",
+        "source_fact": "65 cases and 100 controls belong to secondary expansion validation; primary discovery enrolled 39/39.",
+        "reason": "Expansion cohort denominator misattributed to primary discovery stage.",
+        "expected_memory_code": "numbers_denominators",
+        "expected_citable": false
+      },
+      {
+        "id": "pitfall_bev028_direction_comparator",
+        "validator_rule": "BEV028",
+        "facet_name": "direction_comparator",
+        "verdict": "contradicted",
+        "anchor_block": "b2",
+        "anchor_quote": "Observational biomarker levels correlated positively with baseline score without establishing causal mediation.",
+        "sibling_blocks": [],
+        "claim_fact": "Biomarker levels correlated inversely with baseline score.",
+        "source_fact": "Biomarker levels correlated positively with baseline score.",
+        "reason": "Claimed direction inverts positive correlation reported in b2.",
+        "expected_memory_code": "direction_comparator",
+        "expected_citable": false
+      },
+      {
+        "id": "pitfall_bev029_causal_strength",
+        "validator_rule": "BEV029",
+        "facet_name": "causal_strength",
+        "verdict": "not_established",
+        "anchor_block": "b2",
+        "anchor_quote": "Observational biomarker levels correlated positively with baseline score without establishing causal mediation.",
+        "sibling_blocks": [],
+        "claim_fact": "Biomarker directly causes baseline score elevation.",
+        "source_fact": "Observational correlation explicitly notes without establishing causal mediation.",
+        "reason": "Causal claim overstates observational correlation in b2.",
+        "expected_memory_code": "causal_strength",
+        "expected_citable": false
+      },
+      {
+        "id": "pitfall_uncertain_conflict_source_inconsistency",
+        "validator_rule": "BEV027",
+        "facet_name": "numbers_denominators",
+        "verdict": "uncertain",
+        "anchor_block": "b1",
+        "anchor_quote": "Primary discovery stage enrolled 39 cases and 39 controls with dose 1.25 mg across participating centers.",
+        "sibling_blocks": [
+          "b2"
+        ],
+        "claim_fact": "Cohort count across primary and summary sections.",
+        "source_fact": "Main text reports 39/39 while supplement summary lists 40/39.",
+        "reason": "Internal source conflict between main text and supplement summary.",
+        "expected_memory_code": "source_inconsistency",
+        "expected_citable": false
+      }
+    ]
+  }
+}
