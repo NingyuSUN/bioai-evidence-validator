@@ -226,6 +226,22 @@ def test_pairs_and_values():
     assert parse_table(b"a,b\n1, 2\n") == (["a", "b"], [{"a": "1", "b": "2"}])
 
 
+def test_same_value_scientific_notation_and_non_finite():
+    assert same_value("1e-5", "0.000014") and not same_value("1e-5", "0.49")
+    assert same_value("1.2e-5", "0.0000124") and not same_value("1.2e-5", "0.000013")
+    assert not same_value("1.2e-10", "4e-6")
+    assert same_value("1e-15", "1.4e-15") and not same_value("1e-15", "1e-12")
+    assert same_value("1.2e+3", "1240") and not same_value("1.2e+3", "1260")
+    assert not same_value("nan", "nan") and not same_value("inf", "inf") and not same_value("1.0", "nan")
+    pval_table = b"cluster\tgene\tpadj\n3\tCD8A\t0.49\n3\tCD19\t1.24e-5\n"
+    sha = hashlib.sha256(pval_table).hexdigest()
+    grounder = TableGrounder(SnapshotStore({sha: lambda: pval_table}), ["marker_gene"])
+    bad = table_record("cluster=3;gene=CD8A", "padj=1e-5", sha=sha)
+    assert codes(bad, grounder) == ["BEV017"] and grounder.verified_items(bad) == set()
+    good = table_record("cluster=3;gene=CD19", "padj=1.2e-5", sha=sha)
+    assert codes(good, grounder) == [] and grounder.verified_items(good) == {"bioev:item-1"}
+
+
 def table_record(locator, text, *, sha=None):
     record = base()
     record["source_artifacts"][0].update(sha256=sha or hashlib.sha256(TABLE).hexdigest())

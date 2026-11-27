@@ -17,6 +17,7 @@ import csv
 import difflib
 import io
 from collections.abc import Iterable
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from .engine import Finding
@@ -34,11 +35,13 @@ def parse_table(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
 
 def same_value(claimed: str, actual: str) -> bool:
     try:
-        number, value = float(claimed), float(actual)
-    except ValueError:
+        number, value = Decimal(claimed.strip()), Decimal(actual.strip())
+    except InvalidOperation:
         return claimed.strip().casefold() == actual.strip().casefold()
-    decimals = len(claimed.strip().partition(".")[2].rstrip()) if "." in claimed else 0
-    return abs(number - value) <= 0.5 * 10 ** -decimals + 1e-12
+    exponent = number.as_tuple().exponent
+    if not isinstance(exponent, int) or not value.is_finite():
+        return False
+    return abs(number - value) <= Decimal((0, (5,), exponent - 1))
 
 
 class TableGrounder:
